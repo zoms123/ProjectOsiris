@@ -6,9 +6,10 @@ public class BasicCombat : MonoBehaviour
 {
     [Header("Attack System")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private Vector3 attackExtend;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsDamageable;
+    [SerializeField] private string myTag;
 
     // Start is called before the first frame update
     void Start()
@@ -19,23 +20,15 @@ public class BasicCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DoAttack();
+
     }
 
-    private void DoAttack()
+    public void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Attack();
-        }
-    }
-
-    private void Attack()
-    {
-        Collider[] collidersTouched = Physics.OverlapBox(attackPoint.position, attackExtend, Quaternion.identity, whatIsDamageable);
+        Collider[] collidersTouched = Physics.OverlapSphere(attackPoint.position, radius, whatIsDamageable);
         foreach (Collider collider in collidersTouched)
         {
-            if (!collider.gameObject.CompareTag("PlayerHitBox"))
+            if (!collider.gameObject.CompareTag(myTag))
             {
                 LifeSystem lifesystem = collider.gameObject.GetComponent<LifeSystem>();
                 StartCoroutine(lifesystem.ReceiveDamage(attackDamage));
@@ -46,8 +39,6 @@ public class BasicCombat : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-
-        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
-        Gizmos.DrawWireCube(attackPoint.position, attackExtend);
+        Gizmos.DrawWireSphere(attackPoint.position, radius);
     }
 }
