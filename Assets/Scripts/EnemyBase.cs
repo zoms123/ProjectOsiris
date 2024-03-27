@@ -15,8 +15,6 @@ public class EnemyBase : MonoBehaviour
     private GameObject player;
     private BasicCombat basicCombat;
 
-    public float lookSpeed = 2f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +34,7 @@ public class EnemyBase : MonoBehaviour
         {
             DefineNewTarget();
             FocusTarget(currentTarget);
-            while (transform.position != currentTarget)
+            while ((Vector3.Distance(transform.position, currentTarget) > 0.5))
             {
                 if (!playerDetected && !hasRecibedDamage)
                 {
