@@ -5,21 +5,39 @@ using UnityEngine;
 
 public class ZeroGravityZone : MonoBehaviour
 {
+    [SerializeField] float activeTime;
 
-    public Action disableZeroGravityEffect;
     private List<ZeroGravityEffector> zeroGravityEffectors;
 
     private void Awake()
     {
         zeroGravityEffectors = new List<ZeroGravityEffector>();
     }
+
+    private void OnEnable()
+    {
+        StartCoroutine(DisableZoneCountDown());
+    }
+
     private void OnDisable()
     {
+        StopAllCoroutines();
         foreach(ZeroGravityEffector effector in zeroGravityEffectors)
         {
             effector.StopUsingZeroGravity();
         }
+        zeroGravityEffectors.Clear();
     }
+
+    #region Coroutines
+    private IEnumerator DisableZoneCountDown()
+    {
+        yield return new WaitForSeconds(activeTime);
+        gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region Collisions and triggers
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,4 +48,6 @@ public class ZeroGravityZone : MonoBehaviour
             effector.UseZeroGravity();
         }
     }
+
+    #endregion
 }
