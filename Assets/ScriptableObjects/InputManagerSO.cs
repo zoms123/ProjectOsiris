@@ -7,22 +7,27 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "InputManager")]
 public class InputManagerSO : ScriptableObject
 {
-    public Controls controls;
+    private Controls controls;
     public event Action OnJump;
     public event Action<Vector2> OnMove;
     public event Action<bool> OnRun;
+    public event Action OnLockTarget;
 
     private void OnEnable()
     {
-        controls = new Controls();
+        if (controls == null)
+        {
+            controls = new Controls();
+
+            controls.Gameplay.Move.performed += Move;
+            controls.Gameplay.Move.canceled += Move;
+            controls.Gameplay.Jump.started += Jump;
+            controls.Gameplay.Run.performed += Run;
+            controls.Gameplay.Run.canceled += Run;
+            controls.Gameplay.LockTarget.started += LockTarget;
+        }
+
         controls.Gameplay.Enable();
-
-        controls.Gameplay.Move.performed += Move;
-        controls.Gameplay.Move.canceled += Move;
-        controls.Gameplay.Jump.started += Jump;
-        controls.Gameplay.Run.performed += Run;
-        controls.Gameplay.Run.canceled += Run;
-
         Debug.Log("Input ready!");
     }
 
@@ -39,5 +44,10 @@ public class InputManagerSO : ScriptableObject
     private void Run(InputAction.CallbackContext context)
     {
         OnRun?.Invoke(context.ReadValueAsButton());
+    }
+
+    private void LockTarget(InputAction.CallbackContext context)
+    {
+        OnLockTarget?.Invoke();
     }
 }

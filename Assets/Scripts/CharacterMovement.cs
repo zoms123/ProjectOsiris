@@ -65,7 +65,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Run(bool isRunPressed)
     {
-        if (isRunPressed)
+        if (isRunPressed && IsGrounded())
         {
             currentSpeed = runningSpeed;
         }
