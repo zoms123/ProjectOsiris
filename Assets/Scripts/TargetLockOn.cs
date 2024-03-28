@@ -1,3 +1,4 @@
+using Cinemachine;
 using Cinemachine.Utility;
 using System;
 using System.Collections;
@@ -33,7 +34,11 @@ public class TargetLockOn : MonoBehaviour
     [SerializeField] private Transform lockOnCanvas;
     [SerializeField] private InputManagerSO inputManager;
     [SerializeField] private Transform enemyTargetLocator;
+    [SerializeField] private CinemachineVirtualCamera targetLockCamera;
+
     private Transform cam;
+    private Animator anim;
+    private CharacterMovement characterMovement;
 
     private void OnEnable()
     {
@@ -43,6 +48,9 @@ public class TargetLockOn : MonoBehaviour
     private void Start()
     {
         cam = Camera.main.transform;
+        anim = GetComponent<Animator>();
+        characterMovement = GetComponent<CharacterMovement>();
+
         lockOnCanvas.gameObject.SetActive(false);
     }
 
@@ -65,10 +73,11 @@ public class TargetLockOn : MonoBehaviour
 
     private void Update()
     {
+        characterMovement.lockMovement = targetLocked;
         if (targetLocked)
         {
             if (!IsTargetInRange()) ResetTarget();
-            else LookAtTarget();
+            LookAtTarget();
         }
     }
 
@@ -77,6 +86,8 @@ public class TargetLockOn : MonoBehaviour
         lockOnCanvas.gameObject.SetActive(false);
         currentTarget = null;
         targetLocked = false;
+        anim.SetLayerWeight(1, 0);
+        targetLockCamera.LookAt = null;
         cinemachineAnimator.Play("FreeLookCamera");
         Debug.Log("<color=orange>Target reset</color>");
     }
@@ -84,6 +95,8 @@ public class TargetLockOn : MonoBehaviour
     private void FoundTarget()
     {
         lockOnCanvas.gameObject.SetActive(true);
+        anim.SetLayerWeight(1, 1);
+        targetLockCamera.LookAt = enemyTargetLocator;
         cinemachineAnimator.Play("TargetCamera");
         targetLocked = true;
         Debug.Log("<color=green>" + currentTarget.gameObject.name + " locked.</color>");

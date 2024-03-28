@@ -1,19 +1,22 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController), typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController))]
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] private float movementSpeed;
     [SerializeField] private float runningSpeed;
+    [SerializeField] private float lockedSpeed;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float gravity = -9.81f;
     private float currentSpeed;
     private Vector3 movementDirection = Vector3.zero;
     private Vector3 velocity = Vector3.zero;
+    [HideInInspector] public bool lockMovement;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheckTransform;
@@ -26,7 +29,7 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController controller;
     private Animator animator;
 
-    private Vector3 inputDirection = Vector3.zero;
+    private Vector2 inputDirection = Vector2.zero;
 
     private void Awake()
     {
@@ -51,7 +54,7 @@ public class CharacterMovement : MonoBehaviour
     // Only runs when the input is being updated
     private void Move(Vector2 movementInput)
     {
-        inputDirection = new Vector3(movementInput.x, 0f, movementInput.y);
+        inputDirection = movementInput;
     }
 
     private void Jump()
@@ -77,15 +80,21 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        movementDirection = mainCamera.forward * inputDirection.z + mainCamera.right * inputDirection.x;
+        movementDirection = mainCamera.forward * inputDirection.y + mainCamera.right * inputDirection.x;
         movementDirection.y = 0f;
+
+        float speed = (currentSpeed != lockedSpeed) ? currentSpeed : movementSpeed;
+        if (lockMovement) currentSpeed = lockedSpeed; else currentSpeed = speed;
 
         controller.Move(currentSpeed * Time.deltaTime * movementDirection);
         animator.SetFloat("Speed", controller.velocity.magnitude);
 
-        if (movementDirection.sqrMagnitude > 0f)
+        animator.SetFloat("Horizontal", movementDirection.x, 0.1f, Time.deltaTime);
+        animator.SetFloat("Vertical", movementDirection.y, 0.1f, Time.deltaTime);
+
+        if (movementDirection.sqrMagnitude > 0f && !lockMovement)
         {
-            RotateToTarget();  
+            RotateToTarget();
         }
 
         // If character has landed...

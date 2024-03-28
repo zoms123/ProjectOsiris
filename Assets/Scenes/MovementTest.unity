@@ -521,8 +521,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102893845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12465184, y: -0.000000025611367, z: 0.0000000033178362, w: 0.99220055}
-  m_LocalPosition: {x: -0.00000008943064, y: 0.0000013995959, z: 0.0000002957874}
+  m_LocalRotation: {x: 0.12465184, y: -0.000000035390254, z: 0.0000000045984048, w: 0.99220055}
+  m_LocalPosition: {x: -0.000000029810213, y: 0.00000046653196, z: 0.00000009859579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1199,7 +1199,7 @@ GameObject:
   m_Layer: 0
   m_Name: EnemyTargetLocator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1289,7 +1289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506254414}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1933204, y: -0.000000021886079, z: 0.000000004365574, w: 0.9811357}
+  m_LocalRotation: {x: 0.19332036, y: -0.000000029802315, z: 0.00000000593718, w: 0.98113567}
   m_LocalPosition: {x: -0.000000029810213, y: 0.00000046653196, z: 0.00000009859579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1478,8 +1478,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
+  m_LookaheadTime: 0.2
+  m_LookaheadSmoothing: 1
   m_LookaheadIgnoreY: 0
   m_XDamping: 1
   m_YDamping: 1
@@ -1568,8 +1568,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579916075}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.57309115, y: -0.10952458, z: 0.117837854, w: -0.80354536}
-  m_LocalPosition: {x: 0.14508313, y: 3.8221526, z: -17.537584}
+  m_LocalRotation: {x: -0.5287636, y: -0.27941445, z: 0.30321524, w: -0.7418876}
+  m_LocalPosition: {x: 0.0031808019, y: 3.7929783, z: -17.6737}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 467216447}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1797657301}
   m_Lens:
     FieldOfView: 70
@@ -4653,7 +4653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769315214}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15891536, y: -0.000000038184222, z: 0.000000006228219, w: 0.9872923}
+  m_LocalRotation: {x: 0.15891536, y: -0.000000029802319, z: 0.0000000050058584, w: 0.9872923}
   m_LocalPosition: {x: -0.000000029810213, y: 0.00000046653196, z: 0.00000009859579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5641,7 +5641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079508894}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1761448, y: 0.000000012941726, z: -0.000000002315827, w: 0.98436433}
+  m_LocalRotation: {x: 0.1761448, y: 0.000000021188475, z: -0.000000003791522, w: 0.98436433}
   m_LocalPosition: {x: 0, y: 2.6610804, z: -2.5880501}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6256,8 +6256,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653514027801}
-  - component: {fileID: 5866666021826693481}
   - component: {fileID: 5866666021826693477}
+  - component: {fileID: 5866666021826693481}
   - component: {fileID: 5866666021826693479}
   - component: {fileID: 5866666021826693476}
   - component: {fileID: 5866666021826693478}
@@ -9211,8 +9211,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 6
   runningSpeed: 8
-  jumpHeight: 0.67
+  lockedSpeed: 4
+  jumpHeight: 1
   gravity: -9.81
+  lockMovement: 0
   groundCheckTransform: {fileID: 938432936}
   detectionRadius: 0.4
   whatIsGround:
@@ -9305,14 +9307,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   detectionRadius: 10
-  lookAtSmoothing: 2
+  lookAtSmoothing: 6
   maxDetectionAngle: 270
   crosshairScale: 0.2
-  applyYOffsetLimit: 0
+  applyYOffsetLimit: 1
   cinemachineAnimator: {fileID: 1529676549}
   lockOnCanvas: {fileID: 1087448855}
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
   enemyTargetLocator: {fileID: 467216447}
+  targetLockCamera: {fileID: 579916077}
 --- !u!4 &5901452235043062170
 Transform:
   m_ObjectHideFlags: 0
