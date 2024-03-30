@@ -143,7 +143,7 @@ public class TargetLockOn : MonoBehaviour
         if (!closestTarget) return null;
 
         // Set target locator position
-        float h1 = closestTarget.GetComponentInChildren<CapsuleCollider>().height; Debug.Log(h1);
+        float h1 = closestTarget.GetComponent<CapsuleCollider>().height; Debug.Log(h1);
         float h2 = closestTarget.localScale.y;
         float h = h1 * h2;
         float half_h = (h / 2) / 2;
