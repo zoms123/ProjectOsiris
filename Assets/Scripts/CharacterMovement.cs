@@ -62,7 +62,6 @@ public class CharacterMovement : MonoBehaviour
     private void Move(Vector2 movementInput)
     {
         inputDirection = movementInput;
-        Debug.Log(movementInput);
     }
 
     private void Jump()

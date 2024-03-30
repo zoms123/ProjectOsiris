@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LifeSystem : MonoBehaviour
 {
-    protected bool hasRecibedDamage = false;
-
     [Header("Lifes System")]
     [SerializeField] protected float health;
 
@@ -29,7 +27,7 @@ public class LifeSystem : MonoBehaviour
         if (health <= 0)
         {
             yield return new WaitForSeconds(0.5f);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

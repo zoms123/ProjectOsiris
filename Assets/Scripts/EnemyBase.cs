@@ -20,6 +20,8 @@ public class EnemyBase : MonoBehaviour
     {
         basicCombat = GetComponent<BasicCombat>();
         StartCoroutine(Patrol());
+
+        waypoints[0].parent.SetParent(null);
     }
 
     // Update is called once per frame
@@ -51,7 +53,7 @@ public class EnemyBase : MonoBehaviour
                     while (playerDetected)
                     {
                         FocusTarget(player.transform.position);
-                        while ((Vector3.Distance(transform.position, player.transform.position) > 1.5) && playerDetected)
+                        while ((Vector3.Distance(transform.position, player.transform.position) > 3) && playerDetected)
                         {
                             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, patrolSpeed * Time.deltaTime);
                             yield return null;
@@ -83,6 +85,7 @@ public class EnemyBase : MonoBehaviour
     private void FocusTarget(Vector3 target)
     {
         Vector3 relativePos = target - transform.position;
+        relativePos.y = 0;
         transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
     }
 

@@ -36,9 +36,9 @@ public class BasicCombat : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(attackPoint.position, radius);
     }
 }
