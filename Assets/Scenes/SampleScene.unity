@@ -136,9 +136,6 @@ GameObject:
   - component: {fileID: 38029993}
   - component: {fileID: 38029992}
   - component: {fileID: 38029998}
-  - component: {fileID: 38029996}
-  - component: {fileID: 38029995}
-  - component: {fileID: 38029997}
   m_Layer: 6
   m_Name: EnemyMesh
   m_TagString: EnemyHitBox
@@ -236,56 +233,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38029990}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &38029995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38029990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502c51fe3c8ba2248b7f9c00665707f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
---- !u!114 &38029996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38029990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 2068556965}
-  attackDamage: 20
-  radius: 1
-  whatIsDamageable:
-    serializedVersion: 2
-    m_Bits: 64
-  myTag: EnemyHitBox
---- !u!114 &38029997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38029990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c85f77fbf146b459347f2583e64bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 1912733335}
-  - {fileID: 801730747}
-  - {fileID: 1310941336}
-  - {fileID: 1610505191}
-  patrolSpeed: 5
 --- !u!54 &38029998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -430,7 +377,6 @@ GameObject:
   - component: {fileID: 153133399}
   - component: {fileID: 153133398}
   - component: {fileID: 153133397}
-  - component: {fileID: 153133400}
   m_Layer: 6
   m_Name: PlayerMesh
   m_TagString: PlayerHitBox
@@ -526,19 +472,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153133395}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &153133400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 153133395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502c51fe3c8ba2248b7f9c00665707f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!1 &283719422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,8 +1806,6 @@ GameObject:
   - component: {fileID: 2110582108}
   - component: {fileID: 2110582110}
   - component: {fileID: 2110582109}
-  - component: {fileID: 2110582112}
-  - component: {fileID: 2110582113}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1946,37 +1877,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2110582112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110582107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 283719423}
-  attackDamage: 20
-  radius: 1
-  whatIsDamageable:
-    serializedVersion: 2
-    m_Bits: 64
-  myTag: PlayerHitBox
---- !u!114 &2110582113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2110582107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c659b4630e21a4498cbde5e12b50b08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -33,6 +33,7 @@ public class InputManagerSO : ScriptableObject
 
     private void Move(InputAction.CallbackContext context)
     {
+        Debug.Log(context.ReadValue<Vector2>());
         OnMove?.Invoke(context.ReadValue<Vector2>());
     }
 

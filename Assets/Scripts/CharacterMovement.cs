@@ -45,6 +45,13 @@ public class CharacterMovement : MonoBehaviour
         inputManager.OnRun += Run;
     }
 
+    private void OnDisable()
+    {
+        inputManager.OnJump -= Jump;
+        inputManager.OnMove -= Move;
+        inputManager.OnRun -= Run;
+    }
+
     private void Start()
     {
         currentSpeed = movementSpeed;
@@ -55,6 +62,7 @@ public class CharacterMovement : MonoBehaviour
     private void Move(Vector2 movementInput)
     {
         inputDirection = movementInput;
+        Debug.Log(movementInput);
     }
 
     private void Jump()
