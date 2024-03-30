@@ -4,6 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - PlayerHitBox
+  - EnemyHitBox
+  - PlayerDetection
   - Enemy
   layers:
   - Default
@@ -12,10 +15,10 @@ TagManager:
   - 
   - Water
   - UI
+  - HitBox
+  - Detection
   - Ground
   - Enemy
-  - 
-  - 
   - UIRender
   - 
   - 
