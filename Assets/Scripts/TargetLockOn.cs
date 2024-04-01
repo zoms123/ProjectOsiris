@@ -1,9 +1,5 @@
-using Cinemachine;
-using Cinemachine.Utility;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class TargetLockOn : MonoBehaviour
 {
@@ -33,7 +29,6 @@ public class TargetLockOn : MonoBehaviour
     [Tooltip("Canvas Transform for the crosshair of the locked target")]
     [SerializeField] private Transform lockOnCanvas;
     [SerializeField] private InputManagerSO inputManager;
-    [SerializeField] private Transform enemyTargetLocator;
     [SerializeField] private CinemachineVirtualCamera targetLockCamera;
 
     private Transform cam;
@@ -78,6 +73,7 @@ public class TargetLockOn : MonoBehaviour
         {
             if (!IsTargetInRange()) ResetTarget();
             LookAtTarget();
+            UpdateTargetLocatorPosition();
         }
     }
 
@@ -96,7 +92,7 @@ public class TargetLockOn : MonoBehaviour
     {
         lockOnCanvas.gameObject.SetActive(true);
         anim.SetLayerWeight(1, 1);
-        targetLockCamera.LookAt = enemyTargetLocator;
+        targetLockCamera.LookAt = lockOnCanvas;
         cinemachineAnimator.Play("TargetCamera");
         targetLocked = true;
         Debug.Log("<color=green>" + currentTarget.gameObject.name + " locked.</color>");
@@ -113,7 +109,6 @@ public class TargetLockOn : MonoBehaviour
         lockOnCanvas.position = targetLocator;
         lockOnCanvas.localScale = Vector3.one * (cam.position - targetLocator).magnitude * crosshairScale;
 
-        enemyTargetLocator.position = targetLocator;
         Vector3 dir = currentTarget.position - transform.position;
         dir.y = 0;
         Quaternion rot = Quaternion.LookRotation(dir);
@@ -127,37 +122,58 @@ public class TargetLockOn : MonoBehaviour
         Transform closestTarget = null;
 
         if (nearbyTargets.Length <= 0) return null;
-        
-        for (int i = 0; i < nearbyTargets.Length; i++)
+
+        foreach (Collider targetCollider in nearbyTargets)
         {
-            Vector3 directionToTarget = nearbyTargets[i].transform.position - transform.position;
+            if (targetCollider.CompareTag("Player"))
+            {
+                continue; // Skip player
+            }
+
+            Vector3 directionToTarget = targetCollider.transform.position - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToTarget);
 
             if (angle < closestAngle)
             {
                 closestAngle = angle;
-                closestTarget = nearbyTargets[i].transform;
+                closestTarget = targetCollider.transform;
             }
         }
-
+        
         if (!closestTarget) return null;
 
-        // Set target locator position
-        float h1 = closestTarget.GetComponent<CapsuleCollider>().height; Debug.Log(h1);
+        // Set targetLocator position
+        float h1 = closestTarget.GetComponent<CapsuleCollider>().height;
         float h2 = closestTarget.localScale.y;
         float h = h1 * h2;
         float half_h = (h / 2) / 2;
         currentYOffset = h - half_h;
         if (applyYOffsetLimit && currentYOffset > 1.6f && currentYOffset < 1.6f * 3) currentYOffset = 1.6f;
+
         targetLocator = closestTarget.position + new Vector3(0, currentYOffset, 0);
 
         if (Blocked())
         {
-            Debug.DrawLine(transform.position, closestTarget.position, Color.red);
+            Debug.DrawLine(transform.position, targetLocator, Color.red);
             return null;
         }
-        Debug.DrawLine(transform.position, closestTarget.position, Color.green);
+        Debug.DrawLine(transform.position, targetLocator, Color.green);
+
         return closestTarget;
+    }
+
+    private void UpdateTargetLocatorPosition()
+    {
+        if (currentTarget == null) return;
+
+        float h1 = currentTarget.GetComponent<CapsuleCollider>().height;
+        float h2 = currentTarget.localScale.y;
+        float h = h1 * h2;
+        float half_h = (h / 2) / 2;
+        currentYOffset = h - half_h;
+        if (applyYOffsetLimit && currentYOffset > 1.6f && currentYOffset < 1.6f * 3) currentYOffset = 1.6f;
+
+        targetLocator = currentTarget.position + new Vector3(0, currentYOffset, 0);
     }
 
     private bool Blocked()
@@ -165,7 +181,7 @@ public class TargetLockOn : MonoBehaviour
         RaycastHit hit;
         if (Physics.Linecast(transform.position + Vector3.up * 0.5f, targetLocator, out hit))
         {
-            if (!hit.transform.CompareTag("EnemyHitBox")) return true;
+            if (!hit.transform.CompareTag("Enemy")) return true;
         }
         return false;
     }
