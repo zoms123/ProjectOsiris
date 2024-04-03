@@ -12,6 +12,7 @@ public class InputManagerSO : ScriptableObject
     public event Action<Vector2> OnMove;
     public event Action<bool> OnRun;
     public event Action OnLockTarget;
+    public event Action OnFire;
 
     private void OnEnable()
     {
@@ -25,6 +26,7 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.Run.performed += Run;
             controls.Gameplay.Run.canceled += Run;
             controls.Gameplay.LockTarget.started += LockTarget;
+            controls.Gameplay.Fire.performed += Fire;
         }
 
         controls.Gameplay.Enable();
@@ -49,5 +51,10 @@ public class InputManagerSO : ScriptableObject
     private void LockTarget(InputAction.CallbackContext context)
     {
         OnLockTarget?.Invoke();
+    }
+
+    private void Fire(InputAction.CallbackContext context)
+    {
+        OnFire?.Invoke();
     }
 }
