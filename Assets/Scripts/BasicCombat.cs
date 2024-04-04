@@ -11,18 +11,6 @@ public class BasicCombat : MonoBehaviour
     [SerializeField] private LayerMask whatIsDamageable;
     [SerializeField] private string myTag;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Attack()
     {
         Collider[] collidersTouched = Physics.OverlapSphere(attackPoint.position, radius, whatIsDamageable);

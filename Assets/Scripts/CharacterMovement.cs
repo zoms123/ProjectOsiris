@@ -31,11 +31,14 @@ public class CharacterMovement : MonoBehaviour
 
     private Vector2 inputDirection = Vector2.zero;
 
+    private BasicCombat basicCombat;
+
     private void Awake()
     {
         mainCamera = Camera.main.transform;
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        basicCombat = GetComponent<BasicCombat>();
     }
 
     private void OnEnable()
@@ -43,6 +46,7 @@ public class CharacterMovement : MonoBehaviour
         inputManager.OnJump += Jump;
         inputManager.OnMove += Move;
         inputManager.OnRun += Run;
+        inputManager.OnAttack += Attack;
     }
 
     private void OnDisable()
@@ -50,6 +54,7 @@ public class CharacterMovement : MonoBehaviour
         inputManager.OnJump -= Jump;
         inputManager.OnMove -= Move;
         inputManager.OnRun -= Run;
+        inputManager.OnAttack -= Attack;
     }
 
     private void Start()
@@ -82,6 +87,14 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             currentSpeed = movementSpeed;
+        }
+    }
+
+    private void Attack()
+    {
+        if (IsGrounded())
+        {
+            basicCombat.Attack();
         }
     }
 
