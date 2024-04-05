@@ -11,24 +11,50 @@ public class InputManagerSO : ScriptableObject
     public event Action OnJump;
     public event Action<Vector2> OnMove;
     public event Action<bool> OnRun;
+    public event Action OnAttack;
     public event Action OnLockTarget;
+    public event Action OnOptions;
+    public event Action<Vector2> OnPowerSelect;
 
     private void OnEnable()
     {
         if (controls == null)
         {
-            controls = new Controls();
+            controls = new();
 
             controls.Gameplay.Move.performed += Move;
             controls.Gameplay.Move.canceled += Move;
             controls.Gameplay.Jump.started += Jump;
             controls.Gameplay.Run.performed += Run;
             controls.Gameplay.Run.canceled += Run;
+            controls.Gameplay.Attack.started += Attack;
             controls.Gameplay.LockTarget.started += LockTarget;
+            controls.Gameplay.Options.started += Options;
+            controls.Gameplay.PowerSelect.started += PowerSelect;
         }
 
         controls.Gameplay.Enable();
         Debug.Log("Input ready!");
+    }
+
+    private void OnDisable()
+    {
+        if (controls == null)
+        {
+
+            controls.Gameplay.Move.performed -= Move;
+            controls.Gameplay.Move.canceled -= Move;
+            controls.Gameplay.Jump.started -= Jump;
+            controls.Gameplay.Run.performed -= Run;
+            controls.Gameplay.Run.canceled -= Run;
+            controls.Gameplay.Attack.started -= Attack;
+            controls.Gameplay.LockTarget.started -= LockTarget;
+            controls.Gameplay.Options.started -= Options;
+            controls.Gameplay.PowerSelect.started -= PowerSelect;
+
+            controls.Gameplay.Disable();
+            Debug.Log("Input Disabled!");
+        }
     }
 
     private void Move(InputAction.CallbackContext context)
@@ -46,8 +72,23 @@ public class InputManagerSO : ScriptableObject
         OnRun?.Invoke(context.ReadValueAsButton());
     }
 
+    private void Attack(InputAction.CallbackContext context)
+    {
+        OnAttack?.Invoke();
+    }
+
     private void LockTarget(InputAction.CallbackContext context)
     {
         OnLockTarget?.Invoke();
+    }
+
+    private void Options(InputAction.CallbackContext context)
+    {
+        OnOptions?.Invoke();
+    }
+
+    private void PowerSelect(InputAction.CallbackContext context)
+    {
+        OnPowerSelect?.Invoke(context.ReadValue<Vector2>());
     }
 }
