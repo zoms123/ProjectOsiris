@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleLockOn : MonoBehaviour
+public class Billboard : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    private Transform target;
 
     private void OnEnable()
     {
@@ -18,7 +18,6 @@ public class SimpleLockOn : MonoBehaviour
         while (this.gameObject.activeInHierarchy)
         {
             Vector3 dir = target.position - this.transform.position;
-            // dir.y = 0;
 
             transform.rotation = Quaternion.LookRotation(dir);
             yield return null;
