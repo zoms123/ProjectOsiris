@@ -196,7 +196,7 @@ public class TargetLockOn : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

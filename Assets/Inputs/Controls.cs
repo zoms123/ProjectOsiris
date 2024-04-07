@@ -73,6 +73,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""0065e6c3-b530-435c-b85b-0767dfcd0241"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Options"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2a36323-29c9-4783-afc9-54d89cd9a274"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerSelect"",
+                    ""type"": ""Value"",
+                    ""id"": ""d5c11628-c000-4944-9ffc-7d422edfa50d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""7e8365ce-3c0d-4dad-8da8-7d05a76a2226"",
@@ -97,7 +124,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""239aa8fc-a02a-44b7-bd7a-c7586dcff81f"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -262,7 +289,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""37b87900-4567-49e5-a162-61e790955178"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -295,13 +322,167 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4ad4aab8-91ea-404f-9331-52b42ae0074a"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LockTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98f4110a-c11c-4cfa-8375-720814256a4f"",
+                    ""path"": ""<DualShockGamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""954bb885-7b75-482f-bc50-e698d707f751"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ef91567-d7fd-4d4a-9b9e-688fd6431167"",
+                    ""path"": ""<DualShockGamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Options"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2ea2145-bc96-43ed-8232-8b8eeb426079"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Options"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""D-Pad"",
+                    ""id"": ""dbf3500e-9649-485d-9fa9-73aa07d3bcb0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""96d08fbf-41ef-4a1a-b816-c6f3090cc12b"",
+                    ""path"": ""<DualShockGamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fe1e2e26-cc16-45eb-a11e-8dc2cb30218c"",
+                    ""path"": ""<DualShockGamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""661149a0-eb71-4a0a-a64e-735ecbaa2261"",
+                    ""path"": ""<DualShockGamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""cc73c6bd-747e-41b6-a908-bcffc8629322"",
+                    ""path"": ""<DualShockGamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""IJKL"",
+                    ""id"": ""31fd904e-b48f-4c73-ab30-17831f2bb5cf"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7e90464a-029c-4fd7-baab-77a276bc51f7"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""114b8721-b7c2-4863-b771-ac7d6e327f10"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7f81c5e3-3c11-4de2-80a2-3ab5f6d6490f"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""edbf3eb0-00b5-4cd3-be57-fcf14dbe22f5"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -337,6 +518,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
         m_Gameplay_LockTarget = m_Gameplay.FindAction("LockTarget", throwIfNotFound: true);
+        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
+        m_Gameplay_Options = m_Gameplay.FindAction("Options", throwIfNotFound: true);
+        m_Gameplay_PowerSelect = m_Gameplay.FindAction("PowerSelect", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
     }
 
@@ -404,6 +588,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_Run;
     private readonly InputAction m_Gameplay_LockTarget;
+    private readonly InputAction m_Gameplay_Attack;
+    private readonly InputAction m_Gameplay_Options;
+    private readonly InputAction m_Gameplay_PowerSelect;
     private readonly InputAction m_Gameplay_Fire;
     public struct GameplayActions
     {
@@ -414,6 +601,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         public InputAction @Run => m_Wrapper.m_Gameplay_Run;
         public InputAction @LockTarget => m_Wrapper.m_Gameplay_LockTarget;
+        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
+        public InputAction @Options => m_Wrapper.m_Gameplay_Options;
+        public InputAction @PowerSelect => m_Wrapper.m_Gameplay_PowerSelect;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -439,6 +629,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @LockTarget.started += instance.OnLockTarget;
             @LockTarget.performed += instance.OnLockTarget;
             @LockTarget.canceled += instance.OnLockTarget;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @Options.started += instance.OnOptions;
+            @Options.performed += instance.OnOptions;
+            @Options.canceled += instance.OnOptions;
+            @PowerSelect.started += instance.OnPowerSelect;
+            @PowerSelect.performed += instance.OnPowerSelect;
+            @PowerSelect.canceled += instance.OnPowerSelect;
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
@@ -461,6 +660,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @LockTarget.started -= instance.OnLockTarget;
             @LockTarget.performed -= instance.OnLockTarget;
             @LockTarget.canceled -= instance.OnLockTarget;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @Options.started -= instance.OnOptions;
+            @Options.performed -= instance.OnOptions;
+            @Options.canceled -= instance.OnOptions;
+            @PowerSelect.started -= instance.OnPowerSelect;
+            @PowerSelect.performed -= instance.OnPowerSelect;
+            @PowerSelect.canceled -= instance.OnPowerSelect;
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
@@ -488,6 +696,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnLockTarget(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnOptions(InputAction.CallbackContext context);
+        void OnPowerSelect(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
     }
 }
