@@ -4,13 +4,14 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class CrystalDissolveControl : MonoBehaviour
+public class CrystalDissolveEffect : MonoBehaviour, IInteractable
 {
     [SerializeField] Material material;
     [SerializeField] float effectTime;
     [SerializeField] float appearingRatio = 0.1f;
     [SerializeField] float speed = 2;
 
+    private bool canInteract = true; 
     private float total = 1;
     private Material copyMaterial;
     private bool hidden = true;
@@ -27,45 +28,46 @@ public class CrystalDissolveControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.L) && !applyEffect)
-        {
-            ActivateAppearingAndDisappearingEffect();
-        }
         if (applyEffect && currentTime <= effectTime)
         {
-            
             currentTime += Time.deltaTime;
-            float amount = 0;
-            if (hidden)
-                amount = currentTime / effectTime;
-            else
-                amount -= currentTime / effectTime;
-
-            copyMaterial.SetFloat("_Dissolve", total + amount);
+            float effectRatio = CalculateEffectRatio();          
+            copyMaterial.SetFloat("_Dissolve", total + effectRatio);
         } 
         else
         {
             applyEffect = false;
             currentTime = 0;
-            if (hidden)
-            {
-                total = 1;
-            } else
-            {
-                total = 0;
-            }
+            total = hidden ? 1 : 0;
         }
     }
 
-    #region Coroutines
+
+    private float CalculateEffectRatio()
+    {
+        var ratio = currentTime / effectTime;
+        return hidden ? ratio : -ratio;
+        
+    }
 
     private void ActivateAppearingAndDisappearingEffect()
     {
         hidden = !hidden;
         applyEffect = true;
         
-        // Activbate or deactivate colliders
+        // Activate or deactivate colliders
     }
-    #endregion
+
+    public bool CanInteract()
+    {
+        return canInteract;
+    }
+
+    public void Interact(PowerType powerType)
+    {
+        if (powerType == PowerType.Crystal && !applyEffect)
+        {
+            ActivateAppearingAndDisappearingEffect();
+        }
+    }
 }

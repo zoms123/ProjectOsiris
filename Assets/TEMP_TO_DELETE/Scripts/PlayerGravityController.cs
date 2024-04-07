@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerGravityController : MonoBehaviour
 {
+    [SerializeField] private GameManagerSO gameManager;
+    [SerializeField] private InputManagerSO inputManager;
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
 
@@ -11,10 +13,15 @@ public class PlayerGravityController : MonoBehaviour
 
     private IInteractable interactable;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        inputManager.OnInteract += Interact;
+
+    }
+
+    private void OnDisable()
+    {
+        inputManager.OnInteract -= Interact;
     }
 
     // Update is called once per frame
@@ -40,12 +47,13 @@ public class PlayerGravityController : MonoBehaviour
             
             
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+    }
+
+    private void Interact()
+    {
+        if (interactable != null && interactable.CanInteract())
         {
-            if (interactable != null && interactable.CanInteract())
-            {
-                interactable.Interact();
-            }
+            interactable.Interact(PowerType.Gravity);
         }
     }
 

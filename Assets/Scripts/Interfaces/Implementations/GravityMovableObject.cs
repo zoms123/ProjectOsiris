@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GravityMovableObject : MonoBehaviour, IInteractable
 {
-
     private ZeroGravityEffector zeroGravityEffector;
     private bool activated;
     private Transform parent; 
@@ -13,7 +12,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void Interact()
+    public void Interact(PowerType powerType)
     {
         if (!activated)
         {
