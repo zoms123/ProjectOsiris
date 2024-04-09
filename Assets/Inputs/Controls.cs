@@ -98,6 +98,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""638e0cc7-af09-4b4e-bdcc-d261bab1ba8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -474,6 +483,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""PowerSelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c7b31ba-ad16-4a4c-b2b7-a8ffb2ffac1f"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""924879d3-9d4a-49fb-b58d-7b5234a39037"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -490,6 +521,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Options = m_Gameplay.FindAction("Options", throwIfNotFound: true);
         m_Gameplay_PowerSelect = m_Gameplay.FindAction("PowerSelect", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -559,6 +591,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Options;
     private readonly InputAction m_Gameplay_PowerSelect;
+    private readonly InputAction m_Gameplay_Interact;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -571,6 +604,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Options => m_Wrapper.m_Gameplay_Options;
         public InputAction @PowerSelect => m_Wrapper.m_Gameplay_PowerSelect;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -604,6 +638,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PowerSelect.started += instance.OnPowerSelect;
             @PowerSelect.performed += instance.OnPowerSelect;
             @PowerSelect.canceled += instance.OnPowerSelect;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -632,6 +669,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PowerSelect.started -= instance.OnPowerSelect;
             @PowerSelect.performed -= instance.OnPowerSelect;
             @PowerSelect.canceled -= instance.OnPowerSelect;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -659,5 +699,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnOptions(InputAction.CallbackContext context);
         void OnPowerSelect(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

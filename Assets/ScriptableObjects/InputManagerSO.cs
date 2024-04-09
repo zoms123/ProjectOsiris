@@ -12,6 +12,7 @@ public class InputManagerSO : ScriptableObject
     public event Action<Vector2> OnMove;
     public event Action<bool> OnRun;
     public event Action OnAttack;
+    public event Action OnInteract;
     public event Action OnLockTarget;
     public event Action OnOptions;
     public event Action<Vector2> OnPowerSelect;
@@ -28,6 +29,7 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.Run.performed += Run;
             controls.Gameplay.Run.canceled += Run;
             controls.Gameplay.Attack.started += Attack;
+            controls.Gameplay.Interact.started += Interact;
             controls.Gameplay.LockTarget.started += LockTarget;
             controls.Gameplay.Options.started += Options;
             controls.Gameplay.PowerSelect.started += PowerSelect;
@@ -48,6 +50,7 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.Run.performed -= Run;
             controls.Gameplay.Run.canceled -= Run;
             controls.Gameplay.Attack.started -= Attack;
+            controls.Gameplay.Interact.started -= Interact;
             controls.Gameplay.LockTarget.started -= LockTarget;
             controls.Gameplay.Options.started -= Options;
             controls.Gameplay.PowerSelect.started -= PowerSelect;
@@ -75,6 +78,11 @@ public class InputManagerSO : ScriptableObject
     private void Attack(InputAction.CallbackContext context)
     {
         OnAttack?.Invoke();
+    }
+
+    private void Interact(InputAction.CallbackContext context)
+    {
+        OnInteract?.Invoke();
     }
 
     private void LockTarget(InputAction.CallbackContext context)
