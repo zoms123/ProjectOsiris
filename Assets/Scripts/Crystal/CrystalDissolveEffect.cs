@@ -8,8 +8,7 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
 {
     [SerializeField] Material material;
     [SerializeField] float effectTime;
-    [SerializeField] float appearingRatio = 0.1f;
-    [SerializeField] float speed = 2;
+    [SerializeField] Collider colliderToDisolve;
 
     private bool canInteract = true; 
     private float total = 1;
@@ -23,9 +22,9 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
         copyMaterial = new Material(material);
         GetComponent<Renderer>().material = copyMaterial;
         copyMaterial.SetFloat("_Dissolve", total);
+        colliderToDisolve.enabled = !hidden;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (applyEffect && currentTime <= effectTime)
@@ -34,11 +33,12 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
             float effectRatio = CalculateEffectRatio();          
             copyMaterial.SetFloat("_Dissolve", total + effectRatio);
         } 
-        else
+        else if(applyEffect)
         {
             applyEffect = false;
             currentTime = 0;
             total = hidden ? 1 : 0;
+            colliderToDisolve.enabled = !hidden;            
         }
     }
 
@@ -55,7 +55,6 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
         hidden = !hidden;
         applyEffect = true;
         
-        // Activate or deactivate colliders
     }
 
     public bool CanInteract()

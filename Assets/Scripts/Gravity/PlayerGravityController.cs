@@ -15,19 +15,20 @@ public class PlayerGravityController : MonoBehaviour
 
     private void OnEnable()
     {
+        inputManager.OnFire += Fire;
         inputManager.OnInteract += Interact;
 
     }
 
     private void OnDisable()
     {
+        inputManager.OnFire -= Fire;
         inputManager.OnInteract -= Interact;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if(gameManager.CurrentPowerType == PowerType.Gravity)
         {
             if (!zeroGravityZone)
             {
@@ -39,19 +40,18 @@ public class PlayerGravityController : MonoBehaviour
                 Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
                 zeroGravityZone.transform.position = position;
                 zeroGravityZone.SetActive(true);
-            } 
+            }
             else
             {
                 zeroGravityZone.SetActive(false);
             }
-            
-            
+
         }
     }
 
     private void Interact()
     {
-        if (interactable != null && interactable.CanInteract())
+        if (gameManager.CurrentPowerType == PowerType.Gravity && interactable != null && interactable.CanInteract())
         {
             interactable.Interact(PowerType.Gravity);
         }
@@ -61,19 +61,19 @@ public class PlayerGravityController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
-            IInteractable interact = other.GetComponent<IInteractable>();
-            if (interact != null)
-            {
-                interactable = other.GetComponent<IInteractable>();
-            }
+            interactable = interact;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
             interactable = null;
         }

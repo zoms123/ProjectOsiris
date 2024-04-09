@@ -52,19 +52,17 @@ public class CrystalController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
-            IInteractable interact = other.GetComponent<IInteractable>();
-            if (interact != null)
-            {
-                interactable = other.GetComponent<IInteractable>();
-            }
+                interactable = interact;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
             interactable = null;
         }
