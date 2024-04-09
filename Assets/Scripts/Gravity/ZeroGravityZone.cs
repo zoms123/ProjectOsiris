@@ -16,7 +16,8 @@ public class ZeroGravityZone : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(DisableZoneCountDown());
+        if (activeTime > 0)
+            StartCoroutine(DisableZoneCountDown());
     }
 
     private void OnDisable()
