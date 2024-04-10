@@ -8,30 +8,26 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     private bool activated;
     private Transform parent;
 
-    public bool CanInteract()
+    public bool CanInteract(PowerType powerType)
     {
-        return true;
+        return powerType == PowerType.Gravity;
     }
 
-    public void Interact(PowerType powerType)
+    public void Interact()
     {
-        if(powerType == PowerType.Gravity)
+        if (!activated)
         {
-            if (!activated)
-            {
-                zeroGravityEffector = GetComponent<ZeroGravityEffector>();
-                zeroGravityEffector.UseZeroGravity();
-                transform.SetParent(parent);
-                activated = true;
-            }
-            else
-            {
-                zeroGravityEffector.StopUsingZeroGravity();
-                transform.SetParent(null);
-                activated = false;
-            }
+            zeroGravityEffector = GetComponent<ZeroGravityEffector>();
+            zeroGravityEffector.UseZeroGravity();
+            transform.SetParent(parent);
+            activated = true;
         }
-        
+        else
+        {
+            zeroGravityEffector.StopUsingZeroGravity();
+            transform.SetParent(null);
+            activated = false;
+        }
     }
 
 

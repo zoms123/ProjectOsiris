@@ -24,12 +24,12 @@ public class Button : MonoBehaviour, IInteractable
         }
     }
 
-    public bool CanInteract()
+    public bool CanInteract(PowerType powerType)
     {
-        return canInteract;
+        return canInteract && powerType == PowerType.None;
     }
 
-    public void Interact(PowerType powerType)
+    public void Interact()
     {
         destinationPosition = objectToMove.transform.position + displacementUnits;
         interacting = true;

@@ -25,14 +25,11 @@ public class PlayerInteractControler : MonoBehaviour
         Collider[] collidersTouched = Physics.OverlapSphere(point.position, radius);
         foreach (Collider collider in collidersTouched)
         {
-            if (!collider.gameObject.CompareTag("Player") && collider.CompareTag("Interactable"))
+            IInteractable interactable = collider.GetComponent<IInteractable>();
+            if (interactable != null && interactable.CanInteract(PowerType.None))
             {
-                IInteractable interactable = collider.GetComponent<IInteractable>();
-                if (interactable != null && interactable.CanInteract())
-                {
-                    interactable.Interact(PowerType.None);
-                    break;
-                }
+                interactable.Interact();
+                break;
             }
         }
     }

@@ -198,9 +198,7 @@ GameObject:
   - component: {fileID: 8301126046662638390}
   - component: {fileID: 4558627797121368189}
   - component: {fileID: 8852996138916609081}
-  - component: {fileID: 2696162592645215751}
-  - component: {fileID: 8236353231987322615}
-  - component: {fileID: 5486091960845576766}
+  - component: {fileID: 5099254302897840902}
   - component: {fileID: 5503250831304565375}
   m_Layer: 6
   m_Name: NewPlayer
@@ -330,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   point: {fileID: 8566005181887499671}
-  radius: 5
+  radius: 1.5
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!143 &2850807508791019473
 CharacterController:
@@ -435,7 +433,7 @@ MonoBehaviour:
   crystalIcon: {fileID: 0}
   timeIcon: {fileID: 0}
   shadowIcon: {fileID: 0}
---- !u!114 &2696162592645215751
+--- !u!114 &5099254302897840902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,48 +442,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 477885546983042174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c212a0a0f69c142a6157984e31ecb6, type: 3}
+  m_Script: {fileID: 11500000, guid: d5304472d478d6b44a31abf52c4005fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   zeroGravityZoneOffset: 0
---- !u!114 &8236353231987322615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477885546983042174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dff08c2195063048bc31202a09367ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
   firePoint: {fileID: 8566005181887499671}
---- !u!114 &5486091960845576766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477885546983042174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 8566005181887499671}
-  attackDamage: 1
-  radius: 2
-  whatIsDamageable:
-    serializedVersion: 2
-    m_Bits: 512
-  myTag: Player
 --- !u!95 &5503250831304565375
 Animator:
   serializedVersion: 5

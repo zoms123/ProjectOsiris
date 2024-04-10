@@ -10,12 +10,12 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
     
 
 
-    public bool CanInteract()
+    public bool CanInteract(PowerType powerType)
     {
         return true;
     }
 
-    public void Interact(PowerType powerType)
+    public void Interact()
     {
         if(interactable != null)
         {
