@@ -83,9 +83,12 @@ public class ZeroGravityEffector : MonoBehaviour
     public void StopUsingZeroGravity()
     {
         useZeroGravity = false;
-        rigidBody.useGravity = true;
+        if (rigidBody != null) 
+        { 
+            rigidBody.useGravity = true;
+            rigidBody.drag = 0;
+        }
         initialImpulseStoped = false;
-        rigidBody.drag = 0;
         currentTimeInterval = 0;
     }
 
