@@ -14,8 +14,8 @@ public class InputManagerSO : ScriptableObject
     public event Action OnLockTarget;
     public event Action OnOptions;
     public event Action<Vector2> OnPowerSelect;
-    public event Action OnFire;
-    public event Action OnInteract;
+    public event Action OnCombatAbility;
+    public event Action OnPuzzleAbility;
 
     private void OnEnable()
     {
@@ -32,8 +32,8 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.LockTarget.started += LockTarget;
             controls.Gameplay.Options.started += Options;
             controls.Gameplay.PowerSelect.started += PowerSelect;
-            controls.Gameplay.Fire.started += Fire;
-            controls.Gameplay.Interact.started += Interact;
+            controls.Gameplay.CombatAbility.started += CombatAbility;
+            controls.Gameplay.PuzzleAbility.started += PuzzleAbility;
         }
 
         controls.Gameplay.Enable();
@@ -77,14 +77,14 @@ public class InputManagerSO : ScriptableObject
         OnPowerSelect?.Invoke(context.ReadValue<Vector2>());
     }
 
-    private void Fire(InputAction.CallbackContext context)
+    private void CombatAbility(InputAction.CallbackContext context)
     {
-        OnFire?.Invoke();
+        OnCombatAbility?.Invoke();
     }
 
-    private void Interact(InputAction.CallbackContext context)
+    private void PuzzleAbility(InputAction.CallbackContext context)
     {
-        OnInteract?.Invoke();
+        OnPuzzleAbility?.Invoke();
     }
 
     private void OnDisable()
@@ -100,8 +100,8 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.LockTarget.started -= LockTarget;
             controls.Gameplay.Options.started -= Options;
             controls.Gameplay.PowerSelect.started -= PowerSelect;
-            controls.Gameplay.Fire.started -= Fire;
-            controls.Gameplay.Interact.started -= Interact;
+            controls.Gameplay.CombatAbility.started -= CombatAbility;
+            controls.Gameplay.PuzzleAbility.started -= PuzzleAbility;
 
             controls.Gameplay.Disable();
             controls.PlayerMovement.Disable();

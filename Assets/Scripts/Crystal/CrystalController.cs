@@ -15,14 +15,14 @@ public class CrystalController : MonoBehaviour
 
     private void OnEnable()
     {
-        inputManager.OnFire += Fire;
-        inputManager.OnInteract += Interact;
+        inputManager.OnCombatAbility += Fire;
+        inputManager.OnPuzzleAbility += Interact;
     }
 
     private void OnDisable()
     {
-        inputManager.OnFire -= Fire;
-        inputManager.OnInteract -= Interact;
+        inputManager.OnCombatAbility -= Fire;
+        inputManager.OnPuzzleAbility -= Interact;
     }
 
     private void Fire()

@@ -64,7 +64,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Fire"",
+                    ""name"": ""CombatAbility"",
                     ""type"": ""Button"",
                     ""id"": ""7e8365ce-3c0d-4dad-8da8-7d05a76a2226"",
                     ""expectedControlType"": ""Button"",
@@ -73,7 +73,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""PuzzleAbility"",
                     ""type"": ""Button"",
                     ""id"": ""bfefad43-d654-4e73-aa73-b9a21741877c"",
                     ""expectedControlType"": ""Button"",
@@ -277,7 +277,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""CombatAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -288,7 +288,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Fire"",
+                    ""action"": ""CombatAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -299,7 +299,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""PuzzleAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -310,7 +310,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""PuzzleAbility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -572,8 +572,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Options = m_Gameplay.FindAction("Options", throwIfNotFound: true);
         m_Gameplay_PowerSelect = m_Gameplay.FindAction("PowerSelect", throwIfNotFound: true);
-        m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
-        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay_CombatAbility = m_Gameplay.FindAction("CombatAbility", throwIfNotFound: true);
+        m_Gameplay_PuzzleAbility = m_Gameplay.FindAction("PuzzleAbility", throwIfNotFound: true);
         // Player Movement
         m_PlayerMovement = asset.FindActionMap("Player Movement", throwIfNotFound: true);
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
@@ -649,8 +649,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Options;
     private readonly InputAction m_Gameplay_PowerSelect;
-    private readonly InputAction m_Gameplay_Fire;
-    private readonly InputAction m_Gameplay_Interact;
+    private readonly InputAction m_Gameplay_CombatAbility;
+    private readonly InputAction m_Gameplay_PuzzleAbility;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -659,8 +659,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Options => m_Wrapper.m_Gameplay_Options;
         public InputAction @PowerSelect => m_Wrapper.m_Gameplay_PowerSelect;
-        public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
-        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        public InputAction @CombatAbility => m_Wrapper.m_Gameplay_CombatAbility;
+        public InputAction @PuzzleAbility => m_Wrapper.m_Gameplay_PuzzleAbility;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -682,12 +682,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PowerSelect.started += instance.OnPowerSelect;
             @PowerSelect.performed += instance.OnPowerSelect;
             @PowerSelect.canceled += instance.OnPowerSelect;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
+            @CombatAbility.started += instance.OnCombatAbility;
+            @CombatAbility.performed += instance.OnCombatAbility;
+            @CombatAbility.canceled += instance.OnCombatAbility;
+            @PuzzleAbility.started += instance.OnPuzzleAbility;
+            @PuzzleAbility.performed += instance.OnPuzzleAbility;
+            @PuzzleAbility.canceled += instance.OnPuzzleAbility;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -704,12 +704,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @PowerSelect.started -= instance.OnPowerSelect;
             @PowerSelect.performed -= instance.OnPowerSelect;
             @PowerSelect.canceled -= instance.OnPowerSelect;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
+            @CombatAbility.started -= instance.OnCombatAbility;
+            @CombatAbility.performed -= instance.OnCombatAbility;
+            @CombatAbility.canceled -= instance.OnCombatAbility;
+            @PuzzleAbility.started -= instance.OnPuzzleAbility;
+            @PuzzleAbility.performed -= instance.OnPuzzleAbility;
+            @PuzzleAbility.canceled -= instance.OnPuzzleAbility;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -879,8 +879,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnOptions(InputAction.CallbackContext context);
         void OnPowerSelect(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
+        void OnCombatAbility(InputAction.CallbackContext context);
+        void OnPuzzleAbility(InputAction.CallbackContext context);
     }
     public interface IPlayerMovementActions
     {
