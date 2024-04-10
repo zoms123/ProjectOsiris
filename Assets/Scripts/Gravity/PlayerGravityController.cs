@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerGravityController : MonoBehaviour
 {
+    [SerializeField] private GameManagerSO gameManager;
+    [SerializeField] private InputManagerSO inputManager;
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
 
@@ -11,16 +13,22 @@ public class PlayerGravityController : MonoBehaviour
 
     private IInteractable interactable;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        inputManager.OnFire += Fire;
+        inputManager.OnInteract += Interact;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        inputManager.OnFire -= Fire;
+        inputManager.OnInteract -= Interact;
+    }
+
+    private void Fire()
+    {
+        if(gameManager.CurrentPowerType == PowerType.Gravity)
         {
             if (!zeroGravityZone)
             {
@@ -32,20 +40,20 @@ public class PlayerGravityController : MonoBehaviour
                 Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
                 zeroGravityZone.transform.position = position;
                 zeroGravityZone.SetActive(true);
-            } 
+            }
             else
             {
                 zeroGravityZone.SetActive(false);
             }
-            
-            
+
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+    }
+
+    private void Interact()
+    {
+        if (gameManager.CurrentPowerType == PowerType.Gravity && interactable != null && interactable.CanInteract())
         {
-            if (interactable != null && interactable.CanInteract())
-            {
-                interactable.Interact();
-            }
+            interactable.Interact(PowerType.Gravity);
         }
     }
 
@@ -53,19 +61,19 @@ public class PlayerGravityController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
-            IInteractable interact = other.GetComponent<IInteractable>();
-            if (interact != null)
-            {
-                interactable = other.GetComponent<IInteractable>();
-            }
+            interactable = interact;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Interactable"))
+        IInteractable interact = other.GetComponent<IInteractable>();
+        if (interact != null)
         {
             interactable = null;
         }

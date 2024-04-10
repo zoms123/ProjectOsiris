@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "InputManager")]
+[CreateAssetMenu(menuName = "Managers/InputManager")]
 public class InputManagerSO : ScriptableObject
 {
     public Controls controls;
@@ -14,6 +14,8 @@ public class InputManagerSO : ScriptableObject
     public event Action OnLockTarget;
     public event Action OnOptions;
     public event Action<Vector2> OnPowerSelect;
+    public event Action OnFire;
+    public event Action OnInteract;
 
     private void OnEnable()
     {
@@ -30,6 +32,8 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.LockTarget.started += LockTarget;
             controls.Gameplay.Options.started += Options;
             controls.Gameplay.PowerSelect.started += PowerSelect;
+            controls.Gameplay.Fire.started += Fire;
+            controls.Gameplay.Interact.started += Interact;
         }
 
         controls.Gameplay.Enable();
@@ -73,6 +77,16 @@ public class InputManagerSO : ScriptableObject
         OnPowerSelect?.Invoke(context.ReadValue<Vector2>());
     }
 
+    private void Fire(InputAction.CallbackContext context)
+    {
+        OnFire?.Invoke();
+    }
+
+    private void Interact(InputAction.CallbackContext context)
+    {
+        OnInteract?.Invoke();
+    }
+
     private void OnDisable()
     {
         if (controls != null)
@@ -86,6 +100,8 @@ public class InputManagerSO : ScriptableObject
             controls.Gameplay.LockTarget.started -= LockTarget;
             controls.Gameplay.Options.started -= Options;
             controls.Gameplay.PowerSelect.started -= PowerSelect;
+            controls.Gameplay.Fire.started -= Fire;
+            controls.Gameplay.Interact.started -= Interact;
 
             controls.Gameplay.Disable();
             controls.PlayerMovement.Disable();

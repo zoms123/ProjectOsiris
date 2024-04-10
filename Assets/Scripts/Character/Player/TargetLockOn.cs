@@ -4,6 +4,7 @@ using Cinemachine;
 public class TargetLockOn : MonoBehaviour
 {
     private Transform currentTarget;
+    public Transform CurrentTarget { get { return currentTarget; } }
     private bool isLockActive = false;
     
     [Header("Settings")]
