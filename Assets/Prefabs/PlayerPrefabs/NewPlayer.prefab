@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 1467840604482223549}
   - component: {fileID: 4809864321202586411}
   - component: {fileID: 2967062750217546772}
+  - component: {fileID: 8459709941152380902}
   - component: {fileID: 2850807508791019473}
   - component: {fileID: 8436162734839637493}
   - component: {fileID: 8301126046662638390}
@@ -199,6 +200,7 @@ GameObject:
   - component: {fileID: 8852996138916609081}
   - component: {fileID: 2696162592645215751}
   - component: {fileID: 8236353231987322615}
+  - component: {fileID: 5486091960845576766}
   - component: {fileID: 5503250831304565375}
   m_Layer: 6
   m_Name: NewPlayer
@@ -314,6 +316,21 @@ MonoBehaviour:
   cinemachineAnimator: {fileID: 0}
   lockOnCanvasTransform: {fileID: 0}
   targetLockCamera: {fileID: 0}
+  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
+--- !u!114 &8459709941152380902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477885546983042174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dd65123a1e03345a81c48535a1b876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  point: {fileID: 8566005181887499671}
+  radius: 5
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!143 &2850807508791019473
 CharacterController:
@@ -450,6 +467,25 @@ MonoBehaviour:
   gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
   firePoint: {fileID: 8566005181887499671}
+--- !u!114 &5486091960845576766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477885546983042174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 8566005181887499671}
+  attackDamage: 1
+  radius: 2
+  whatIsDamageable:
+    serializedVersion: 2
+    m_Bits: 512
+  myTag: Player
 --- !u!95 &5503250831304565375
 Animator:
   serializedVersion: 5

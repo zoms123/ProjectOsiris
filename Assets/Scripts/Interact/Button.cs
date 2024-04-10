@@ -29,7 +29,7 @@ public class Button : MonoBehaviour, IInteractable
         return canInteract;
     }
 
-    public void Interact()
+    public void Interact(PowerType powerType)
     {
         destinationPosition = objectToMove.transform.position + displacementUnits;
         interacting = true;

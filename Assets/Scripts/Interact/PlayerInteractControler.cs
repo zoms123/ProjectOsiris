@@ -30,7 +30,7 @@ public class PlayerInteractControler : MonoBehaviour
                 IInteractable interactable = collider.GetComponent<IInteractable>();
                 if (interactable != null && interactable.CanInteract())
                 {
-                    interactable.Interact();
+                    interactable.Interact(PowerType.None);
                     break;
                 }
             }

@@ -44,6 +44,30 @@ public class InputManagerSO : ScriptableObject
         Debug.Log("Input ready!");
     }
 
+<<<<<<< HEAD:Assets/ScriptableObjects/InputManagerSO.cs
+    private void OnDisable()
+    {
+        if (controls == null)
+        {
+
+            controls.Gameplay.Move.performed -= Move;
+            controls.Gameplay.Move.canceled -= Move;
+            controls.Gameplay.Jump.started -= Jump;
+            controls.Gameplay.Run.performed -= Run;
+            controls.Gameplay.Run.canceled -= Run;
+            controls.Gameplay.Attack.started -= Attack;
+            controls.Gameplay.Interact.started -= Interact;
+            controls.Gameplay.LockTarget.started -= LockTarget;
+            controls.Gameplay.Options.started -= Options;
+            controls.Gameplay.PowerSelect.started -= PowerSelect;
+
+            controls.Gameplay.Disable();
+            Debug.Log("Input Disabled!");
+        }
+    }
+
+=======
+>>>>>>> main:Assets/Scripts/ScriptableObjects/InputManagerSO.cs
     private void Move(InputAction.CallbackContext context)
     {
         OnMove?.Invoke(context.ReadValue<Vector2>());
@@ -104,7 +128,6 @@ public class InputManagerSO : ScriptableObject
             controls.PlayerActions.Sprint.performed -= Sprint;
             controls.PlayerActions.Sprint.canceled -= Sprint;
             controls.Gameplay.Attack.started -= Attack;
-            controls.Gameplay.Interact.started -= Interact;
             controls.Gameplay.LockTarget.started -= LockTarget;
             controls.Gameplay.Options.started -= Options;
             controls.Gameplay.PowerSelect.started -= PowerSelect;

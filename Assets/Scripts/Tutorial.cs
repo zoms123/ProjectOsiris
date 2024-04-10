@@ -17,7 +17,7 @@ public class Tutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PlayerHitBox"))
+        if (other.CompareTag("Player"))
         {
             tutorialText.text = message;
             tutorialIcon.texture = icon;
@@ -27,7 +27,7 @@ public class Tutorial : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("PlayerHitBox"))
+        if (other.CompareTag("Player"))
         {
             tutorial.gameObject.SetActive(false);
         }
