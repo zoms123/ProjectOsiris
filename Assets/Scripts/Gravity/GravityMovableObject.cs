@@ -6,7 +6,8 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
 {
     private ZeroGravityEffector zeroGravityEffector;
     private bool activated;
-    private Transform parent; 
+    private Transform parent;
+
     public bool CanInteract()
     {
         return true;
@@ -20,13 +21,13 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
             {
                 zeroGravityEffector = GetComponent<ZeroGravityEffector>();
                 zeroGravityEffector.UseZeroGravity();
-                transform.parent = parent;
+                transform.SetParent(parent);
                 activated = true;
             }
             else
             {
                 zeroGravityEffector.StopUsingZeroGravity();
-                transform.parent = null;
+                transform.SetParent(null);
                 activated = false;
             }
         }
@@ -39,7 +40,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            parent = other.transform;
+            parent = other.gameObject.transform;
         }
     }
     #endregion
