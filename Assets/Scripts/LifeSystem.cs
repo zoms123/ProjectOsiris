@@ -25,4 +25,18 @@ public class LifeSystem : MonoBehaviour
             lowLifeImage.gameObject.SetActive(true);
         }
     }
+
+    #region Collisions and Triggers
+
+    
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+        if (damageDealer)
+        {
+            StartCoroutine(ReceiveDamage(damageDealer.Damage));
+        }
+    }
+    #endregion
 }

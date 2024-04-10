@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GravityMovableObject : MonoBehaviour, IInteractable
 {
-
     private ZeroGravityEffector zeroGravityEffector;
     private bool activated;
     private Transform parent; 
@@ -13,20 +12,23 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void Interact()
+    public void Interact(PowerType powerType)
     {
-        if (!activated)
+        if(powerType == PowerType.Gravity)
         {
-            zeroGravityEffector = GetComponent<ZeroGravityEffector>();
-            zeroGravityEffector.UseZeroGravity();
-            transform.parent = parent;
-            activated = true;
-        }
-        else
-        {
-            zeroGravityEffector.StopUsingZeroGravity();
-            transform.parent = null;
-            activated = false;
+            if (!activated)
+            {
+                zeroGravityEffector = GetComponent<ZeroGravityEffector>();
+                zeroGravityEffector.UseZeroGravity();
+                transform.parent = parent;
+                activated = true;
+            }
+            else
+            {
+                zeroGravityEffector.StopUsingZeroGravity();
+                transform.parent = null;
+                activated = false;
+            }
         }
         
     }
