@@ -273,7 +273,7 @@ MonoBehaviour:
   groundCheckSphereRadius: 0.3
   groundedYVelocity: -20
   fallStartYVelocity: -5
-  walkingSpeed: 3
+  walkingSpeed: 1.5
   runningSpeed: 6
   sprintingSpeed: 10
   rotationSpeed: 25
@@ -308,7 +308,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  detectionRadius: 10
+  detectionRadius: 5
   lookAtSmoothing: 6
   maxDetectionAngle: 270
   crosshairScale: 0.2
@@ -366,7 +366,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477885546983042174}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 70
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
