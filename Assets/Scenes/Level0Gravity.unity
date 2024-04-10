@@ -11499,10 +11499,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6256071399032715058, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 8461152025179260286, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -33314,7 +33310,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
