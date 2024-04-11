@@ -68,4 +68,9 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
             ActivateAppearingAndDisappearingEffect();
         }
     }
+
+    public bool Activated()
+    {
+        return applyEffect;
+    }
 }

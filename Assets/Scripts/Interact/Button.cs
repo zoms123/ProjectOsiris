@@ -35,4 +35,9 @@ public class Button : MonoBehaviour, IInteractable
         interacting = true;
         canInteract = false;
     }
+
+    public bool Activated()
+    {
+        return interacting;
+    }
 }

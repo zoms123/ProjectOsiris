@@ -40,6 +40,11 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
         }
     }
 
+    public bool Activated()
+    {
+        return activated;
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;

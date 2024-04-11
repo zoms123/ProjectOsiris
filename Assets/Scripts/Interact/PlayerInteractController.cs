@@ -29,6 +29,10 @@ public class PlayerInteractController : MonoBehaviour
             if (interactable != null && interactable.CanInteract(PowerType.None))
             {
                 interactable.Interact();
+                if (!interactable.Activated()) 
+                {
+                    interactable = null;
+                }
                 break;
             }
         }
