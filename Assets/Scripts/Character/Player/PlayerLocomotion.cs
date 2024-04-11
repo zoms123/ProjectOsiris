@@ -23,7 +23,6 @@ public class PlayerLocomotion : CharacterLocomotion
     [Header("Components")]
     [SerializeField] private InputManagerSO inputManager;
     private PlayerManager player;
-    private BasicCombat basicCombat;
     private Transform mainCameraTransform;
     #endregion
 
@@ -33,7 +32,6 @@ public class PlayerLocomotion : CharacterLocomotion
 
         player = GetComponent<PlayerManager>();
         mainCameraTransform = Camera.main.transform;
-        basicCombat = GetComponent<BasicCombat>();
     }
 
     private void OnEnable()
@@ -41,7 +39,6 @@ public class PlayerLocomotion : CharacterLocomotion
         inputManager.OnMove += Move;
         inputManager.OnJump += Jump;
         inputManager.OnSprint += Sprint;
-        inputManager.OnAttack += Attack;
     }
 
     // Only runs when the input is being updated
@@ -61,14 +58,6 @@ public class PlayerLocomotion : CharacterLocomotion
     private void Sprint(bool isSprintPressed)
     {
         player.isSprinting = isSprintPressed && moveAmount >= 0.5;
-    }
-
-    private void Attack()
-    {
-        if (player.isGrounded)
-        {
-            basicCombat.Attack();
-        }
     }
 
     protected override void Update()
@@ -186,9 +175,9 @@ public class PlayerLocomotion : CharacterLocomotion
         if (player.isPerformingAction || player.isJumping || !player.isGrounded) return;
 
         if (moveAmount < 0.1f)
-            player.animatorManager.PlayTargetActionAnimation("Jump", false);
+            player.animatorManager.PlayTargetActionAnimation("Jump", false, true, true);
         else
-            player.animatorManager.PlayTargetActionAnimation("JumpMove", false);
+            player.animatorManager.PlayTargetActionAnimation("JumpMove", false, true, true);
 
         player.isJumping = true;
 
@@ -226,6 +215,5 @@ public class PlayerLocomotion : CharacterLocomotion
         inputManager.OnMove -= Move;
         inputManager.OnJump -= Jump;
         inputManager.OnSprint -= Sprint;
-        inputManager.OnAttack -= Attack;
     }
 }

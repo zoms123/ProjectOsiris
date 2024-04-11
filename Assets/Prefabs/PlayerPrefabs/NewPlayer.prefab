@@ -422,6 +422,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   myTag: Player
+  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!114 &5099254302897840902
 MonoBehaviour:
   m_ObjectHideFlags: 0

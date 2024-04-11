@@ -11,6 +11,30 @@ public class BasicCombat : MonoBehaviour
     [SerializeField] private LayerMask whatIsDamageable;
     [SerializeField] private string myTag;
 
+    #region Components
+    [Header("Components")]
+    [SerializeField] private InputManagerSO inputManager;
+    private PlayerManager player;
+    #endregion
+
+    private void Awake()
+    {
+        player = GetComponent<PlayerManager>();
+    }
+
+    private void OnEnable()
+    {
+        inputManager.OnAttack += ExecuteAttack;
+    }
+
+    private void ExecuteAttack()
+    {
+        if (player.isGrounded)
+        {
+            Attack();
+        }
+    }
+
     public void Attack()
     {
         Collider[] collidersTouched = Physics.OverlapSphere(attackPoint.position, radius, whatIsDamageable);
@@ -22,6 +46,11 @@ public class BasicCombat : MonoBehaviour
                 StartCoroutine(lifesystem.ReceiveDamage(attackDamage));
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        inputManager.OnAttack -= ExecuteAttack;
     }
 
     void OnDrawGizmosSelected()
