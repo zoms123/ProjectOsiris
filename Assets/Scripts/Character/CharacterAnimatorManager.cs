@@ -1,20 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CharacterAnimatorManager : MonoBehaviour
 {
-    private CharacterManager character;
+    protected Animator animator;
+    protected CharacterLocomotion character;
 
     private int horizontal;
     private int vertical;
 
+    private int grounded;
+
     protected virtual void Awake()
     {
-        character = GetComponent<CharacterManager>();
+        animator = GetComponent<Animator>();
+        character = GetComponent<CharacterLocomotion>();
 
         horizontal = Animator.StringToHash("Horizontal");
         vertical = Animator.StringToHash("Vertical");
+
+        grounded = Animator.StringToHash("IsGrounded");
+    }
+
+    protected virtual void Update()
+    {
+        animator.SetBool(grounded, character.isGrounded);
     }
 
     public void UpdateAnimatorMovementParameters(float horizontalMovement, float verticalMovement, bool isSprinting)
@@ -24,8 +36,8 @@ public class CharacterAnimatorManager : MonoBehaviour
 
         if (isSprinting) verticalAmount = 2;
 
-        character.animator.SetFloat(horizontal, horizontalAmount, 0.1f, Time.deltaTime);
-        character.animator.SetFloat(vertical, verticalAmount, 0.1f, Time.deltaTime);
+        animator.SetFloat(horizontal, horizontalAmount, 0.1f, Time.deltaTime);
+        animator.SetFloat(vertical, verticalAmount, 0.1f, Time.deltaTime);
     }
 
     public virtual void PlayTargetActionAnimation(
@@ -36,7 +48,7 @@ public class CharacterAnimatorManager : MonoBehaviour
         bool canMove = false)
     {
         character.applyRootMotion = applyRootMotion;
-        character.animator.CrossFade(targetAnimation, 0.2f);
+        animator.CrossFade(targetAnimation, 0.2f);
         // Can be used to stop character from attempting new actions.
         // For example, if you get damaged and begin performing a damage animation
         // this flag will turn true if you are stunned.
