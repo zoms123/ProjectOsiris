@@ -270,13 +270,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3519965033747411893}
-  gravityFactor: -15
+  gravityFactor: -35
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   groundCheckSphereRadius: 0.3
   groundedYVelocity: -20
-  fallStartYVelocity: -5
+  fallStartYVelocity: -7
   walkingSpeed: 1.5
   runningSpeed: 6
   sprintingSpeed: 10
