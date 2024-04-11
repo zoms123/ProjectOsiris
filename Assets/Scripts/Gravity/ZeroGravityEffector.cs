@@ -94,9 +94,4 @@ public class ZeroGravityEffector : MonoBehaviour
 
     #endregion
 
-    #region Collisions & triggers
-
-
-
-    #endregion
-}
+ }

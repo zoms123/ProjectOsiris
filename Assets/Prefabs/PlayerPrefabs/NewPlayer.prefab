@@ -447,6 +447,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
+  overlapSphereTransform: {fileID: 8566005181887499671}
+  overlapSphereRadius: 1
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   zeroGravityZoneOffset: 0
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}

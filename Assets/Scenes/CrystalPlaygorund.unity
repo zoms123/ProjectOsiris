@@ -207,14 +207,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 2696162592645215751, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
-    - target: {fileID: 2696162592645215751, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: inputManager
-      value: 
-      objectReference: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
     - target: {fileID: 2967062750217546772, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
       propertyPath: targetLockCamera
       value: 
@@ -223,29 +215,10 @@ PrefabInstance:
       propertyPath: lockOnCanvasTransform
       value: 
       objectReference: {fileID: 1087448855}
-    - target: {fileID: 8852996138916609081, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: timeIcon
-      value: 
-      objectReference: {fileID: 442908215}
-    - target: {fileID: 8852996138916609081, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: shadowIcon
-      value: 
-      objectReference: {fileID: 149837940}
-    - target: {fileID: 8852996138916609081, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: crystalIcon
-      value: 
-      objectReference: {fileID: 1251742533}
-    - target: {fileID: 8852996138916609081, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: gravityIcon
-      value: 
-      objectReference: {fileID: 2057854901}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 477885546983042174, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 812785539}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
 --- !u!1 &46270862
 GameObject:
@@ -809,17 +782,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &149837940 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 995624545784536718, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
-  m_PrefabInstance: {fileID: 462922621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &183498408
@@ -1592,17 +1554,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &442908215 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1041697634075414932, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
-  m_PrefabInstance: {fileID: 462922621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &462922621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2070,7 +2021,7 @@ Transform:
   m_GameObject: {fileID: 579916075}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5287636, y: -0.27941445, z: 0.30321524, w: -0.7418876}
-  m_LocalPosition: {x: 0.003319472, y: 3.7929432, z: -17.673857}
+  m_LocalPosition: {x: -0.028028518, y: 3.8002777, z: -17.638933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3010,27 +2961,6 @@ Transform:
   - {fileID: 1403604287}
   m_Father: {fileID: 738604028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &812785527 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 477885546983042174, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-  m_PrefabInstance: {fileID: 41247339}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &812785539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812785527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dff08c2195063048bc31202a09367ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
-  throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
-  firePoint: {fileID: 935213318}
 --- !u!1 &828269469
 GameObject:
   m_ObjectHideFlags: 0
@@ -3150,6 +3080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b42f103b7e7bc4596a6e529bc992b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlapSphereRadius: 0
 --- !u!114 &835256215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3424,11 +3355,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917199474}
   m_CullTransparentMesh: 1
---- !u!4 &935213318 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8566005181887499671, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-  m_PrefabInstance: {fileID: 41247339}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &938150841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4462,17 +4388,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1935992473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1251742533 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9219379914690014558, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
-  m_PrefabInstance: {fileID: 462922621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1291858730
 GameObject:
   m_ObjectHideFlags: 0
@@ -7264,17 +7179,6 @@ Transform:
   - {fileID: 731763604}
   m_Father: {fileID: 1431447065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2057854901 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3923618919053997781, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
-  m_PrefabInstance: {fileID: 462922621}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2071732343
 GameObject:
   m_ObjectHideFlags: 0
@@ -11189,10 +11093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c212a0a0f69c142a6157984e31ecb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
-  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
-  zeroGravityZoneOffset: 0
 --- !u!114 &5866666021826693486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11205,10 +11105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dff08c2195063048bc31202a09367ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
-  throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
-  firePoint: {fileID: 1219195499}
 --- !u!114 &5866666021826693487
 MonoBehaviour:
   m_ObjectHideFlags: 0

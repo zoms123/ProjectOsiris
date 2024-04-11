@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GravityMovableObject : MonoBehaviour, IInteractable
 {
+    [SerializeField] private float overlapSphereRadius;
+
     private ZeroGravityEffector zeroGravityEffector;
     private bool activated;
-    private Transform parent;
 
     public bool CanInteract(PowerType powerType)
     {
@@ -17,10 +18,19 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     {
         if (!activated)
         {
-            zeroGravityEffector = GetComponent<ZeroGravityEffector>();
-            zeroGravityEffector.UseZeroGravity();
-            transform.SetParent(parent);
-            activated = true;
+            
+            Collider[] collidersTouched = Physics.OverlapSphere(transform.position, overlapSphereRadius);
+            foreach (Collider collider in collidersTouched)
+            {
+                if (collider.CompareTag("Player"))
+                {
+                    zeroGravityEffector = GetComponent<ZeroGravityEffector>();
+                    zeroGravityEffector.UseZeroGravity();
+                    transform.SetParent(collider.transform);
+                    activated = true;
+                    break;
+                }
+            }
         }
         else
         {
@@ -30,14 +40,9 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
         }
     }
 
-
-    #region Collisions and Triggers
-    private void OnTriggerEnter(Collider other)
+    void OnDrawGizmosSelected()
     {
-        if (other.CompareTag("Player"))
-        {
-            parent = other.gameObject.transform;
-        }
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, overlapSphereRadius);
     }
-    #endregion
 }
