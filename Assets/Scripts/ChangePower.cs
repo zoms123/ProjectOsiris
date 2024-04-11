@@ -6,47 +6,39 @@ using UnityEngine.UI;
 
 public class ChangePower : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private GameManagerSO gameManager;
     [SerializeField] private InputManagerSO inputManager;
+    [SerializeField] private RawImage powerIcon;
 
-    [SerializeField] private RawImage gravityIcon;
-    [SerializeField] private RawImage crystalIcon;
-    [SerializeField] private RawImage timeIcon;
-    [SerializeField] private RawImage shadowIcon;
-
-    private void OnEnable()
-    {
-        inputManager.OnPowerSelect += Change;
-    }
-
-    private void OnDisable()
-    {
-        inputManager.OnPowerSelect -= Change;
-    }
+    [Header("Textures")]
+    [SerializeField] private Texture2D gravity;
+    [SerializeField] private Texture2D crystal;
+    [SerializeField] private Texture2D time;
+    [SerializeField] private Texture2D shadow;
 
     private void Change(Vector2 power)
     {
-        gravityIcon.gameObject.SetActive(false);
-        crystalIcon.gameObject.SetActive(false);
-        timeIcon.gameObject.SetActive(false);
-        shadowIcon.gameObject.SetActive(false);
+        switch (gameManager.CurrentPowerType)
+        {
+            case PowerType.Gravity:
+                powerIcon.texture = gravity;
+                break;
 
-        if (power[1] == -1)
-        {
-            gravityIcon.gameObject.SetActive(true);
+            case PowerType.Crystal:
+                powerIcon.texture = crystal;
+                break;
 
-        }
-        else if (power[0] == -1)
-        {
-            crystalIcon.gameObject.SetActive(true);
-        }
-        else if (power[0] == 1)
-        {
-            timeIcon.gameObject.SetActive(true);
-        }
-        else
-        {
-            shadowIcon.gameObject.SetActive(true);
-        }
+            case PowerType.Time:
+                powerIcon.texture = time;
+                break;
 
+            case PowerType.Shadow:
+                powerIcon.texture = shadow;
+                break;
+
+            default:
+                break;
+        }
     }
 }

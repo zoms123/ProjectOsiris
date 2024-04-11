@@ -9,8 +9,7 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
     [SerializeField] Material material;
     [SerializeField] float effectTime;
     [SerializeField] Collider colliderToDisolve;
-
-    private bool canInteract = true; 
+ 
     private float total = 1;
     private Material copyMaterial;
     private bool hidden = true;
@@ -57,16 +56,21 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
         
     }
 
-    public bool CanInteract()
+    public bool CanInteract(PowerType powerType)
     {
-        return canInteract;
+        return powerType == PowerType.Crystal;
     }
 
-    public void Interact(PowerType powerType)
+    public void Interact()
     {
-        if (powerType == PowerType.Crystal && !applyEffect)
+        if (!applyEffect)
         {
             ActivateAppearingAndDisappearingEffect();
         }
+    }
+
+    public bool Activated()
+    {
+        return applyEffect;
     }
 }

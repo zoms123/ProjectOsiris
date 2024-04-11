@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class PlayerInteractControler : MonoBehaviour
+public class PlayerInteractController : MonoBehaviour
 {
     [SerializeField] private Transform point;
     [SerializeField] private float radius;
@@ -25,14 +25,15 @@ public class PlayerInteractControler : MonoBehaviour
         Collider[] collidersTouched = Physics.OverlapSphere(point.position, radius);
         foreach (Collider collider in collidersTouched)
         {
-            if (!collider.gameObject.CompareTag("Player") && collider.CompareTag("Interactable"))
+            IInteractable interactable = collider.GetComponent<IInteractable>();
+            if (interactable != null && interactable.CanInteract(PowerType.None))
             {
-                IInteractable interactable = collider.GetComponent<IInteractable>();
-                if (interactable != null && interactable.CanInteract())
+                interactable.Interact();
+                if (!interactable.Activated()) 
                 {
-                    interactable.Interact(PowerType.None);
-                    break;
+                    interactable = null;
                 }
+                break;
             }
         }
     }

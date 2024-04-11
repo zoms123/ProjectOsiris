@@ -60,7 +60,7 @@ public class PlayerLocomotion : CharacterLocomotion
 
     private void Sprint(bool isSprintPressed)
     {
-        player.isSprinting = isSprintPressed;
+        player.isSprinting = isSprintPressed && moveAmount >= 0.5;
     }
 
     private void Attack()

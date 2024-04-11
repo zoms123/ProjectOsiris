@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: GameManager
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  currentPowerType: 0
+  currentPowerType: 2
+  powerIcon: {fileID: 0}
+  gravity: {fileID: 2800000, guid: 7c6966821c17c2e45af17b17d0428db9, type: 3}
+  crystal: {fileID: 2800000, guid: 846f4b10f1dd637478f0b3bd42ca0393, type: 3}
+  time: {fileID: 2800000, guid: e79bebd14052209468dddafe9e0bd6ec, type: 3}
+  shadow: {fileID: 2800000, guid: a6109728deac4fd4dbf846e782966275, type: 3}

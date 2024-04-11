@@ -7,15 +7,13 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
     [SerializeField] private GameObject zeroGravityZone;
     [SerializeField] private bool active;
     private GameObject interactable;
-    
 
-
-    public bool CanInteract()
+    public bool CanInteract(PowerType powerType)
     {
         return true;
     }
 
-    public void Interact(PowerType powerType)
+    public void Interact()
     {
         if(interactable != null)
         {
@@ -25,6 +23,10 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
         }
     }
 
+    public bool Activated()
+    {
+        return active;
+    }
 
     #region Collisions and Triggers
 
