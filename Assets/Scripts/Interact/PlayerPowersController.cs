@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPowersController : MonoBehaviour
 {
-    [SerializeField] private GameManagerSO gameManager;
+    [Header("References")]
     [SerializeField] private InputManagerSO inputManager;
+
+    [Header("Overlap")]
     [SerializeField] private Transform overlapSphereTransform;
     [SerializeField] private float overlapSphereRadius;
 
@@ -18,8 +22,14 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private Transform firePoint;
 
     private GameObject zeroGravityZone;
+    private PlayerManager playerManager;
 
     private IInteractable interactable;
+
+    private void Start()
+    {
+        playerManager = GetComponent<PlayerManager>();
+    }
 
     private void OnEnable()
     {
@@ -35,7 +45,7 @@ public class PlayerPowersController : MonoBehaviour
 
     private void CombatAbility()
     {
-        switch (gameManager.CurrentPowerType)
+        switch (playerManager.CurrentPowerType)
         {
             case PowerType.Gravity:
                 GravityCombatAbility();
@@ -107,14 +117,14 @@ public class PlayerPowersController : MonoBehaviour
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
-                if (interactable != null && interactable.CanInteract(gameManager.CurrentPowerType))
+                if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
                     interactable.Interact();
                     break;
                 }
             }
         } 
-        else
+        else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
             interactable.Interact();
             interactable = null;
