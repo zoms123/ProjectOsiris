@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerManager : CharacterManager
+public class PlayerManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InputManagerSO inputManager;
@@ -16,23 +16,20 @@ public class PlayerManager : CharacterManager
     [SerializeField] private Texture2D time;
     [SerializeField] private Texture2D shadow;
 
-    [HideInInspector] public PlayerAnimatorManager animatorManager;
+    // Scripts
     private PlayerLocomotion locomotion;
+    private BasicCombat basicCombat;
 
     public PowerType CurrentPowerType { get { return currentPowerType; } }
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
-
         locomotion = GetComponent<PlayerLocomotion>();
-        animatorManager = GetComponent<PlayerAnimatorManager>();
+        basicCombat = GetComponent<BasicCombat>();
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
         // Handle movement
         locomotion.HandleAllMovement();
     }
@@ -40,11 +37,13 @@ public class PlayerManager : CharacterManager
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
+        inputManager.OnAttack += ExecuteAttack;
     }
 
     private void OnDisable()
     {
         inputManager.OnPowerSelect -= OnPowerSelected;
+        inputManager.OnAttack -= ExecuteAttack;
     }
 
     private void OnPowerSelected(Vector2 power)
@@ -68,6 +67,14 @@ public class PlayerManager : CharacterManager
         {
             currentPowerType = PowerType.Shadow;
             powerIcon.texture = shadow;
+        }
+    }
+
+    private void ExecuteAttack()
+    {
+        if (locomotion.isGrounded)
+        {
+            basicCombat.Attack();
         }
     }
 }

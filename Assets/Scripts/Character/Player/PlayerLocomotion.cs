@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerLocomotion : CharacterLocomotion
 {
-
-
     [Header("Movement Settings")]
     [SerializeField] private float walkingSpeed = 2f;
     [SerializeField] private float runningSpeed = 5f;
@@ -22,8 +20,7 @@ public class PlayerLocomotion : CharacterLocomotion
     #region Components
     [Header("Components")]
     [SerializeField] private InputManagerSO inputManager;
-    private PlayerManager player;
-    private BasicCombat basicCombat;
+    private PlayerAnimatorManager playerAnimatorManager;
     private Transform mainCameraTransform;
     #endregion
 
@@ -31,9 +28,8 @@ public class PlayerLocomotion : CharacterLocomotion
     {
         base.Awake();
 
-        player = GetComponent<PlayerManager>();
+        playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         mainCameraTransform = Camera.main.transform;
-        basicCombat = GetComponent<BasicCombat>();
     }
 
     private void OnEnable()
@@ -41,7 +37,6 @@ public class PlayerLocomotion : CharacterLocomotion
         inputManager.OnMove += Move;
         inputManager.OnJump += Jump;
         inputManager.OnSprint += Sprint;
-        inputManager.OnAttack += Attack;
     }
 
     // Only runs when the input is being updated
@@ -60,15 +55,7 @@ public class PlayerLocomotion : CharacterLocomotion
 
     private void Sprint(bool isSprintPressed)
     {
-        player.isSprinting = isSprintPressed && moveAmount >= 0.5;
-    }
-
-    private void Attack()
-    {
-        if (player.isGrounded)
-        {
-            basicCombat.Attack();
-        }
+        isSprinting = isSprintPressed && moveAmount >= 0.5;
     }
 
     protected override void Update()
@@ -99,53 +86,51 @@ public class PlayerLocomotion : CharacterLocomotion
             moveAmount = 1;
         }
 
-        if (player == null) return;
-
         // If it is locked on, pass the horizontal movement as well (cannot run)
-        if (player.isStrafing)
+        if (isStrafing)
         {
-            player.animatorManager.UpdateAnimatorMovementParameters(moveDirection.x, moveDirection.z, false);
+            playerAnimatorManager.UpdateAnimatorMovementParameters(moveDirection.x, moveDirection.z, false);
         }
         // If it is not locked on, only use the move amount (can run)
         else
         {
-            player.animatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.isSprinting);
+            playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, isSprinting);
         }
 
     }
 
     private void HandleGroundedMovement()
     {
-        if (!player.canMove) return;
+        if (!canMove) return;
 
         // Movement direction is based on camera facing perspective and movement inputs
         moveDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
         moveDirection.Normalize();
         moveDirection.y = 0f;
 
-        if (player.isSprinting && !player.isStrafing)
+        if (isSprinting && !isStrafing)
         {
             // Move at sprinting speed
-            player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+            characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
         }
         else
         {
             if (moveAmount > 0.5f)
             {
                 // Move at running speed
-                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
             }
             else if (moveAmount <= 0.5f)
             {
                 // Move at walking speed
-                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
             }
         }
     }
 
     private void HandleRotation()
     {
-        if (!player.canRotate || player.isStrafing) return;
+        if (!canRotate || isStrafing) return;
 
         Vector3 targetRotationDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
         targetRotationDirection.Normalize();
@@ -163,34 +148,34 @@ public class PlayerLocomotion : CharacterLocomotion
 
     private void HandleFreeFallMovement()
     {
-        if (!player.isGrounded)
+        if (!isGrounded && !isJumping)
         {
             Vector3 freeFallDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
             freeFallDirection.Normalize();
             freeFallDirection.y = 0;
 
-            player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
+            characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
         }
     }
 
     private void HandleJumpingMovement()
     {
-        if (player.isJumping)
+        if (isJumping)
         {
-            player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+            characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
         }
     }
 
     private void AttemptToPerformJump()
     {
-        if (player.isPerformingAction || player.isJumping || !player.isGrounded) return;
+        if (isPerformingAction || isJumping || !isGrounded) return;
 
         if (moveAmount < 0.1f)
-            player.animatorManager.PlayTargetActionAnimation("Jump", false);
+            playerAnimatorManager.PlayTargetActionAnimation("Jump", false, true, true);
         else
-            player.animatorManager.PlayTargetActionAnimation("JumpMove", false);
+            playerAnimatorManager.PlayTargetActionAnimation("JumpMove", false, true, true);
 
-        player.isJumping = true;
+        isJumping = true;
 
         jumpDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
         jumpDirection.Normalize();
@@ -199,7 +184,7 @@ public class PlayerLocomotion : CharacterLocomotion
         if (jumpDirection != Vector3.zero)
         {
             // If sprinting, jump direction is at full distance
-            if (player.isSprinting)
+            if (isSprinting)
             {
                 jumpDirection *= 1;
             }
@@ -226,6 +211,5 @@ public class PlayerLocomotion : CharacterLocomotion
         inputManager.OnMove -= Move;
         inputManager.OnJump -= Jump;
         inputManager.OnSprint -= Sprint;
-        inputManager.OnAttack -= Attack;
     }
 }

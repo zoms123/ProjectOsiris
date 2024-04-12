@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterLocomotion : MonoBehaviour
+public class CharacterLocomotion : CharacterManager
 {
-    [SerializeField] private CharacterManager character;
-
     [Header("Ground Check & Falling")]
     [SerializeField] protected float gravityFactor = -9.81f;
     [SerializeField] private LayerMask groundLayer;
@@ -19,16 +17,11 @@ public class CharacterLocomotion : MonoBehaviour
     protected bool fallingVelocityHasBeenSet = false;
     protected float inAirTimer = 0;
 
-    protected virtual void Awake()
-    {
-
-    }
-
     protected virtual void Update()
     {
         HandleGroundCheck();
 
-        if (character.isGrounded)
+        if (isGrounded)
         {
             // If we are not attempting to jump or move upward
             if (velocity.y < 0)
@@ -41,7 +34,7 @@ public class CharacterLocomotion : MonoBehaviour
         else
         {
             // If we are not jumping and falling velocity has not been set yet
-            if (!character.isJumping && !fallingVelocityHasBeenSet)
+            if (!isJumping && !fallingVelocityHasBeenSet)
             {
                 fallingVelocityHasBeenSet = true;
                 velocity.y = fallStartYVelocity;
@@ -53,17 +46,17 @@ public class CharacterLocomotion : MonoBehaviour
         }
 
         // There should always be some force applied to the Y velocity
-        character.characterController.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
     }
 
     protected void HandleGroundCheck()
     {
-        character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+        isGrounded = Physics.CheckSphere(transform.position, groundCheckSphereRadius, groundLayer);
     }
 
     protected void OnDrawGizmos()
     {
         // Draws ground check sphere in scene view
-        Gizmos.DrawWireSphere(character.transform.position, groundCheckSphereRadius);
+        Gizmos.DrawWireSphere(transform.position, groundCheckSphereRadius);
     }
 }

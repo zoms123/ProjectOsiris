@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class CharacterManager : MonoBehaviour
 {
-    [HideInInspector] public CharacterController characterController;
-    [HideInInspector] public Animator animator;
+    public CharacterController characterController;
 
     [Header("Flags")]
     public bool isPerformingAction = false;
@@ -17,20 +17,8 @@ public class CharacterManager : MonoBehaviour
     public bool canRotate = true;
     public bool canMove = true;
 
-    private int grounded;
-
     protected virtual void Awake()
     {
-        DontDestroyOnLoad(this);
-
         characterController = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
-
-        grounded = Animator.StringToHash("IsGrounded");
-    }
-
-    protected virtual void Update()
-    {
-        animator.SetBool(grounded, isGrounded);
     }
 }
