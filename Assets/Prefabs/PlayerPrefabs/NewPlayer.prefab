@@ -239,16 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d52a775f8ebd8048b1e4fa886ef77ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
-  isPerformingAction: 0
-  isGrounded: 1
-  isSprinting: 0
-  isJumping: 0
-  isStrafing: 0
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
   currentPowerType: 2
   powerIcon: {fileID: 0}
@@ -256,7 +246,6 @@ MonoBehaviour:
   crystal: {fileID: 2800000, guid: 846f4b10f1dd637478f0b3bd42ca0393, type: 3}
   time: {fileID: 2800000, guid: e79bebd14052209468dddafe9e0bd6ec, type: 3}
   shadow: {fileID: 2800000, guid: a6109728deac4fd4dbf846e782966275, type: 3}
-  animatorManager: {fileID: 0}
 --- !u!114 &1467840604482223549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,20 +258,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31475c8f0de6d1f4aa19cb2bae56b97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 3519965033747411893}
-  gravityFactor: -35
+  characterController: {fileID: 0}
+  isPerformingAction: 0
+  isGrounded: 1
+  isSprinting: 0
+  isJumping: 0
+  isStrafing: 0
+  applyRootMotion: 0
+  canRotate: 1
+  canMove: 1
+  gravityFactor: -40
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
   groundCheckSphereRadius: 0.3
   groundedYVelocity: -20
-  fallStartYVelocity: -7
+  fallStartYVelocity: -5
   walkingSpeed: 1.5
   runningSpeed: 6
   sprintingSpeed: 10
   rotationSpeed: 25
-  jumpHeight: 3
-  jumpForwardSpeed: 5
+  jumpHeight: 2
+  jumpForwardSpeed: 9
   freeFallSpeed: 2
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!114 &4809864321202586411
@@ -422,7 +419,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   myTag: Player
-  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!114 &5099254302897840902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1298,7 +1294,7 @@ Transform:
   m_GameObject: {fileID: 3371308602268475187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 1.641, z: 0}
+  m_LocalPosition: {x: 0, y: 1.641, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
