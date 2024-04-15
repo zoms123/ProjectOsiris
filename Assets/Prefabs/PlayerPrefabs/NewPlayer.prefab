@@ -279,8 +279,8 @@ MonoBehaviour:
   sprintingSpeed: 10
   rotationSpeed: 25
   jumpHeight: 2
-  jumpForwardSpeed: 9
-  freeFallSpeed: 2
+  jumpForwardSpeed: 8
+  freeFallSpeed: 3
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
 --- !u!114 &4809864321202586411
 MonoBehaviour:

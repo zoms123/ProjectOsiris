@@ -34,10 +34,10 @@ public class CharacterAnimatorManager : MonoBehaviour
         float horizontalAmount = horizontalMovement;
         float verticalAmount = verticalMovement;
 
-        if (isSprinting) verticalAmount = 2;
+        if (isSprinting && verticalAmount >= 0.5f) verticalAmount = 2;
 
-        animator.SetFloat(horizontal, horizontalAmount, 0.1f, Time.deltaTime);
-        animator.SetFloat(vertical, verticalAmount, 0.1f, Time.deltaTime);
+        animator.SetFloat(horizontal, horizontalAmount, 0.2f, Time.deltaTime);
+        animator.SetFloat(vertical, verticalAmount, 0.2f, Time.deltaTime);
     }
 
     public virtual void PlayTargetActionAnimation(

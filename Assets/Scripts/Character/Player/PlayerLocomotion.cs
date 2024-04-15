@@ -10,6 +10,7 @@ public class PlayerLocomotion : CharacterLocomotion
     private Vector2 inputDirection;
     private Vector3 moveDirection;
     private float moveAmount = 0f;
+    private bool isSprintInputPressed = false;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 3f;
@@ -36,7 +37,8 @@ public class PlayerLocomotion : CharacterLocomotion
     {
         inputManager.OnMove += Move;
         inputManager.OnJump += Jump;
-        inputManager.OnSprint += Sprint;
+        inputManager.OnSprintPressed += Sprint;
+        inputManager.OnSprintReleased += StopSprint;
     }
 
     // Only runs when the input is being updated
@@ -53,9 +55,14 @@ public class PlayerLocomotion : CharacterLocomotion
         }
     }
 
-    private void Sprint(bool isSprintPressed)
+    private void Sprint()
     {
-        isSprinting = isSprintPressed && moveAmount >= 0.5;
+        isSprintInputPressed = true;
+    }
+
+    private void StopSprint()
+    {
+        isSprintInputPressed = false;
     }
 
     protected override void Update()
@@ -86,6 +93,8 @@ public class PlayerLocomotion : CharacterLocomotion
             moveAmount = 1;
         }
 
+        isSprinting = isSprintInputPressed && moveAmount >= 0.5f;
+
         // If it is locked on, pass the horizontal movement as well (cannot run)
         if (isStrafing)
         {
@@ -96,45 +105,43 @@ public class PlayerLocomotion : CharacterLocomotion
         {
             playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, isSprinting);
         }
+    }
 
+    // Movement direction is based on camera facing perspective and movement inputs
+    private Vector3 GetMoveDirection()
+    {
+        Vector3 forward = mainCameraTransform.forward;
+        Vector3 right = mainCameraTransform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 moveDir = forward * inputDirection.y + right * inputDirection.x;
+        moveDir.y = 0f;
+        moveDir.Normalize();
+
+        return moveDir;
     }
 
     private void HandleGroundedMovement()
     {
         if (!canMove) return;
 
-        // Movement direction is based on camera facing perspective and movement inputs
-        moveDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
-        moveDirection.Normalize();
-        moveDirection.y = 0f;
+        moveDirection = GetMoveDirection();
 
-        if (isSprinting && !isStrafing)
-        {
-            // Move at sprinting speed
-            characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
-        }
-        else
-        {
-            if (moveAmount > 0.5f)
-            {
-                // Move at running speed
-                characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
-            }
-            else if (moveAmount <= 0.5f)
-            {
-                // Move at walking speed
-                characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
-            }
-        }
+        float currentSpeed = isSprinting && !isStrafing ? sprintingSpeed : (moveAmount > 0.5f ? runningSpeed : walkingSpeed);
+
+        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
     }
 
     private void HandleRotation()
     {
         if (!canRotate || isStrafing) return;
 
-        Vector3 targetRotationDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
-        targetRotationDirection.Normalize();
-        targetRotationDirection.y = 0f;
+        Vector3 targetRotationDirection = GetMoveDirection();
 
         if (targetRotationDirection == Vector3.zero)
         {
@@ -177,9 +184,7 @@ public class PlayerLocomotion : CharacterLocomotion
 
         isJumping = true;
 
-        jumpDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
-        jumpDirection.Normalize();
-        jumpDirection.y = 0;
+        jumpDirection = GetMoveDirection();
 
         if (jumpDirection != Vector3.zero)
         {
@@ -210,6 +215,7 @@ public class PlayerLocomotion : CharacterLocomotion
     {
         inputManager.OnMove -= Move;
         inputManager.OnJump -= Jump;
-        inputManager.OnSprint -= Sprint;
+        inputManager.OnSprintPressed -= Sprint;
+        inputManager.OnSprintReleased -= StopSprint;
     }
 }

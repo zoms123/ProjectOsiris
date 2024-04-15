@@ -9,7 +9,8 @@ public class InputManagerSO : ScriptableObject
 
     public event Action<bool> OnJump;
     public event Action<Vector2> OnMove;
-    public event Action<bool> OnSprint;
+    public event Action OnSprintPressed;
+    public event Action OnSprintReleased;
     public event Action OnAttack;
     public event Action OnInteract;
     public event Action OnLockTarget;
@@ -27,8 +28,8 @@ public class InputManagerSO : ScriptableObject
             controls.PlayerMovement.Move.performed += Move;
             controls.PlayerMovement.Move.canceled += Move;
             controls.PlayerActions.Jump.performed += Jump;
-            controls.PlayerActions.Sprint.performed += Sprint;
-            controls.PlayerActions.Sprint.canceled += Sprint;
+            controls.PlayerActions.Sprint.performed += x => Sprint();
+            controls.PlayerActions.SprintFinish.performed += x => SprintCancel();
             controls.Gameplay.Attack.started += Attack;
             controls.Gameplay.Interact.started += Interact;
             controls.Gameplay.LockTarget.started += LockTarget;
@@ -54,9 +55,14 @@ public class InputManagerSO : ScriptableObject
         OnJump?.Invoke(context.ReadValueAsButton());
     }
 
-    private void Sprint(InputAction.CallbackContext context)
+    private void Sprint()
     {
-        OnSprint?.Invoke(context.ReadValueAsButton());
+        OnSprintPressed?.Invoke();
+    }
+
+    private void SprintCancel()
+    {
+        OnSprintReleased?.Invoke();
     }
 
     private void Attack(InputAction.CallbackContext context)
@@ -101,8 +107,8 @@ public class InputManagerSO : ScriptableObject
             controls.PlayerMovement.Move.performed -= Move;
             controls.PlayerMovement.Move.canceled -= Move;
             controls.PlayerActions.Jump.started -= Jump;
-            controls.PlayerActions.Sprint.performed -= Sprint;
-            controls.PlayerActions.Sprint.canceled -= Sprint;
+            controls.PlayerActions.Sprint.performed -= x => Sprint();
+            controls.PlayerActions.SprintFinish.performed -= x => SprintCancel();
             controls.Gameplay.Attack.started -= Attack;
             controls.Gameplay.Interact.started -= Interact;
             controls.Gameplay.LockTarget.started -= LockTarget;
