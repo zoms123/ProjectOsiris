@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ public class PlayerPowersController : MonoBehaviour
     private PlayerManager playerManager;
 
     private IInteractable interactable;
+    private Collider interactableCollider;
 
     private void Start()
     {
@@ -113,28 +115,34 @@ public class PlayerPowersController : MonoBehaviour
     {
         if(interactable == null)
         {
-            Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
+            //Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereTransform.position, overlapSphereTransform.position, overlapSphereRadius);
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
                     interactable.Interact();
+                    interactableCollider = collider;
                     break;
                 }
             }
         } 
         else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
-            interactable.Interact();
-            interactable = null;
+            Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
+            if (collidersTouched.Contains(interactableCollider))
+            {
+                interactable.Interact();
+                interactable = null;
+            }
         }
         
     }
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(overlapSphereTransform.position, overlapSphereRadius);
     }
 }

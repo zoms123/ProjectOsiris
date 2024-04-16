@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6047462578940668530}
   - component: {fileID: 2483153266602191787}
   - component: {fileID: 7984304163898195844}
-  - component: {fileID: 1612264774392998614}
   - component: {fileID: 2904798582474084025}
   m_Layer: 0
   m_Name: PuzzleCube
@@ -153,27 +152,6 @@ MonoBehaviour:
   intervalTime: 1
   floatingForce: {x: 0, y: 5, z: 0}
   floatingDragForce: 16
---- !u!65 &1612264774392998614
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4837148109782958875}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: -0.0000019073486, z: 0}
 --- !u!114 &2904798582474084025
 MonoBehaviour:
   m_ObjectHideFlags: 0
