@@ -42,8 +42,17 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     private void FixedUpdate()
     {
         if (activated && !attached)
-        {
-            if (transform.position.y != attachPointPosition.y)
+        {   //rigidBody.MovePosition(transform.parent.transform.position);
+            Vector3 direccion = (transform.parent.position - transform.position).normalized;
+
+            // Aplicar una fuerza al cubo en la dirección deseada
+            rigidBody.AddForce(direccion * attachingMovementSpeed, ForceMode.VelocityChange);
+            /*
+            var absoluteY = Mathf.Abs(attachPointPosition.y - transform.position.y);
+            var absoluteX = Mathf.Abs(attachPointPosition.x - transform.position.x);
+            var absoluteZ = Mathf.Abs(attachPointPosition.z - transform.position.z);
+
+            if (absoluteY > 0.1 )
             {
                 Vector3 targetPosition = new Vector3(transform.position.x, attachPointPosition.y, transform.position.z);
                 Vector3 diretion = (targetPosition - transform.position).normalized;
@@ -51,19 +60,35 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
                 rigidBody.MovePosition(newPosition);
 
             }
-            else if (transform.position.x != attachPointPosition.x || transform.position.z != attachPointPosition.z)
+            else if (absoluteX > 0.1 || absoluteZ > 0.1)
             {
-                Vector3 targetPosition = new Vector3(attachPointPosition.x, transform.position.y, attachPointPosition.z);
+                var x = absoluteX > 0.1 ? attachPointPosition.x : transform.position.x;
+                var z = absoluteZ > 0.1 ? attachPointPosition.z : transform.position.z;
+                Vector3 targetPosition = new Vector3(x, transform.position.y, z);
                 Vector3 diretion = (targetPosition - transform.position).normalized;
                 Vector3 newPosition = transform.position + diretion * attachingMovementSpeed * Time.deltaTime;
                 rigidBody.MovePosition(newPosition);
             }
-            else if (transform.position == attachPointPosition)
+            else
             {
                 attached = true;
-                zeroGravityEffector.UseZeroGravity();
+                rigidBody.useGravity = true;
+                //zeroGravityEffector.UseZeroGravity();
+            }
+            */
+
+            // Si el cubo está cerca del punto de destino, detener el movimiento
+            if (Vector3.Distance(transform.position, transform.parent.position) < 0.1f)
+            {
+                rigidBody.velocity = Vector3.zero;
+                transform.rotation = transform.parent.rotation;
+                
+                attached = true;
             }
 
+        } else if (attached)
+        {
+            rigidBody.Sleep();
         }
 
         
@@ -86,8 +111,8 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
                 if (collider.CompareTag("Player"))
                 {
                     zeroGravityEffector = GetComponent<ZeroGravityEffector>();
-                    transform.SetParent(collider.transform);
-                    attachPointPosition = collider.transform.Find("AttachPoint").position;
+                    transform.SetParent(collider.transform.Find("AttachPoint"));
+                    // attachPointPosition = collider.transform.Find("AttachPoint").position;
                     activated = true;
                     rigidBody.useGravity = false;
                     break;

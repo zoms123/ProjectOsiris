@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,9 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private InputManagerSO inputManager;
 
     [Header("Overlap")]
-    [SerializeField] private Transform overlapSphereTransform;
+    [SerializeField] private Transform overlapSphereStartPoint;
+    [SerializeField] private Vector3 offsetDirection = Vector3.up;
+    [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
 
     [Header("Gravity Power")]
@@ -27,6 +30,7 @@ public class PlayerPowersController : MonoBehaviour
 
     private IInteractable interactable;
     private Collider interactableCollider;
+    private Vector3 overlapSphereEndPoint;
 
     private void Start()
     {
@@ -43,6 +47,11 @@ public class PlayerPowersController : MonoBehaviour
     {
         inputManager.OnCombatAbility -= CombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
+    }
+
+    private void Update()
+    {
+        overlapSphereEndPoint = overlapSphereStartPoint.position + offsetDirection * offsetValue;
     }
 
     private void CombatAbility()
@@ -115,8 +124,7 @@ public class PlayerPowersController : MonoBehaviour
     {
         if(interactable == null)
         {
-            //Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
-            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereTransform.position, overlapSphereTransform.position, overlapSphereRadius);
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
@@ -130,7 +138,7 @@ public class PlayerPowersController : MonoBehaviour
         } 
         else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
-            Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
             if (collidersTouched.Contains(interactableCollider))
             {
                 interactable.Interact();
@@ -143,6 +151,20 @@ public class PlayerPowersController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(overlapSphereTransform.position, overlapSphereRadius);
+
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(overlapSphereStartPoint.position, overlapSphereRadius);
+        /* Enable it to draw the sphere used to detect interactables
+        Gizmos.DrawWireSphere(overlapSphereEndPoint, overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.up * overlapSphereRadius, overlapSphereEndPoint + Vector3.up * overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.up * overlapSphereRadius, overlapSphereEndPoint - Vector3.up * overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.right * overlapSphereRadius, overlapSphereEndPoint + Vector3.right * overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.right * overlapSphereRadius, overlapSphereEndPoint - Vector3.right * overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.forward * overlapSphereRadius, overlapSphereEndPoint + Vector3.forward * overlapSphereRadius);
+        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.forward * overlapSphereRadius, overlapSphereEndPoint - Vector3.forward * overlapSphereRadius);
+        */
+
+
     }
 }
