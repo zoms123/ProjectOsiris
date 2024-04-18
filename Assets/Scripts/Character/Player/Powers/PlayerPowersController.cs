@@ -151,20 +151,6 @@ public class PlayerPowersController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-
-
-        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(overlapSphereStartPoint.position, overlapSphereRadius);
-        /* Enable it to draw the sphere used to detect interactables
-        Gizmos.DrawWireSphere(overlapSphereEndPoint, overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.up * overlapSphereRadius, overlapSphereEndPoint + Vector3.up * overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.up * overlapSphereRadius, overlapSphereEndPoint - Vector3.up * overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.right * overlapSphereRadius, overlapSphereEndPoint + Vector3.right * overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.right * overlapSphereRadius, overlapSphereEndPoint - Vector3.right * overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position + Vector3.forward * overlapSphereRadius, overlapSphereEndPoint + Vector3.forward * overlapSphereRadius);
-        Gizmos.DrawLine(overlapSphereStartPoint.position - Vector3.forward * overlapSphereRadius, overlapSphereEndPoint - Vector3.forward * overlapSphereRadius);
-        */
-
-
     }
 }

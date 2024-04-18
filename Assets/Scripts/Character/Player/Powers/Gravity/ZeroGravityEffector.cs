@@ -68,6 +68,7 @@ public class ZeroGravityEffector : MonoBehaviour
             rigidBody.velocity = Vector3.zero;
         } else
         {
+            rigidBody.velocity = Vector3.zero;
             rigidBody.AddForce(floatingForce);
         }
     }
@@ -77,7 +78,7 @@ public class ZeroGravityEffector : MonoBehaviour
     {
         useZeroGravity = true;
         rigidBody.useGravity = false;
-        rigidBody.AddForce(initialForce, ForceMode.Impulse);
+        //rigidBody.AddForce(initialForce, ForceMode.Impulse);
     }
 
     public void StopUsingZeroGravity()
