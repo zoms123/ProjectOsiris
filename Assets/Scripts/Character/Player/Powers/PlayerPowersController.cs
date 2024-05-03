@@ -28,6 +28,7 @@ public class PlayerPowersController : MonoBehaviour
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
 
+    private IAttachable attachable;
     private IInteractable interactable;
     private Collider interactableCollider;
     private Vector3 overlapSphereEndPoint;
@@ -130,8 +131,10 @@ public class PlayerPowersController : MonoBehaviour
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
+                attachable = collider.GetComponent<IAttachable>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
+                    interactable.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
                     interactableCollider = collider;
                     break;
@@ -143,11 +146,19 @@ public class PlayerPowersController : MonoBehaviour
             Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
             if (collidersTouched.Contains(interactableCollider))
             {
+                interactable.OnLoseObject -= OnInteractableLost;
                 interactable.Interact();
                 interactable = null;
             }
         }
         
+    }
+
+    private void OnInteractableLost()
+    {
+        interactable.OnLoseObject -= OnInteractableLost;
+        interactable.Interact();
+        interactable = null;
     }
 
     void OnDrawGizmosSelected()

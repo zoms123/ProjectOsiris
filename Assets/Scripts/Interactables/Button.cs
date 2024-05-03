@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Button : MonoBehaviour, IInteractable
     private bool canInteract = true;
     private bool interacting = false;
     private Vector3 destinationPosition;
+
+    public event Action OnLoseObject;
 
     void Update()
     {
