@@ -20,6 +20,7 @@ public class PlayerPowersController : MonoBehaviour
     [Header("Gravity Power")]
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
+    [SerializeField] Transform attachPoint;
 
     [Header("Crystal Power")]
     [SerializeField] private GameObject throwableCrystalPrefab;
@@ -134,9 +135,15 @@ public class PlayerPowersController : MonoBehaviour
                 attachable = collider.GetComponent<IAttachable>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
+                    ChangeAttachableParent(attachPoint);
                     interactable.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
                     interactableCollider = collider;
+                    if(attachPoint == null)
+                    {
+                        interactable = null;
+                        interactableCollider = null;
+                    }
                     break;
                 }
             }
@@ -147,6 +154,7 @@ public class PlayerPowersController : MonoBehaviour
             if (collidersTouched.Contains(interactableCollider))
             {
                 interactable.OnLoseObject -= OnInteractableLost;
+                ChangeAttachableParent(null);
                 interactable.Interact();
                 interactable = null;
             }
@@ -157,8 +165,17 @@ public class PlayerPowersController : MonoBehaviour
     private void OnInteractableLost()
     {
         interactable.OnLoseObject -= OnInteractableLost;
+        ChangeAttachableParent(null);
         interactable.Interact();
         interactable = null;
+    }
+
+    private void ChangeAttachableParent(Transform parentTransform)
+    {
+        if (attachable != null)
+        {
+            attachable.ChangeParent(parentTransform);
+        }
     }
 
     void OnDrawGizmosSelected()

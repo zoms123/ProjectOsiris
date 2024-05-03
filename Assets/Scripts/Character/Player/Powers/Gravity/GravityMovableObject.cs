@@ -7,18 +7,23 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
 {
     [SerializeField] private float overlapSphereRadius;
     [SerializeField] private float attachingMovementSpeed;
-
+    [SerializeField] private bool attached;
     public event Action OnLoseObject;
 
     private Rigidbody rigidBody;
     private ZeroGravityEffector zeroGravityEffector;
     private bool effectorActivated;
     private bool activated;
-    private bool attached;    
+    
+    private float originalSpeed;
+
+    public bool Attached { get { return attached; } }
 
     private void Awake()
     {
+        originalSpeed = attachingMovementSpeed;
         rigidBody = GetComponent<Rigidbody>();
+        zeroGravityEffector = GetComponent<ZeroGravityEffector>();
     }
 
     private void FixedUpdate()
@@ -58,24 +63,8 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
     public void Interact()
     {
         if (!activated)
-        {   
-            // TODO reorganize the code in order to: 
-                // TODO 1: remove the dependency with Player, this way we should not use OverlapSphere to detect player
-                // TODO 2: Create a method to set parent, once the parent change the status change to activated = false
-            /*Collider[] collidersTouched = Physics.OverlapSphere(transform.position, overlapSphereRadius);
-            foreach (Collider collider in collidersTouched)
-            {
-                if (collider.CompareTag("Player"))
-                {
-                    zeroGravityEffector = GetComponent<ZeroGravityEffector>();
-                    transform.SetParent(collider.transform.Find("AttachPoint"));
-                    activated = true;
-                    rigidBody.velocity = Vector3.zero;
-                    rigidBody.useGravity = false;
-                    break;
-                }
-            }
-            */
+        {
+            
             activated = true;
             rigidBody.velocity = Vector3.zero;
             rigidBody.useGravity = false;
@@ -83,7 +72,6 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
         else
         {
             zeroGravityEffector.StopUsingZeroGravity();
-            //transform.SetParent(null);
             attached = false;
             activated = false;
             effectorActivated = false;
@@ -107,6 +95,33 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
         }
     }
     #endregion
+
+    public void MultiplySpeed(float factor) 
+    {
+        attachingMovementSpeed *= factor;
+    }
+
+    public void ResetSpeed()
+    {
+        attachingMovementSpeed = originalSpeed;
+    }
+
+    public void DeactivateWhenAttached()
+    {
+        StartCoroutine(DeactivateWhenAttachedRoutine());
+    }
+
+
+    private IEnumerator DeactivateWhenAttachedRoutine()
+    {
+        while (!attached)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        ChangeParent(null);
+        ResetSpeed();
+        Interact();
+    }
     #region Debug
 
     void OnDrawGizmosSelected()

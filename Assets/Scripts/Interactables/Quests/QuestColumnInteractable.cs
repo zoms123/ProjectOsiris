@@ -7,9 +7,31 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject zeroGravityZone;
     [SerializeField] private bool active;
-    private GameObject interactable;
+    [SerializeField] private float attachingMovementSpeedFactor = 3;
+    [SerializeField] private Transform detachPoint;
+    private IInteractable interactable;
+    private IAttachable attachable;
+    private GravityMovableObject gravityMovableObject;
 
     public event Action OnLoseObject;
+
+    private void Awake()
+    {
+        interactable = GetComponentInChildren<IInteractable>();
+        if (interactable != null) 
+        {
+            attachable = GetComponentInChildren<IAttachable>();
+            gravityMovableObject = GetComponentInChildren<GravityMovableObject>();
+        }
+    }
+
+    private void Start()
+    {
+        if(interactable != null)
+        {
+            interactable.Interact();
+        }
+    }
 
     public bool CanInteract(PowerType powerType)
     {
@@ -18,14 +40,22 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(interactable != null)
+        if(interactable != null && !active)
         {
-            // TODO 3: when the method to change parent on interactable is included, call that method and right after call the Intereact method
-            // TODO 4: create a script to verify if the interactable is now located at the zero position on in a range, if so, modify its position to zero and change to active = true
-
-            interactable.transform.parent = zeroGravityZone.transform;
-            interactable.transform.localPosition = Vector3.zero;
+            gravityMovableObject.MultiplySpeed(attachingMovementSpeedFactor);
+            attachable.ChangeParent(zeroGravityZone.transform);
+            interactable.Interact();
             active = true;
+        } else if ( active && gravityMovableObject.Attached)
+        {
+            attachable.ChangeParent(detachPoint);
+            if (interactable.Activated())
+            {
+                interactable.Interact();
+            }
+            interactable.Interact();
+            gravityMovableObject.DeactivateWhenAttached();
+            active = false;
         }
     }
 
@@ -40,7 +70,20 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
     {
         if (other.GetComponent<IInteractable>() != null)
         {
-            interactable = other.gameObject;
+            interactable = other.GetComponent<IInteractable>();
+            attachable = other.GetComponent<IAttachable>();
+            gravityMovableObject = other.GetComponent<GravityMovableObject>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<IInteractable>() == interactable)
+        {
+            Debug.Log("Exit trigger");
+            interactable = null;
+            attachable = null;
+            gravityMovableObject = null;
         }
     }
 

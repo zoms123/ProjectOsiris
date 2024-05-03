@@ -94,7 +94,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4837148109782958875}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d6636fa70496ecd4f900244d22315ac1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   overlapSphereRadius: 2
-  attachingMovementSpeed: 0.5
+  attachingMovementSpeed: 1

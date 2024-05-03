@@ -440,6 +440,7 @@ MonoBehaviour:
   overlapSphereRadius: 0.2
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   zeroGravityZoneOffset: 0
+  attachPoint: {fileID: 3204328039759108904}
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
   firePoint: {fileID: 8566005181887499671}
 --- !u!95 &5503250831304565375
