@@ -45,6 +45,7 @@ public class ZeroGravityZone : MonoBehaviour
         ZeroGravityEffector effector = other.GetComponent<ZeroGravityEffector>();
         if (effector)
         {
+            Debug.Log("Entered");
             zeroGravityEffectors.Add(effector);
             effector.UseZeroGravity();
         }

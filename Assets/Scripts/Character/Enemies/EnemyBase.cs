@@ -7,6 +7,9 @@ public class EnemyBase : MonoBehaviour
     [Header("Patrol System")]
     [SerializeField] private Transform[] waypoints;
     [SerializeField] private float patrolSpeed;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadious;
+    [SerializeField] private LayerMask groundLayerMask;
 
     private Vector3 currentTarget;
     private int currentIndex = -1;
@@ -14,6 +17,7 @@ public class EnemyBase : MonoBehaviour
     private bool hasRecibedDamage = false;
     private GameObject player;
     private BasicCombat basicCombat;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -31,44 +35,65 @@ public class EnemyBase : MonoBehaviour
     }
 
     private IEnumerator Patrol()
+    
     {
         while (true)
         {
-            DefineNewTarget();
-            FocusTarget(currentTarget);
-            while ((Vector3.Distance(transform.position, currentTarget) > 0.5))
+            if (IsGrounded())
             {
-                if (!playerDetected && !hasRecibedDamage)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, currentTarget, patrolSpeed * Time.deltaTime);
-                    yield return null;
-                }
-                else if (hasRecibedDamage)
-                {
-                    yield return new WaitForSeconds(0.5f);
-                    hasRecibedDamage = false;
-                }
-                else
-                {
-                    while (playerDetected)
-                    {
-                        FocusTarget(player.transform.position);
-                        while ((Vector3.Distance(transform.position, player.transform.position) > 3) && playerDetected)
-                        {
-                            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, patrolSpeed * Time.deltaTime);
-                            yield return null;
-                        }
-                        if (playerDetected)
-                        {
-                            FocusTarget(player.transform.position);
-                            yield return new WaitForSeconds(0.5f);
-                            basicCombat.Attack();
-                            yield return new WaitForSeconds(1f);
-                        }
-                    }
-                }
+                  DefineNewTarget();
+                  FocusTarget(currentTarget);
+                  while ((Vector3.Distance(transform.position, currentTarget) > 0.5))
+                  {
+                      if (!IsGrounded())
+                      {
+                          break;
+                      }
+                      if (!playerDetected && !hasRecibedDamage)
+                      {
+                          transform.position = Vector3.MoveTowards(transform.position, currentTarget, patrolSpeed * Time.deltaTime);
+                          yield return null;
+                      }
+                      else if (hasRecibedDamage)
+                      {
+                          yield return new WaitForSeconds(0.5f);
+                          hasRecibedDamage = false;
+                      }
+                      else
+                      {
+                          while (playerDetected)
+                          {
+                              if (!IsGrounded())
+                              {
+                                  break;
+                              }
+                              FocusTarget(player.transform.position);
+                              while ((Vector3.Distance(transform.position, player.transform.position) > 3) && playerDetected)
+                              {
+                                  if (!IsGrounded())
+                                  {
+                                      break;
+                                  }
+                                  transform.position = Vector3.MoveTowards(transform.position, player.transform.position, patrolSpeed * Time.deltaTime);
+                                  yield return null;
+                              }
+                              if (playerDetected)
+                              {
+                                  FocusTarget(player.transform.position);
+                                  yield return new WaitForSeconds(0.5f);
+                                  basicCombat.Attack();
+                                  yield return new WaitForSeconds(1f);
+                              }
+                          }
+                      }
+                  }
+                
+                yield return new WaitForSeconds(3f);   
             }
-            yield return new WaitForSeconds(3f);
+            else
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 
@@ -89,6 +114,13 @@ public class EnemyBase : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
     }
 
+    private bool IsGrounded()
+    {
+        Collider[] colliders = Physics.OverlapSphere(groundCheck.transform.position, groundCheckRadious, groundLayerMask);
+        return colliders.Length > 0;
+    }
+
+#region Collisions and Triggers
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("PlayerDetection"))
@@ -105,4 +137,13 @@ public class EnemyBase : MonoBehaviour
             playerDetected = false;
         }
     }
+    #endregion
+
+    #region Debug
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(groundCheck.transform.position, groundCheckRadious);
+    }
+    #endregion
 }

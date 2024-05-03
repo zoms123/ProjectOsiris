@@ -10,7 +10,6 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     private Rigidbody rigidBody;
     private ZeroGravityEffector zeroGravityEffector;
     private bool effectorActivated;
-    private Vector3 attachPointPosition;
     private bool activated;
     private bool attached;
 
@@ -24,7 +23,8 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
         if (activated && !attached) 
         { 
             Vector3 direction = (transform.parent.position - transform.position).normalized;
-            rigidBody.AddForce(direction * attachingMovementSpeed, ForceMode.VelocityChange);
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.AddForce(direction * attachingMovementSpeed, ForceMode.Impulse);
 
             if (Vector3.Distance(transform.position, transform.parent.position) < 0.1f)
             {
@@ -35,7 +35,8 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
 
         } else if (attached && !effectorActivated)
         {
-            zeroGravityEffector.UseZeroGravity();
+            rigidBody.Sleep();
+            //zeroGravityEffector.UseZeroGravity();
             effectorActivated = true;
         }
 
@@ -51,8 +52,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (!activated)
-        {
-            
+        {   
             Collider[] collidersTouched = Physics.OverlapSphere(transform.position, overlapSphereRadius);
             foreach (Collider collider in collidersTouched)
             {
@@ -61,6 +61,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
                     zeroGravityEffector = GetComponent<ZeroGravityEffector>();
                     transform.SetParent(collider.transform.Find("AttachPoint"));
                     activated = true;
+                    rigidBody.velocity = Vector3.zero;
                     rigidBody.useGravity = false;
                     break;
                 }
@@ -72,6 +73,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable
             transform.SetParent(null);
             attached = false;
             activated = false;
+            effectorActivated = false;
         }
     }
 

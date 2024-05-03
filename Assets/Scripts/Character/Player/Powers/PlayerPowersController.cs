@@ -81,20 +81,22 @@ public class PlayerPowersController : MonoBehaviour
 
     private void GravityCombatAbility()
     {
-        if (!zeroGravityZone)
+        Transform targetTransform = GetComponent<TargetLockOn>().CurrentTarget;
+        if(targetTransform != null)
         {
-            Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
-            zeroGravityZone = Instantiate(zeroGravityZonePrefab, position, Quaternion.identity);
-        }
-        else if (zeroGravityZone && !zeroGravityZone.activeSelf)
-        {
-            Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
-            zeroGravityZone.transform.position = position;
-            zeroGravityZone.SetActive(true);
-        }
-        else
-        {
-            zeroGravityZone.SetActive(false);
+            if (!zeroGravityZone)
+            {
+                zeroGravityZone = Instantiate(zeroGravityZonePrefab, targetTransform.position, Quaternion.identity);
+            }
+            else if (zeroGravityZone && !zeroGravityZone.activeSelf)
+            {
+                zeroGravityZone.transform.position = targetTransform.position;
+                zeroGravityZone.SetActive(true);
+            }
+            else
+            {
+                zeroGravityZone.SetActive(false);
+            }
         }
     }
 
