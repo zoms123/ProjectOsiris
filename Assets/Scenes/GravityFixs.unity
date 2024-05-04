@@ -4231,15 +4231,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.9507526
+      value: -1.008885
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1640444
+      value: 3.1776454
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.676678
+      value: -17.61191
       objectReference: {fileID: 0}
     - target: {fileID: 3420743939290458752, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_Name
@@ -4532,10 +4532,6 @@ PrefabInstance:
     - target: {fileID: 161862588372587708, guid: ee5c38fe22c4e2f4d948cfc4c75ff230, type: 3}
       propertyPath: m_Name
       value: QuestColumn (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 304342450337690677, guid: ee5c38fe22c4e2f4d948cfc4c75ff230, type: 3}
-      propertyPath: active
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 439870050569640259, guid: ee5c38fe22c4e2f4d948cfc4c75ff230, type: 3}
       propertyPath: m_LocalPosition.x

@@ -15,21 +15,16 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 
     public event Action OnLoseObject;
 
-    private void Awake()
-    {
-        interactable = GetComponentInChildren<IInteractable>();
-        if (interactable != null) 
-        {
-            attachable = GetComponentInChildren<IAttachable>();
-            gravityMovableObject = GetComponentInChildren<GravityMovableObject>();
-        }
-    }
-
     private void Start()
     {
-        if(interactable != null)
+        gravityMovableObject = GetComponentInChildren<GravityMovableObject>();
+        
+        
+        if (gravityMovableObject != null)
         {
-            interactable.Interact();
+            interactable = gravityMovableObject.GetComponent<IInteractable>();
+            attachable = gravityMovableObject.GetComponent<IAttachable>();
+            Interact();
         }
     }
 
@@ -68,7 +63,17 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<IInteractable>() != null)
+        if (other.GetComponent<IInteractable>() != null && interactable == null)
+        {
+            interactable = other.GetComponent<IInteractable>();
+            attachable = other.GetComponent<IAttachable>();
+            gravityMovableObject = other.GetComponent<GravityMovableObject>();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(interactable == null && other.GetComponent<IInteractable>() != null)
         {
             interactable = other.GetComponent<IInteractable>();
             attachable = other.GetComponent<IAttachable>();

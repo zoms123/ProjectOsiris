@@ -139,7 +139,7 @@ public class PlayerPowersController : MonoBehaviour
                     interactable.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
                     interactableCollider = collider;
-                    if(attachPoint == null)
+                    if(attachable == null)
                     {
                         interactable = null;
                         interactableCollider = null;
@@ -168,6 +168,7 @@ public class PlayerPowersController : MonoBehaviour
         ChangeAttachableParent(null);
         interactable.Interact();
         interactable = null;
+        attachable = null;
     }
 
     private void ChangeAttachableParent(Transform parentTransform)

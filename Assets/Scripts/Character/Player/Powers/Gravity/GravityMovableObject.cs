@@ -88,7 +88,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
     #region IAttachable Interface implementation
     public void ChangeParent(Transform parentTransform)
     {
-        if(parentTransform != transform.parent)
+        if (parentTransform != transform.parent)
         {
             OnLoseObject?.Invoke();
             transform.parent = parentTransform;
