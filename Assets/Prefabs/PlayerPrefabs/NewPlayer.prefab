@@ -443,6 +443,7 @@ MonoBehaviour:
   attachPoint: {fileID: 3204328039759108904}
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
   firePoint: {fileID: 8566005181887499671}
+  timeBombPrefab: {fileID: 6223891636749422205, guid: 4852e4e0052a4174494429c42fab0f56, type: 3}
 --- !u!95 &5503250831304565375
 Animator:
   serializedVersion: 5

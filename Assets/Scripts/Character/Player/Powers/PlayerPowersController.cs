@@ -26,8 +26,13 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private GameObject throwableCrystalPrefab;
     [SerializeField] private Transform firePoint;
 
+    [Header("Time Power")]
+    [SerializeField] GameObject timeBombPrefab;
+
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
+
+    private GameObject timeBomb;
 
     private IAttachable attachable;
     private IInteractable interactable;
@@ -116,7 +121,23 @@ public class PlayerPowersController : MonoBehaviour
 
     private void TimeCombatAbility()
     {
-
+        Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
+        if (currentTarget != null)
+        {
+            if (!timeBomb)
+            {
+                timeBomb = Instantiate(timeBombPrefab, currentTarget.position, Quaternion.identity);
+            }
+            else if (timeBomb && !timeBomb.activeSelf)
+            {
+                timeBomb.transform.position = currentTarget.position;
+                timeBomb.SetActive(true);
+            }
+            else
+            {
+                timeBomb.SetActive(false);
+            }
+        }
     }
 
     private void ShadowCombatAbility()
