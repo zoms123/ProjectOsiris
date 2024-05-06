@@ -970,9 +970,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7903736210837791101, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326443225167066567, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326443225167066567, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
+      propertyPath: lowLifeImage
+      value: 
+      objectReference: {fileID: 765293800}
     - target: {fileID: 8956926113564542473, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.11
+      value: 8.47
       objectReference: {fileID: 0}
     - target: {fileID: 8956926113564542473, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: m_LocalPosition.y
@@ -980,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8956926113564542473, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 192.48
+      value: 173.21
       objectReference: {fileID: 0}
     - target: {fileID: 8956926113564542473, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1455,6 +1467,14 @@ PrefabInstance:
       propertyPath: powerIcon
       value: 
       objectReference: {fileID: 765293804}
+    - target: {fileID: 5099254302897840902, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
+      propertyPath: distance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099254302897840902, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
+      propertyPath: timeBombPrefab
+      value: 
+      objectReference: {fileID: 1919913695092184, guid: 1e00a4340f4ae8a4b8253da4ffaa7c82, type: 3}
     - target: {fileID: 8301126046662638390, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
       propertyPath: lowLifeImage
       value: 

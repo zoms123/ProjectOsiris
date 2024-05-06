@@ -14,15 +14,29 @@ public class LifeSystem : MonoBehaviour
         Debug.Log("Actor Damaged!!!!\nCurrent Heath: " + health + "\nDamage Recibed: " + damageRecibed + "\nNew Heath: " + (health - damageRecibed));
         health -= damageRecibed;
         
-        if (health <= 0)
+        if (tag == "Player")
         {
-            yield return new WaitForSeconds(0.5f);
-            lowLifeImage.gameObject.SetActive(false);
-            gameObject.SetActive(false);
+            if (health <= 0)
+            {
+                yield return new WaitForSeconds(0.5f);
+                lowLifeImage.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
+            else if (health <= 20)
+            {
+                lowLifeImage.gameObject.SetActive(true);
+            }
         }
-        else if (tag == "Player" && health <= 20)
+        else
         {
-            lowLifeImage.gameObject.SetActive(true);
+            if (health <= 0)
+            {
+                Debug.Log("ENEMIGO MUERTO");
+                yield return new WaitForSeconds(0.5f);
+                Debug.Log("ENEMIGO MUY MUERTO");
+                Destroy(gameObject);
+                Debug.Log("ENEMIGO BAJO TIERRA");
+            }
         }
     }
 

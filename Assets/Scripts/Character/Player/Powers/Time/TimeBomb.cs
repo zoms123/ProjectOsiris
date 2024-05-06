@@ -10,10 +10,21 @@ public class TimeBomb : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsDamageable;
 
+    private GameObject visual;
+
     private void OnEnable()
     {
-        if (waitTime > 0)
+        visual = transform.GetChild(0).gameObject;
+        visual.SetActive(true);
+        if (waitTime > 0 && radius > 0)
+        {
+            for (int i = 0; i < visual.transform.childCount; i++)
+            {
+                float newScale = radius * 1.15f;
+                visual.transform.GetChild(i).localScale = new Vector3(newScale, newScale, newScale);
+            }
             StartCoroutine(WaitExplodeBomb());
+        }
     }
 
     private void OnDisable()
@@ -26,7 +37,7 @@ public class TimeBomb : MonoBehaviour
         Collider[] collidersTouched = Physics.OverlapSphere(transform.position, radius, whatIsDamageable);
         foreach (Collider collider in collidersTouched)
         {
-            if (collider.CompareTag("Player")) { // Temp Check
+            if (!collider.CompareTag("Player")) { // Temp Check
                 Debug.Log("BombHit");
                 LifeSystem lifesystem = collider.gameObject.GetComponent<LifeSystem>();
                 StartCoroutine(lifesystem.ReceiveDamage(damage));
@@ -39,6 +50,8 @@ public class TimeBomb : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         Explode();
+        visual.SetActive(false);
+        yield return new WaitForSeconds(0.7f);
         gameObject.SetActive(false);
     }
     #endregion

@@ -27,17 +27,24 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private Transform firePoint;
 
     [Header("Time Power")]
-    [SerializeField] GameObject timeBombPrefab;
+    [SerializeField] private GameObject timeBombPrefab;
+    [SerializeField] private float distance;
 
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
 
     private GameObject timeBomb;
+    private Transform mainCameraTransform;
 
     private IAttachable attachable;
     private IInteractable interactable;
     private Collider interactableCollider;
     private Vector3 overlapSphereEndPoint;
+
+    protected void Awake()
+    {
+        mainCameraTransform = Camera.main.transform;
+    }
 
     private void Start()
     {
@@ -89,7 +96,7 @@ public class PlayerPowersController : MonoBehaviour
     private void GravityCombatAbility()
     {
         Transform targetTransform = GetComponent<TargetLockOn>().CurrentTarget;
-        if(targetTransform != null)
+        if (targetTransform != null)
         {
             if (!zeroGravityZone)
             {
@@ -122,21 +129,33 @@ public class PlayerPowersController : MonoBehaviour
     private void TimeCombatAbility()
     {
         Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
+
         if (currentTarget != null)
+            UseTimeBomb(currentTarget.position);
+        else
         {
-            if (!timeBomb)
-            {
-                timeBomb = Instantiate(timeBombPrefab, currentTarget.position, Quaternion.identity);
-            }
-            else if (timeBomb && !timeBomb.activeSelf)
-            {
-                timeBomb.transform.position = currentTarget.position;
-                timeBomb.SetActive(true);
-            }
-            else
-            {
-                timeBomb.SetActive(false);
-            }
+            Vector3 forward = mainCameraTransform.forward;
+            forward.y = 0f;
+            forward.Normalize();
+
+            UseTimeBomb(transform.position + forward * distance);
+        }
+    }
+
+    private void UseTimeBomb(Vector3 spawnPosition)
+    {
+        if (!timeBomb)
+        {
+            timeBomb = Instantiate(timeBombPrefab, spawnPosition, Quaternion.identity);
+        }
+        else if (timeBomb && !timeBomb.activeSelf)
+        {
+            timeBomb.transform.position = spawnPosition;
+            timeBomb.SetActive(true);
+        }
+        else
+        {
+            timeBomb.SetActive(false);
         }
     }
 
