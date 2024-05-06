@@ -6,6 +6,7 @@ using UnityEngine;
 public class ZeroGravityEffector : MonoBehaviour
 {
 
+    [SerializeField] bool applyInitialForce;
     [SerializeField] Vector3 initialForce = new Vector3 (0, 5, 0);
     [SerializeField] float initialTime = 1;
     [SerializeField] float intervalTime = 1;
@@ -18,8 +19,6 @@ public class ZeroGravityEffector : MonoBehaviour
     private float currentTimeInterval;
 
     private bool initialImpulseStoped;
-
-    private ZeroGravityZone zeroGravityZone;
 
     private void Awake()
     {
@@ -68,6 +67,7 @@ public class ZeroGravityEffector : MonoBehaviour
             rigidBody.velocity = Vector3.zero;
         } else
         {
+            rigidBody.velocity = Vector3.zero;
             rigidBody.AddForce(floatingForce);
         }
     }
@@ -77,14 +77,16 @@ public class ZeroGravityEffector : MonoBehaviour
     {
         useZeroGravity = true;
         rigidBody.useGravity = false;
-        rigidBody.AddForce(initialForce, ForceMode.Impulse);
+        if(applyInitialForce)
+            rigidBody.AddForce(initialForce, ForceMode.Impulse);
     }
 
     public void StopUsingZeroGravity()
     {
         useZeroGravity = false;
         if (rigidBody != null) 
-        { 
+        {
+            rigidBody.velocity = Vector3.zero;
             rigidBody.useGravity = true;
             rigidBody.drag = 0;
         }

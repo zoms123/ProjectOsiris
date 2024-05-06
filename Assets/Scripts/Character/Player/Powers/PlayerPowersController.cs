@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +12,15 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private InputManagerSO inputManager;
 
     [Header("Overlap")]
-    [SerializeField] private Transform overlapSphereTransform;
+    [SerializeField] private Transform overlapSphereStartPoint;
+    [SerializeField] private Vector3 offsetDirection = Vector3.up;
+    [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
 
     [Header("Gravity Power")]
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
+    [SerializeField] Transform attachPoint;
 
     [Header("Crystal Power")]
     [SerializeField] private GameObject throwableCrystalPrefab;
@@ -24,7 +29,10 @@ public class PlayerPowersController : MonoBehaviour
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
 
+    private IAttachable attachable;
     private IInteractable interactable;
+    private Collider interactableCollider;
+    private Vector3 overlapSphereEndPoint;
 
     private void Start()
     {
@@ -41,6 +49,11 @@ public class PlayerPowersController : MonoBehaviour
     {
         inputManager.OnCombatAbility -= CombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
+    }
+
+    private void Update()
+    {
+        overlapSphereEndPoint = overlapSphereStartPoint.position + offsetDirection * offsetValue;
     }
 
     private void CombatAbility()
@@ -70,20 +83,22 @@ public class PlayerPowersController : MonoBehaviour
 
     private void GravityCombatAbility()
     {
-        if (!zeroGravityZone)
+        Transform targetTransform = GetComponent<TargetLockOn>().CurrentTarget;
+        if(targetTransform != null)
         {
-            Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
-            zeroGravityZone = Instantiate(zeroGravityZonePrefab, position, Quaternion.identity);
-        }
-        else if (zeroGravityZone && !zeroGravityZone.activeSelf)
-        {
-            Vector3 position = transform.position + Vector3.forward * zeroGravityZoneOffset;
-            zeroGravityZone.transform.position = position;
-            zeroGravityZone.SetActive(true);
-        }
-        else
-        {
-            zeroGravityZone.SetActive(false);
+            if (!zeroGravityZone)
+            {
+                zeroGravityZone = Instantiate(zeroGravityZonePrefab, targetTransform.position, Quaternion.identity);
+            }
+            else if (zeroGravityZone && !zeroGravityZone.activeSelf)
+            {
+                zeroGravityZone.transform.position = targetTransform.position;
+                zeroGravityZone.SetActive(true);
+            }
+            else
+            {
+                zeroGravityZone.SetActive(false);
+            }
         }
     }
 
@@ -113,28 +128,60 @@ public class PlayerPowersController : MonoBehaviour
     {
         if(interactable == null)
         {
-            Collider[] collidersTouched = Physics.OverlapSphere(overlapSphereTransform.position, overlapSphereRadius);
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
+                attachable = collider.GetComponent<IAttachable>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
+                    ChangeAttachableParent(attachPoint);
+                    interactable.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
+                    interactableCollider = collider;
+                    if(attachable == null)
+                    {
+                        interactable = null;
+                        interactableCollider = null;
+                    }
                     break;
                 }
             }
         } 
         else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
-            interactable.Interact();
-            interactable = null;
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
+            if (collidersTouched.Contains(interactableCollider))
+            {
+                interactable.OnLoseObject -= OnInteractableLost;
+                ChangeAttachableParent(null);
+                interactable.Interact();
+                interactable = null;
+            }
         }
         
     }
 
+    private void OnInteractableLost()
+    {
+        interactable.OnLoseObject -= OnInteractableLost;
+        ChangeAttachableParent(null);
+        interactable.Interact();
+        interactable = null;
+        attachable = null;
+    }
+
+    private void ChangeAttachableParent(Transform parentTransform)
+    {
+        if (attachable != null)
+        {
+            attachable.ChangeParent(parentTransform);
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(overlapSphereTransform.position, overlapSphereRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(overlapSphereStartPoint.position, overlapSphereRadius);
     }
 }
