@@ -2364,6 +2364,11 @@ MonoBehaviour:
   - {fileID: 7411736353375566203}
   - {fileID: 6150919398262642731}
   patrolSpeed: 5
+  groundCheck: {fileID: 0}
+  groundCheckRadious: 0
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1426772114559970003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2480,6 +2485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a2645da6ab3764ca216a8274c91302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyInitialForce: 0
   initialForce: {x: 0, y: 5, z: 0}
   initialTime: 1
   intervalTime: 1

@@ -10,18 +10,23 @@ public class BasicCombat : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsDamageable;
     [SerializeField] private string myTag;
+    [SerializeField] private float timeBetweenAttacks;
+
+    private IAttackStrategy attackStrategy;
+    private PlayerDetector playerDetector;
+
+    public float TimeBetweenAttacks { get { return timeBetweenAttacks; } }
+
+    private void Awake()
+    {
+        playerDetector = GetComponent<PlayerDetector>();
+        if(playerDetector)
+            attackStrategy = new MeleAttackStrategy(attackPoint.position, radius, whatIsDamageable, myTag, attackDamage, playerDetector);
+    }
 
     public void Attack()
     {
-        Collider[] collidersTouched = Physics.OverlapSphere(attackPoint.position, radius, whatIsDamageable);
-        foreach (Collider collider in collidersTouched)
-        {
-            if (!collider.gameObject.CompareTag(myTag))
-            {
-                LifeSystem lifesystem = collider.gameObject.GetComponent<LifeSystem>();
-                StartCoroutine(lifesystem.ReceiveDamage(attackDamage));
-            }
-        }
+        attackStrategy.Execute();
     }
 
     void OnDrawGizmosSelected()
