@@ -5,23 +5,37 @@ using UnityEngine;
 public class ThrowableCrystal : MonoBehaviour
 {
     [SerializeField] private float speed;
-
-    private bool move;
+    [SerializeField] private float lifetime;
     private Vector3 direction;
+    private bool initialized;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(Vector3 direction)
     {
-        if (move)
+        this.direction = direction;
+        initialized = true;
+        Invoke("ReturnToPool", lifetime);
+    }
+
+    private void Update()
+    {
+        if (initialized)
         {
             transform.Translate(direction * speed * Time.deltaTime, Space.World);
         }
     }
 
-    public void Move(Vector3 targetPosition)
+    private void ReturnToPool()
     {
-        move = true;
-        direction = targetPosition.normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
+        ObjectPool.ReturnObject(gameObject);
+        initialized = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Hit " + other.name);
+            ReturnToPool();
+        }
     }
 }

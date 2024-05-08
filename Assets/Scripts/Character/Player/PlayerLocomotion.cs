@@ -98,7 +98,7 @@ public class PlayerLocomotion : CharacterLocomotion
         // If it is locked on, pass the horizontal movement as well (cannot run)
         if (isStrafing)
         {
-            playerAnimatorManager.UpdateAnimatorMovementParameters(moveDirection.x, moveDirection.z, false);
+            playerAnimatorManager.UpdateAnimatorMovementParameters(inputDirection.x, moveDirection.z, false);
         }
         // If it is not locked on, only use the move amount (can run)
         else
