@@ -36,7 +36,7 @@ public class TimeBomb : MonoBehaviour
             if (!collider.CompareTag("Player")) { // Temp Check
                 Debug.Log("BombHit");
                 LifeSystem lifesystem = collider.gameObject.GetComponent<LifeSystem>();
-                StartCoroutine(lifesystem.ReceiveDamage(damage));
+                lifesystem.ReceiveDamage(damage);
             }
         }
     }

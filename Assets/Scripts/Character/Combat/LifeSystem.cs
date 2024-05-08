@@ -12,18 +12,15 @@ public class LifeSystem : MonoBehaviour
 
     private void Update()
     {
+
         if (health <= 0)
         {
             lowLifeImage.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
-        else
+        else if (tag == "Player" && health <= 20)
         {
-            if (health <= 0)
-            {
-                yield return new WaitForSeconds(0.5f);
-                Destroy(gameObject);
-            }
+            lowLifeImage.gameObject.SetActive(true);
         }
     }
 
@@ -35,8 +32,8 @@ public class LifeSystem : MonoBehaviour
 
     #region Collisions and Triggers
 
-    
-    
+
+
     private void OnCollisionEnter(Collision collision)
     {
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
