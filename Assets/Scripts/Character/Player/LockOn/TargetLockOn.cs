@@ -24,9 +24,9 @@ public class TargetLockOn : MonoBehaviour
     private Vector3 targetLocator;
     private int strafing;
 
-    #region Components
-    [Tooltip("Animator for switching cameras")]
-    [SerializeField] private Animator cinemachineAnimator;
+    #region References
+    [Header("References")]
+    
     [Tooltip("Canvas Transform for the crosshair of the locked target")]
     [SerializeField] private Transform lockOnCanvasTransform;
     [SerializeField] private CinemachineVirtualCamera targetLockCamera;
@@ -83,22 +83,18 @@ public class TargetLockOn : MonoBehaviour
     private void ResetTarget()
     {
         lockOnCanvasTransform.gameObject.SetActive(false);
+        targetLockCamera.gameObject.SetActive(false);
         currentTarget = null;
         targetLocked = false;
-        //animator.SetLayerWeight(1, 0);
         animator.SetBool(strafing, character.isStrafing = false);
-        targetLockCamera.LookAt = null;
-        cinemachineAnimator.Play("FreeLookCamera");
         Debug.Log("<color=orange>Target reset</color>");
     }
 
     private void FoundTarget()
     {
         lockOnCanvasTransform.gameObject.SetActive(true);
-        //animator.SetLayerWeight(1, 1);
         animator.SetBool(strafing, character.isStrafing = true);
-        targetLockCamera.LookAt = lockOnCanvasTransform;
-        cinemachineAnimator.Play("TargetCamera");
+        targetLockCamera.gameObject.SetActive(true);
         targetLocked = true;
         Debug.Log("<color=green>" + currentTarget.gameObject.name + " locked.</color>");
     }
@@ -115,7 +111,9 @@ public class TargetLockOn : MonoBehaviour
         lockOnCanvasTransform.localScale = Vector3.one * (mainCameraTransform.position - targetLocator).magnitude * crosshairScale;
 
         Vector3 dir = currentTarget.position - transform.position;
+        dir.Normalize();
         dir.y = 0;
+
         Quaternion rot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * lookAtSmoothing);
     }
@@ -207,5 +205,8 @@ public class TargetLockOn : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.red;
+        if (currentTarget != null) Gizmos.DrawWireSphere(currentTarget.position, 1.5f);
     }
 }
