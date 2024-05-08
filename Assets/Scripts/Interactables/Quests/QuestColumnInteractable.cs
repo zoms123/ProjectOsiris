@@ -85,7 +85,6 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
     {
         if (other.GetComponent<IInteractable>() == interactable)
         {
-            Debug.Log("Exit trigger");
             interactable = null;
             attachable = null;
             gravityMovableObject = null;

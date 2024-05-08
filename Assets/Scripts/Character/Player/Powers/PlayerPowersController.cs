@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerPowersController : MonoBehaviour
 {
