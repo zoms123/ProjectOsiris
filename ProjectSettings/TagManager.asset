@@ -9,6 +9,7 @@ TagManager:
   - PlayerDetection
   - Enemy
   - Interactable
+  - ZeroGravityZone
   layers:
   - Default
   - TransparentFX

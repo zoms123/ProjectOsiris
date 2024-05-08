@@ -73,3 +73,5 @@ crashlytics-build.properties
 
 /[Aa]ssets/[Ff]astScriptReload/*
 /[Aa]ssets/[Ff]astScriptReload.meta
+
+/[Pp]ackaged/*
