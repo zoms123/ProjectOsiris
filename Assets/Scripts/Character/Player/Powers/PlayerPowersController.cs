@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using UnityEditor.Callbacks;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerPowersController : MonoBehaviour
 {
@@ -21,6 +16,7 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
     [SerializeField] Transform attachPoint;
+    private TargetLockOn targetLockOn;
 
     [Header("Crystal Power")]
     [SerializeField] private GameObject throwableCrystalPrefab;
@@ -49,6 +45,9 @@ public class PlayerPowersController : MonoBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
+        targetLockOn = GetComponent<TargetLockOn>();
+
+        ObjectPool.Initialize(throwableCrystalPrefab);
     }
 
     private void OnEnable()
@@ -116,15 +115,40 @@ public class PlayerPowersController : MonoBehaviour
 
     private void CrystalCombatAbility()
     {
-        Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
-        GameObject throwableCrystal = Instantiate(throwableCrystalPrefab, firePoint.position, Quaternion.identity);
-        Vector3 direction = transform.forward;
-        if (currentTarget != null)
+        GameObject crystalObject = ObjectPool.GetObject(throwableCrystalPrefab);
+        if (crystalObject != null)
         {
-            direction = currentTarget.position - transform.position;
+            crystalObject.transform.position = firePoint.position;
+            crystalObject.transform.rotation = firePoint.rotation;
+            ThrowableCrystal crystal = crystalObject.GetComponent<ThrowableCrystal>();
+            if (crystal != null)
+            {
+                if (targetLockOn.CurrentTarget)
+                {
+                    Vector3 targetDirection = targetLockOn.CurrentTarget.position - firePoint.position;
+                    targetDirection.Normalize();
+                    //Debug.DrawRay(firePoint.position, targetDirection * 20, Color.cyan, 5f);
+                    crystal.Initialize(targetDirection);
+                }
+                else
+                {
+                    crystal.Initialize(firePoint.forward);
+                }
+            }
         }
-        throwableCrystal.GetComponent<ThrowableCrystal>().Move(direction);
     }
+
+    //private void CrystalCombatAbility()
+    //{
+    //    Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
+    //    GameObject throwableCrystal = Instantiate(throwableCrystalPrefab, firePoint.position, Quaternion.identity);
+    //    Vector3 direction = transform.forward;
+    //    if (currentTarget != null)
+    //    {
+    //        direction = currentTarget.position - transform.position;
+    //    }
+    //    throwableCrystal.GetComponent<ThrowableCrystal>().Move(direction);
+    //}
 
     private void TimeCombatAbility()
     {

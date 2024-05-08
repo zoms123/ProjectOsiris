@@ -32,7 +32,7 @@ public class InputManagerSO : ScriptableObject
             controls.PlayerActions.SprintFinish.performed += x => SprintCancel();
             controls.Gameplay.Attack.started += Attack;
             controls.Gameplay.Interact.started += Interact;
-            controls.Gameplay.LockTarget.started += LockTarget;
+            controls.Gameplay.LockTarget.performed += LockTarget;
             controls.Gameplay.Options.started += Options;
             controls.Gameplay.PowerSelect.started += PowerSelect;
             controls.Gameplay.CombatAbility.started += CombatAbility;
