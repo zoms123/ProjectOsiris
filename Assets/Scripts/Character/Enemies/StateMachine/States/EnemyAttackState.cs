@@ -4,7 +4,6 @@ public class EnemyAttackState : EnemyBaseState
 {
     private NavMeshAgent agent;
     private BasicCombat basicCombat;
-    private float currentTime;
 
     public EnemyAttackState(EnemyBase enemyBase, Animator animator, BasicCombat basicCombat, NavMeshAgent agent) : base(enemyBase, animator)
     {
@@ -25,11 +24,6 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void Update()
     {
-        currentTime += Time.deltaTime;
-        if (currentTime >= basicCombat.TimeBetweenAttacks)
-        {
-            basicCombat.Attack();
-            currentTime = 0;
-        }
+        basicCombat.Attack();
     }
 }
