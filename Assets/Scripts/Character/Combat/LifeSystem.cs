@@ -31,11 +31,8 @@ public class LifeSystem : MonoBehaviour
         {
             if (health <= 0)
             {
-                Debug.Log("ENEMIGO MUERTO");
                 yield return new WaitForSeconds(0.5f);
-                Debug.Log("ENEMIGO MUY MUERTO");
                 Destroy(gameObject);
-                Debug.Log("ENEMIGO BAJO TIERRA");
             }
         }
     }

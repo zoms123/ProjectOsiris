@@ -1467,14 +1467,6 @@ PrefabInstance:
       propertyPath: powerIcon
       value: 
       objectReference: {fileID: 765293804}
-    - target: {fileID: 5099254302897840902, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: distance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5099254302897840902, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
-      propertyPath: timeBombPrefab
-      value: 
-      objectReference: {fileID: 1919913695092184, guid: 1e00a4340f4ae8a4b8253da4ffaa7c82, type: 3}
     - target: {fileID: 8301126046662638390, guid: 89cbefcffc09613429adb00a867bd28b, type: 3}
       propertyPath: lowLifeImage
       value: 

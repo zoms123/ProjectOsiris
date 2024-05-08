@@ -13,16 +13,12 @@ public class TimeBomb : MonoBehaviour
     private GameObject visual;
 
     private void OnEnable()
-    {
-        visual = transform.GetChild(0).gameObject;
-        visual.SetActive(true);
+    {        
         if (waitTime > 0 && radius > 0)
         {
-            for (int i = 0; i < visual.transform.childCount; i++)
-            {
-                float newScale = radius * 1.15f;
-                visual.transform.GetChild(i).localScale = new Vector3(newScale, newScale, newScale);
-            }
+            visual = transform.GetChild(0).gameObject;
+            visual.SetActive(true);
+            visual.transform.localScale = new Vector3(radius, radius, radius);
             StartCoroutine(WaitExplodeBomb());
         }
     }
