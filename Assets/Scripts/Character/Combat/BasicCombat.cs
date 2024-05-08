@@ -21,7 +21,7 @@ public class BasicCombat : MonoBehaviour
     {
         playerDetector = GetComponent<PlayerDetector>();
         if(playerDetector)
-            attackStrategy = new MeleAttackStrategy(attackPoint.position, radius, whatIsDamageable, myTag, attackDamage, playerDetector);
+            attackStrategy = new MeleAttackStrategy(attackDamage, playerDetector);
     }
 
     public void Attack()

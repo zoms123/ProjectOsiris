@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ZeroGravityEffector : MonoBehaviour
@@ -19,6 +16,8 @@ public class ZeroGravityEffector : MonoBehaviour
     private float currentTimeInterval;
 
     private bool initialImpulseStoped;
+
+    public bool Activated { get { return useZeroGravity; } }
 
     private void Awake()
     {
@@ -77,6 +76,7 @@ public class ZeroGravityEffector : MonoBehaviour
     {
         useZeroGravity = true;
         rigidBody.useGravity = false;
+        rigidBody.velocity = Vector3.zero;
         if(applyInitialForce)
             rigidBody.AddForce(initialForce, ForceMode.Impulse);
     }

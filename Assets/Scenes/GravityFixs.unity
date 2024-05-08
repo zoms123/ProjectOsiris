@@ -4053,7 +4053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4386675765088789933, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: m_Mass
-      value: 70
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4530977396113815111, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: attackRange
@@ -4101,11 +4101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8148307349185828802, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: initialTime
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8148307349185828802, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: initialForce.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8148307349185828802, guid: c9dbacaf96525724187f5d0aa0df6456, type: 3}
       propertyPath: applyInitialForce
@@ -4405,15 +4405,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0933867
+      value: -1.0827374
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1974163
+      value: 3.1949236
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.517778
+      value: -17.529642
       objectReference: {fileID: 0}
     - target: {fileID: 3420743939290458752, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_Name
