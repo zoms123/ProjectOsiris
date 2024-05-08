@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerPowersController : MonoBehaviour
@@ -11,6 +12,17 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] private Vector3 offsetDirection = Vector3.up;
     [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
+
+    [Header("Cooldown")]
+    [SerializeField] private float gravityCombatAbilityCooldown;
+    [SerializeField] private float crystalCombatAbilityCooldown;
+    [SerializeField] private float timeCombatAbilityCooldown;
+    [SerializeField] private float shadowCombatAbilityCooldown;
+
+    private float gravityWaitTime = 0;
+    private float crystalWaitTime = 0;
+    private float timeWaitTime = 0;
+    private float shadowWaitTime = 0;
 
     [Header("Gravity Power")]
     [SerializeField] GameObject zeroGravityZonePrefab;
@@ -53,6 +65,11 @@ public class PlayerPowersController : MonoBehaviour
     private void Update()
     {
         overlapSphereEndPoint = overlapSphereStartPoint.position + offsetDirection * offsetValue;
+
+        gravityWaitTime -= Time.deltaTime;
+        crystalWaitTime -= Time.deltaTime;
+        timeWaitTime -= Time.deltaTime;
+        shadowWaitTime -= Time.deltaTime;
     }
 
     private void CombatAbility()
@@ -60,19 +77,36 @@ public class PlayerPowersController : MonoBehaviour
         switch (playerManager.CurrentPowerType)
         {
             case PowerType.Gravity:
-                GravityCombatAbility();
+                if (gravityWaitTime <= 0)
+                {
+                    GravityCombatAbility();
+                    gravityWaitTime = gravityCombatAbilityCooldown;
+                }
+                    
                 break;
 
             case PowerType.Crystal:
-                CrystalCombatAbility();
+                if (crystalWaitTime <= 0)
+                {
+                    GravityCombatAbility();
+                    crystalWaitTime = crystalCombatAbilityCooldown;
+                }
                 break;
 
             case PowerType.Time:
-                TimeCombatAbility();
+                if (timeWaitTime <= 0)
+                {
+                    GravityCombatAbility();
+                    timeWaitTime = timeCombatAbilityCooldown;
+                }
                 break;
 
             case PowerType.Shadow:
-                ShadowCombatAbility();
+                if (shadowWaitTime <= 0)
+                {
+                    GravityCombatAbility();
+                    shadowWaitTime = shadowCombatAbilityCooldown;
+                }
                 break;
 
             default:
