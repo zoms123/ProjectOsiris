@@ -4252,15 +4252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0827374
+      value: -0.9920344
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1949236
+      value: 3.173702
       objectReference: {fileID: 0}
     - target: {fileID: 2934742849834108816, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.529642
+      value: -17.630692
       objectReference: {fileID: 0}
     - target: {fileID: 3420743939290458752, guid: fdf29a071cc636d47b83bcfb11c39d9b, type: 3}
       propertyPath: m_Name
@@ -4801,6 +4801,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627212241}
     m_Modifications:
+    - target: {fileID: 2904798582474084025, guid: e23d24d97d95247488ad4cae864deedf, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
     - target: {fileID: 4837148109782958875, guid: e23d24d97d95247488ad4cae864deedf, type: 3}
       propertyPath: m_Name
       value: PlatformCube
@@ -5010,6 +5014,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 627212241}
     m_Modifications:
+    - target: {fileID: 2904798582474084025, guid: e23d24d97d95247488ad4cae864deedf, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
     - target: {fileID: 4837148109782958875, guid: e23d24d97d95247488ad4cae864deedf, type: 3}
       propertyPath: m_Name
       value: CageCube

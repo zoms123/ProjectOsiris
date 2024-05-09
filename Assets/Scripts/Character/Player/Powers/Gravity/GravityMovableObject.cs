@@ -2,12 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
 {
     [SerializeField] private float overlapSphereRadius;
     [SerializeField] private float attachingMovementSpeed;
     [SerializeField] private bool attached;
+
+    [SerializeField] private InputManagerSO inputManager;
+
+    private Vector2 inputDirection;
+
     public event Action OnLoseObject;
 
     private Rigidbody rigidBody;
@@ -47,6 +53,10 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
             zeroGravityEffector.UseZeroGravity();
             effectorActivated = true;
         }
+        else if (attached && effectorActivated) 
+        {
+            HandleMovementInput();
+        }
         if (attached && effectorActivated && Vector3.Distance(transform.position, transform.parent.position) > 1f)
         {
             zeroGravityEffector.StopUsingZeroGravity();
@@ -68,6 +78,9 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
             activated = true;
             rigidBody.velocity = Vector3.zero;
             rigidBody.useGravity = false;
+
+            inputManager.PuzzleGravityAbilityEnabled();
+            inputManager.OnControlObject += ControlObject;
         }
         else
         {
@@ -75,7 +88,21 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable
             attached = false;
             activated = false;
             effectorActivated = false;
+
+            inputManager.PuzzleGravityAbilityDisabled();
+            inputManager.OnControlObject -= ControlObject;
         }
+    }
+
+    private void HandleMovementInput()
+    {
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.AddForce(inputDirection * attachingMovementSpeed, ForceMode.Impulse);
+    }
+
+    private void ControlObject(Vector2 direction)
+    {
+        inputDirection = direction;
     }
 
     public bool Activated()

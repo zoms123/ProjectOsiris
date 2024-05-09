@@ -19,6 +19,8 @@ public class InputManagerSO : ScriptableObject
     public event Action OnCombatAbility;
     public event Action OnPuzzleAbility;
 
+    public event Action<Vector2> OnControlObject;
+
     private void OnEnable()
     {
         if (controls == null)
@@ -98,6 +100,33 @@ public class InputManagerSO : ScriptableObject
     private void PuzzleAbility(InputAction.CallbackContext context)
     {
         OnPuzzleAbility?.Invoke();
+    }
+
+    public void PuzzleGravityAbilityEnabled()
+    {
+        controls.Gameplay.PowerSelect.started -= PowerSelect;
+        controls.Gameplay.CombatAbility.started -= CombatAbility;
+
+        controls.PlayerGravityPuzzle.ControlObject.performed += ControlObject;
+        controls.PlayerGravityPuzzle.ControlObject.canceled += ControlObject;
+
+        controls.PlayerGravityPuzzle.Enable();
+    }
+
+    public void PuzzleGravityAbilityDisabled()
+    {
+        controls.Gameplay.PowerSelect.started += PowerSelect;
+        controls.Gameplay.CombatAbility.started += CombatAbility;
+
+        controls.PlayerGravityPuzzle.ControlObject.performed -= ControlObject;
+        controls.PlayerGravityPuzzle.ControlObject.canceled -= ControlObject;
+
+        controls.PlayerGravityPuzzle.Disable();
+    }
+
+    private void ControlObject(InputAction.CallbackContext context)
+    {
+        OnControlObject?.Invoke(context.ReadValue<Vector2>());
     }
 
     private void OnDisable()
