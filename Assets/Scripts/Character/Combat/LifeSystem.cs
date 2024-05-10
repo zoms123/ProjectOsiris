@@ -9,14 +9,12 @@ public class LifeSystem : MonoBehaviour
     [SerializeField] protected float health;
     [SerializeField] protected RawImage lowLifeImage;
 
-    public IEnumerator ReceiveDamage(float damageRecibed)
+
+    private void Update()
     {
-        Debug.Log("Actor Damaged!!!!\nCurrent Heath: " + health + "\nDamage Recibed: " + damageRecibed + "\nNew Heath: " + (health - damageRecibed));
-        health -= damageRecibed;
-        
+
         if (health <= 0)
         {
-            yield return new WaitForSeconds(0.5f);
             lowLifeImage.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
@@ -24,6 +22,12 @@ public class LifeSystem : MonoBehaviour
         {
             lowLifeImage.gameObject.SetActive(true);
         }
+    }
+
+    public void ReceiveDamage(float damageRecibed)
+    {
+        Debug.Log("Actor Damaged!!!!\nCurrent Heath: " + health + "\nDamage Recibed: " + damageRecibed + "\nNew Heath: " + (health - damageRecibed));
+        health -= damageRecibed;
     }
 
     #region Collisions and Triggers
@@ -35,7 +39,7 @@ public class LifeSystem : MonoBehaviour
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
         if (damageDealer)
         {
-            StartCoroutine(ReceiveDamage(damageDealer.Damage));
+            ReceiveDamage(damageDealer.Damage);
         }
     }
     #endregion

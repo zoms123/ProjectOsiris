@@ -1,108 +1,89 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] private PlayerDetector playerDetector;
+    [SerializeField] private float attackRange;
+
+
     [Header("Patrol System")]
     [SerializeField] private Transform[] waypoints;
+    [SerializeField] private float waitTimeOnPoint;
     [SerializeField] private float patrolSpeed;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadious;
+    [SerializeField] private LayerMask groundLayerMask;
 
-    private Vector3 currentTarget;
-    private int currentIndex = -1;
-    private bool playerDetected = false;
-    private bool hasRecibedDamage = false;
-    private GameObject player;
+    
     private BasicCombat basicCombat;
+    private StateMachine stateMachine;
+    private NavMeshAgent agent;
+    private ZeroGravityEffector zeroGravityEffector;
 
-    // Start is called before the first frame update
+
+    private void Awake()
+    {
+        stateMachine = new StateMachine();
+        basicCombat = GetComponent<BasicCombat>();
+        agent = GetComponent<NavMeshAgent>();
+        zeroGravityEffector = GetComponent<ZeroGravityEffector>();
+        //declare states
+        var attackState = new EnemyAttackState(this, null, basicCombat, agent);
+        var patrolState = new EnemyPatrolState(
+            this,
+            null,
+            agent,
+            waypoints,
+            waitTimeOnPoint
+            );
+
+        var chaseState = new EnemyChaseState(this, null, agent, playerDetector);
+
+        var floatingState = new EnemyFloatingState(this, null, agent);
+
+        // declare transitions
+        At(patrolState, chaseState, new FuncPredicate(() => playerDetector.CanDetectPlayer()));
+        At(chaseState, attackState, new FuncPredicate(() => playerDetector.PlayerDistance(transform.position) <= attackRange));
+        At(attackState, chaseState, new FuncPredicate(() => playerDetector.PlayerDistance(transform.position) > attackRange));
+        At(floatingState, chaseState, new FuncPredicate(() => !zeroGravityEffector.Activated && IsGrounded()));
+
+        Any(floatingState, new FuncPredicate(() => zeroGravityEffector.Activated));
+        Any(patrolState, new FuncPredicate(() => !playerDetector.CanDetectPlayer()));
+        stateMachine.SetState(patrolState);
+    }
+
+    private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
+    private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+
     void Start()
     {
-        basicCombat = GetComponent<BasicCombat>();
-        StartCoroutine(Patrol());
-
         waypoints[0].parent.SetParent(null);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        stateMachine.Update();
     }
 
-    private IEnumerator Patrol()
+    private bool IsGrounded()
     {
-        while (true)
-        {
-            DefineNewTarget();
-            FocusTarget(currentTarget);
-            while ((Vector3.Distance(transform.position, currentTarget) > 0.5))
-            {
-                if (!playerDetected && !hasRecibedDamage)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, currentTarget, patrolSpeed * Time.deltaTime);
-                    yield return null;
-                }
-                else if (hasRecibedDamage)
-                {
-                    yield return new WaitForSeconds(0.5f);
-                    hasRecibedDamage = false;
-                }
-                else
-                {
-                    while (playerDetected)
-                    {
-                        FocusTarget(player.transform.position);
-                        while ((Vector3.Distance(transform.position, player.transform.position) > 3) && playerDetected)
-                        {
-                            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, patrolSpeed * Time.deltaTime);
-                            yield return null;
-                        }
-                        if (playerDetected)
-                        {
-                            FocusTarget(player.transform.position);
-                            yield return new WaitForSeconds(0.5f);
-                            basicCombat.Attack();
-                            yield return new WaitForSeconds(1f);
-                        }
-                    }
-                }
-            }
-            yield return new WaitForSeconds(3f);
-        }
+        Collider[] colliders = Physics.OverlapSphere(groundCheck.transform.position, groundCheckRadious, groundLayerMask);
+        return colliders.Length > 0;
     }
 
-    private void DefineNewTarget()
-    {
-        currentIndex++;
-        if (currentIndex >= waypoints.Length)
-        {
-            currentIndex = 0;
-        }
-        currentTarget = waypoints[currentIndex].position;
-    }
+    #region Collisions and Triggers
 
-    private void FocusTarget(Vector3 target)
-    {
-        Vector3 relativePos = target - transform.position;
-        relativePos.y = 0;
-        transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-    }
+    #endregion
 
-    private void OnTriggerEnter(Collider collision)
+    #region Debug
+    private void OnDrawGizmosSelected()
     {
-        if (collision.gameObject.CompareTag("PlayerDetection"))
-        {
-            player = collision.gameObject;
-            playerDetected = true;
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(groundCheck.transform.position, groundCheckRadious);
     }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("PlayerDetection"))
-        {
-            playerDetected = false;
-        }
-    }
+    #endregion
 }

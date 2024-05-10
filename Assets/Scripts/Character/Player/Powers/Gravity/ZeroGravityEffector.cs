@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ZeroGravityEffector : MonoBehaviour
 {
 
+    [SerializeField] bool applyInitialForce;
     [SerializeField] Vector3 initialForce = new Vector3 (0, 5, 0);
     [SerializeField] float initialTime = 1;
     [SerializeField] float intervalTime = 1;
@@ -19,7 +17,7 @@ public class ZeroGravityEffector : MonoBehaviour
 
     private bool initialImpulseStoped;
 
-    private ZeroGravityZone zeroGravityZone;
+    public bool Activated { get { return useZeroGravity; } }
 
     private void Awake()
     {
@@ -68,6 +66,7 @@ public class ZeroGravityEffector : MonoBehaviour
             rigidBody.velocity = Vector3.zero;
         } else
         {
+            rigidBody.velocity = Vector3.zero;
             rigidBody.AddForce(floatingForce);
         }
     }
@@ -77,14 +76,17 @@ public class ZeroGravityEffector : MonoBehaviour
     {
         useZeroGravity = true;
         rigidBody.useGravity = false;
-        rigidBody.AddForce(initialForce, ForceMode.Impulse);
+        rigidBody.velocity = Vector3.zero;
+        if(applyInitialForce)
+            rigidBody.AddForce(initialForce, ForceMode.Impulse);
     }
 
     public void StopUsingZeroGravity()
     {
         useZeroGravity = false;
         if (rigidBody != null) 
-        { 
+        {
+            rigidBody.velocity = Vector3.zero;
             rigidBody.useGravity = true;
             rigidBody.drag = 0;
         }

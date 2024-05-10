@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,26 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject zeroGravityZone;
     [SerializeField] private bool active;
-    private GameObject interactable;
+    [SerializeField] private float attachingMovementSpeedFactor = 3;
+    [SerializeField] private Transform detachPoint;
+    private IInteractable interactable;
+    private IAttachable attachable;
+    private GravityMovableObject gravityMovableObject;
+
+    public event Action OnLoseObject;
+
+    private void Start()
+    {
+        gravityMovableObject = GetComponentInChildren<GravityMovableObject>();
+        
+        
+        if (gravityMovableObject != null)
+        {
+            interactable = gravityMovableObject.GetComponent<IInteractable>();
+            attachable = gravityMovableObject.GetComponent<IAttachable>();
+            Interact();
+        }
+    }
 
     public bool CanInteract(PowerType powerType)
     {
@@ -15,11 +35,22 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(interactable != null)
+        if(interactable != null && !active)
         {
-            interactable.transform.parent = zeroGravityZone.transform;
-            interactable.transform.localPosition = Vector3.zero;
+            gravityMovableObject.MultiplySpeed(attachingMovementSpeedFactor);
+            attachable.ChangeParent(zeroGravityZone.transform);
+            interactable.Interact();
             active = true;
+        } else if ( active && gravityMovableObject.Attached)
+        {
+            attachable.ChangeParent(detachPoint);
+            if (interactable.Activated())
+            {
+                interactable.Interact();
+            }
+            interactable.Interact();
+            gravityMovableObject.DeactivateWhenAttached();
+            active = false;
         }
     }
 
@@ -32,9 +63,31 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<IInteractable>() != null)
+        if (other.GetComponent<IInteractable>() != null && interactable == null)
         {
-            interactable = other.gameObject;
+            interactable = other.GetComponent<IInteractable>();
+            attachable = other.GetComponent<IAttachable>();
+            gravityMovableObject = other.GetComponent<GravityMovableObject>();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(interactable == null && other.GetComponent<IInteractable>() != null)
+        {
+            interactable = other.GetComponent<IInteractable>();
+            attachable = other.GetComponent<IAttachable>();
+            gravityMovableObject = other.GetComponent<GravityMovableObject>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<IInteractable>() == interactable)
+        {
+            interactable = null;
+            attachable = null;
+            gravityMovableObject = null;
         }
     }
 

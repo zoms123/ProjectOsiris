@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
+using System;
 using UnityEngine;
 
 public class CrystalDissolveEffect : MonoBehaviour, IInteractable
@@ -15,6 +12,8 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
     private bool hidden = true;
     private float currentTime;
     private bool applyEffect;
+
+    public event Action OnLoseObject;
 
     void Start()
     {
