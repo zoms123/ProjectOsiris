@@ -11,14 +11,17 @@ public static class ObjectPool
 
     public static void Initialize(GameObject prefab)
     {
-        List<GameObject> objects = new List<GameObject>();
-        for (int i = 0; i < pooledAmountPerObject; i++)
+        if (!pooledObjects.ContainsKey(prefab))
         {
-            GameObject obj = GameObject.Instantiate(prefab);
-            obj.SetActive(false);
-            objects.Add(obj);
+            List<GameObject> objects = new List<GameObject>();
+            for (int i = 0; i < pooledAmountPerObject; i++)
+            {
+                GameObject obj = GameObject.Instantiate(prefab);
+                obj.SetActive(false);
+                objects.Add(obj);
+            }
+            pooledObjects.Add(prefab, objects);
         }
-        pooledObjects.Add(prefab, objects);
     }
 
     public static GameObject GetObject(GameObject prefab)
