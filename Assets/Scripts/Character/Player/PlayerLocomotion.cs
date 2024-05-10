@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerLocomotion : CharacterLocomotion
@@ -17,6 +18,7 @@ public class PlayerLocomotion : CharacterLocomotion
     [SerializeField] private float jumpForwardSpeed = 5f;
     [SerializeField] private float freeFallSpeed = 2f;
     private Vector3 jumpDirection;
+    public bool lockRotation;
 
     #region Components
     [Header("Components")]
@@ -140,6 +142,14 @@ public class PlayerLocomotion : CharacterLocomotion
     private void HandleRotation()
     {
         if (!canRotate || isStrafing) return;
+
+        if (lockRotation)
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,
+                                                  mainCameraTransform.rotation.eulerAngles.y,
+                                                  transform.rotation.eulerAngles.z);
+            return;
+        }
 
         Vector3 targetRotationDirection = GetMoveDirection();
 

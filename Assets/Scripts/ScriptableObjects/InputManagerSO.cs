@@ -19,7 +19,8 @@ public class InputManagerSO : ScriptableObject
     public event Action OnCombatAbility;
     public event Action OnPuzzleAbility;
 
-    public event Action<Vector2> OnControlObject;
+    public event Action<Vector2> OnControlObjectXY;
+    public event Action<Vector2> OnControlObjectZ;
 
     private void OnEnable()
     {
@@ -107,8 +108,10 @@ public class InputManagerSO : ScriptableObject
         controls.Gameplay.PowerSelect.started -= PowerSelect;
         controls.Gameplay.CombatAbility.started -= CombatAbility;
 
-        controls.PlayerGravityPuzzle.ControlObject.performed += ControlObject;
-        controls.PlayerGravityPuzzle.ControlObject.canceled += ControlObject;
+        controls.PlayerGravityPuzzle.ControlObjectXY.performed += ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectXY.canceled += ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectZ.performed += ControlObjectY;
+        controls.PlayerGravityPuzzle.ControlObjectZ.canceled += ControlObjectY;
 
         controls.PlayerGravityPuzzle.Enable();
     }
@@ -118,21 +121,29 @@ public class InputManagerSO : ScriptableObject
         controls.Gameplay.PowerSelect.started += PowerSelect;
         controls.Gameplay.CombatAbility.started += CombatAbility;
 
-        controls.PlayerGravityPuzzle.ControlObject.performed -= ControlObject;
-        controls.PlayerGravityPuzzle.ControlObject.canceled -= ControlObject;
+        controls.PlayerGravityPuzzle.ControlObjectXY.performed -= ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectXY.canceled -= ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectZ.performed -= ControlObjectY;
+        controls.PlayerGravityPuzzle.ControlObjectZ.canceled -= ControlObjectY;
 
         controls.PlayerGravityPuzzle.Disable();
     }
 
-    private void ControlObject(InputAction.CallbackContext context)
+    private void ControlObjectX(InputAction.CallbackContext context)
     {
-        OnControlObject?.Invoke(context.ReadValue<Vector2>());
+        OnControlObjectXY?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    private void ControlObjectY(InputAction.CallbackContext context)
+    {
+        OnControlObjectZ?.Invoke(context.ReadValue<Vector2>());
     }
 
     private void OnDisable()
     {
         if (controls != null)
         {
+            PuzzleGravityAbilityDisabled();
             controls.PlayerMovement.Move.performed -= Move;
             controls.PlayerMovement.Move.canceled -= Move;
             controls.PlayerActions.Jump.started -= Jump;
