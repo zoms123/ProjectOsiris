@@ -111,17 +111,14 @@ public class PlayerPowersController : MonoBehaviour
             ThrowableCrystal crystal = crystalObject.GetComponent<ThrowableCrystal>();
             if (crystal != null)
             {
+                Vector3 targetDirection = firePoint.forward;
                 if (targetLockOn.CurrentTarget)
                 {
-                    Vector3 targetDirection = targetLockOn.CurrentTarget.position - firePoint.position;
+                    targetDirection = targetLockOn.CurrentTarget.position - firePoint.position;
                     targetDirection.Normalize();
                     //Debug.DrawRay(firePoint.position, targetDirection * 20, Color.cyan, 5f);
-                    crystal.Initialize(targetDirection);
                 }
-                else
-                {
-                    crystal.Initialize(firePoint.forward);
-                }
+                crystal.Initialize(targetDirection, tag);
             }
         }
     }

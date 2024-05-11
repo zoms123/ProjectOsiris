@@ -32,7 +32,7 @@ public class DistanceAttackStrategy<T> : IAttackStrategy where T : MonoBehaviour
                 {
                     direction = (currentTarget.position - attackPoint.position).normalized;                    
                 }
-                (attack as IDistanceAttack).Initialize(direction);
+                (attack as IDistanceAttack).Initialize(direction, ownerTransform.tag);
             }
         }
     }

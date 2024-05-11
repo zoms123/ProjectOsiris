@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowableCrystal : DistanceAttack
+public class ThrowableRock : DistanceAttack
 {
-
-
     protected override void PerformAction()
     {
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
@@ -13,7 +11,7 @@ public class ThrowableCrystal : DistanceAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("Hit " + other.name);
             ReturnToPool();

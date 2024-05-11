@@ -17,8 +17,6 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private float groundCheckRadious;
     [SerializeField] private LayerMask groundLayerMask;
 
-    
-    private BasicCombat basicCombat;
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     private ZeroGravityEffector zeroGravityEffector;
@@ -28,12 +26,11 @@ public class EnemyBase : MonoBehaviour
     private void Awake()
     {
         stateMachine = new StateMachine();
-        basicCombat = GetComponent<BasicCombat>();
         agent = GetComponent<NavMeshAgent>();
         zeroGravityEffector = GetComponent<ZeroGravityEffector>();
         animator = GetComponentInChildren<Animator>();
         //declare states
-        var attackState = new EnemyAttackState(this, animator, basicCombat, agent);
+        var attackState = new EnemyAttackState(this, animator, agent);
         var patrolState = new EnemyPatrolState(
             this,
             animator,

@@ -3,12 +3,10 @@ using UnityEngine.AI;
 public class EnemyAttackState : EnemyBaseState
 {
     private NavMeshAgent agent;
-    private BasicCombat basicCombat;
 
-    public EnemyAttackState(EnemyBase enemyBase, Animator animator, BasicCombat basicCombat, NavMeshAgent agent) : base(enemyBase, animator)
+    public EnemyAttackState(EnemyBase enemyBase, Animator animator, NavMeshAgent agent) : base(enemyBase, animator)
     {
         this.agent = agent;
-        this.basicCombat = basicCombat;
 
     }
 
@@ -27,6 +25,5 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void Update()
     {
-        //basicCombat.Attack();
     }
 }

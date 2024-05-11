@@ -36,7 +36,7 @@ public class BasicCombat : MonoBehaviour
                     }
                 case EAttackType.DISTANCE:
                     {
-                        attackStrategy = new DistanceAttackStrategy<ThrowableCrystal>(transform, animator, attackPrefab, attackPoint);
+                        attackStrategy = new DistanceAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, attackPoint);
                         break;
                     }
             }
@@ -47,12 +47,7 @@ public class BasicCombat : MonoBehaviour
     public void Attack()
     {
         FocusTarget();
-      //  currentTime += Time.deltaTime;
-       // if (currentTime >= TimeBetweenAttacks)
-       // {
-            attackStrategy.Execute();
-          //  currentTime = 0;
-        //}    
+        attackStrategy.Execute();
     }
 
     private void FocusTarget()

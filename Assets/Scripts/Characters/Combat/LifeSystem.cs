@@ -15,7 +15,8 @@ public class LifeSystem : MonoBehaviour
 
         if (health <= 0)
         {
-            lowLifeImage.gameObject.SetActive(false);
+            if(lowLifeImage)
+                lowLifeImage.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
         else if (tag == "Player" && health <= 20)
@@ -32,12 +33,12 @@ public class LifeSystem : MonoBehaviour
 
     #region Collisions and Triggers
 
-    
-    
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider collider)
     {
-        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
-        if (damageDealer)
+        // TODO as we are using triggers deffine a way to differenciate who is shooting and who is receiving the damage
+        DamageDealer damageDealer = collider.GetComponent<DamageDealer>();
+        if (damageDealer && collider.GetComponent<DistanceAttack>().OwnerTag != tag)
         {
             ReceiveDamage(damageDealer.Damage);
         }
