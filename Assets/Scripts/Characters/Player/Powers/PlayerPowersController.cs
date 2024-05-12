@@ -86,7 +86,6 @@ public class PlayerPowersController : MonoBehaviour
             LiftingObjectWithGravityMovement();
     }
 
-    float lastCameraXRotation;
     private void LiftingObjectWithGravityMovement()
     {
         targetRigidbody.velocity = Vector3.zero;

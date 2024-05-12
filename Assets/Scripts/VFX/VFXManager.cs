@@ -8,15 +8,15 @@ public class VFXManager : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     private GameObject instance;
     private VisualEffect visualEffect;
-    private float lifeTime;
-    private float currentTime;
+    //private float lifeTime;
+    //private float currentTime;
 
-    private bool execute;
+    //private bool execute;
 
  
     public void ExecuteVFX(GameObject prefab)
     {
-        execute = true;
+        //execute = true;
         instance = ObjectPool.GetObject(prefab);
         if (!instance)
         {
@@ -56,7 +56,7 @@ public class VFXManager : MonoBehaviour
     public void StopVFX()
     {
         visualEffect.Stop();
-        execute = false;
+        //execute = false;
         ObjectPool.ReturnObject(instance);
     }
 }
