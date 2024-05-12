@@ -19,6 +19,9 @@ public class InputManagerSO : ScriptableObject
     public event Action OnCombatAbility;
     public event Action OnPuzzleAbility;
 
+    public event Action<Vector2> OnControlObjectXY;
+    public event Action<Vector2> OnControlObjectZ;
+
     private void OnEnable()
     {
         if (controls == null)
@@ -100,10 +103,47 @@ public class InputManagerSO : ScriptableObject
         OnPuzzleAbility?.Invoke();
     }
 
+    public void PuzzleGravityAbilityEnabled()
+    {
+        controls.Gameplay.PowerSelect.started -= PowerSelect;
+        controls.Gameplay.CombatAbility.started -= CombatAbility;
+
+        controls.PlayerGravityPuzzle.ControlObjectXY.performed += ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectXY.canceled += ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectZ.performed += ControlObjectY;
+        controls.PlayerGravityPuzzle.ControlObjectZ.canceled += ControlObjectY;
+
+        controls.PlayerGravityPuzzle.Enable();
+    }
+
+    public void PuzzleGravityAbilityDisabled()
+    {
+        controls.Gameplay.PowerSelect.started += PowerSelect;
+        controls.Gameplay.CombatAbility.started += CombatAbility;
+
+        controls.PlayerGravityPuzzle.ControlObjectXY.performed -= ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectXY.canceled -= ControlObjectX;
+        controls.PlayerGravityPuzzle.ControlObjectZ.performed -= ControlObjectY;
+        controls.PlayerGravityPuzzle.ControlObjectZ.canceled -= ControlObjectY;
+
+        controls.PlayerGravityPuzzle.Disable();
+    }
+
+    private void ControlObjectX(InputAction.CallbackContext context)
+    {
+        OnControlObjectXY?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    private void ControlObjectY(InputAction.CallbackContext context)
+    {
+        OnControlObjectZ?.Invoke(context.ReadValue<Vector2>());
+    }
+
     private void OnDisable()
     {
         if (controls != null)
         {
+            PuzzleGravityAbilityDisabled();
             controls.PlayerMovement.Move.performed -= Move;
             controls.PlayerMovement.Move.canceled -= Move;
             controls.PlayerActions.Jump.started -= Jump;

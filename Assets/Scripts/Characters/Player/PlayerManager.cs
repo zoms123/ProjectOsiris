@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     private BasicCombat basicCombat;
 
     public PowerType CurrentPowerType { get { return currentPowerType; } }
+    public PlayerLocomotion Locomotion { get { return locomotion; } }
 
     protected void Awake()
     {

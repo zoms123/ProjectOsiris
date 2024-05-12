@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class PlayerPowersController : MonoBehaviour
@@ -28,7 +29,13 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
     [SerializeField] Transform attachPoint;
-    private TargetLockOn targetLockOn;
+    [SerializeField] private float controlMovementSpeed;
+    
+    private bool liftingObjectWithGravity;
+    private float inputDirectionY;
+    private float inputDirectionZ;
+    private Rigidbody targetRigidbody;
+    private Transform mainCameraTransform;
 
     [Header("Crystal Power")]
     [SerializeField] private GameObject throwableCrystalPrefab;
@@ -36,16 +43,20 @@ public class PlayerPowersController : MonoBehaviour
 
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
+    private PlayerLocomotion playerlocomotion;
+    private TargetLockOn targetLockOn;
 
     private IAttachable attachable;
     private IInteractable interactable;
-    private Collider interactableCollider;
+    private IMovable movable;
     private Vector3 overlapSphereEndPoint;
 
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
         targetLockOn = GetComponent<TargetLockOn>();
+        playerlocomotion = playerManager.Locomotion;
+        mainCameraTransform = Camera.main.transform;
 
         ObjectPool.Initialize(throwableCrystalPrefab);
     }
@@ -70,7 +81,48 @@ public class PlayerPowersController : MonoBehaviour
         crystalWaitTime -= Time.deltaTime;
         timeWaitTime -= Time.deltaTime;
         shadowWaitTime -= Time.deltaTime;
+
+        if (liftingObjectWithGravity)
+            LiftingObjectWithGravityMovement();
     }
+
+    float lastCameraXRotation;
+    private void LiftingObjectWithGravityMovement()
+    {
+        targetRigidbody.velocity = Vector3.zero;
+        Vector3 targetPosition = movable.GetPosition();
+        Vector3 targetLocalPosition = movable.GetLocalPosition();
+
+        if (Vector3.Distance(targetPosition, attachPoint.transform.position) < 4.5f
+            && targetPosition.y >= attachPoint.transform.position.y
+            && targetLocalPosition.z >= -1f)
+            targetRigidbody.AddForce(GetMoveDirection() * controlMovementSpeed, ForceMode.Impulse);
+
+        else if (targetPosition.y < attachPoint.transform.position.y)
+            targetRigidbody.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+
+        else
+        {
+            Vector3 direction = (attachPoint.transform.position - targetPosition).normalized;
+            targetRigidbody.AddForce(direction * 2f, ForceMode.Impulse);
+        }
+
+    }
+
+    public Vector3 GetMoveDirection()
+    {
+        Vector3 forward = mainCameraTransform.forward;
+        forward.y = 0f;
+        forward.Normalize();
+
+        Vector3 moveDir = forward * inputDirectionY;
+        moveDir.y = inputDirectionZ;
+        moveDir.Normalize();
+
+        return moveDir;
+    }
+
+    #region Combat Abilitys
 
     private void CombatAbility()
     {
@@ -179,6 +231,8 @@ public class PlayerPowersController : MonoBehaviour
 
     }
 
+    #endregion
+
     private void PuzzleAbility()
     {
         if(interactable == null)
@@ -188,33 +242,45 @@ public class PlayerPowersController : MonoBehaviour
             {
                 interactable = collider.GetComponent<IInteractable>();
                 attachable = collider.GetComponent<IAttachable>();
+                movable = collider.GetComponent<IMovable>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
                     ChangeAttachableParent(attachPoint);
                     interactable.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
-                    interactableCollider = collider;
                     if(attachable == null)
                     {
                         interactable = null;
-                        interactableCollider = null;
                     }
+                    else if (movable != null)
+                    {
+                        playerlocomotion.lockRotation = true;
+                        inputManager.PuzzleGravityAbilityEnabled();
+                        inputManager.OnControlObjectXY += ControlObjectXY;
+                        inputManager.OnControlObjectZ += ControlObjectZ;
+                        targetRigidbody = movable.GetRigidbody();
+                        liftingObjectWithGravity = true;
+                    }
+                        
                     break;
                 }
             }
         } 
         else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
-            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
-            if (collidersTouched.Contains(interactableCollider))
-            {
-                interactable.OnLoseObject -= OnInteractableLost;
-                ChangeAttachableParent(null);
-                interactable.Interact();
-                interactable = null;
-            }
+            OnInteractableLost();
         }
         
+    }
+
+    private void ControlObjectXY(Vector2 direction)
+    {
+        inputDirectionY = direction[1];
+    }
+
+    private void ControlObjectZ(Vector2 direction)
+    {
+        inputDirectionZ = direction[1];
     }
 
     private void OnInteractableLost()
@@ -224,6 +290,20 @@ public class PlayerPowersController : MonoBehaviour
         interactable.Interact();
         interactable = null;
         attachable = null;
+
+        if (movable != null)
+        {
+            playerlocomotion.lockRotation = false;
+            inputManager.PuzzleGravityAbilityDisabled();
+            inputManager.OnControlObjectXY -= ControlObjectXY;
+            inputManager.OnControlObjectZ -= ControlObjectZ;
+            liftingObjectWithGravity = false;
+            targetRigidbody.velocity = Vector3.zero;
+            targetRigidbody = null;
+            inputDirectionY = 0f;
+            inputDirectionZ = 0f;
+            movable = null;
+        }
     }
 
     private void ChangeAttachableParent(Transform parentTransform)
@@ -234,9 +314,12 @@ public class PlayerPowersController : MonoBehaviour
         }
     }
 
+    #region Debug
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(overlapSphereStartPoint.position, overlapSphereRadius);
     }
+    #endregion
 }

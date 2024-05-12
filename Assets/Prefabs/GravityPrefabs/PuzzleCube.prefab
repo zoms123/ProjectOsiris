@@ -167,3 +167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlapSphereRadius: 2
   attachingMovementSpeed: 1
+  controlMovementSpeed: 5
+  attached: 0
+  inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
