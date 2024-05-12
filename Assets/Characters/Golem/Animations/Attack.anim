@@ -68463,6 +68463,20 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.125
+    functionName: ExecuteVFX
+    data: 
+    objectReferenceParameter: {fileID: 8586754187950108552, guid: 4045381f40e89574b842c0231b6b73f9, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: StopVFX
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: Attack
     data: 
