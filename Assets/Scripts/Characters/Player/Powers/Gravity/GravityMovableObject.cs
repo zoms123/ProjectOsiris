@@ -69,6 +69,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
             activated = true;
             rigidBody.velocity = Vector3.zero;
             rigidBody.useGravity = false;
+            transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
@@ -76,6 +77,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
             attached = false;
             activated = false;
             effectorActivated = false;
+            transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 

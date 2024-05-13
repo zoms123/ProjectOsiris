@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerPowersController : MonoBehaviour
 {
@@ -35,11 +36,17 @@ public class PlayerPowersController : MonoBehaviour
     private float inputDirectionY;
     private float inputDirectionZ;
     private Rigidbody targetRigidbody;
-    private Transform mainCameraTransform;
 
     [Header("Crystal Power")]
     [SerializeField] private GameObject throwableCrystalPrefab;
     [SerializeField] private Transform firePoint;
+
+    [Header("Time Power")]
+    [SerializeField] private GameObject timeBombPrefab;
+    [SerializeField] private float distance;
+
+    private GameObject timeBomb;
+    private Transform mainCameraTransform;
 
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
@@ -50,6 +57,11 @@ public class PlayerPowersController : MonoBehaviour
     private IInteractable interactable;
     private IMovable movable;
     private Vector3 overlapSphereEndPoint;
+
+    protected void Awake()
+    {
+        mainCameraTransform = Camera.main.transform;
+    }
 
     private void Start()
     {
@@ -139,7 +151,7 @@ public class PlayerPowersController : MonoBehaviour
             case PowerType.Crystal:
                 if (crystalWaitTime <= 0)
                 {
-                    GravityCombatAbility();
+                    CrystalCombatAbility();
                     crystalWaitTime = crystalCombatAbilityCooldown;
                 }
                 break;
@@ -147,7 +159,7 @@ public class PlayerPowersController : MonoBehaviour
             case PowerType.Time:
                 if (timeWaitTime <= 0)
                 {
-                    GravityCombatAbility();
+                    TimeCombatAbility();
                     timeWaitTime = timeCombatAbilityCooldown;
                 }
                 break;
@@ -155,7 +167,7 @@ public class PlayerPowersController : MonoBehaviour
             case PowerType.Shadow:
                 if (shadowWaitTime <= 0)
                 {
-                    GravityCombatAbility();
+                    ShadowCombatAbility();
                     shadowWaitTime = shadowCombatAbilityCooldown;
                 }
                 break;
@@ -222,7 +234,35 @@ public class PlayerPowersController : MonoBehaviour
 
     private void TimeCombatAbility()
     {
+        Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
 
+        if (currentTarget != null)
+            UseTimeBomb(currentTarget.position);
+        else
+        {
+            Vector3 forward = mainCameraTransform.forward;
+            forward.y = 0f;
+            forward.Normalize();
+
+            UseTimeBomb(transform.position + forward * distance);
+        }
+    }
+
+    private void UseTimeBomb(Vector3 spawnPosition)
+    {
+        if (!timeBomb)
+        {
+            timeBomb = Instantiate(timeBombPrefab, spawnPosition, Quaternion.identity);
+        }
+        else if (timeBomb && !timeBomb.activeSelf)
+        {
+            timeBomb.transform.position = spawnPosition;
+            timeBomb.SetActive(true);
+        }
+        else
+        {
+            timeBomb.SetActive(false);
+        }
     }
 
     private void ShadowCombatAbility()

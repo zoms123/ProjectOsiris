@@ -451,6 +451,8 @@ MonoBehaviour:
   controlMovementSpeed: 5
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
   firePoint: {fileID: 8566005181887499671}
+  timeBombPrefab: {fileID: 3744133877081091469, guid: 960fadffe0ff04c4498e78232c6c5519, type: 3}
+  distance: 10
 --- !u!95 &5503250831304565375
 Animator:
   serializedVersion: 5
