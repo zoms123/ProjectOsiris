@@ -5,7 +5,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, IMovable
+public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, IMovable, ILosableObject
 {
     [SerializeField] private float overlapSphereRadius;
     [SerializeField] private float attachingMovementSpeed;
@@ -21,6 +21,7 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
     private float originalSpeed;
 
     public bool Attached { get { return attached; } }
+    
 
     private void Awake()
     {

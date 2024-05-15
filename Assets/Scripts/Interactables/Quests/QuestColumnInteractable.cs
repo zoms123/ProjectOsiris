@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestColumnInteractable : MonoBehaviour, IInteractable
+public class QuestColumnInteractable : InteractableBase, IActivable
 {
     [SerializeField] private GameObject zeroGravityZone;
     [SerializeField] private bool active;
@@ -13,7 +12,8 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
     private IAttachable attachable;
     private GravityMovableObject gravityMovableObject;
 
-    public event Action OnLoseObject;
+    public event Action OnActivated;
+    public event Action OnDeactivated;
 
     private void Start()
     {
@@ -28,19 +28,20 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
         }
     }
 
-    public bool CanInteract(PowerType powerType)
+    public override bool CanInteract(PowerType powerType)
     {
         return true;
     }
 
-    public void Interact()
+    public override void Interact()
     {
         if(interactable != null && !active)
         {
             gravityMovableObject.MultiplySpeed(attachingMovementSpeedFactor);
             attachable.ChangeParent(zeroGravityZone.transform);
             interactable.Interact();
-            active = true;
+            StartCoroutine(ChangetToActiveWhenAttached());
+            
         } else if ( active && gravityMovableObject.Attached)
         {
             attachable.ChangeParent(detachPoint);
@@ -51,13 +52,26 @@ public class QuestColumnInteractable : MonoBehaviour, IInteractable
             interactable.Interact();
             gravityMovableObject.DeactivateWhenAttached();
             active = false;
+            OnDeactivated?.Invoke();
         }
     }
 
-    public bool Activated()
+    public override bool Activated()
     {
         return active;
     }
+
+    #region Coroutines
+    private IEnumerator ChangetToActiveWhenAttached()
+    {
+        while (!attachable.Attached)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        active = true;
+        OnActivated?.Invoke();
+    }
+    #endregion
 
     #region Collisions and Triggers
 
