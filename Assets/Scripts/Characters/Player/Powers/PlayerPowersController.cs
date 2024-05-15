@@ -56,6 +56,7 @@ public class PlayerPowersController : MonoBehaviour
     private IAttachable attachable;
     private IInteractable interactable;
     private IMovable movable;
+    private ILosableObject losableObjet;
     private Vector3 overlapSphereEndPoint;
 
     protected void Awake()
@@ -282,10 +283,12 @@ public class PlayerPowersController : MonoBehaviour
                 interactable = collider.GetComponent<IInteractable>();
                 attachable = collider.GetComponent<IAttachable>();
                 movable = collider.GetComponent<IMovable>();
+                losableObjet = collider.GetComponent<ILosableObject>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
                     ChangeAttachableParent(attachPoint);
-                    interactable.OnLoseObject += OnInteractableLost;
+                    if(losableObjet != null)
+                        losableObjet.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
                     if(attachable == null)
                     {
@@ -324,7 +327,8 @@ public class PlayerPowersController : MonoBehaviour
 
     private void OnInteractableLost()
     {
-        interactable.OnLoseObject -= OnInteractableLost;
+        if (losableObjet != null)
+            losableObjet.OnLoseObject -= OnInteractableLost;
         ChangeAttachableParent(null);
         interactable.Interact();
         interactable = null;

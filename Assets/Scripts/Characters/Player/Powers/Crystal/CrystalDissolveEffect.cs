@@ -13,8 +13,6 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
     private float currentTime;
     private bool applyEffect;
 
-    public event Action OnLoseObject;
-
     void Start()
     {
         copyMaterial = new Material(material);

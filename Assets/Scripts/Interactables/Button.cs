@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Button : MonoBehaviour, IInteractable
+public class Button : InteractableBase
 {
     [SerializeField] private float speed;
     [SerializeField] private Vector3 displacementUnits;
@@ -12,8 +10,6 @@ public class Button : MonoBehaviour, IInteractable
     private bool canInteract = true;
     private bool interacting = false;
     private Vector3 destinationPosition;
-
-    public event Action OnLoseObject;
 
     void Update()
     {
@@ -27,19 +23,19 @@ public class Button : MonoBehaviour, IInteractable
         }
     }
 
-    public bool CanInteract(PowerType powerType)
+    public override bool CanInteract(PowerType powerType)
     {
         return canInteract && powerType == PowerType.None;
     }
 
-    public void Interact()
+    public override void Interact()
     {
         destinationPosition = objectToMove.transform.position + displacementUnits;
         interacting = true;
         canInteract = false;
     }
 
-    public bool Activated()
+    public override bool Activated()
     {
         return interacting;
     }
