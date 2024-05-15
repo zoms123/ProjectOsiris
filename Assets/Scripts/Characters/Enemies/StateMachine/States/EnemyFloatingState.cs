@@ -12,6 +12,7 @@ public class EnemyFloatingState : EnemyBaseState
 
     public override void OnEnter()
     {
+        animator.SetTrigger("Floating");
         agent.isStopped = true;
         agent.enabled = false;
     }
@@ -19,6 +20,7 @@ public class EnemyFloatingState : EnemyBaseState
     public override void OnExit()
     {
         Debug.Log("Exit Floating State");
+        animator.ResetTrigger("Floating");
         agent.enabled = true;
         agent.isStopped = false;
     }
