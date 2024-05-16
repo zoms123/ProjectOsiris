@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Dissolve_Shadder_MAT
+  m_Name: VerticalDissolve_Shadder_MAT
   m_Shader: {fileID: -6465566751694194690, guid: f5fe3bb27843a1c4690ad3d2792a19fb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,9 +37,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dissolve: 1
-    - _EdgeWidth: 0.01
-    - _ObjectHeight: 9
+    - _DisolveHorizontally: 0
+    - _Dissolve: 0
+    - _EdgeWidth: 0.05
+    - _ObjectHeight: 3
+    - _Origin: -0.51
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:

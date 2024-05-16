@@ -6,6 +6,7 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
     [SerializeField] Material material;
     [SerializeField] float effectTime;
     [SerializeField] Collider colliderToDisolve;
+    [SerializeField] Renderer rendererToDisolve;
  
     private float total = 1;
     private Material copyMaterial;
@@ -16,7 +17,7 @@ public class CrystalDissolveEffect : MonoBehaviour, IInteractable
     void Start()
     {
         copyMaterial = new Material(material);
-        GetComponent<Renderer>().material = copyMaterial;
+        rendererToDisolve.material = copyMaterial;
         copyMaterial.SetFloat("_Dissolve", total);
         colliderToDisolve.enabled = !hidden;
     }
