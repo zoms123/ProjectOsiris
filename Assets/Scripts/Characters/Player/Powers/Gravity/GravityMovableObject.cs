@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -51,10 +52,18 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
             zeroGravityEffector.UseZeroGravity();
             effectorActivated = true;
         }
-        if (attached && effectorActivated && Vector3.Distance(transform.position, transform.parent.position) > 5f)
-        { 
+        if (attached && effectorActivated && !CheckIfInteractableIsInRange())
+        {
             OnLoseObject?.Invoke();
         }
+    }
+
+    private bool CheckIfInteractableIsInRange()
+    {
+        return transform.position.y >= transform.parent.position.y - 0.5f
+            && transform.localPosition.z >= -1.5f
+            && transform.position.y <= transform.parent.position.y + 5f
+            && transform.localPosition.z <= 5f;
     }
 
     #region IInteractable Interface implementation
@@ -114,6 +123,17 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
     public Vector3 GetLocalPosition()
     {
         return transform.localPosition;
+    }
+
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    public void SetLocalPosition(Vector3 localPosition)
+    {
+        transform.localPosition = localPosition;
     }
     #endregion
 

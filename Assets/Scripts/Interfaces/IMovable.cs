@@ -9,4 +9,8 @@ public interface IMovable
     public Vector3 GetPosition();
 
     public Vector3 GetLocalPosition();
+
+    public void SetPosition(Vector3 position);
+
+    public void SetLocalPosition(Vector3 localPosition);
 }
