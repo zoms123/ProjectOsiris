@@ -52,6 +52,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
             interactable.Interact();
             gravityMovableObject.DeactivateWhenAttached();
             active = false;
+            // TODO Change color here
             OnDeactivated?.Invoke();
         }
     }
@@ -69,7 +70,9 @@ public class QuestColumnInteractable : InteractableBase, IActivable
             yield return new WaitForSeconds(0.5f);
         }
         active = true;
+        // TODO Change color here
         OnActivated?.Invoke();
+        
     }
     #endregion
 
