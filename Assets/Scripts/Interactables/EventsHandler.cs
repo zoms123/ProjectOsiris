@@ -24,9 +24,12 @@ public class EventHandler : MonoBehaviour
     {
         foreach (GameObject conditionObject in conditions)
         {
-            IActivable activable = conditionObject.GetComponent<IActivable>();
-            activable.OnActivated -= Execute;
-            activable.OnDeactivated -= Execute;
+            if(conditionObject != null)
+            {
+                IActivable activable = conditionObject.GetComponent<IActivable>();
+                activable.OnActivated -= Execute;
+                activable.OnDeactivated -= Execute;
+            }
         }
     }
 
