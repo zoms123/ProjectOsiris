@@ -55,7 +55,10 @@ public class VFXManager : MonoBehaviour
 
     public void StopVFX()
     {
-        visualEffect.Stop();
+        if (visualEffect)
+        {
+            visualEffect.Stop();
+        }
         //execute = false;
         ObjectPool.ReturnObject(instance);
     }
