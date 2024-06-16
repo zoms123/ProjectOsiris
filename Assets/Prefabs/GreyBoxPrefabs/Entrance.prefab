@@ -2917,7 +2917,7 @@ GameObject:
   - component: {fileID: 1903551316620889180}
   - component: {fileID: 659806908727617943}
   - component: {fileID: 8288558271881213253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SecondEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8193,7 +8193,7 @@ GameObject:
   - component: {fileID: 8059129456364108058}
   - component: {fileID: 7996857244597092844}
   - component: {fileID: 2738877995064110645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EntranceBanse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10344,7 +10344,7 @@ GameObject:
   - component: {fileID: 1096981555491746039}
   - component: {fileID: 8888489223373114747}
   - component: {fileID: 4098827862454453210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EntranceBanse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12880,7 +12880,7 @@ GameObject:
   - component: {fileID: 8448217273767600737}
   - component: {fileID: 2594650210824601381}
   - component: {fileID: 2443910601222914632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SecondEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15886,7 +15886,7 @@ GameObject:
   - component: {fileID: 6851024244095942334}
   - component: {fileID: 5426956182964440868}
   - component: {fileID: 7761938532141394622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
