@@ -19,7 +19,9 @@ public class DistanceAttackStrategy<T> : IAttackStrategy where T : MonoBehaviour
 
     public void Execute()
     {
+        Debug.Log("prefab " + attackPrefab);
         GameObject attackObject = ObjectPool.GetObject(attackPrefab);
+        Debug.Log("attackObject " + attackObject);
         if (attackObject != null)
         {
             attackObject.transform.position = attackPoint.position;
