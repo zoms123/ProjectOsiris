@@ -58,8 +58,8 @@ public class VFXManager : MonoBehaviour
         if (visualEffect)
         {
             visualEffect.Stop();
+            //execute = false;
+            ObjectPool.ReturnObject(instance);
         }
-        //execute = false;
-        ObjectPool.ReturnObject(instance);
     }
 }
