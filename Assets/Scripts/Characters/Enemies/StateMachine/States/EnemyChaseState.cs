@@ -16,6 +16,7 @@ public class EnemyChaseState : EnemyBaseState
     public override void OnEnter()
     {
         animator.SetBool("Idle", false);
+        animator.SetBool("Attack", false);
         animator.SetBool("Walk", true);
         this.target = playerDetector.Player;
     }

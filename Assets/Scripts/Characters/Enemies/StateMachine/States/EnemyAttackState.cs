@@ -19,6 +19,7 @@ public class EnemyAttackState : EnemyBaseState
 
     public override void OnExit()
     {
+        enemyBase.GetComponent<VFXManager>().StopVFX();
         animator.SetBool("Attack", false);
         agent.isStopped = false;
     }
