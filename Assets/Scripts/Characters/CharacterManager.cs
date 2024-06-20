@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public CharacterController characterController;
+    [HideInInspector] public CharacterController characterController;
 
     [Header("Flags")]
     public bool isPerformingAction = false;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerLocomotion : CharacterLocomotion
 {
     [Header("Movement Settings")]
+
     [SerializeField] private float walkingSpeed = 2f;
     [SerializeField] private float runningSpeed = 5f;
     [SerializeField] private float sprintingSpeed = 7f;
@@ -14,18 +15,19 @@ public class PlayerLocomotion : CharacterLocomotion
     private bool isSprintInputPressed = false;
 
     [Header("Jump Settings")]
+
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private float jumpForwardSpeed = 5f;
     [SerializeField] private float freeFallSpeed = 2f;
     private Vector3 jumpDirection;
     public bool lockRotation;
 
-    #region Components
-    [Header("Components")]
-    [SerializeField] private InputManagerSO inputManager;
+    [Header("Inputs")]
+
+    [SerializeField, Required] private InputManagerSO inputManager;
+
     private PlayerAnimatorManager playerAnimatorManager;
     private Transform mainCameraTransform;
-    #endregion
 
     protected override void Awake()
     {
@@ -97,12 +99,16 @@ public class PlayerLocomotion : CharacterLocomotion
 
         isSprinting = isSprintInputPressed && moveAmount >= 0.5f;
 
-        // If it is locked on, pass the horizontal movement as well (cannot run)
+        // If it is strafing, pass the horizontal movement as well (cannot run)
         if (isStrafing)
         {
-            playerAnimatorManager.UpdateAnimatorMovementParameters(inputDirection.x, moveDirection.z, false);
+            Debug.Log($"Input direction: {inputDirection}");
+            // Calculate relative movement direction when strafing
+            Vector3 localMoveDirection = transform.InverseTransformDirection(moveDirection);
+            playerAnimatorManager.UpdateAnimatorMovementParameters(localMoveDirection.x, localMoveDirection.z, false);
+            //playerAnimatorManager.UpdateAnimatorMovementParameters(inputDirection.x, moveDirection.z, false);
         }
-        // If it is not locked on, only use the move amount (can run)
+        // If it is not strafing, only use the move amount (can run)
         else
         {
             playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, isSprinting);

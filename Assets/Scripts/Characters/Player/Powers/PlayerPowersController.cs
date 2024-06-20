@@ -7,11 +7,11 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerPowersController : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private InputManagerSO inputManager;
+    [Header("Inputs")]
+    [SerializeField, Required] private InputManagerSO inputManager;
 
     [Header("Overlap")]
-    [SerializeField] private Transform overlapSphereStartPoint;
+    [SerializeField, Required] private Transform overlapSphereStartPoint;
     [SerializeField] private Vector3 offsetDirection = Vector3.up;
     [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
@@ -28,9 +28,9 @@ public class PlayerPowersController : MonoBehaviour
     private float shadowWaitTime = 0;
 
     [Header("Gravity Power")]
-    [SerializeField] GameObject zeroGravityZonePrefab;
+    [SerializeField, Required] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
-    [SerializeField] Transform attachPoint;
+    [SerializeField, Required] Transform attachPoint;
     [SerializeField] private float controlMovementSpeed;
     
     private bool liftingObjectWithGravity;
@@ -39,11 +39,11 @@ public class PlayerPowersController : MonoBehaviour
     private Rigidbody targetRigidbody;
 
     [Header("Crystal Power")]
-    [SerializeField] private GameObject throwableCrystalPrefab;
-    [SerializeField] private Transform firePoint;
+    [SerializeField, Required] private GameObject throwableCrystalPrefab;
+    [SerializeField, Required] private Transform firePoint;
 
     [Header("Time Power")]
-    [SerializeField] private GameObject timeBombPrefab;
+    [SerializeField, Required] private GameObject timeBombPrefab;
     [SerializeField] private float distance;
 
     private GameObject timeBomb;

@@ -8,6 +8,8 @@ public class CharacterAnimatorManager : MonoBehaviour
     protected Animator animator;
     protected CharacterLocomotion character;
 
+    [SerializeField] private float movementAnimationDampTime = 0.2f;
+
     private int horizontal;
     private int vertical;
 
@@ -36,8 +38,8 @@ public class CharacterAnimatorManager : MonoBehaviour
 
         if (isSprinting && verticalAmount >= 0.5f) verticalAmount = 2;
 
-        animator.SetFloat(horizontal, horizontalAmount, 0.2f, Time.deltaTime);
-        animator.SetFloat(vertical, verticalAmount, 0.2f, Time.deltaTime);
+        animator.SetFloat(horizontal, horizontalAmount, movementAnimationDampTime, Time.deltaTime);
+        animator.SetFloat(vertical, verticalAmount, movementAnimationDampTime, Time.deltaTime);
     }
 
     public virtual void PlayTargetActionAnimation(
