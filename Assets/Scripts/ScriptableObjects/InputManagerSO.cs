@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 [CreateAssetMenu(menuName = "Managers/InputManager")]
 public class InputManagerSO : ScriptableObject
@@ -9,11 +11,12 @@ public class InputManagerSO : ScriptableObject
 
     public event Action<bool> OnJump;
     public event Action<Vector2> OnMove;
+    public event Action<Vector2> OnLook;
     public event Action OnSprintPressed;
     public event Action OnSprintReleased;
     public event Action OnAttack;
     public event Action OnInteract;
-    public event Action OnLockTarget;
+    public event Action<bool> OnAim;
     public event Action OnOptions;
     public event Action<Vector2> OnPowerSelect;
     public event Action OnCombatAbility;
@@ -21,6 +24,8 @@ public class InputManagerSO : ScriptableObject
 
     public event Action<Vector2> OnControlObjectXY;
     public event Action<Vector2> OnControlObjectZ;
+
+    public CursorLockMode cursorLockMode = CursorLockMode.None;
 
     private void OnEnable()
     {
@@ -30,27 +35,43 @@ public class InputManagerSO : ScriptableObject
 
             controls.PlayerMovement.Move.performed += Move;
             controls.PlayerMovement.Move.canceled += Move;
+
+            controls.PlayerCamera.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+            controls.PlayerCamera.Look.canceled += ctx => Look(Vector2.zero);
+
             controls.PlayerActions.Jump.performed += Jump;
+
             controls.PlayerActions.Sprint.performed += x => Sprint();
             controls.PlayerActions.SprintFinish.performed += x => SprintCancel();
+
             controls.Gameplay.Attack.started += Attack;
+
             controls.Gameplay.Interact.started += Interact;
-            controls.Gameplay.LockTarget.performed += LockTarget;
+
+            controls.Gameplay.Aim.performed += ctx => Aim(ctx.ReadValueAsButton());
+            controls.Gameplay.Aim.canceled += ctx => Aim(ctx.ReadValueAsButton());
+
             controls.Gameplay.Options.started += Options;
+
             controls.Gameplay.PowerSelect.started += PowerSelect;
+
             controls.Gameplay.CombatAbility.started += CombatAbility;
+
             controls.Gameplay.PuzzleAbility.started += PuzzleAbility;
         }
 
-        controls.Gameplay.Enable();
-        controls.PlayerMovement.Enable();
-        controls.PlayerActions.Enable();
+        controls.Enable();
         Debug.Log("Input ready!");
     }
 
     private void Move(InputAction.CallbackContext context)
     {
         OnMove?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    private void Look(Vector2 newLookDirection)
+    {
+        OnLook?.Invoke(newLookDirection);
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -78,9 +99,9 @@ public class InputManagerSO : ScriptableObject
         OnInteract?.Invoke();
     }
 
-    private void LockTarget(InputAction.CallbackContext context)
+    private void Aim(bool newAimState)
     {
-        OnLockTarget?.Invoke();
+        OnAim?.Invoke(newAimState);
     }
 
     private void Options(InputAction.CallbackContext context)
@@ -143,24 +164,16 @@ public class InputManagerSO : ScriptableObject
     {
         if (controls != null)
         {
-            PuzzleGravityAbilityDisabled();
-            controls.PlayerMovement.Move.performed -= Move;
-            controls.PlayerMovement.Move.canceled -= Move;
-            controls.PlayerActions.Jump.started -= Jump;
-            controls.PlayerActions.Sprint.performed -= x => Sprint();
-            controls.PlayerActions.SprintFinish.performed -= x => SprintCancel();
-            controls.Gameplay.Attack.started -= Attack;
-            controls.Gameplay.Interact.started -= Interact;
-            controls.Gameplay.LockTarget.started -= LockTarget;
-            controls.Gameplay.Options.started -= Options;
-            controls.Gameplay.PowerSelect.started -= PowerSelect;
-            controls.Gameplay.CombatAbility.started -= CombatAbility;
-            controls.Gameplay.PuzzleAbility.started -= PuzzleAbility;
-
-            controls.Gameplay.Disable();
-            controls.PlayerMovement.Disable();
-            controls.PlayerActions.Disable();
+            controls.Disable();
             Debug.Log("Input Disabled!");
+
+            //PuzzleGravityAbilityDisabled();
         }
+    }
+
+    public void SetCursorState(CursorLockMode cursorMode)
+    {
+        cursorLockMode = cursorMode;
+        Cursor.lockState = cursorLockMode;
     }
 }

@@ -3,8 +3,6 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private InputManagerSO inputManager;
     [SerializeField] private PowerType currentPowerType = PowerType.None;
     [SerializeField] private RawImage powerIcon;
 
@@ -13,6 +11,10 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Texture2D crystal;
     [SerializeField] private Texture2D time;
     [SerializeField] private Texture2D shadow;
+
+    [Header("Inputs")]
+
+    [SerializeField, Required] private InputManagerSO inputManager;
 
     // Scripts
     private PlayerLocomotion locomotion;

@@ -39,7 +39,7 @@ public class TargetLockOn : MonoBehaviour
 
     private void OnEnable()
     {
-        inputManager.OnLockTarget += ToggleTargetLock;
+        //inputManager.OnLockTarget += ToggleTargetLock;
     }
 
     private void Start()
@@ -198,7 +198,7 @@ public class TargetLockOn : MonoBehaviour
 
     private void OnDisable()
     {
-        inputManager.OnLockTarget -= ToggleTargetLock;
+        //inputManager.OnLockTarget -= ToggleTargetLock;
     }
 
     private void OnDrawGizmos()

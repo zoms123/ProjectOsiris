@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class PlayerInteractController : MonoBehaviour
 {
-    [SerializeField] private Transform point;
+    [SerializeField, Required] private Transform point;
     [SerializeField] private float radius;
 
-    [SerializeField] private InputManagerSO inputManager;
+    [Header("Inputs")]
+
+    [SerializeField, Required] private InputManagerSO inputManager;
 
     private void OnEnable()
     {
