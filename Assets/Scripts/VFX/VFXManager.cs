@@ -17,11 +17,10 @@ public class VFXManager : MonoBehaviour
     public void ExecuteVFX(GameObject prefab)
     {
         //execute = true;
-        instance = ObjectPool.GetObject(prefab);
         if (!instance)
         {
-            ObjectPool.Initialize(prefab);
-            instance = ObjectPool.GetObject(prefab);
+            ObjectPooler.Instance.CreatePool(prefab);
+            instance = ObjectPooler.Instance.Spawn(prefab);
         }
         instance.transform.parent = spawnPoint;
         instance.transform.position = spawnPoint.position;
@@ -59,7 +58,7 @@ public class VFXManager : MonoBehaviour
         {
             visualEffect.Stop();
             //execute = false;
-            ObjectPool.ReturnObject(instance);
+            ObjectPooler.Instance.Despawn(instance);
         }
     }
 }

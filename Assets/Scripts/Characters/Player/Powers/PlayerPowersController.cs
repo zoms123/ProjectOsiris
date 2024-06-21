@@ -51,7 +51,7 @@ public class PlayerPowersController : MonoBehaviour
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
     private PlayerLocomotion playerlocomotion;
-    private TargetLockOn targetLockOn;
+    private PlayerAiming playerAiming;
 
     private IAttachable attachable;
     private IInteractable interactable;
@@ -67,11 +67,11 @@ public class PlayerPowersController : MonoBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
-        targetLockOn = GetComponent<TargetLockOn>();
+        playerAiming = GetComponent<PlayerAiming>();
         playerlocomotion = playerManager.Locomotion;
         mainCameraTransform = Camera.main.transform;
 
-        ObjectPool.Initialize(throwableCrystalPrefab);
+        ObjectPooler.Instance.CreatePool(throwableCrystalPrefab, 10);
     }
 
     private void OnEnable()
@@ -201,7 +201,7 @@ public class PlayerPowersController : MonoBehaviour
 
     private void CrystalCombatAbility()
     {
-        GameObject crystalObject = ObjectPool.GetObject(throwableCrystalPrefab);
+        GameObject crystalObject = ObjectPooler.Instance.Spawn(throwableCrystalPrefab);
         if (crystalObject != null)
         {
             crystalObject.transform.position = firePoint.position;
@@ -210,28 +210,16 @@ public class PlayerPowersController : MonoBehaviour
             if (crystal != null)
             {
                 Vector3 targetDirection = firePoint.forward;
-                if (targetLockOn.CurrentTarget)
-                {
-                    targetDirection = targetLockOn.CurrentTarget.position - firePoint.position;
-                    targetDirection.Normalize();
-                    //Debug.DrawRay(firePoint.position, targetDirection * 20, Color.cyan, 5f);
-                }
+                //if (playerAiming.CurrentTarget)
+                //{
+                //    targetDirection = playerAiming.CurrentTarget.position - firePoint.position;
+                //    targetDirection.Normalize();
+                //    //Debug.DrawRay(firePoint.position, targetDirection * 20, Color.cyan, 5f);
+                //}
                 crystal.Initialize(targetDirection, tag);
             }
         }
     }
-
-    //private void CrystalCombatAbility()
-    //{
-    //    Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
-    //    GameObject throwableCrystal = Instantiate(throwableCrystalPrefab, firePoint.position, Quaternion.identity);
-    //    Vector3 direction = transform.forward;
-    //    if (currentTarget != null)
-    //    {
-    //        direction = currentTarget.position - transform.position;
-    //    }
-    //    throwableCrystal.GetComponent<ThrowableCrystal>().Move(direction);
-    //}
 
     private void TimeCombatAbility()
     {

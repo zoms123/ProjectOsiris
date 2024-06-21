@@ -1238,10 +1238,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 323024503158636921, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
-      propertyPath: defaultCameraSensitivity
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8435563724770440047, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1289,8 +1285,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8435563724770440047, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 2389581555556494190}
   m_SourcePrefab: {fileID: 100100000, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
+--- !u!1 &2389581555556494189 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8435563724770440047, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
+  m_PrefabInstance: {fileID: 2389581555556494188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2389581555556494190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389581555556494189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169a307339c42924e80c4b36b08adfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 919132149155446097, guid: a0277783bb110a841984e03c9549dc2f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

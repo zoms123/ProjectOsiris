@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrowableRock : DistanceAttack
 {
-    protected override void PerformAction()
+    protected override void PerformAttack()
     {
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
@@ -14,7 +14,14 @@ public class ThrowableRock : DistanceAttack
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit " + other.name);
-            ReturnToPool();
+            DestroySelf();
         }
+    }
+
+    protected override void DestroySelf()
+    {
+        // reduce crystal lifetime and return it to the pool when its time reaches zero
+        lifetime -= Time.deltaTime;
+        if (lifetime < 0.0f) ObjectPooler.Instance.Despawn(gameObject);
     }
 }

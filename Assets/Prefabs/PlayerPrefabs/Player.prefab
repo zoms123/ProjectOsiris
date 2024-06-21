@@ -4078,11 +4078,13 @@ MonoBehaviour:
   aimTargetSmoothSpeed: 20
   playerRotationSpeed: 20
   aimLookAtTransform: {fileID: 355342698100423347}
-  defaultCameraSensitivity: 1
+  defaultCameraSensitivity: 1.5
   aimCameraSensitivity: 0.8
   aimTransitionSpeed: 10
   bodyRig: {fileID: 4529847418701170117}
+  playerCamera: {fileID: 4417174087259398715}
   cameraFollowTransform: {fileID: 3812577715058646944}
+  aimFOV: 40
   cameraTopClamp: 70
   cameraBottomClamp: -30
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
