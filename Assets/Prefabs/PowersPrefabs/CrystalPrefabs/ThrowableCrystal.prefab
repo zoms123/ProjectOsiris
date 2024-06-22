@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3670407754151397931}
   - component: {fileID: 1956026166754960175}
   - component: {fileID: 7735599083659851933}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ThrowableCrystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   lifetime: 5
+  debugHit: {fileID: 7023676373501165629, guid: 08e1ba70e7d4c8645874c0d915f56942, type: 3}
 --- !u!114 &3871728617291045269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -293,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1279060d66d6d734ea7d8fca3b6b5c07, type: 3}
       propertyPath: m_Name
-      value: Crystal
+      value: Mesh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

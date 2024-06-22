@@ -1468,7 +1468,7 @@ GameObject:
   m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1481,7 +1481,7 @@ Transform:
   m_GameObject: {fileID: 3114631942865360374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1640,7 +1640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2769462720097248474}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttachPoint
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -3317,7 +3317,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58fd20d309a18744dbf8f28c79ad948d, type: 2}
+  - {fileID: 2100000, guid: 03407b277305ecc4784468984388d00d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4072,17 +4072,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e286e7a1e5f618744adbcb9d887edf6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimLookAtTransform: {fileID: 355342698100423347}
   aimingMask:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 4929
   aimTargetSmoothSpeed: 20
   playerRotationSpeed: 20
-  aimLookAtTransform: {fileID: 355342698100423347}
-  defaultCameraSensitivity: 1
-  aimCameraSensitivity: 0.8
   aimTransitionSpeed: 10
   bodyRig: {fileID: 4529847418701170117}
+  playerCamera: {fileID: 4417174087259398715}
   cameraFollowTransform: {fileID: 3812577715058646944}
+  defaultCameraSensitivity: 1.5
+  aimCameraSensitivity: 0.8
+  aimFOV: 40
   cameraTopClamp: 70
   cameraBottomClamp: -30
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
@@ -4189,13 +4191,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.95
-  m_Radius: 0.33
+  m_Height: 1.8
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.03, z: 0}
+  m_MinMoveDistance: 0.00001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!54 &5888231448538333888
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4272,7 +4274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  overlapSphereStartPoint: {fileID: 5793742140711181477}
+  overlapSphereStartPointTransform: {fileID: 5793742140711181477}
   offsetDirection: {x: 0, y: -1, z: 0}
   offsetValue: 1
   overlapSphereRadius: 0.2
@@ -4282,10 +4284,10 @@ MonoBehaviour:
   shadowCombatAbilityCooldown: 0
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   zeroGravityZoneOffset: 0
-  attachPoint: {fileID: 2769462720097248474}
+  attachPointTransform: {fileID: 2769462720097248474}
   controlMovementSpeed: 0
   throwableCrystalPrefab: {fileID: 5169130777888166953, guid: 3a2d0e1df8b99b8478419b825edfb430, type: 3}
-  firePoint: {fileID: 4433904396964856846}
+  firePointTransform: {fileID: 4433904396964856846}
   timeBombPrefab: {fileID: 3744133877081091469, guid: 960fadffe0ff04c4498e78232c6c5519, type: 3}
   distance: 0
 --- !u!95 &3125200892653269630

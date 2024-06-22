@@ -102,11 +102,9 @@ public class PlayerLocomotion : CharacterLocomotion
         // If it is strafing, pass the horizontal movement as well (cannot run)
         if (isStrafing)
         {
-            Debug.Log($"Input direction: {inputDirection}");
             // Calculate relative movement direction when strafing
             Vector3 localMoveDirection = transform.InverseTransformDirection(moveDirection);
             playerAnimatorManager.UpdateAnimatorMovementParameters(localMoveDirection.x, localMoveDirection.z, false);
-            //playerAnimatorManager.UpdateAnimatorMovementParameters(inputDirection.x, moveDirection.z, false);
         }
         // If it is not strafing, only use the move amount (can run)
         else

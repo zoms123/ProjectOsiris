@@ -8,16 +8,13 @@ public class PlayerAiming : MonoBehaviour
 {
     [Header("Aim Settings")]
 
+    [SerializeField, Required] private Transform aimLookAtTransform;
     [SerializeField] private LayerMask aimingMask;
     [SerializeField] private float aimTargetSmoothSpeed = 20;
     [SerializeField] private float playerRotationSpeed = 20;
-    [SerializeField, Required] private Transform aimLookAtTransform;
     private bool isAiming = false;
     private Vector2 lookInput;
 
-    [SerializeField] private float defaultCameraSensitivity = 1.0f;
-    [SerializeField] private float aimCameraSensitivity = 0.5f;
-    private float cameraSensitivity;
 
     // Animation settings
     [SerializeField] private float aimTransitionSpeed = 5f;
@@ -27,7 +24,14 @@ public class PlayerAiming : MonoBehaviour
 
     [Header("Camera Settings")]
 
+    [SerializeField, Required] private CinemachineVirtualCamera playerCamera;
     [SerializeField, Required] private Transform cameraFollowTransform;
+    [SerializeField] private float defaultCameraSensitivity = 1.0f;
+    [SerializeField] private float aimCameraSensitivity = 0.5f;
+    [SerializeField] private float aimFOV = 50.0f;
+    private float cameraSensitivity;
+    private float defaultFOV;
+    private float currentCameraFOV;
 
     [Tooltip("How far in degrees you can move the camera up")]
     [SerializeField] private float cameraTopClamp = 70.0f;
@@ -61,26 +65,36 @@ public class PlayerAiming : MonoBehaviour
     {
         Cursor.visible = false;
         inputManager.SetCursorState(CursorLockMode.Locked);
+
+        defaultFOV = playerCamera.m_Lens.FieldOfView;
+        currentCameraFOV = defaultFOV;
         cameraSensitivity = defaultCameraSensitivity;
+
         bodyRig.weight = 0f;
     }
 
     private void Update()
     {
+        // apply upper body layer and body rig weights
         aimLayerWeight = Mathf.Lerp(aimLayerWeight, aimLayerTargetWeight, Time.deltaTime * aimTransitionSpeed);
         bodyRig.weight = Mathf.Lerp(aimLayerWeight, aimLayerTargetWeight, Time.deltaTime * aimTransitionSpeed);
         animator.SetLayerWeight(1, aimLayerWeight);
 
+        // camera field of view transition
+        playerCamera.m_Lens.FieldOfView = Mathf.Lerp(playerCamera.m_Lens.FieldOfView, currentCameraFOV, Time.deltaTime * aimTransitionSpeed);
+
         HandleAimPosition();
 
-        if (isAiming)
-        {
-            Vector3 worldAimTarget = aimLookAtTransform.position;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+        if (isAiming) RotatePlayerTowardsAimDirection();
+    }
 
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * playerRotationSpeed);
-        }
+    private void RotatePlayerTowardsAimDirection()
+    {
+        Vector3 worldAimTarget = aimLookAtTransform.position;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * playerRotationSpeed);
     }
 
     private void LateUpdate()
@@ -108,6 +122,7 @@ public class PlayerAiming : MonoBehaviour
     private void HandleAim(bool isAiming)
     {
         this.isAiming = isAiming;
+        currentCameraFOV = isAiming ? aimFOV : defaultFOV;
         aimLayerTargetWeight = isAiming ? 1f : 0f;
         cameraSensitivity = isAiming ? aimCameraSensitivity : defaultCameraSensitivity;
         character.isStrafing = isAiming;
@@ -115,14 +130,20 @@ public class PlayerAiming : MonoBehaviour
 
     private void HandleAimPosition()
     {
-        aimLookAtTransform.position = Vector3.Lerp(aimLookAtTransform.position, GetAimPosition(), Time.deltaTime * aimTargetSmoothSpeed);
+        Vector3 targetPosition = GetAimPosition();
+
+        // make sure the position obtained is valid before assigning it
+        if (targetPosition != Vector3.zero && targetPosition != Vector3.positiveInfinity && targetPosition != Vector3.negativeInfinity)
+        {
+            aimLookAtTransform.position = Vector3.Lerp(aimLookAtTransform.position, targetPosition, Time.deltaTime * aimTargetSmoothSpeed);
+        }
     }
 
-    private Vector3 GetAimPosition()
+    public Vector3 GetAimPosition()
     {
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+        Vector2 screenCenterPoint = new(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimingMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, aimingMask))
         {
             Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
             return hit.point;
@@ -130,7 +151,7 @@ public class PlayerAiming : MonoBehaviour
         else
         {
             Debug.DrawRay(ray.origin, ray.direction * float.MaxValue, Color.red);
-            return Vector3.zero;
+            return ray.origin + ray.direction * 1000f;
         }
     }
 

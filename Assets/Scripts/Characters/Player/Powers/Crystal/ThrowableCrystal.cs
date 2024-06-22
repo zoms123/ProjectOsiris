@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class ThrowableCrystal : DistanceAttack
 {
-
-
-    protected override void PerformAction()
+    // called on Update if initialized
+    protected override void PerformAttack()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        // move in the firing direction
+        transform.Translate(speed * Time.deltaTime * direction, Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Hit " + other.name);
-            ReturnToPool();
+            Debug.Log($"Hit {other.name}");
+            ObjectPooler.Instance.Despawn(gameObject);
+        }
+        else // hit other object
+        {
+            Debug.Log($"Hit {other.name}");
+            ObjectPooler.Instance.Despawn(gameObject);
         }
     }
 }

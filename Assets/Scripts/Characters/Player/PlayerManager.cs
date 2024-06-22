@@ -17,22 +17,25 @@ public class PlayerManager : MonoBehaviour
     [SerializeField, Required] private InputManagerSO inputManager;
 
     // Scripts
-    private PlayerLocomotion locomotion;
+    private PlayerLocomotion playerlocomotion;
+    private PlayerAiming playerAiming;
     private BasicCombat basicCombat;
 
     public PowerType CurrentPowerType { get { return currentPowerType; } }
-    public PlayerLocomotion Locomotion { get { return locomotion; } }
+    public PlayerLocomotion Locomotion { get { return playerlocomotion; } }
+    public PlayerAiming Aiming { get { return playerAiming; } }
 
     protected void Awake()
     {
-        locomotion = GetComponent<PlayerLocomotion>();
+        playerlocomotion = GetComponent<PlayerLocomotion>();
+        playerAiming = GetComponent<PlayerAiming>();
         basicCombat = GetComponent<BasicCombat>();
     }
 
     private void Update()
     {
         // Handle movement
-        locomotion.HandleAllMovement();
+        playerlocomotion.HandleAllMovement();
     }
 
     private void OnEnable()
@@ -73,7 +76,7 @@ public class PlayerManager : MonoBehaviour
 
     private void ExecuteAttack()
     {
-        if (locomotion.isGrounded)
+        if (playerlocomotion.isGrounded)
         {
             basicCombat.Attack();
         }

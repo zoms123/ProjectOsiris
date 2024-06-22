@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThrowableRock : DistanceAttack
 {
-    protected override void PerformAction()
+    protected override void PerformAttack()
     {
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
@@ -14,7 +14,7 @@ public class ThrowableRock : DistanceAttack
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit " + other.name);
-            ReturnToPool();
+            ObjectPooler.Instance.Despawn(gameObject);
         }
     }
 }

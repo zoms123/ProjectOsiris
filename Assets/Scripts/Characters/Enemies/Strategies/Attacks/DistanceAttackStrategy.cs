@@ -14,13 +14,13 @@ public class DistanceAttackStrategy<T> : IAttackStrategy where T : MonoBehaviour
         this.ownerTransform = ownerTransform;
         this.attackPrefab = attackPrefab;
         this.attackPoint = attackPoint;
-        ObjectPool.Initialize(attackPrefab);
+        ObjectPooler.Instance.CreatePool(attackPrefab, 5);
     }
 
     public void Execute()
     {
         Debug.Log("prefab " + attackPrefab);
-        GameObject attackObject = ObjectPool.GetObject(attackPrefab);
+        GameObject attackObject = ObjectPooler.Instance.Spawn(attackPrefab);
         Debug.Log("attackObject " + attackObject);
         if (attackObject != null)
         {

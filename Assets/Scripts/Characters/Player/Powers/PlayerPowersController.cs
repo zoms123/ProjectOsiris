@@ -1,9 +1,6 @@
 using System;
 using System.Linq;
-using System.Threading;
-using TMPro;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerPowersController : MonoBehaviour
 {
@@ -11,7 +8,7 @@ public class PlayerPowersController : MonoBehaviour
     [SerializeField, Required] private InputManagerSO inputManager;
 
     [Header("Overlap")]
-    [SerializeField, Required] private Transform overlapSphereStartPoint;
+    [SerializeField, Required] private Transform overlapSphereStartPointTransform;
     [SerializeField] private Vector3 offsetDirection = Vector3.up;
     [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
@@ -30,9 +27,9 @@ public class PlayerPowersController : MonoBehaviour
     [Header("Gravity Power")]
     [SerializeField, Required] GameObject zeroGravityZonePrefab;
     [SerializeField] float zeroGravityZoneOffset;
-    [SerializeField, Required] Transform attachPoint;
+    [SerializeField, Required] Transform attachPointTransform;
     [SerializeField] private float controlMovementSpeed;
-    
+
     private bool liftingObjectWithGravity;
     private float inputDirectionY;
     private float inputDirectionZ;
@@ -40,7 +37,7 @@ public class PlayerPowersController : MonoBehaviour
 
     [Header("Crystal Power")]
     [SerializeField, Required] private GameObject throwableCrystalPrefab;
-    [SerializeField, Required] private Transform firePoint;
+    [SerializeField, Required] private Transform firePointTransform;
 
     [Header("Time Power")]
     [SerializeField, Required] private GameObject timeBombPrefab;
@@ -51,8 +48,6 @@ public class PlayerPowersController : MonoBehaviour
 
     private GameObject zeroGravityZone;
     private PlayerManager playerManager;
-    private PlayerLocomotion playerlocomotion;
-    private TargetLockOn targetLockOn;
 
     private IAttachable attachable;
     private IInteractable interactable;
@@ -63,16 +58,12 @@ public class PlayerPowersController : MonoBehaviour
     protected void Awake()
     {
         mainCameraTransform = Camera.main.transform;
+        playerManager = GetComponent<PlayerManager>();
     }
 
     private void Start()
     {
-        playerManager = GetComponent<PlayerManager>();
-        targetLockOn = GetComponent<TargetLockOn>();
-        playerlocomotion = playerManager.Locomotion;
-        mainCameraTransform = Camera.main.transform;
-
-        ObjectPool.Initialize(throwableCrystalPrefab);
+        ObjectPooler.Instance.CreatePool(throwableCrystalPrefab, 10);
     }
 
     private void OnEnable()
@@ -89,7 +80,7 @@ public class PlayerPowersController : MonoBehaviour
 
     private void Update()
     {
-        overlapSphereEndPoint = overlapSphereStartPoint.position + offsetDirection * offsetValue;
+        overlapSphereEndPoint = overlapSphereStartPointTransform.position + offsetDirection * offsetValue;
 
         gravityWaitTime -= Time.deltaTime;
         crystalWaitTime -= Time.deltaTime;
@@ -117,7 +108,7 @@ public class PlayerPowersController : MonoBehaviour
 
         else if (targetLocalPosition.z > 4.5f)
             movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, 4.5f));
-
+            
         else
             targetRigidbody.AddForce(GetMoveDirection() * controlMovementSpeed, ForceMode.Impulse);
     }
@@ -147,7 +138,7 @@ public class PlayerPowersController : MonoBehaviour
                     GravityCombatAbility();
                     gravityWaitTime = gravityCombatAbilityCooldown;
                 }
-                    
+
                 break;
 
             case PowerType.Crystal:
@@ -181,16 +172,16 @@ public class PlayerPowersController : MonoBehaviour
 
     private void GravityCombatAbility()
     {
-        Transform targetTransform = GetComponent<TargetLockOn>().CurrentTarget;
-        if(targetTransform != null)
+        Vector3 aimPosition = playerManager.Aiming.GetAimPosition();
+        if (aimPosition != Vector3.zero && aimPosition != Vector3.positiveInfinity && aimPosition != Vector3.negativeInfinity)
         {
             if (!zeroGravityZone)
             {
-                zeroGravityZone = Instantiate(zeroGravityZonePrefab, targetTransform.position, Quaternion.identity);
+                zeroGravityZone = Instantiate(zeroGravityZonePrefab, aimPosition, Quaternion.identity);
             }
             else if (zeroGravityZone && !zeroGravityZone.activeSelf)
             {
-                zeroGravityZone.transform.position = targetTransform.position;
+                zeroGravityZone.transform.position = aimPosition;
                 zeroGravityZone.SetActive(true);
             }
             else
@@ -202,44 +193,34 @@ public class PlayerPowersController : MonoBehaviour
 
     private void CrystalCombatAbility()
     {
-        GameObject crystalObject = ObjectPool.GetObject(throwableCrystalPrefab);
-        if (crystalObject != null)
+        GameObject crystalObject = ObjectPooler.Instance.Spawn(throwableCrystalPrefab, firePointTransform.transform.position, Quaternion.identity);
+        if (crystalObject != null && crystalObject.TryGetComponent<ThrowableCrystal>(out var crystal))
         {
-            crystalObject.transform.position = firePoint.position;
-            crystalObject.transform.rotation = firePoint.rotation;
-            ThrowableCrystal crystal = crystalObject.GetComponent<ThrowableCrystal>();
-            if (crystal != null)
+            Vector3 aimPosition = playerManager.Aiming.GetAimPosition();
+            if (aimPosition != Vector3.zero && aimPosition != Vector3.positiveInfinity && aimPosition != Vector3.negativeInfinity)
             {
-                Vector3 targetDirection = firePoint.forward;
-                if (targetLockOn.CurrentTarget)
-                {
-                    targetDirection = targetLockOn.CurrentTarget.position - firePoint.position;
-                    targetDirection.Normalize();
-                    //Debug.DrawRay(firePoint.position, targetDirection * 20, Color.cyan, 5f);
-                }
+                Vector3 targetDirection = (aimPosition - firePointTransform.position).normalized;
+                Debug.DrawRay(firePointTransform.position, targetDirection, Color.blue);
                 crystal.Initialize(targetDirection, tag);
             }
+            else
+            {
+                Debug.LogError("Invalid aim position");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to spawn or get ThrowableCrystal component.");
         }
     }
 
-    //private void CrystalCombatAbility()
-    //{
-    //    Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
-    //    GameObject throwableCrystal = Instantiate(throwableCrystalPrefab, firePoint.position, Quaternion.identity);
-    //    Vector3 direction = transform.forward;
-    //    if (currentTarget != null)
-    //    {
-    //        direction = currentTarget.position - transform.position;
-    //    }
-    //    throwableCrystal.GetComponent<ThrowableCrystal>().Move(direction);
-    //}
-
     private void TimeCombatAbility()
     {
-        Transform currentTarget = GetComponent<TargetLockOn>().CurrentTarget;
-
-        if (currentTarget != null)
-            UseTimeBomb(currentTarget.position);
+        Vector3 aimPosition = playerManager.Aiming.GetAimPosition();
+        if (aimPosition != Vector3.zero && aimPosition != Vector3.positiveInfinity && aimPosition != Vector3.negativeInfinity)
+        {
+            UseTimeBomb(aimPosition);
+        }
         else
         {
             Vector3 forward = mainCameraTransform.forward;
@@ -276,9 +257,9 @@ public class PlayerPowersController : MonoBehaviour
 
     private void PuzzleAbility()
     {
-        if(interactable == null)
+        if (interactable == null)
         {
-            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPoint.position, overlapSphereEndPoint, overlapSphereRadius);
+            Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPointTransform.position, overlapSphereEndPoint, overlapSphereRadius);
             foreach (Collider collider in collidersTouched)
             {
                 interactable = collider.GetComponent<IInteractable>();
@@ -287,33 +268,33 @@ public class PlayerPowersController : MonoBehaviour
                 losableObjet = collider.GetComponent<ILosableObject>();
                 if (interactable != null && interactable.CanInteract(playerManager.CurrentPowerType))
                 {
-                    ChangeAttachableParent(attachPoint);
-                    if(losableObjet != null)
+                    ChangeAttachableParent(attachPointTransform);
+                    if (losableObjet != null)
                         losableObjet.OnLoseObject += OnInteractableLost;
                     interactable.Interact();
-                    if(attachable == null)
+                    if (attachable == null)
                     {
                         interactable = null;
                     }
                     else if (movable != null)
                     {
-                        playerlocomotion.lockRotation = true;
+                        playerManager.Locomotion.lockRotation = true;
                         inputManager.PuzzleGravityAbilityEnabled();
                         inputManager.OnControlObjectXY += ControlObjectXY;
                         inputManager.OnControlObjectZ += ControlObjectZ;
                         targetRigidbody = movable.GetRigidbody();
                         liftingObjectWithGravity = true;
                     }
-                        
+
                     break;
                 }
             }
-        } 
+        }
         else if (interactable.CanInteract(playerManager.CurrentPowerType))
         {
             OnInteractableLost();
         }
-        
+
     }
 
     private void ControlObjectXY(Vector2 direction)
@@ -340,7 +321,7 @@ public class PlayerPowersController : MonoBehaviour
 
         if (movable != null)
         {
-            playerlocomotion.lockRotation = false;
+            playerManager.Locomotion.lockRotation = false;
             inputManager.PuzzleGravityAbilityDisabled();
             inputManager.OnControlObjectXY -= ControlObjectXY;
             inputManager.OnControlObjectZ -= ControlObjectZ;
@@ -366,7 +347,7 @@ public class PlayerPowersController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(overlapSphereStartPoint.position, overlapSphereRadius);
+        Gizmos.DrawWireSphere(overlapSphereStartPointTransform.position, overlapSphereRadius);
     }
     #endregion
 }
