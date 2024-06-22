@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -86,7 +87,7 @@ public class PlayerPowersController : MonoBehaviour
         timeWaitTime -= Time.deltaTime;
         shadowWaitTime -= Time.deltaTime;
 
-        if (liftingObjectWithGravity)
+        if (liftingObjectWithGravity && attachable.Attached)
             LiftingObjectWithGravityMovement();
     }
 
@@ -96,20 +97,20 @@ public class PlayerPowersController : MonoBehaviour
         Vector3 targetPosition = movable.GetPosition();
         Vector3 targetLocalPosition = movable.GetLocalPosition();
 
-        if (Vector3.Distance(targetPosition, attachPointTransform.transform.position) < 4.5f
-            && targetPosition.y >= attachPointTransform.transform.position.y
-            && targetLocalPosition.z >= -1f)
-            targetRigidbody.AddForce(GetMoveDirection() * controlMovementSpeed, ForceMode.Impulse);
+        if (targetPosition.y < attachPoint.transform.position.y)
+            movable.SetPosition(new Vector3(targetPosition.x, attachPoint.transform.position.y, targetPosition.z));
 
-        else if (targetPosition.y < attachPointTransform.transform.position.y)
-            targetRigidbody.AddForce(Vector3.up * 2f, ForceMode.Impulse);
+        else if (targetLocalPosition.z < -1f)
+            movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, -1));
 
+        else if (targetPosition.y > attachPoint.transform.position.y + 4.5f)
+            movable.SetPosition(new Vector3(targetPosition.x, attachPoint.transform.position.y + 4.5f, targetPosition.z));
+
+        else if (targetLocalPosition.z > 4.5f)
+            movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, 4.5f));
+            
         else
-        {
-            Vector3 direction = (attachPointTransform.transform.position - targetPosition).normalized;
-            targetRigidbody.AddForce(direction * 2f, ForceMode.Impulse);
-        }
-
+            targetRigidbody.AddForce(GetMoveDirection() * controlMovementSpeed, ForceMode.Impulse);
     }
 
     public Vector3 GetMoveDirection()
@@ -303,7 +304,10 @@ public class PlayerPowersController : MonoBehaviour
 
     private void ControlObjectZ(Vector2 direction)
     {
-        inputDirectionZ = direction[1];
+        if (Math.Abs(direction[1]) > 0.7)
+            inputDirectionZ = direction[1];
+        else
+            inputDirectionZ = 0f;
     }
 
     private void OnInteractableLost()
