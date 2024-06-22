@@ -19,7 +19,7 @@ public class LifeSystem : MonoBehaviour
                 lowLifeImage.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
-        else if (tag == "Player" && health <= 20)
+        else if (CompareTag("Player") && health <= 20)
         {
             lowLifeImage.gameObject.SetActive(true);
         }

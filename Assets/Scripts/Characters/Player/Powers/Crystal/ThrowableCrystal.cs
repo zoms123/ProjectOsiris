@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThrowableCrystal : DistanceAttack
 {
+    // called on Update if initialized
     protected override void PerformAttack()
     {
         // move in the firing direction
@@ -14,15 +15,13 @@ public class ThrowableCrystal : DistanceAttack
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Hit " + other.name);
-            DestroySelf();
+            Debug.Log($"Hit {other.name}");
+            ObjectPooler.Instance.Despawn(gameObject);
         }
-    }
-
-    protected override void DestroySelf()
-    {
-        // reduce crystal lifetime and return it to the pool when its time reaches zero
-        lifetime -= Time.deltaTime;
-        if (lifetime < 0.0f) ObjectPooler.Instance.Despawn(gameObject);
+        else // hit other object
+        {
+            Debug.Log($"Hit {other.name}");
+            ObjectPooler.Instance.Despawn(gameObject);
+        }
     }
 }

@@ -14,14 +14,7 @@ public class ThrowableRock : DistanceAttack
         if (other.CompareTag("Player"))
         {
             Debug.Log("Hit " + other.name);
-            DestroySelf();
+            ObjectPooler.Instance.Despawn(gameObject);
         }
-    }
-
-    protected override void DestroySelf()
-    {
-        // reduce crystal lifetime and return it to the pool when its time reaches zero
-        lifetime -= Time.deltaTime;
-        if (lifetime < 0.0f) ObjectPooler.Instance.Despawn(gameObject);
     }
 }

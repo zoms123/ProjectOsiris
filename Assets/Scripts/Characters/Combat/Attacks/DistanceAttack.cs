@@ -27,6 +27,4 @@ public abstract class DistanceAttack : MonoBehaviour , IDistanceAttack
     }
 
     protected abstract void PerformAttack();
-
-    protected abstract void DestroySelf();
 }

@@ -139,11 +139,11 @@ public class PlayerAiming : MonoBehaviour
         }
     }
 
-    private Vector3 GetAimPosition()
+    public Vector3 GetAimPosition()
     {
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2, Screen.height / 2);
+        Vector2 screenCenterPoint = new(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimingMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, aimingMask))
         {
             Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.green);
             return hit.point;
@@ -151,7 +151,7 @@ public class PlayerAiming : MonoBehaviour
         else
         {
             Debug.DrawRay(ray.origin, ray.direction * float.MaxValue, Color.red);
-            return ray.origin + ray.direction * float.MaxValue;
+            return ray.origin + ray.direction * 1000f;
         }
     }
 
