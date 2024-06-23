@@ -16,6 +16,7 @@ public abstract class DistanceAttack : MonoBehaviour , IDistanceAttack
         initialized = true;
         this.direction = direction;
         this.ownerTag = ownerTag;
+        ObjectPooler.Instance.Despawn(gameObject, lifetime);
     }
 
     protected void Update()
