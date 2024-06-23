@@ -16,20 +16,18 @@ public class BasicCrystalAttackStrategy<T> : IAttackStrategy where T : MonoBehav
         this.attackPrefab = attackPrefab;
         this.playerDetector = playerDetector;
         this.playerTransform = playerDetector.Player;
-        ObjectPool.Initialize(attackPrefab);
+        ObjectPooler.Instance.CreatePool(attackPrefab);
     }
 
     public void Execute()
     {
         Debug.Log("prefab " + attackPrefab);
-        GameObject attackObject = ObjectPool.GetObject(attackPrefab);
+        GameObject attackObject = ObjectPooler.Instance.Spawn(attackPrefab, playerTransform.position, playerTransform.rotation);
         attackObject.SetActive(false);
         Debug.Log("attackObject " + attackObject);
         if (attackObject != null)
         {
             Debug.Log(playerTransform);
-            attackObject.transform.position = playerTransform.position;
-            attackObject.transform.rotation = playerTransform.rotation;
             T attack = attackObject.GetComponent<T>();
             (attack as ITrapAttack).Initialize(ownerTransform.tag);
         }

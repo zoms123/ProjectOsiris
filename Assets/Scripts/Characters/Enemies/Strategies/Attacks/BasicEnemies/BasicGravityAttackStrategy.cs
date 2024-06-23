@@ -14,18 +14,16 @@ public class BasicGravityAttackStrategy<T> : IAttackStrategy where T : MonoBehav
         this.ownerTransform = ownerTransform;
         this.attackPrefab = attackPrefab;
         this.attackPoint = attackPoint;
-        ObjectPool.Initialize(attackPrefab);
+        ObjectPooler.Instance.CreatePool(attackPrefab);
     }
 
     public void Execute()
     {
         Debug.Log("prefab " + attackPrefab);
-        GameObject attackObject = ObjectPool.GetObject(attackPrefab);
+        GameObject attackObject = ObjectPooler.Instance.Spawn(attackPrefab, attackPoint.position, attackPoint.rotation);
         Debug.Log("attackObject " + attackObject);
         if (attackObject != null)
         {
-            attackObject.transform.position = attackPoint.position;
-            attackObject.transform.rotation = attackPoint.rotation;
             T attack = attackObject.GetComponent<T>();
             if (attack != null)
             {

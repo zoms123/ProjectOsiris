@@ -26,7 +26,7 @@ public class CrystalTrap : MonoBehaviour, ITrapAttack
 
     protected void ReturnToPool()
     {
-        ObjectPool.ReturnObject(gameObject);
+        ObjectPooler.Instance.Despawn(gameObject);
         initialized = false;
     }
 
