@@ -199,7 +199,11 @@ public class PlayerPowersController : MonoBehaviour
             if (aimPosition != Vector3.zero && aimPosition != Vector3.positiveInfinity && aimPosition != Vector3.negativeInfinity)
             {
                 Vector3 targetDirection = (aimPosition - firePointTransform.position).normalized;
-                Debug.DrawRay(firePointTransform.position, targetDirection, Color.blue);
+
+                // set crystal rotation in the firing direction
+                Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
+                crystalObject.transform.rotation = lookRotation;
+
                 crystal.Initialize(targetDirection, tag);
             }
             else
