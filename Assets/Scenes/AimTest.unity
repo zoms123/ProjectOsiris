@@ -1135,6 +1135,10 @@ PrefabInstance:
       propertyPath: powerIcon
       value: 
       objectReference: {fileID: 314415865}
+    - target: {fileID: 323024503158636921, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
+      propertyPath: aimCameraSensitivity
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3120136768088184493, guid: ace99d935cdfe464295ed4eba411299c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1208,6 +1212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5176086451911943837, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5607285740452671755, guid: ac3f58cfc064cd34585126c19e994bb0, type: 3}
       propertyPath: m_Name
       value: Canvas
