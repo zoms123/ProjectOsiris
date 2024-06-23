@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerPowersController : MonoBehaviour
@@ -97,14 +96,14 @@ public class PlayerPowersController : MonoBehaviour
         Vector3 targetPosition = movable.GetPosition();
         Vector3 targetLocalPosition = movable.GetLocalPosition();
 
-        if (targetPosition.y < attachPoint.transform.position.y)
-            movable.SetPosition(new Vector3(targetPosition.x, attachPoint.transform.position.y, targetPosition.z));
+        if (targetPosition.y < attachPointTransform.position.y)
+            movable.SetPosition(new Vector3(targetPosition.x, attachPointTransform.position.y, targetPosition.z));
 
         else if (targetLocalPosition.z < -1f)
             movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, -1));
 
-        else if (targetPosition.y > attachPoint.transform.position.y + 4.5f)
-            movable.SetPosition(new Vector3(targetPosition.x, attachPoint.transform.position.y + 4.5f, targetPosition.z));
+        else if (targetPosition.y > attachPointTransform.position.y + 4.5f)
+            movable.SetPosition(new Vector3(targetPosition.x, attachPointTransform.position.y + 4.5f, targetPosition.z));
 
         else if (targetLocalPosition.z > 4.5f)
             movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, 4.5f));
