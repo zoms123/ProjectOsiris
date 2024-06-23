@@ -29,16 +29,24 @@ public class BasicCombat : MonoBehaviour
         {
             switch (attackType)
             {
-                case EAttackType.MELE: 
-                    {
-                        attackStrategy = new MeleAttackStrategy(attackDamage, playerDetector);
-                        break;
-                    }
-                case EAttackType.DISTANCE:
-                    {
-                        attackStrategy = new DistanceAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, attackPoint);
-                        break;
-                    }
+                case EAttackType.GRAVITY_BASIC:
+                    attackStrategy = new BasicGravityAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, attackPoint);
+                    break;
+
+                case EAttackType.CRYSTAL_BASIC:
+                    attackStrategy = new BasicCrystalAttackStrategy<CrystalTrap>(transform, animator, attackPrefab, playerDetector);
+                    break;
+
+                case EAttackType.TIME_BASIC:
+                    attackStrategy = new BasicTimeAttackStrategy<ThrowableRock>();
+                    break;
+
+                case EAttackType.SHADOW_BASIC:
+                    attackStrategy = new BasicShadowAttackStrategy<ThrowableRock>();
+                    break;
+
+                default:
+                    break;
             }
         }
             
