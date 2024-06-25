@@ -30,7 +30,7 @@ public class EnemyBase : MonoBehaviour
         zeroGravityEffector = GetComponent<ZeroGravityEffector>();
         animator = GetComponentInChildren<Animator>();
         //declare states
-        var attackState = new EnemyAttackState(this, animator, agent);
+        var attackState = new EnemyAttackState(this, animator, agent, playerDetector);
         var patrolState = new EnemyPatrolState(
             this,
             animator,

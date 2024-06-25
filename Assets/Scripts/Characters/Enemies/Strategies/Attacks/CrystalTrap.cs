@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class CrystalTrap : MonoBehaviour, ITrapAttack
+public class CrystalTrap : DistanceAttack
 {
-    [SerializeField] private float lifetime;
-    private bool initialized;
-    private string ownerTag;
+    [SerializeField] private GameObject attackPrefab;
+    private float startTime;
+    private bool isMoving;
+    private Vector3 startPosition;
+    private float journeyLength;
+    private VisualEffect visualEffect;
+    private GameObject instantiatedAttack;
 
-    public string OwnerTag { get { return ownerTag; } }
-
-    public void Initialize(string ownerTag)
+    public override void Initialize(Vector3 direction, string ownerTag, Transform spawnpoint = default)
     {
-        initialized = true;
-        this.ownerTag = ownerTag;
-        StartCoroutine(ActiveTrap());
-        Invoke("ReturnToPool", lifetime);
-    }
-
-    private IEnumerator ActiveTrap()
-    {
-        yield return new WaitForSeconds(lifetime/2);
-        gameObject.SetActive(true);
+        base.Initialize(direction, ownerTag);
+        ObjectPooler.Instance.CreatePool(attackPrefab);
+        startTime = Time.time;
+        startPosition = transform.position;
+        journeyLength = Vector3.Distance(startPosition, direction);
+        isMoving = true;
+        visualEffect = GetComponentInChildren<VisualEffect>();
+        visualEffect.SetFloat("lifeTime", (journeyLength / speed));
+        visualEffect.Play();
     }
 
     protected void ReturnToPool()
     {
-        ObjectPooler.Instance.Despawn(gameObject);
         initialized = false;
+        visualEffect.Stop();
+        ObjectPooler.Instance.Despawn(instantiatedAttack);
+        ObjectPooler.Instance.Despawn(gameObject);        
     }
 
 
@@ -35,8 +39,23 @@ public class CrystalTrap : MonoBehaviour, ITrapAttack
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit " + other.name);
             ReturnToPool();
+        }
+    }
+
+    protected override void PerformAttack()
+    {
+        if (isMoving)
+        {
+            float distanceCovered = (Time.time - startTime) * speed;
+            float fractionOfJourney = distanceCovered / journeyLength;
+            transform.position = Vector3.Lerp(startPosition, direction, fractionOfJourney);
+            if (fractionOfJourney >= 1.0f)
+            {
+                isMoving = false;
+                instantiatedAttack = ObjectPooler.Instance.Spawn(attackPrefab, transform.position, transform.rotation);
+                Invoke(nameof(ReturnToPool), lifetime);
+            }
         }
     }
 }
