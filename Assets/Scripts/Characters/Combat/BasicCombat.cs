@@ -8,6 +8,7 @@ public class BasicCombat : MonoBehaviour
     [SerializeField] private EAttackType attackType;
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private Transform attackPoint;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private float attackDamage;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsDamageable;
@@ -30,11 +31,11 @@ public class BasicCombat : MonoBehaviour
             switch (attackType)
             {
                 case EAttackType.GRAVITY_BASIC:
-                    attackStrategy = new BasicGravityAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, attackPoint);
+                    attackStrategy = new BasicGravityAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, playerDetector, attackPoint, spawnPoint);
                     break;
 
                 case EAttackType.CRYSTAL_BASIC:
-                    attackStrategy = new BasicCrystalAttackStrategy<CrystalTrap>(transform, animator, attackPrefab, playerDetector);
+                    attackStrategy = new BasicCrystalAttackStrategy<CrystalTrap>(transform, animator, attackPrefab, playerDetector, attackPoint);
                     break;
 
                 case EAttackType.TIME_BASIC:
@@ -52,18 +53,14 @@ public class BasicCombat : MonoBehaviour
             
     }
 
+    #region Animation events
+
+    // Used on Enemy Attack animation
     public void Attack()
     {
-        FocusTarget();
         attackStrategy.Execute();
     }
-
-    private void FocusTarget()
-    {
-        Vector3 relativePos = playerDetector.Player.position - transform.position;
-        relativePos.y = 0;
-        transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-    }
+    #endregion
 
     void OnDrawGizmosSelected()
     {
