@@ -5,17 +5,17 @@ public abstract class DistanceAttack : MonoBehaviour, IDistanceAttack
     [SerializeField] protected float speed;
     [SerializeField] protected float lifetime;
     protected Vector3 direction;
-    private bool initialized;
+    protected bool initialized;
     private string ownerTag;
 
     public string OwnerTag { get { return ownerTag; } }
 
-    public void Initialize(Vector3 direction, string ownerTag)
+    public virtual void Initialize(Vector3 direction, string ownerTag, Transform spawnpoint = default)
     {
+        gameObject.SetActive(true);
         initialized = true;
         this.direction = direction;
         this.ownerTag = ownerTag;
-        ObjectPooler.Instance.Despawn(gameObject, lifetime);
     }
 
     protected void Update()

@@ -32,7 +32,7 @@ public class LifeSystem : MonoBehaviour
 
     public void ReceiveDamage(float damageRecibed)
     {
-        Debug.Log("Actor Damaged!!!!\nCurrent Heath: " + health + "\nDamage Recibed: " + damageRecibed + "\nNew Heath: " + (health - damageRecibed));
+        Debug.Log(tag + " Damaged!!!!\nCurrent Heath: " + health + "\nDamage Recibed: " + damageRecibed + "\nNew Heath: " + (health - damageRecibed));
         health -= damageRecibed;
 
         if (health <= 0f)
@@ -71,7 +71,7 @@ public class LifeSystem : MonoBehaviour
     {
         // TODO as we are using triggers deffine a way to differenciate who is shooting and who is receiving the damage
         DamageDealer damageDealer = collider.GetComponent<DamageDealer>();
-        if (damageDealer && collider.GetComponent<DistanceAttack>().OwnerTag != tag)
+        if (damageDealer && !damageDealer.gameObject.CompareTag(tag))
         {
             ReceiveDamage(damageDealer.Damage);
         }

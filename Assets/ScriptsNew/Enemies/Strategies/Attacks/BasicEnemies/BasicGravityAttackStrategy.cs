@@ -7,32 +7,35 @@ public class BasicGravityAttackStrategy<T> : IAttackStrategy where T : MonoBehav
     private Animator animator;
     private GameObject attackPrefab;
     private Transform attackPoint;
+    private Transform spawnPoint;
+    private PlayerDetector playerDetector;
+    private Transform playerTransform;
 
-    public BasicGravityAttackStrategy(Transform ownerTransform, Animator animator, GameObject attackPrefab, Transform attackPoint)
+    public BasicGravityAttackStrategy(Transform ownerTransform, Animator animator, GameObject attackPrefab, PlayerDetector playerDetector, Transform attackPoint, Transform spawnPoint)
     {
         this.animator = animator;
         this.ownerTransform = ownerTransform;
         this.attackPrefab = attackPrefab;
         this.attackPoint = attackPoint;
+        this.spawnPoint = spawnPoint;
+        this.playerDetector = playerDetector;
         ObjectPooler.Instance.CreatePool(attackPrefab);
     }
 
     public void Execute()
     {
-        Debug.Log("prefab " + attackPrefab);
-        GameObject attackObject = ObjectPooler.Instance.Spawn(attackPrefab, attackPoint.position, attackPoint.rotation);
-        Debug.Log("attackObject " + attackObject);
-        if (attackObject != null)
+        playerTransform = playerDetector.Player;
+        Vector3 relativePos = playerDetector.Player.position - ownerTransform.position;
+        relativePos.y = 0;
+
+        GameObject attackObject = ObjectPooler.Instance.Spawn(attackPrefab, attackPoint.position, Quaternion.LookRotation(relativePos * -1, Vector3.up));
+        attackObject.transform.parent = attackPoint;
+       if (attackObject != null)
         {
             T attack = attackObject.GetComponent<T>();
             if (attack != null)
             {
-                Vector3 direction = attackPoint.forward;
-                if (currentTarget != null)
-                {
-                    direction = (currentTarget.position - attackPoint.position).normalized;
-                }
-                (attack as IDistanceAttack).Initialize(direction, ownerTransform.tag);
+                (attack as IDistanceAttack).Initialize(spawnPoint.forward, ownerTransform.tag, spawnPoint);
             }
         }
     }
