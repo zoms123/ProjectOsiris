@@ -12,9 +12,11 @@ public class CrystalTrap : DistanceAttack
     private float journeyLength;
     private VisualEffect visualEffect;
     private GameObject instantiatedAttack;
+    private AudioSource audioSource;
 
     public override void Initialize(Vector3 direction, string ownerTag, Transform spawnpoint = default)
     {
+        audioSource = GetComponent<AudioSource>();
         base.Initialize(direction, ownerTag);
         ObjectPooler.Instance.CreatePool(attackPrefab);
         startTime = Time.time;
@@ -24,6 +26,7 @@ public class CrystalTrap : DistanceAttack
         visualEffect = GetComponentInChildren<VisualEffect>();
         visualEffect.SetFloat("lifeTime", (journeyLength / speed));
         visualEffect.Play();
+        audioSource.Play();
     }
 
     protected void ReturnToPool()
@@ -53,7 +56,9 @@ public class CrystalTrap : DistanceAttack
             if (fractionOfJourney >= 1.0f)
             {
                 isMoving = false;
+                audioSource.Stop();
                 instantiatedAttack = ObjectPooler.Instance.Spawn(attackPrefab, transform.position, transform.rotation);
+                instantiatedAttack.GetComponent<AudioSource>().Play();
                 Invoke(nameof(ReturnToPool), lifetime);
             }
         }
