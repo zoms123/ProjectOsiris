@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.8
+  m_Weight: 0.3
   m_Data:
     m_ConstrainedObject: {fileID: 7488076868821607903}
     m_SourceObjects:
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.8
+  m_Weight: 0.5
   m_Data:
     m_ConstrainedObject: {fileID: 6842325980839642534}
     m_SourceObjects:
@@ -2004,9 +2004,9 @@ MonoBehaviour:
   CameraDistance: 2.5
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 961
   IgnoreTag: Player
-  CameraRadius: 0.2
+  CameraRadius: 0.1
   DampingIntoCollision: 0
   DampingFromCollision: 2
 --- !u!1 &4146873615252340949
@@ -2378,7 +2378,7 @@ Transform:
   m_GameObject: {fileID: 4814476632028969416}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 1.75, z: -2.5}
+  m_LocalPosition: {x: 0.5, y: 1.75, z: -2.4999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3467,7 +3467,7 @@ GameObject:
   - component: {fileID: 7383357131642643221}
   - component: {fileID: 4417174087259398715}
   - component: {fileID: 1130001856292354264}
-  - component: {fileID: 6765281661552022446}
+  - component: {fileID: 8112065930919536871}
   m_Layer: 0
   m_Name: Follow Camera
   m_TagString: Untagged
@@ -3484,7 +3484,7 @@ Transform:
   m_GameObject: {fileID: 7089464453312679481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 11
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 3812577715058646944}
   m_Follow: {fileID: 3812577715058646944}
   m_Lens:
     FieldOfView: 70
@@ -3546,7 +3546,7 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 3794979722483078993, guid: c6cf041a81552c3488aa6a0ff9b7070a, type: 3}
   ZAxis: {fileID: 0}
---- !u!114 &6765281661552022446
+--- !u!114 &8112065930919536871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3555,12 +3555,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 7089464453312679481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Offset: {x: 0.5, y: 0, z: 0}
-  m_ApplyAfter: 1
-  m_PreserveComposition: 0
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 961
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.5
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0
+  m_Strategy: 0
+  m_MaximumEffort: 2
+  m_SmoothingTime: 0
+  m_Damping: 0.2
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &7225645714179291582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4023,7 +4038,6 @@ GameObject:
   - component: {fileID: 6324762043267601553}
   - component: {fileID: 5888231448538333888}
   - component: {fileID: 4811134563121996784}
-  - component: {fileID: 7041603222102404455}
   - component: {fileID: 7503329489337148093}
   - component: {fileID: 3125200892653269630}
   - component: {fileID: 245395742622149243}
@@ -4075,16 +4089,16 @@ MonoBehaviour:
   aimLookAtTransform: {fileID: 355342698100423347}
   aimingMask:
     serializedVersion: 2
-    m_Bits: 4929
+    m_Bits: 833
   aimTargetSmoothSpeed: 20
   playerRotationSpeed: 20
   aimTransitionSpeed: 10
   bodyRig: {fileID: 4529847418701170117}
   playerCamera: {fileID: 4417174087259398715}
   cameraFollowTransform: {fileID: 3812577715058646944}
-  defaultCameraSensitivity: 1.5
-  aimCameraSensitivity: 0.8
-  aimFOV: 40
+  defaultCameraSensitivity: 1.25
+  aimCameraSensitivity: 0.6
+  aimFOV: 30
   cameraTopClamp: 70
   cameraBottomClamp: -30
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
@@ -4131,7 +4145,7 @@ MonoBehaviour:
   gravityFactor: -40
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 257
   groundCheckSphereRadius: 0.3
   groundedYVelocity: -20
   fallStartYVelocity: -5
@@ -4239,28 +4253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   lowLifeImage: {fileID: 0}
---- !u!114 &7041603222102404455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8435563724770440047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackType: 0
-  attackPrefab: {fileID: 0}
-  attackPoint: {fileID: 4433904396964856846}
-  attackDamage: 1
-  radius: 2
-  whatIsDamageable:
-    serializedVersion: 2
-    m_Bits: 512
-  myTag: Player
-  timeBetweenAttacks: 0
 --- !u!114 &7503329489337148093
 MonoBehaviour:
   m_ObjectHideFlags: 0

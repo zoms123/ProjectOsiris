@@ -25,7 +25,12 @@ public class ObjectPooler
             pools[key] = new(prefab, initialSize);
             originalPrefabs[key] = prefab;
         }
-        else Debug.LogWarning($"Pool for {key} already exists");
+        //else Debug.LogWarning($"Pool for {key} already exists");
+    }
+
+    public void ResetPools()
+    {
+        pools.Clear();
     }
 
     public GameObject Spawn(GameObject prefab, Vector3 position = default, Quaternion rotation = default)

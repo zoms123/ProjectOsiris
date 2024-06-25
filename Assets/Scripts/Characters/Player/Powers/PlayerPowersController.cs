@@ -75,6 +75,8 @@ public class PlayerPowersController : MonoBehaviour
     {
         inputManager.OnCombatAbility -= CombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
+
+        ObjectPooler.Instance.ResetPools();
     }
 
     private void Update()

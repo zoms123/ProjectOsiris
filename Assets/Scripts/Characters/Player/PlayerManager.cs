@@ -41,13 +41,13 @@ public class PlayerManager : MonoBehaviour
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
-        inputManager.OnAttack += ExecuteAttack;
+        //inputManager.OnAttack += ExecuteAttack;
     }
 
     private void OnDisable()
     {
         inputManager.OnPowerSelect -= OnPowerSelected;
-        inputManager.OnAttack -= ExecuteAttack;
+        //inputManager.OnAttack -= ExecuteAttack;
     }
 
     private void OnPowerSelected(Vector2 power)
@@ -74,11 +74,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void ExecuteAttack()
-    {
-        if (playerlocomotion.isGrounded)
-        {
-            basicCombat.Attack();
-        }
-    }
+    //private void ExecuteAttack()
+    //{
+    //    if (playerlocomotion.isGrounded)
+    //    {
+    //        basicCombat.Attack();
+    //    }
+    //}
 }

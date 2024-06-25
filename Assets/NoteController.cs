@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NoteController : MonoBehaviour
+public class NoteController : MonoBehaviour, IInteractable
 {
 	[SerializeField][TextArea] private string noteText;
 	[SerializeField] private GameObject noteCanvas;
@@ -11,22 +11,34 @@ public class NoteController : MonoBehaviour
 
 	private bool playerInRange = false;
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (playerInRange)
-		{
-			if (Input.GetKeyDown(KeyCode.E))
-			{
-				//Open Note
-				noteTextUi.text = noteText;
-				noteCanvas.SetActive(true);
-			}
-		}
+    public bool CanInteract(PowerType powerType)
+    {
+		return playerInRange && powerType == PowerType.None;
+    }
 
-	}
+    public void Interact()
+    {
+        if (!Activated())
+        {
+            //Open Note
+            noteTextUi.text = noteText;
+            noteCanvas.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            //Close Note
+            noteCanvas.SetActive(false);
+            Time.timeScale = 1f;
+        }
+    }
 
-	private void OnTriggerEnter(Collider other)
+    public bool Activated()
+    {
+        return noteCanvas.activeSelf;
+    }
+
+    private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
@@ -40,5 +52,7 @@ public class NoteController : MonoBehaviour
 		Debug.Log("jugador fuera de rango");
 		playerInRange = false;
 		noteCanvas.SetActive(false);
-	}
+    }
+
+
 }

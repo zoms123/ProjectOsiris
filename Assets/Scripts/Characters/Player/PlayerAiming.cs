@@ -99,6 +99,11 @@ public class PlayerAiming : MonoBehaviour
 
     private void LateUpdate()
     {
+        MoveCamera();
+    }
+
+    private void MoveCamera()
+    {
         // if look input is moving
         if (lookInput.sqrMagnitude >= 0.01f)
         {

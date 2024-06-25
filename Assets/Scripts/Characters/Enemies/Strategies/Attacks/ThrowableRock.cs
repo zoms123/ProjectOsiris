@@ -16,5 +16,10 @@ public class ThrowableRock : DistanceAttack
             Debug.Log("Hit " + other.name);
             ObjectPooler.Instance.Despawn(gameObject);
         }
+        else // hit other object
+        {
+            Debug.Log($"Hit {other.name}");
+            ObjectPooler.Instance.Despawn(gameObject);
+        }
     }
 }
