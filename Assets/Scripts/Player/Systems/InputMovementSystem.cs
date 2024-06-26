@@ -24,6 +24,7 @@ public class InputMovementSystem : PlayerSystem
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private float jumpForwardSpeed = 5f;
+    [SerializeField] private float airMovementSpeed = 2f;
     [SerializeField] private float freeFallSpeed = 2f;
 
     private Vector3 moveDirection;
@@ -336,7 +337,7 @@ public class InputMovementSystem : PlayerSystem
             freeFallDirection.Normalize();
             freeFallDirection.y = 0;
 
-            characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
+            characterController.Move(freeFallSpeed * Time.deltaTime * freeFallDirection);
         }
     }
 
@@ -344,7 +345,13 @@ public class InputMovementSystem : PlayerSystem
     {
         if (isJumping)
         {
-            characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+            if (jumpDirection != Vector3.zero) characterController.Move(jumpForwardSpeed * Time.deltaTime * jumpDirection);
+
+            Vector3 airMoveDirection = mainCameraTransform.forward * inputDirection.y + mainCameraTransform.right * inputDirection.x;
+            airMoveDirection.Normalize();
+            airMoveDirection.y = 0;
+
+            characterController.Move(airMovementSpeed * Time.deltaTime * airMoveDirection);
         }
     }
 
