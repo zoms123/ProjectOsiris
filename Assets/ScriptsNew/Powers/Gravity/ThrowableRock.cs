@@ -31,9 +31,8 @@ public class ThrowableRock : DistanceAttack
             visualEffect.Stop();
         } else if (instantiated)
         {
-            instantiatedAttack.transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            instantiatedAttack.transform.Translate(speed * Time.deltaTime * direction, Space.World);
         }
-
     }
 
     protected void ReturnToPool()
@@ -44,6 +43,8 @@ public class ThrowableRock : DistanceAttack
         ObjectPooler.Instance.Despawn(gameObject);
     }
 
+    // ESTA FUNCION NO SE ESTA EJECUTANDO NUNCA PORQUE EL PREFAB "GravityThrowableAttack" NO TIENE COLLIDER
+    // Y POR TANTO, "attackPrefab" QUE EN ESTE CASO ES "ThrowableRock", NO SE DESTRUYE AL GOLPEAR OTRO OBJETO
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag(OwnerTag))
