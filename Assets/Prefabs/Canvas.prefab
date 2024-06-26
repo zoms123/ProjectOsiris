@@ -702,7 +702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7c6966821c17c2e45af17b17d0428db9, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1af434b02acb6574d9f4170a98e711a9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1269,6 +1269,7 @@ GameObject:
   - component: {fileID: 6256071399032715058}
   - component: {fileID: 93980567574306678}
   - component: {fileID: 5522791562507018731}
+  - component: {fileID: 3786152378961621666}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1363,6 +1364,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3786152378961621666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5607285740452671755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af789fc0c2ffe4f44a13e4f6bff23104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  powerIcon: {fileID: 3923618919053997781}
+  lowLifeImage: {fileID: 4137446446881059216}
+  gravity: {fileID: 2800000, guid: 7c6966821c17c2e45af17b17d0428db9, type: 3}
+  crystal: {fileID: 2800000, guid: 846f4b10f1dd637478f0b3bd42ca0393, type: 3}
+  time: {fileID: 2800000, guid: e79bebd14052209468dddafe9e0bd6ec, type: 3}
+  shadow: {fileID: 2800000, guid: a6109728deac4fd4dbf846e782966275, type: 3}
+  none: {fileID: 2800000, guid: 1af434b02acb6574d9f4170a98e711a9, type: 3}
 --- !u!1 &6736073245531956613
 GameObject:
   m_ObjectHideFlags: 0

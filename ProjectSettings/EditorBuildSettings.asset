@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level0Puerto.unity
     guid: f393a0b35c6544e43a4e718343bf0da4
   - enabled: 1
-    path: Assets/Scenes/Level0Gravity.unity
+    path: Assets/Scenes/Blockout/Level0Gravity.unity
     guid: 34370d87afa59ad4c86cc82fb943bb17
   m_configObjects: {}
