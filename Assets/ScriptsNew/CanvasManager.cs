@@ -23,6 +23,7 @@ public class CanvasManager : MonoBehaviour
     {
         gameManager.OnPlayerChangePower += ChangePowerUI;
         gameManager.OnPlayerLowLife += ShowLowLifeUI;
+        gameManager.OnPlayerRestoreLife += HideLowLifeUI;
     }
 
     private void ChangePowerUI(PowerType powerType)
@@ -56,10 +57,16 @@ public class CanvasManager : MonoBehaviour
         lowLifeImage.gameObject.SetActive(true);
     }
 
+    private void HideLowLifeUI()
+    {
+        lowLifeImage.gameObject.SetActive(false);
+    }
+
     private void OnDisable()
     {
         gameManager.OnPlayerChangePower -= ChangePowerUI;
         gameManager.OnPlayerLowLife -= ShowLowLifeUI;
+        gameManager.OnPlayerRestoreLife -= HideLowLifeUI;
     }
 
     #endregion
