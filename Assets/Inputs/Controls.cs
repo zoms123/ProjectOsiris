@@ -28,24 +28,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""id"": ""2e134b9d-72b8-4c23-9646-975777d6ceb3"",
             ""actions"": [
                 {
-                    ""name"": ""LockTarget"",
-                    ""type"": ""Button"",
-                    ""id"": ""076cbc92-4f0e-4ec8-b6bb-ed3c31c31d58"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""0065e6c3-b530-435c-b85b-0767dfcd0241"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Options"",
                     ""type"": ""Button"",
                     ""id"": ""e2a36323-29c9-4783-afc9-54d89cd9a274"",
@@ -101,72 +83,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4ad4aab8-91ea-404f-9331-52b42ae0074a"",
-                    ""path"": ""<DualShockGamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed1e0ac0-d51b-46cb-8a0a-921a5d793ae4"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""28337f5d-bc01-424c-bc88-28676fcfeb48"",
-                    ""path"": ""<Keyboard>/o"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7649f3b0-5646-4e16-b752-2a3674958a49"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LockTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd0ddb7a-06c5-4c16-9612-21c2a239d2c8"",
-                    ""path"": ""<DualShockGamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""954bb885-7b75-482f-bc50-e698d707f751"",
-                    ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""b69cc088-c84f-4d39-9a7f-63631c82e05c"",
@@ -499,17 +415,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""98f4110a-c11c-4cfa-8375-720814256a4f"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7ef91567-d7fd-4d4a-9b9e-688fd6431167"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
@@ -523,6 +428,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c1877ff6-3ce9-4650-852a-d6bdd281794b"",
                     ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe40513d-7c0e-4a8e-81f7-7e6ff39981df"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1094,8 +1010,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_LockTarget = m_Gameplay.FindAction("LockTarget", throwIfNotFound: true);
-        m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Options = m_Gameplay.FindAction("Options", throwIfNotFound: true);
         m_Gameplay_PowerSelect = m_Gameplay.FindAction("PowerSelect", throwIfNotFound: true);
         m_Gameplay_CombatAbility = m_Gameplay.FindAction("CombatAbility", throwIfNotFound: true);
@@ -1178,8 +1092,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_LockTarget;
-    private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Options;
     private readonly InputAction m_Gameplay_PowerSelect;
     private readonly InputAction m_Gameplay_CombatAbility;
@@ -1190,8 +1102,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         private @Controls m_Wrapper;
         public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LockTarget => m_Wrapper.m_Gameplay_LockTarget;
-        public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Options => m_Wrapper.m_Gameplay_Options;
         public InputAction @PowerSelect => m_Wrapper.m_Gameplay_PowerSelect;
         public InputAction @CombatAbility => m_Wrapper.m_Gameplay_CombatAbility;
@@ -1207,12 +1117,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @LockTarget.started += instance.OnLockTarget;
-            @LockTarget.performed += instance.OnLockTarget;
-            @LockTarget.canceled += instance.OnLockTarget;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
             @Options.started += instance.OnOptions;
             @Options.performed += instance.OnOptions;
             @Options.canceled += instance.OnOptions;
@@ -1235,12 +1139,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @LockTarget.started -= instance.OnLockTarget;
-            @LockTarget.performed -= instance.OnLockTarget;
-            @LockTarget.canceled -= instance.OnLockTarget;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
             @Options.started -= instance.OnOptions;
             @Options.performed -= instance.OnOptions;
             @Options.canceled -= instance.OnOptions;
@@ -1486,8 +1384,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public PlayerGravityPuzzleActions @PlayerGravityPuzzle => new PlayerGravityPuzzleActions(this);
     public interface IGameplayActions
     {
-        void OnLockTarget(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
         void OnOptions(InputAction.CallbackContext context);
         void OnPowerSelect(InputAction.CallbackContext context);
         void OnCombatAbility(InputAction.CallbackContext context);
