@@ -187,10 +187,10 @@ RectTransform:
   - {fileID: 7423050322414700850}
   m_Father: {fileID: 8058334323238652036}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 750}
+  m_SizeDelta: {x: -50, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2389650089797671274
 CanvasRenderer:
@@ -406,18 +406,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PC
+  m_text: '<size=64>PC</size>
+
 
     Move:  W,A,S,D and Arrows
 
     Look: Mouse
 
-    Jump: Espace
+    Jump:
+    Espace
 
-    Run:
-    Left Shift
+    Run: Left Shift
 
-    Attack: C
+    Combat Ability: Left Click
 
 '
   m_isRightToLeft: 0
@@ -1350,6 +1351,7 @@ RectTransform:
   - {fileID: 8058334323238652036}
   - {fileID: 519498167540443000}
   - {fileID: 8713827046406353716}
+  - {fileID: 2711442229790037287}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1372,6 +1374,12 @@ MonoBehaviour:
   gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   powerIcon: {fileID: 3923618919053997781}
   lowLifeImage: {fileID: 4137446446881059216}
+  noteUI: {fileID: 8863024493472360979}
+  noteTextUi: {fileID: 5583842067934527683}
+  tutorialText: {fileID: 7004587840503068661}
+  tutorialIcon: {fileID: 4460445479813718876}
+  tutorial: {fileID: 3490620188655237961}
+  brightnessPanel: {fileID: 1104422773071759241}
   gravity: {fileID: 2800000, guid: 7c6966821c17c2e45af17b17d0428db9, type: 3}
   crystal: {fileID: 2800000, guid: 846f4b10f1dd637478f0b3bd42ca0393, type: 3}
   time: {fileID: 2800000, guid: e79bebd14052209468dddafe9e0bd6ec, type: 3}
@@ -1440,6 +1448,81 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &6282329974951395207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2711442229790037287}
+  - component: {fileID: 4227947430920034076}
+  - component: {fileID: 1104422773071759241}
+  m_Layer: 5
+  m_Name: BrightnessPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2711442229790037287
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282329974951395207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8461152025179260286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4227947430920034076
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282329974951395207}
+  m_CullTransparentMesh: 1
+--- !u!114 &1104422773071759241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282329974951395207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6736073245531956613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,18 +1660,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'PS5
+  m_text: '<size=64>PS5</size>
+
 
     Move:  Left Stick
 
     Look: Rigth Stick
 
-    Jump: Cross
+    Jump:
+    Cross
 
-    Run:
-    Circle
+    Run: R2
 
-    Attack: Square
+    Combat Ability: R1
 
 '
   m_isRightToLeft: 0
