@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d09c9be1f4a77d4c8362a3c7689a2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorController: {fileID: 9100000, guid: 201c1196557046e4c97348ab0bd63b68, type: 2}
   attackType: 0
   attackPrefab: {fileID: 5169130777888166953, guid: 81bc72897074ff54498060cfe1f492df, type: 3}
   attackPoint: {fileID: 0}
@@ -402,8 +401,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502c51fe3c8ba2248b7f9c00665707f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  maxHealth: 0
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  maxHealth: 100
 --- !u!95 &216026798198409348
 Animator:
   serializedVersion: 5

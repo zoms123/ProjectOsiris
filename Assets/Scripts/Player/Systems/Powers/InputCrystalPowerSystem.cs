@@ -79,7 +79,7 @@ public class InputCrystalPowerSystem : PlayerSystem
                     Quaternion lookRotation = Quaternion.LookRotation(targetDirection);
                     crystalObject.transform.rotation = lookRotation;
 
-                    crystal.Initialize(targetDirection, tag);
+                    crystal.Initialize(targetDirection, gameObject);
                 }
                 else
                 {
