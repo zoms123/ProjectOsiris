@@ -177,7 +177,7 @@ public class InputGravityPowerSystem : PlayerSystem
 
     private void ControlObjectZ(Vector2 direction)
     {
-        if (Math.Abs(direction[1]) > 0.7)
+        if (Math.Abs(direction[1]) > 0.3)
             inputDirectionZ = direction[1];
         else
             inputDirectionZ = 0f;
@@ -228,18 +228,37 @@ public class InputGravityPowerSystem : PlayerSystem
         else if (targetLocalPosition.z > 4.5f)
             movable.SetLocalPosition(new Vector3(targetLocalPosition.x, targetLocalPosition.y, 4.5f));
 
+        else if (targetLocalPosition.x >= 0.5)
+            targetRigidbody.AddForce(GetMoveDirection2(-1) * 2, ForceMode.Impulse);
+
+        else if (targetLocalPosition.x <= -0.5)
+            targetRigidbody.AddForce(GetMoveDirection2(1) * 2, ForceMode.Impulse);
+
         else
             targetRigidbody.AddForce(GetMoveDirection() * controlMovementSpeed, ForceMode.Impulse);
     }
 
-    public Vector3 GetMoveDirection()
+    private Vector3 GetMoveDirection()
     {
         Vector3 forward = mainCameraTransform.forward;
         forward.y = 0f;
         forward.Normalize();
 
         Vector3 moveDir = forward * inputDirectionY;
-        moveDir.y = inputDirectionZ;
+        moveDir.y = inputDirectionZ > 0 ? 1 : (inputDirectionZ < 0 ? -1 : 0);
+        moveDir.Normalize();
+
+        return moveDir;
+    }
+
+    private Vector3 GetMoveDirection2(float direction)
+    {
+        Vector3 right = mainCameraTransform.right;
+        right.y = 0f;
+        right.Normalize();
+
+        Vector3 moveDir = right * direction;
+        moveDir.y = 0f;
         moveDir.Normalize();
 
         return moveDir;

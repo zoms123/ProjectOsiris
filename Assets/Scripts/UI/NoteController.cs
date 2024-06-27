@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,11 +6,16 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour, IInteractable
 {
-	[SerializeField][TextArea] private string noteText;
-	[SerializeField] private GameObject noteUI;
-	[SerializeField] private TMP_Text noteTextUi;
+    [Header("References")]
+    [SerializeField, Required] private GameManagerSO gameManager;
+
+    [Header("Note Settings")]
+    [SerializeField][TextArea] private string noteText;
 
 	private bool playerInRange = false;
+    private bool active = false;
+
+    #region IInteractable
 
     public bool CanInteract(PowerType powerType)
     {
@@ -21,22 +27,27 @@ public class NoteController : MonoBehaviour, IInteractable
         if (!Activated())
         {
             //Open Note
-            noteTextUi.text = noteText;
-            noteUI.SetActive(true);
+            gameManager.PlayerOpenNote(noteText);
+            active = true;
             Time.timeScale = 0f;
         }
         else
         {
             //Close Note
-            noteUI.SetActive(false);
+            gameManager.PlayerCloseNote();
+            active = false;
             Time.timeScale = 1f;
         }
     }
 
     public bool Activated()
     {
-		return noteUI.activeSelf;
+		return active;
     }
+
+    #endregion
+
+    #region Collisions And Triggers
 
     private void OnTriggerEnter(Collider other)
     {
@@ -51,6 +62,9 @@ public class NoteController : MonoBehaviour, IInteractable
     {
         Debug.Log("jugador fuera de rango");
         playerInRange = false;
-        noteUI.SetActive(false);
+        gameManager.PlayerCloseNote();
+        active = false;
     }
+
+    #endregion
 }

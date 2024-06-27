@@ -4205,7 +4205,7 @@ MonoBehaviour:
   overlapSphereRadius: 0.2
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   attachPointTransform: {fileID: 1053375799754395057}
-  controlMovementSpeed: 5
+  controlMovementSpeed: 10
   gravityCombatAbilityCooldown: 0
 --- !u!114 &1852545833070531625
 MonoBehaviour:

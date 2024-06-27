@@ -11,6 +11,16 @@ public class GameManagerSO : ScriptableObject
     public event Action OnPlayerLowLife;
     public event Action OnPlayerRestoreLife;
 
+    // UI Notes
+    public event Action<string> OnPlayerOpenNote;
+    public event Action OnPlayerCloseNote;
+
+    // UI Tutorial
+    public event Action<string, Texture> OnPlayerEnterTutorialZone;
+    public event Action OnPlayerExitTutorialZone;
+
+    #region Public Methods
+
     public void PlayerChangePower(PowerType powerType)
     {
         OnPlayerChangePower?.Invoke(powerType);
@@ -25,4 +35,26 @@ public class GameManagerSO : ScriptableObject
     {
         OnPlayerRestoreLife?.Invoke();
     }
+
+    public void PlayerOpenNote(string noteText)
+    {
+        OnPlayerOpenNote?.Invoke(noteText);
+    }
+
+    public void PlayerCloseNote()
+    {
+        OnPlayerCloseNote?.Invoke();
+    }
+
+    public void PlayerEnterTutorialZone(string message, Texture icon)
+    {
+        OnPlayerEnterTutorialZone?.Invoke(message, icon);
+    }
+
+    public void PlayerExitTutorialZone()
+    {
+        OnPlayerExitTutorialZone?.Invoke();
+    }
+
+    #endregion
 }

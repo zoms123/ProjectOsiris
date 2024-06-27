@@ -118,6 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3a5ce39e1cea44987ad5d8f2cb827d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
   noteText: This is a test aaaaaaaaaa
-  noteCanvas: {fileID: 0}
-  noteTextUi: {fileID: 0}

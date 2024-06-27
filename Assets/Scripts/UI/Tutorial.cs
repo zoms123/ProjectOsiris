@@ -6,22 +6,20 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    [Header("Parameters")]
+    [Header("References")]
+    [SerializeField, Required] private GameManagerSO gameManager;
+
+    [Header("Tutorial Settings")]
     [SerializeField] private string message;
     [SerializeField] private Texture icon;
 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI tutorialText;
-    [SerializeField] private RawImage tutorialIcon;
-    [SerializeField] private GameObject tutorial;
+    #region Collisions And Triggers
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            tutorialText.text = message;
-            tutorialIcon.texture = icon;
-            tutorial.gameObject.SetActive(true);
+            gameManager.PlayerEnterTutorialZone(message, icon);
         }
     }
 
@@ -29,7 +27,9 @@ public class Tutorial : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tutorial.gameObject.SetActive(false);
+            gameManager.PlayerExitTutorialZone();
         }
     }
+
+    #endregion
 }
