@@ -37,12 +37,14 @@ public class TimeBomb : MonoBehaviour
     }
 
     #region Coroutines
+
     private IEnumerator WaitExplodeBomb()
     {
         yield return new WaitForSeconds(waitTime);
         Explode();
         gameObject.SetActive(false);
     }
+
     #endregion
 
     #region Debug

@@ -83,7 +83,10 @@ public class InputAimingSystem : PlayerSystem
 
     private void GiveAimPosition()
     {
-        player.ID.playerEvents.OnGiveAimPosition?.Invoke(GetAimPosition());
+        if (isAiming)
+        {
+            player.ID.playerEvents.OnGiveAimPosition?.Invoke(GetAimPosition());
+        }
     }
 
     private void OnDisable()
