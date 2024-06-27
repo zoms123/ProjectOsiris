@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
-  maxHealth: 0
+  maxHealth: 100
 --- !u!95 &216026798198409348
 Animator:
   serializedVersion: 5

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class InputShadowPowerSystem : PlayerSystem
 {
     [Header("References")]

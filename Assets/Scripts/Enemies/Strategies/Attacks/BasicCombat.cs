@@ -64,6 +64,7 @@ public class BasicCombat : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(attackPoint.position, radius);
+        Vector3 position = attackPoint ? attackPoint.position : spawnPoint.position;
+        Gizmos.DrawWireSphere(position, radius);
     }
 }
