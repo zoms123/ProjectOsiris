@@ -14,7 +14,7 @@ public class CrystalTrap : DistanceAttack
     private GameObject instantiatedAttack;
     private AudioSource audioSource;
 
-    public override void Initialize(Vector3 direction, string ownerTag, Transform spawnpoint = default)
+    public override void Initialize(Vector3 direction, string ownerTag)
     {
         audioSource = GetComponent<AudioSource>();
         base.Initialize(direction, ownerTag);
