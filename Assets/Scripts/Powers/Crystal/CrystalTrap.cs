@@ -14,10 +14,10 @@ public class CrystalTrap : DistanceAttack
     private GameObject instantiatedAttack;
     private AudioSource audioSource;
 
-    public override void Initialize(Vector3 direction, string ownerTag)
+    public override void Initialize(Vector3 direction, GameObject ownerObject)
     {
         audioSource = GetComponent<AudioSource>();
-        base.Initialize(direction, ownerTag);
+        base.Initialize(direction, ownerObject);
         ObjectPooler.Instance.CreatePool(attackPrefab);
         startTime = Time.time;
         startPosition = transform.position;
@@ -40,7 +40,7 @@ public class CrystalTrap : DistanceAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject != OwnerObject)
         {
             ReturnToPool();
         }

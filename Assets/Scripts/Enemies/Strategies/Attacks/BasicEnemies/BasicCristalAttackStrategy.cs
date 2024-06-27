@@ -35,7 +35,7 @@ public class BasicCrystalAttackStrategy<T> : IAttackStrategy where T : MonoBehav
         if (attackObject != null)
         {
             T attack = attackObject.GetComponent<T>();
-            (attack as IDistanceAttack).Initialize(playerTransform.position, ownerTransform.tag);
+            (attack as IDistanceAttack).Initialize(playerTransform.position, ownerTransform.gameObject);
         }
     }
 

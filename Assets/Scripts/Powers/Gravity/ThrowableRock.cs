@@ -5,9 +5,9 @@ using UnityEngine.VFX;
 
 public class ThrowableRock : DistanceAttack
 {
-    public override void Initialize(Vector3 direction, string ownerTag)
+    public override void Initialize(Vector3 direction, GameObject ownerObject)
     {
-        base.Initialize(direction, ownerTag);
+        base.Initialize(direction, ownerObject);
     }
     protected override void PerformAttack()
     {
@@ -22,7 +22,7 @@ public class ThrowableRock : DistanceAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(OwnerTag))
+        if (!other.gameObject != OwnerObject)
         {
             Debug.Log("Hit " + other.name);
             ReturnToPool();
