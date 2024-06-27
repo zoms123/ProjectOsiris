@@ -10,7 +10,7 @@ public abstract class DistanceAttack : MonoBehaviour, IDistanceAttack
 
     public string OwnerTag { get { return ownerTag; } }
 
-    public virtual void Initialize(Vector3 direction, string ownerTag, Transform spawnpoint = default)
+    public virtual void Initialize(Vector3 direction, string ownerTag)
     {
         gameObject.SetActive(true);
         initialized = true;

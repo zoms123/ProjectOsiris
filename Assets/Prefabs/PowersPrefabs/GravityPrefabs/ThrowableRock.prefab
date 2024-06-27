@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3670407754151397931}
   - component: {fileID: 1956026166754960175}
   - component: {fileID: 7735599083659851933}
+  - component: {fileID: -8730913848281972082}
   m_Layer: 11
   m_Name: ThrowableRock
   m_TagString: Untagged
@@ -212,6 +213,21 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-8730913848281972082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5169130777888166953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac358d8e7127854eae638e5baa2fc8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12
+  lifetime: 5
+  attackPrefab: {fileID: 5169130777888166953}
 --- !u!1001 &819921895978980228
 PrefabInstance:
   m_ObjectHideFlags: 0

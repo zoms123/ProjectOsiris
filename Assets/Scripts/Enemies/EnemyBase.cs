@@ -21,6 +21,7 @@ public class EnemyBase : MonoBehaviour
     private NavMeshAgent agent;
     private ZeroGravityEffector zeroGravityEffector;
     private Animator animator;
+    private BasicCombat basicCombat;
 
 
     private void Awake()
@@ -29,8 +30,9 @@ public class EnemyBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         zeroGravityEffector = GetComponent<ZeroGravityEffector>();
         animator = GetComponentInChildren<Animator>();
+        basicCombat = GetComponent<BasicCombat>();
         //declare states
-        var attackState = new EnemyAttackState(this, animator, agent, playerDetector);
+        var attackState = new EnemyAttackState(this, animator, agent, playerDetector, basicCombat.AttackType);
         var patrolState = new EnemyPatrolState(
             this,
             animator,

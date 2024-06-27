@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class BasicCombat : MonoBehaviour
@@ -21,6 +22,7 @@ public class BasicCombat : MonoBehaviour
     private Animator animator;
 
     public float TimeBetweenAttacks { get { return timeBetweenAttacks; } }
+    public EAttackType AttackType { get { return attackType; } }
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class BasicCombat : MonoBehaviour
             switch (attackType)
             {
                 case EAttackType.GRAVITY_BASIC:
-                    attackStrategy = new BasicGravityAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, playerDetector, attackPoint, spawnPoint);
+                    attackStrategy = new BasicGravityAttackStrategy<ThrowableRock>(transform, animator, attackPrefab, playerDetector, spawnPoint);
                     break;
 
                 case EAttackType.CRYSTAL_BASIC:
