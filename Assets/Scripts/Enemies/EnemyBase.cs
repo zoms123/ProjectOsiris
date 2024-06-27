@@ -22,6 +22,7 @@ public class EnemyBase : MonoBehaviour
     private ZeroGravityEffector zeroGravityEffector;
     private Animator animator;
     private BasicCombat basicCombat;
+    private LifeSystem lifeSystem;
 
 
     private void Awake()
@@ -31,6 +32,7 @@ public class EnemyBase : MonoBehaviour
         zeroGravityEffector = GetComponent<ZeroGravityEffector>();
         animator = GetComponentInChildren<Animator>();
         basicCombat = GetComponent<BasicCombat>();
+        lifeSystem = GetComponent<LifeSystem>();
         //declare states
         var attackState = new EnemyAttackState(this, animator, agent, playerDetector, basicCombat.AttackType);
         var patrolState = new EnemyPatrolState(
@@ -67,7 +69,8 @@ public class EnemyBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        stateMachine.Update();
+        if(lifeSystem.Health > 0)
+            stateMachine.Update();
     }
 
     private bool IsGrounded()

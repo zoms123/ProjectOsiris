@@ -38,11 +38,14 @@ public class LifeSystem : MonoBehaviour
         if (health <= 0f)
         {
             health = 0f;
-            gameObject.SetActive(false);
+            transform.GetComponent<Animator>().SetBool("Dead", true);
         }
         else if (CompareTag("Player") && health <= 20f)
         {
             gameManager.PlayerLowLife();
+        } else
+        {
+            transform.GetComponent<Animator>().SetBool("Hit", true);
         }
 
         timeLastAttack = 0f;
