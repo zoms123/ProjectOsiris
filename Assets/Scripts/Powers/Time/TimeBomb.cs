@@ -48,10 +48,12 @@ public class TimeBomb : MonoBehaviour
     #endregion
 
     #region Debug
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
+
     #endregion
 }
