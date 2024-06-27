@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Blockout/Level0Gravity.unity
     guid: 34370d87afa59ad4c86cc82fb943bb17
+  - enabled: 0
+    path: Assets/Scenes/Development/Enemy.unity
+    guid: 5313e641a55bc084996f400c5ef2bbe4
   m_configObjects: {}
