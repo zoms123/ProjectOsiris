@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.TextCore.Text;
 
 public class InputMovementSystem : PlayerSystem
@@ -139,11 +140,13 @@ public class InputMovementSystem : PlayerSystem
     private void LockRotation()
     {
         lockRotation = true;
+        isStrafing = true;
     }
 
     private void UnlockRotation()
     {
         lockRotation = false;
+        isStrafing = false;
     }
 
     private void OnDisable()
@@ -307,15 +310,16 @@ public class InputMovementSystem : PlayerSystem
 
     private void HandleRotation()
     {
-        if (!canRotate || isStrafing) return;
-
         if (lockRotation)
         {
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,
                                                   mainCameraTransform.rotation.eulerAngles.y,
                                                   transform.rotation.eulerAngles.z);
+            isStrafing = true;
             return;
         }
+
+        if (!canRotate || isStrafing) return;
 
         Vector3 targetRotationDirection = GetMoveDirection();
 

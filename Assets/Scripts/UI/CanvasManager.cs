@@ -8,13 +8,14 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Required] private GameManagerSO gameManager;
 
     [Header("Canvas Elemets")]
-    [SerializeField] private RawImage powerIcon;
-    [SerializeField] private RawImage lowLifeImage;
-    [SerializeField] private GameObject noteUI;
-    [SerializeField] private TMP_Text noteTextUi;
-    [SerializeField] private TextMeshProUGUI tutorialText;
-    [SerializeField] private RawImage tutorialIcon;
-    [SerializeField] private GameObject tutorial;
+    [SerializeField, Required] private RawImage powerIcon;
+    [SerializeField, Required] private RawImage lowLifeImage;
+    [SerializeField, Required] private GameObject noteUI;
+    [SerializeField, Required] private TMP_Text noteTextUi;
+    [SerializeField, Required] private TextMeshProUGUI tutorialText;
+    [SerializeField, Required] private RawImage tutorialIcon;
+    [SerializeField, Required] private GameObject tutorial;
+    [SerializeField, Required] private Image brightnessPanel;
 
     [Header("Textures")]
     [SerializeField] private Texture2D gravity;
@@ -22,6 +23,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Texture2D time;
     [SerializeField] private Texture2D shadow;
     [SerializeField] private Texture2D none;
+
+    private void Awake()
+    {
+        LoadBrightnessPrefs();
+    }
 
     #region Events
 
@@ -104,6 +110,24 @@ public class CanvasManager : MonoBehaviour
         gameManager.OnPlayerCloseNote -= HideNoteUI;
         gameManager.OnPlayerEnterTutorialZone -= ShowTutorialUI;
         gameManager.OnPlayerExitTutorialZone -= HideTutorialUI;
+    }
+
+    #endregion
+
+    #region Methods
+
+    private void LoadBrightnessPrefs()
+    {
+        if (PlayerPrefs.HasKey("masterBrightness"))
+            UpdateBrightness(PlayerPrefs.GetFloat("masterBrightness"));
+    }
+
+    private void UpdateBrightness(float brightness)
+    {
+        brightnessPanel.color = new Color(brightnessPanel.color.r, // Red
+                                          brightnessPanel.color.g, // Green
+                                          brightnessPanel.color.b, // Blue
+                                          1 - brightness); // Alpha
     }
 
     #endregion

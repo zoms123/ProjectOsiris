@@ -38,6 +38,8 @@ public class InputAimingSystem : PlayerSystem
     private float cinemachineTargetYaw;
     private float cinemachineTargetPitch;
 
+    private int invertY = 1;
+
     private bool isAiming = false;
 
     private void Start()
@@ -50,6 +52,8 @@ public class InputAimingSystem : PlayerSystem
         cameraSensitivity = defaultCameraSensitivity;
 
         bodyRig.weight = 0f;
+
+        LoadGamePlayPrefs();
     }
 
     #region Events
@@ -113,7 +117,7 @@ public class InputAimingSystem : PlayerSystem
         if (lookInput.sqrMagnitude >= 0.01f)
         {
             cinemachineTargetYaw += lookInput.x * cameraSensitivity;
-            cinemachineTargetPitch -= lookInput.y * cameraSensitivity;
+            cinemachineTargetPitch -= lookInput.y * cameraSensitivity * invertY;
         }
 
         // clamp rotations so values are limited 360 degrees
@@ -125,6 +129,18 @@ public class InputAimingSystem : PlayerSystem
     }
 
     #region Methods
+
+    private void LoadGamePlayPrefs()
+    {
+        if (PlayerPrefs.HasKey("masterSensitivity"))
+            cameraSensitivity = PlayerPrefs.GetFloat("masterSensitivity");
+
+        if (PlayerPrefs.HasKey("masterAimSensitivity"))
+            aimCameraSensitivity = PlayerPrefs.GetFloat("masterAimSensitivity");
+
+        if (PlayerPrefs.HasKey("masterInvertY"))
+            invertY = PlayerPrefs.GetInt("masterInvertY");
+    }
 
     private void HandleAimPosition()
     {
