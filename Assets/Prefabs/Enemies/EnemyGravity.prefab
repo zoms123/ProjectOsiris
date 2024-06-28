@@ -4277,6 +4277,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetector: {fileID: 1630243983206746905}
   attackRange: 10
+  obstaclesDetectorRayOrigin: {fileID: 600450520606305879}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 769
   waypoints:
   - {fileID: 2963747411593600650}
   - {fileID: 2847530918013685116}

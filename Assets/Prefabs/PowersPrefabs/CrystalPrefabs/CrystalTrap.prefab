@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4525315442692206679}
-  - component: {fileID: 7648094702141454343}
+  - component: {fileID: 2804590381314482758}
   - component: {fileID: 291380358665078836}
+  - component: {fileID: 7648094702141454343}
   - component: {fileID: -7501697347690265248}
   m_Layer: 11
   m_Name: CrystalTrap
@@ -35,6 +36,31 @@ Transform:
   - {fileID: 759677161626589028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2804590381314482758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208154071905077126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c117872a6ba714db90164955f28c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &291380358665078836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208154071905077126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be186e6b4ae13843be4d8a357e2d78d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!65 &7648094702141454343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56,19 +82,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.69, y: 1.2, z: 0.5}
   m_Center: {x: 0.15, y: 0.56, z: -0.2}
---- !u!114 &291380358665078836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208154071905077126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1be186e6b4ae13843be4d8a357e2d78d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
 --- !u!82 &-7501697347690265248
 AudioSource:
   m_ObjectHideFlags: 0

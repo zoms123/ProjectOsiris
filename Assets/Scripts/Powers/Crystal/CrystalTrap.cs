@@ -11,7 +11,6 @@ public class CrystalTrap : DistanceAttack
     private Vector3 startPosition;
     private float journeyLength;
     private VisualEffect visualEffect;
-    private GameObject instantiatedAttack;
     private AudioSource audioSource;
 
     public override void Initialize(Vector3 direction, GameObject ownerObject)
@@ -33,7 +32,6 @@ public class CrystalTrap : DistanceAttack
     {
         initialized = false;
         visualEffect.Stop();
-        ObjectPooler.Instance.Despawn(instantiatedAttack);
         ObjectPooler.Instance.Despawn(gameObject);        
     }
 
@@ -57,8 +55,9 @@ public class CrystalTrap : DistanceAttack
             {
                 isMoving = false;
                 audioSource.Stop();
-                instantiatedAttack = ObjectPooler.Instance.Spawn(attackPrefab, transform.position, transform.rotation);
-                instantiatedAttack.GetComponent<AudioSource>().Play();
+                GameObject instantiatedAttack = ObjectPooler.Instance.Spawn(attackPrefab, transform.position, transform.rotation);
+                instantiatedAttack.GetComponent<DistanceAttack>().Initialize(Vector3.forward, ownerObject);
+                
                 Invoke(nameof(ReturnToPool), lifetime);
             }
         }

@@ -21,6 +21,7 @@ public class BasicCombat : MonoBehaviour
     public float TimeBetweenAttacks { get { return timeBetweenAttacks; } }
     public EAttackType AttackType { get { return attackType; } }
 
+
     private void Awake()
     {
         playerDetector = GetComponent<PlayerDetector>();

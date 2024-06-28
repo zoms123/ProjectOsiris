@@ -74,7 +74,7 @@ public class LifeSystem : MonoBehaviour
     {
         // TODO as we are using triggers deffine a way to differenciate who is shooting and who is receiving the damage
         DamageDealer damageDealer = collider.GetComponent<DamageDealer>();
-        if (damageDealer && !damageDealer.gameObject.CompareTag(tag))
+        if (damageDealer && collider.GetComponent<DistanceAttack>().OwnerObject.tag != tag)
         {
             ReceiveDamage(damageDealer.Damage);
         }

@@ -6,7 +6,7 @@ public abstract class DistanceAttack : MonoBehaviour, IDistanceAttack
     [SerializeField] protected float lifetime;
     protected Vector3 direction;
     protected bool initialized;
-    private GameObject ownerObject;
+    protected GameObject ownerObject;
 
     public GameObject OwnerObject { get { return ownerObject; } }
 
