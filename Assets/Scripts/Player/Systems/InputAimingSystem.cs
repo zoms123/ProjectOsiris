@@ -6,6 +6,7 @@ public class InputAimingSystem : PlayerSystem
 {
     [Header("References")]
     [SerializeField, Required] private InputManagerSO inputManager;
+    [SerializeField, Required] private GameManagerSO gameManager;
 
     [Header("Camera Settings")]
     [SerializeField, Required] private CinemachineVirtualCamera playerCamera;
@@ -64,6 +65,10 @@ public class InputAimingSystem : PlayerSystem
         inputManager.OnAim += HandleAim;
 
         player.ID.playerEvents.OnGetAimPosition += GiveAimPosition;
+
+        gameManager.OnUpdateControllerSensitivity += UpdateControllerSensitivity;
+        gameManager.OnUpdateAimSensitivity += UpdateAimSensitivity;
+        gameManager.OnUpdateInvertY += UpdateInvertY;
     }
 
     private void HandleLook(Vector2 newLook)
@@ -89,12 +94,34 @@ public class InputAimingSystem : PlayerSystem
         }
     }
 
+    private void UpdateControllerSensitivity()
+    {
+        if (PlayerPrefs.HasKey("masterSensitivity"))
+            cameraSensitivity = PlayerPrefs.GetFloat("masterSensitivity");
+    }
+
+    private void UpdateAimSensitivity()
+    {
+        if (PlayerPrefs.HasKey("masterAimSensitivity"))
+            aimCameraSensitivity = PlayerPrefs.GetFloat("masterAimSensitivity");
+    }
+
+    private void UpdateInvertY()
+    {
+        if (PlayerPrefs.HasKey("masterInvertY"))
+            invertY = PlayerPrefs.GetInt("masterInvertY");
+    }
+
     private void OnDisable()
     {
         inputManager.OnLook -= HandleLook;
         inputManager.OnAim -= HandleAim;
 
         player.ID.playerEvents.OnGetAimPosition -= GiveAimPosition;
+
+        gameManager.OnUpdateControllerSensitivity -= UpdateControllerSensitivity;
+        gameManager.OnUpdateAimSensitivity -= UpdateAimSensitivity;
+        gameManager.OnUpdateInvertY -= UpdateInvertY;
     }
 
     #endregion
@@ -135,14 +162,9 @@ public class InputAimingSystem : PlayerSystem
 
     private void LoadGamePlayPrefs()
     {
-        if (PlayerPrefs.HasKey("masterSensitivity"))
-            cameraSensitivity = PlayerPrefs.GetFloat("masterSensitivity");
-
-        if (PlayerPrefs.HasKey("masterAimSensitivity"))
-            aimCameraSensitivity = PlayerPrefs.GetFloat("masterAimSensitivity");
-
-        if (PlayerPrefs.HasKey("masterInvertY"))
-            invertY = PlayerPrefs.GetInt("masterInvertY");
+        UpdateControllerSensitivity();
+        UpdateAimSensitivity();
+        UpdateInvertY();
     }
 
     private void HandleAimPosition()

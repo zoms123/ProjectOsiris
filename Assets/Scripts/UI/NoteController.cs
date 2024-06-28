@@ -7,6 +7,7 @@ using UnityEngine;
 public class NoteController : MonoBehaviour, IInteractable
 {
     [Header("References")]
+    [SerializeField, Required] private InputManagerSO inputManager;
     [SerializeField, Required] private GameManagerSO gameManager;
 
     [Header("Note Settings")]
@@ -29,6 +30,8 @@ public class NoteController : MonoBehaviour, IInteractable
             //Open Note
             gameManager.PlayerOpenNote(noteText);
             active = true;
+            //inputManager.DisableGameplayInputs();
+            //inputManager.DisableUI();
             Time.timeScale = 0f;
         }
         else
@@ -36,6 +39,8 @@ public class NoteController : MonoBehaviour, IInteractable
             //Close Note
             gameManager.PlayerCloseNote();
             active = false;
+            //inputManager.EnableGameplayInputs();
+            //inputManager.EnableUI();
             Time.timeScale = 1f;
         }
     }

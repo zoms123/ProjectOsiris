@@ -7,7 +7,7 @@ public class CanvasManager : MonoBehaviour
     [Header("References")]
     [SerializeField, Required] private GameManagerSO gameManager;
 
-    [Header("Canvas Elemets")]
+    [Header("Canvas Elements")]
     [SerializeField, Required] private RawImage powerIcon;
     [SerializeField, Required] private RawImage lowLifeImage;
     [SerializeField, Required] private GameObject noteUI;
@@ -16,6 +16,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Required] private RawImage tutorialIcon;
     [SerializeField, Required] private GameObject tutorial;
     [SerializeField, Required] private Image brightnessPanel;
+
 
     [Header("Textures")]
     [SerializeField] private Texture2D gravity;
@@ -40,6 +41,7 @@ public class CanvasManager : MonoBehaviour
         gameManager.OnPlayerCloseNote += HideNoteUI;
         gameManager.OnPlayerEnterTutorialZone += ShowTutorialUI;
         gameManager.OnPlayerExitTutorialZone += HideTutorialUI;
+        gameManager.OnUpdateBrightness += UpdateBrightness;
     }
 
     private void ChangePowerUI(PowerType powerType)
@@ -110,6 +112,7 @@ public class CanvasManager : MonoBehaviour
         gameManager.OnPlayerCloseNote -= HideNoteUI;
         gameManager.OnPlayerEnterTutorialZone -= ShowTutorialUI;
         gameManager.OnPlayerExitTutorialZone -= HideTutorialUI;
+        gameManager.OnUpdateBrightness -= UpdateBrightness;
     }
 
     #endregion
@@ -122,12 +125,12 @@ public class CanvasManager : MonoBehaviour
             UpdateBrightness(PlayerPrefs.GetFloat("masterBrightness"));
     }
 
-    private void UpdateBrightness(float brightness)
+    private void UpdateBrightness(float newBrightness)
     {
         brightnessPanel.color = new Color(brightnessPanel.color.r, // Red
                                           brightnessPanel.color.g, // Green
                                           brightnessPanel.color.b, // Blue
-                                          1 - brightness); // Alpha
+                                          1 - newBrightness); // Alpha
     }
 
     #endregion
