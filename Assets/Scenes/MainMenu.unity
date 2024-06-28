@@ -11273,7 +11273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1766456066
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12462,13 +12462,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1620963213}
+  - {fileID: 1191407722}
   - {fileID: 1491406943}
   - {fileID: 399895534}
   - {fileID: 1828551388}
   - {fileID: 2070341375}
   - {fileID: 457109139}
   - {fileID: 1766456066}
-  - {fileID: 1191407722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12489,11 +12489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canUse: 1
-  noSavedGameDialog: {fileID: 95410286}
-  _newGameLevel: Level0Puerto
   brightnessSlider: {fileID: 240933966}
   brightnessTextValue: {fileID: 749957519}
-  brightnessPanel: {fileID: 1191407723}
   defaultBrightness: 1
   qualityDropdown: {fileID: 1221749121}
   defaultQuality: 2
@@ -12509,6 +12506,9 @@ MonoBehaviour:
   invertYToggle: {fileID: 767655267}
   defaultInvertY: 0
   confirmationPrompt: {fileID: 1766456065}
+  noSavedGameDialog: {fileID: 95410286}
+  _newGameLevel: Level0Puerto
+  brightnessPanel: {fileID: 1191407723}
 --- !u!1 &1878679754
 GameObject:
   m_ObjectHideFlags: 0

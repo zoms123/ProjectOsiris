@@ -19,6 +19,12 @@ public class GameManagerSO : ScriptableObject
     public event Action<string, Texture> OnPlayerEnterTutorialZone;
     public event Action OnPlayerExitTutorialZone;
 
+    // UI PauseMenu
+    public event Action<float> OnUpdateBrightness;
+    public event Action OnUpdateControllerSensitivity;
+    public event Action OnUpdateAimSensitivity;
+    public event Action OnUpdateInvertY;
+
     #region Public Methods
 
     public void PlayerChangePower(PowerType powerType)
@@ -55,6 +61,27 @@ public class GameManagerSO : ScriptableObject
     {
         OnPlayerExitTutorialZone?.Invoke();
     }
+
+    public void UpdateBrightness(float newBrightness)
+    {
+        OnUpdateBrightness?.Invoke(newBrightness);
+    }
+
+    public void UpdateControllerSensitivity()
+    {
+        OnUpdateControllerSensitivity?.Invoke();
+    }
+
+    public void UpdateAimSensitivity()
+    {
+        OnUpdateAimSensitivity?.Invoke();
+    }
+
+    public void UpdateInvertY()
+    {
+        OnUpdateInvertY?.Invoke();
+    }
+
 
     #endregion
 }
