@@ -139,7 +139,7 @@ public class InputGravityPowerSystem : PlayerSystem
                     }
                 }
             }
-            else if (interactable.CanInteract(PowerType.Gravity))
+            else
             {
                 OnInteractableLost();
             }

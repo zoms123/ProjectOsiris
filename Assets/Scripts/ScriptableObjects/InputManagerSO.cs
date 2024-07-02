@@ -22,8 +22,6 @@ public class InputManagerSO : ScriptableObject
     public event Action<Vector2> OnControlObjectXY;
     public event Action<Vector2> OnControlObjectZ;
 
-    public CursorLockMode cursorLockMode = CursorLockMode.None;
-
     private bool puzzleGravityAbilityIsEnabled = false;
 
     #region Events
@@ -315,10 +313,10 @@ public class InputManagerSO : ScriptableObject
         puzzleGravityAbilityIsEnabled = false;
     }
 
-    public void SetCursorState(CursorLockMode cursorMode)
+    public void SetCursorState(bool newState)
     {
-        cursorLockMode = cursorMode;
-        Cursor.lockState = cursorLockMode;
+        Cursor.visible = !newState;
+        Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     #endregion

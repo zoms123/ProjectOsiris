@@ -14,6 +14,7 @@ public struct PlayerEvents
     // Aiming Events
     public Action<bool> OnPlayerAim;
     public Action<Vector3> OnGiveAimPosition;
+    public Action<bool, float, float> OnUpdateCameraSettings;
 
     // Powers Events
     public Action OnGetAimPosition;
@@ -24,7 +25,7 @@ public struct PlayerEvents
     public Action<string, bool, bool, bool, bool> OnChangeAnimation;
     public Action<bool> OnAnimationGroundedUpdate;
     public Action<float, float, bool> OnUpdateAnimationMovementParameters;
-    public Action<int, float> OnUpdateAimParameters;
+    public Action<int, float, float> OnUpdateAimParameters;
 
     // Audio Events
     public Action<AudioClip> OnPlayerPlaySound;
