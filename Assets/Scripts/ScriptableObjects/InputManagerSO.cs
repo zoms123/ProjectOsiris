@@ -254,11 +254,7 @@ public class InputManagerSO : ScriptableObject
         EnablePlayerMovement();
         EnablePlayerCamera();
         EnablePlayerActions();
-
-        if (puzzleGravityAbilityIsEnabled)
-            EnablePlayerGravityPuzzle();
-        else
-            EnablePlayerPowers();
+        EnablePlayerPowers();
     }
 
     public void DisableGameplayInputs()
@@ -268,9 +264,11 @@ public class InputManagerSO : ScriptableObject
         DisablePlayerActions();
 
         if (puzzleGravityAbilityIsEnabled)
+        {
             DisablePlayerGravityPuzzle();
-        else
-            DisablePlayerPowers();
+            puzzleGravityAbilityIsEnabled = false;
+        }
+        DisablePlayerPowers();
     }
 
     #endregion
@@ -299,7 +297,8 @@ public class InputManagerSO : ScriptableObject
 
     public void PuzzleGravityAbilityEnabled()
     {
-        DisablePlayerPowers();
+        controls.PlayerPowers.PowerSelect.started -= PowerSelect;
+        controls.PlayerPowers.CombatAbility.started -= CombatAbility;
         EnablePlayerGravityPuzzle();
 
         puzzleGravityAbilityIsEnabled = true;
@@ -308,7 +307,8 @@ public class InputManagerSO : ScriptableObject
     public void PuzzleGravityAbilityDisabled()
     {
         DisablePlayerGravityPuzzle();
-        EnablePlayerPowers();
+        controls.PlayerPowers.PowerSelect.started += PowerSelect;
+        controls.PlayerPowers.CombatAbility.started += CombatAbility;
 
         puzzleGravityAbilityIsEnabled = false;
     }

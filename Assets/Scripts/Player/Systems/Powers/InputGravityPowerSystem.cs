@@ -191,6 +191,8 @@ public class InputGravityPowerSystem : PlayerSystem
             gameManager.PlayerChangePower(PowerType.None);
         }
 
+        inputManager.PuzzleGravityAbilityDisabled();
+
         inputManager.OnPowerSelect -= OnPowerSelected;
         inputManager.OnCombatAbility -= CombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
