@@ -24,9 +24,11 @@ public class InputMovementSystem : PlayerSystem
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpHeight = 3f;
-    [SerializeField] private float jumpForwardSpeed = 5f;
+    [SerializeField] private float jumpForwardSpeedWalking = 3f;
+    [SerializeField] private float jumpForwardSpeedRunning = 6f;
     [SerializeField] private float airMovementSpeed = 2f;
     [SerializeField] private float freeFallSpeed = 2f;
+    private float jumpForwardSpeed;
 
     private Vector3 moveDirection;
     private Vector3 jumpDirection;
@@ -190,6 +192,8 @@ public class InputMovementSystem : PlayerSystem
 
         isJumping = true;
         jumpDirection = GetMoveDirection();
+
+        jumpForwardSpeed = isSprintInputPressed ? jumpForwardSpeedRunning : jumpForwardSpeedWalking;
 
         if (jumpDirection != Vector3.zero)
             jumpDirection *= jumpFactor;

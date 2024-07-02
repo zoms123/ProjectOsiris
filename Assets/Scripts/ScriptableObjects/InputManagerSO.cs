@@ -22,8 +22,6 @@ public class InputManagerSO : ScriptableObject
     public event Action<Vector2> OnControlObjectXY;
     public event Action<Vector2> OnControlObjectZ;
 
-    public CursorLockMode cursorLockMode = CursorLockMode.None;
-
     private bool puzzleGravityAbilityIsEnabled = false;
 
     #region Events
@@ -256,11 +254,7 @@ public class InputManagerSO : ScriptableObject
         EnablePlayerMovement();
         EnablePlayerCamera();
         EnablePlayerActions();
-
-        if (puzzleGravityAbilityIsEnabled)
-            EnablePlayerGravityPuzzle();
-        else
-            EnablePlayerPowers();
+        EnablePlayerPowers();
     }
 
     public void DisableGameplayInputs()
@@ -270,9 +264,11 @@ public class InputManagerSO : ScriptableObject
         DisablePlayerActions();
 
         if (puzzleGravityAbilityIsEnabled)
+        {
             DisablePlayerGravityPuzzle();
-        else
-            DisablePlayerPowers();
+            puzzleGravityAbilityIsEnabled = false;
+        }
+        DisablePlayerPowers();
     }
 
     #endregion
@@ -301,7 +297,8 @@ public class InputManagerSO : ScriptableObject
 
     public void PuzzleGravityAbilityEnabled()
     {
-        DisablePlayerPowers();
+        controls.PlayerPowers.PowerSelect.started -= PowerSelect;
+        controls.PlayerPowers.CombatAbility.started -= CombatAbility;
         EnablePlayerGravityPuzzle();
 
         puzzleGravityAbilityIsEnabled = true;
@@ -310,15 +307,16 @@ public class InputManagerSO : ScriptableObject
     public void PuzzleGravityAbilityDisabled()
     {
         DisablePlayerGravityPuzzle();
-        EnablePlayerPowers();
+        controls.PlayerPowers.PowerSelect.started += PowerSelect;
+        controls.PlayerPowers.CombatAbility.started += CombatAbility;
 
         puzzleGravityAbilityIsEnabled = false;
     }
 
-    public void SetCursorState(CursorLockMode cursorMode)
+    public void SetCursorState(bool newState)
     {
-        cursorLockMode = cursorMode;
-        Cursor.lockState = cursorLockMode;
+        Cursor.visible = !newState;
+        Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     #endregion

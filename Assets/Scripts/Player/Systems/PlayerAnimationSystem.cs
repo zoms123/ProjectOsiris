@@ -1,11 +1,17 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerAnimationSystem : PlayerSystem
 {
     private Animator animator;
 
     [Header("Animation Settings")]
+    [SerializeField, Required] private Rig bodyRig;
     [SerializeField] private float movementAnimationDampTime = 0.2f;
+    [SerializeField] private float transitionSpeed = 10f;
+
+    private float layerWeight = 0f;
+    private float layerTargetWeight = 0f;
 
     private int horizontal;
     private int vertical;
@@ -19,6 +25,8 @@ public class PlayerAnimationSystem : PlayerSystem
         horizontal = Animator.StringToHash("Horizontal");
         vertical = Animator.StringToHash("Vertical");
         grounded = Animator.StringToHash("IsGrounded");
+
+        bodyRig.weight = 0f;
     }
 
     #region Events
@@ -58,9 +66,15 @@ public class PlayerAnimationSystem : PlayerSystem
         animator.SetBool(grounded, isGrounded);
     }
 
-    private void UpdateAimParameters(int layerIndex, float weight)
+    private void UpdateAimParameters(int layerIndex, float weight, float targetWeight)
     {
-        animator.SetLayerWeight(layerIndex, weight);
+        layerWeight = weight;
+        layerTargetWeight = targetWeight;
+
+        // apply upper body layer and body rig weights
+        bodyRig.weight = Mathf.Lerp(layerWeight, layerTargetWeight, Time.deltaTime * transitionSpeed);
+
+        animator.SetLayerWeight(layerIndex, layerWeight);
     }
 
     private void OnDisable()

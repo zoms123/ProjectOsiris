@@ -10,6 +10,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
     [SerializeField] private Transform detachPoint;
     private IInteractable interactable;
     private IAttachable attachable;
+    private ILosableObject losableObjet;
     private GravityMovableObject gravityMovableObject;
 
     public event Action OnActivated;
@@ -24,19 +25,21 @@ public class QuestColumnInteractable : InteractableBase, IActivable
         {
             interactable = gravityMovableObject.GetComponent<IInteractable>();
             attachable = gravityMovableObject.GetComponent<IAttachable>();
+            losableObjet = gravityMovableObject.GetComponent<ILosableObject>();
             Interact();
         }
     }
 
     public override bool CanInteract(PowerType powerType)
     {
-        return true;
+        return powerType == PowerType.None;
     }
 
     public override void Interact()
     {
         if(interactable != null && !active)
         {
+            losableObjet.LoseObject();
             gravityMovableObject.MultiplySpeed(attachingMovementSpeedFactor);
             attachable.ChangeParent(zeroGravityZone.transform);
             interactable.Interact();
@@ -52,6 +55,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
             interactable.Interact();
             gravityMovableObject.DeactivateWhenAttached();
             active = false;
+            StopAllCoroutines();
             // TODO Change color here
             OnDeactivated?.Invoke();
         }
@@ -84,6 +88,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
         {
             interactable = other.GetComponent<IInteractable>();
             attachable = other.GetComponent<IAttachable>();
+            losableObjet = other.GetComponent<ILosableObject>();
             gravityMovableObject = other.GetComponent<GravityMovableObject>();
         }
     }
@@ -94,6 +99,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
         {
             interactable = other.GetComponent<IInteractable>();
             attachable = other.GetComponent<IAttachable>();
+            losableObjet = other.GetComponent<ILosableObject>();
             gravityMovableObject = other.GetComponent<GravityMovableObject>();
         }
     }
@@ -104,6 +110,7 @@ public class QuestColumnInteractable : InteractableBase, IActivable
         {
             interactable = null;
             attachable = null;
+            losableObjet = null;
             gravityMovableObject = null;
         }
     }

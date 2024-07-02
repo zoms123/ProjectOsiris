@@ -139,7 +139,7 @@ public class InputGravityPowerSystem : PlayerSystem
                     }
                 }
             }
-            else if (interactable.CanInteract(PowerType.Gravity))
+            else
             {
                 OnInteractableLost();
             }
@@ -190,6 +190,8 @@ public class InputGravityPowerSystem : PlayerSystem
             gravityIsActive = false;
             gameManager.PlayerChangePower(PowerType.None);
         }
+
+        inputManager.PuzzleGravityAbilityDisabled();
 
         inputManager.OnPowerSelect -= OnPowerSelected;
         inputManager.OnCombatAbility -= CombatAbility;

@@ -54,8 +54,13 @@ public class GravityMovableObject : MonoBehaviour, IInteractable, IAttachable, I
         }
         if (attached && effectorActivated && !CheckIfInteractableIsInRange())
         {
-            OnLoseObject?.Invoke();
+            LoseObject();
         }
+    }
+
+    public void LoseObject()
+    {
+        OnLoseObject?.Invoke();
     }
 
     private bool CheckIfInteractableIsInRange()

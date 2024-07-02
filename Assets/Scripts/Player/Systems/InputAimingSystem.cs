@@ -8,81 +8,43 @@ public class InputAimingSystem : PlayerSystem
     [SerializeField, Required] private InputManagerSO inputManager;
     [SerializeField, Required] private GameManagerSO gameManager;
 
-    [Header("Camera Settings")]
-    [SerializeField, Required] private CinemachineVirtualCamera playerCamera;
-    [SerializeField, Required] private Transform cameraFollowTransform;
-    [SerializeField] private float defaultCameraSensitivity = 1.0f;
-    [SerializeField] private float aimCameraSensitivity = 0.5f;
-    [SerializeField] private float aimFOV = 50.0f;
-    [Tooltip("How far in degrees you can move the camera up")]
-    [SerializeField] private float cameraTopClamp = 70.0f;
-    [Tooltip("How far in degrees you can move the camera down")]
-    [SerializeField] private float cameraBottomClamp = -30.0f;
-
-    [Header("Animation Settings")]
-    [SerializeField, Required] private Rig bodyRig;
-    [SerializeField] private float aimTransitionSpeed = 5f;
-
     [Header("Aim Settings")]
     [SerializeField, Required] private Transform aimLookAtTransform;
     [SerializeField] private LayerMask aimingMask;
+    [SerializeField] private float aimCameraSensitivity = 0.5f;
+    [SerializeField] private float aimFOV = 50.0f;
     [SerializeField] private float aimTargetSmoothSpeed = 20;
     [SerializeField] private float playerRotationSpeed = 20;
+    [SerializeField] private float aimTransitionSpeed = 10f;
 
-    private Vector2 lookInput;
-
-    private float cameraSensitivity;
-    private float defaultFOV;
-    private float currentCameraFOV;
     private float aimLayerWeight = 0f;
     private float aimLayerTargetWeight = 0f;
-    private float cinemachineTargetYaw;
-    private float cinemachineTargetPitch;
-
-    private int invertY = 1;
 
     private bool isAiming = false;
 
     private void Start()
     {
-        Cursor.visible = false;
-        inputManager.SetCursorState(CursorLockMode.Locked);
-
-        defaultFOV = playerCamera.m_Lens.FieldOfView;
-        currentCameraFOV = defaultFOV;
-        cameraSensitivity = defaultCameraSensitivity;
-
-        bodyRig.weight = 0f;
-
-        LoadGamePlayPrefs();
+        LoadPlayerPrefs();
     }
 
     #region Events
 
     private void OnEnable()
     {
-        inputManager.OnLook += HandleLook;
         inputManager.OnAim += HandleAim;
 
         player.ID.playerEvents.OnGetAimPosition += GiveAimPosition;
 
-        gameManager.OnUpdateControllerSensitivity += UpdateControllerSensitivity;
         gameManager.OnUpdateAimSensitivity += UpdateAimSensitivity;
-        gameManager.OnUpdateInvertY += UpdateInvertY;
     }
 
-    private void HandleLook(Vector2 newLook)
-    {
-        lookInput = newLook;
-    }
 
     private void HandleAim(bool isAiming)
     {
         this.isAiming = isAiming;
-        currentCameraFOV = isAiming ? aimFOV : defaultFOV;
         aimLayerTargetWeight = isAiming ? 1f : 0f;
-        cameraSensitivity = isAiming ? aimCameraSensitivity : defaultCameraSensitivity;
 
+        player.ID.playerEvents.OnUpdateCameraSettings?.Invoke(isAiming, aimCameraSensitivity, aimFOV);
         player.ID.playerEvents.OnPlayerAim?.Invoke(isAiming);
     }
 
@@ -94,34 +56,22 @@ public class InputAimingSystem : PlayerSystem
         }
     }
 
-    private void UpdateControllerSensitivity()
-    {
-        if (PlayerPrefs.HasKey("masterSensitivity"))
-            cameraSensitivity = PlayerPrefs.GetFloat("masterSensitivity");
-    }
-
     private void UpdateAimSensitivity()
     {
         if (PlayerPrefs.HasKey("masterAimSensitivity"))
+        {
             aimCameraSensitivity = PlayerPrefs.GetFloat("masterAimSensitivity");
-    }
-
-    private void UpdateInvertY()
-    {
-        if (PlayerPrefs.HasKey("masterInvertY"))
-            invertY = PlayerPrefs.GetInt("masterInvertY");
+            player.ID.playerEvents.OnUpdateCameraSettings?.Invoke(isAiming, aimCameraSensitivity, aimFOV);
+        }
     }
 
     private void OnDisable()
     {
-        inputManager.OnLook -= HandleLook;
         inputManager.OnAim -= HandleAim;
 
         player.ID.playerEvents.OnGetAimPosition -= GiveAimPosition;
 
-        gameManager.OnUpdateControllerSensitivity -= UpdateControllerSensitivity;
         gameManager.OnUpdateAimSensitivity -= UpdateAimSensitivity;
-        gameManager.OnUpdateInvertY -= UpdateInvertY;
     }
 
     #endregion
@@ -130,41 +80,19 @@ public class InputAimingSystem : PlayerSystem
     {
         // apply upper body layer and body rig weights
         aimLayerWeight = Mathf.Lerp(aimLayerWeight, aimLayerTargetWeight, Time.deltaTime * aimTransitionSpeed);
-        bodyRig.weight = Mathf.Lerp(aimLayerWeight, aimLayerTargetWeight, Time.deltaTime * aimTransitionSpeed);
-        player.ID.playerEvents.OnUpdateAimParameters?.Invoke(1, aimLayerWeight);
 
-        // camera field of view transition
-        playerCamera.m_Lens.FieldOfView = Mathf.Lerp(playerCamera.m_Lens.FieldOfView, currentCameraFOV, Time.deltaTime * aimTransitionSpeed);
+        player.ID.playerEvents.OnUpdateAimParameters?.Invoke(1, aimLayerWeight, aimLayerTargetWeight);
 
         HandleAimPosition();
 
         if (isAiming) RotatePlayerTowardsAimDirection();
     }
 
-    private void LateUpdate()
-    {
-        // if look input is moving
-        if (lookInput.sqrMagnitude >= 0.01f)
-        {
-            cinemachineTargetYaw += lookInput.x * cameraSensitivity;
-            cinemachineTargetPitch -= lookInput.y * cameraSensitivity * invertY;
-        }
-
-        // clamp rotations so values are limited 360 degrees
-        cinemachineTargetYaw = ClampAngle(cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        cinemachineTargetPitch = ClampAngle(cinemachineTargetPitch, cameraBottomClamp, cameraTopClamp);
-
-        // camera will follow this target
-        cameraFollowTransform.rotation = Quaternion.Euler(cinemachineTargetPitch, cinemachineTargetYaw, 0.0f);
-    }
-
     #region Methods
 
-    private void LoadGamePlayPrefs()
+    private void LoadPlayerPrefs()
     {
-        UpdateControllerSensitivity();
         UpdateAimSensitivity();
-        UpdateInvertY();
     }
 
     private void HandleAimPosition()
@@ -201,13 +129,6 @@ public class InputAimingSystem : PlayerSystem
         Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * playerRotationSpeed);
-    }
-
-    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-    {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
     #endregion
