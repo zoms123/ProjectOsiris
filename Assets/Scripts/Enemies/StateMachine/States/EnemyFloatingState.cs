@@ -12,6 +12,7 @@ public class EnemyFloatingState : EnemyBaseState
 
     public override void OnEnter()
     {
+        Debug.Log("Entering Floating State");
         animator.SetTrigger("Floating");
         agent.isStopped = true;
         agent.enabled = false;

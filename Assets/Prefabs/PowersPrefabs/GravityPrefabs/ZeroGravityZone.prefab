@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 216646202845819433}
   - component: {fileID: 7319411794853333652}
   - component: {fileID: 6013091215112234084}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: ZeroGravityZone
   m_TagString: ZeroGravityZone
   m_Icon: {fileID: 0}

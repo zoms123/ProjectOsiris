@@ -70,12 +70,12 @@ public class EnemyBase : MonoBehaviour
             Debug.DrawRay(obstaclesDetectorRayOrigin.position, directionToPlayer);
             if (!Physics.Raycast(obstaclesDetectorRayOrigin.position, directionToPlayer, out RaycastHit hitInfo, distanceToPlayer, obstacleLayers, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log("Raicast No hit");
+                Debug.Log("Raycast No hit");
                 return true;
             }
             else
             {
-                Debug.Log("Raicast false" + hitInfo.collider.gameObject);
+                Debug.Log("Raycast false" + hitInfo.collider.gameObject);
                 return false;
             }
         }

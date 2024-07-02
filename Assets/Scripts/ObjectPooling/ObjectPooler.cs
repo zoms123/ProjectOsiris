@@ -25,7 +25,6 @@ public class ObjectPooler
             pools[key] = new(prefab, initialSize);
             originalPrefabs[key] = prefab;
         }
-        else Debug.LogWarning($"Pool for {key} already exists");
     }
 
     public GameObject Spawn(GameObject prefab, Vector3 position = default, Quaternion rotation = default)
@@ -55,7 +54,6 @@ public class ObjectPooler
             }
             else
             {
-                Debug.LogWarning($"No pool exists for {key}");
                 GameObject.Destroy(obj, despawnDelay);
             }
         }

@@ -91,6 +91,7 @@ public class InputCrystalPowerSystem : PlayerSystem
                 Debug.LogError("Failed to spawn or get ThrowableCrystal component.");
             }
         }
+        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
     }
 
     private void PuzzleAbility()

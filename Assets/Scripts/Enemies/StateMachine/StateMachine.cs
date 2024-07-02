@@ -1,12 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine.InputSystem.XR.Haptics;
 
 public class StateMachine {
-    StateNode current;
-    Dictionary<Type, StateNode> nodes = new();
-    HashSet<ITransition> anyTransitions = new();
+    private StateNode current;
+    private Dictionary<Type, StateNode> nodes = new();
+    private HashSet<ITransition> anyTransitions = new();
 
     public void Update()
     {
