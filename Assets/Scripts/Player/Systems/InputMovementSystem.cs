@@ -1,33 +1,57 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem.Processors;
-using UnityEngine.TextCore.Text;
 
 public class InputMovementSystem : PlayerSystem
 {
     [Header("References")]
-    [SerializeField, Required] private InputManagerSO inputManager;
+
+    [SerializeField, Required] 
+    private InputManagerSO inputManager;
 
     [Header("Ground Check & Falling")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private float groundCheckSphereRadius = 0.3f;
-    [Tooltip("The force at which the character is sticking to the ground whilst it is grounded")]
-    [SerializeField] protected float groundedYVelocity = -20f;
-    [Tooltip("The force at which the character begins to fall when it become ungrounded (Rises as it falls longer)")]
-    [SerializeField] protected float fallStartYVelocity = -5f;
-    [SerializeField] protected float gravityFactor = -9.81f;
+
+    [SerializeField] 
+    private LayerMask groundLayer;
+
+    [SerializeField] 
+    private float groundCheckSphereRadius = 0.3f;
+
+    [SerializeField, Tooltip("The force at which the character is sticking to the ground whilst it is grounded")] 
+    protected float groundedYVelocity = -20f;
+
+    [SerializeField, Tooltip("The force at which the character begins to fall when it become ungrounded (Rises as it falls longer)")] 
+    protected float fallStartYVelocity = -5f;
+
+    [SerializeField] 
+    protected float gravityFactor = -9.81f;
 
     [Header("Movement Settings")]
-    [SerializeField] private float walkingSpeed = 2f;
-    [SerializeField] private float runningSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 15f;
+
+    [SerializeField] 
+    private float walkingSpeed = 2f;
+
+    [SerializeField] 
+    private float runningSpeed = 5f;
+
+    [SerializeField] 
+    private float rotationSpeed = 15f;
 
     [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight = 3f;
-    [SerializeField] private float jumpForwardSpeedWalking = 3f;
-    [SerializeField] private float jumpForwardSpeedRunning = 6f;
-    [SerializeField] private float airMovementSpeed = 2f;
-    [SerializeField] private float freeFallSpeed = 2f;
+
+    [SerializeField] 
+    private float jumpHeight = 3f;
+
+    [SerializeField] 
+    private float jumpForwardSpeedWalking = 3f;
+
+    [SerializeField] 
+    private float jumpForwardSpeedRunning = 6f;
+
+    [SerializeField] 
+    private float airMovementSpeed = 2f;
+
+    [SerializeField] 
+    private float freeFallSpeed = 2f;
+
     private float jumpForwardSpeed;
 
     private Vector3 moveDirection;
@@ -36,7 +60,6 @@ public class InputMovementSystem : PlayerSystem
     private Vector2 inputDirection;
 
     private float jumpFactor;
-    private float inAirTimer = 0;
     private float currentSpeed;
     private float moveAmount = 0f;
 
@@ -51,11 +74,13 @@ public class InputMovementSystem : PlayerSystem
     private bool canRotate = true;
     private bool canMove = true;
 
-    private float JUMP_FACTOR_WALKING = 0.25f;
-    private float JUMP_FACTOR_RUNNING = 0.5f;
+    private readonly float JUMP_FACTOR_WALKING = 0.25f;
+    private readonly float JUMP_FACTOR_RUNNING = 0.5f;
 
     private Transform mainCameraTransform;
-    [HideInInspector] public CharacterController characterController;
+
+    [HideInInspector] 
+    public CharacterController characterController;
 
     protected override void Awake()
     {
@@ -233,7 +258,6 @@ public class InputMovementSystem : PlayerSystem
             // If we are not attempting to jump or move upward
             if (verticalVelocity.y < 0)
             {
-                inAirTimer = 0;
                 fallingVelocityHasBeenSet = false;
                 verticalVelocity.y = groundedYVelocity;
             }
@@ -246,8 +270,6 @@ public class InputMovementSystem : PlayerSystem
                 fallingVelocityHasBeenSet = true;
                 verticalVelocity.y = fallStartYVelocity;
             }
-
-            inAirTimer += Time.deltaTime;
 
             verticalVelocity.y += gravityFactor * Time.deltaTime;
         }
@@ -309,7 +331,7 @@ public class InputMovementSystem : PlayerSystem
 
         moveDirection = GetMoveDirection();
 
-        characterController.Move(moveDirection * currentSpeed * Time.deltaTime);
+        characterController.Move(currentSpeed * Time.deltaTime * moveDirection);
     }
 
     private void HandleRotation()
