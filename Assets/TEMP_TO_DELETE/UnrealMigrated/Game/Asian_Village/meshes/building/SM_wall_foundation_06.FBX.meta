@@ -3,11 +3,31 @@ guid: 892fa8e4ff3bdb74b83a6e2a6841afa8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_brick_01_Inst
+    second: {fileID: 2100000, guid: 5ea55483f6cb913408e4ef126861a9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_concrete_WPO_01_Inst
+    second: {fileID: 2100000, guid: 756ad5a9371ee93409ee244245702697, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_concrete_05_Inst
+    second: {fileID: 2100000, guid: dd479f31a6c3f0c4aaf62a967cdf8148, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_stairs_01_Inst
+    second: {fileID: 2100000, guid: 9c38dfe31e343db498e371d385b04b1b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

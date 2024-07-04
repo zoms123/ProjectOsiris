@@ -3,11 +3,26 @@ guid: d4dfe41a29822b04e9b0a2a4633b58aa
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_wood_01_Inst
+    second: {fileID: 2100000, guid: d1b563afa8ed77048a6bc5fc1aa80cdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_column_decoration_01_Inst
+    second: {fileID: 2100000, guid: 49ec4ae91fbbe6c42bc2cb54873c720d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wood_02_Inst
+    second: {fileID: 2100000, guid: 8f39c9153e7976043a696c519e15d84f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

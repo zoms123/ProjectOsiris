@@ -3,11 +3,21 @@ guid: bfc3f1de645e0ed4c8c024217730c31c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_wood_06_Inst
+    second: {fileID: 2100000, guid: 1fe52589617b31648a6af7627caf626e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_thatched_roof
+    second: {fileID: 2100000, guid: 0185a83948df3684bbfb3cef3732f35b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

@@ -3,11 +3,21 @@ guid: 847e80b4437e9be4186598cc9a0a02de
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_metal_01_Inst
+    second: {fileID: 2100000, guid: 54e3e17f2b26b3d489f80019c97f1fa8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_metal_02_Inst
+    second: {fileID: 2100000, guid: a26d3288da29fb846bb09ab09e278ad9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

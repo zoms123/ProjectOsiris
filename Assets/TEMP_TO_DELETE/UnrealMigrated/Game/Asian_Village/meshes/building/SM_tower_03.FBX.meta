@@ -3,11 +3,66 @@ guid: 9cf875710213a6641813fa7b18758a3a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_block_foundation_01_Inst
+    second: {fileID: 2100000, guid: 165a6be71a78c6748b34e4c8e3e6e98a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_brick_01_Inst
+    second: {fileID: 2100000, guid: 5ea55483f6cb913408e4ef126861a9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_concrete_WPO_01_Inst
+    second: {fileID: 2100000, guid: 756ad5a9371ee93409ee244245702697, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_wood_01_Inst
+    second: {fileID: 2100000, guid: d1b563afa8ed77048a6bc5fc1aa80cdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_concrete_03_Inst
+    second: {fileID: 2100000, guid: 1bd2fb4acd877c644ba7b289a905d30a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_roof_01_Inst
+    second: {fileID: 2100000, guid: 439b561944e9aa1418a3a371cdcf4cfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_stairs_01_Inst
+    second: {fileID: 2100000, guid: 9c38dfe31e343db498e371d385b04b1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wood_01_Inst
+    second: {fileID: 2100000, guid: 4e9262209bf54084dabdfc233159cf8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wood_02_Inst
+    second: {fileID: 2100000, guid: 8f39c9153e7976043a696c519e15d84f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wooden_board_01_Inst
+    second: {fileID: 2100000, guid: 44b6a8437468e144aaa1bb94791252b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wooden_board_02_Inst
+    second: {fileID: 2100000, guid: 9c10e4941f932c3479aeebf5d078fee9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

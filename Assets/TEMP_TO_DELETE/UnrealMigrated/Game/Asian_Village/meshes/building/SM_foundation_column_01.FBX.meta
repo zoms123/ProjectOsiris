@@ -3,11 +3,16 @@ guid: 964355850f69d104f86f660b40d9f94d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_concrete_WPO_01_Inst
+    second: {fileID: 2100000, guid: 756ad5a9371ee93409ee244245702697, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

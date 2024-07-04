@@ -3,11 +3,16 @@ guid: f5160e1b4830e904da0cc6398f12ca37
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_column_decoration_01_Inst
+    second: {fileID: 2100000, guid: 49ec4ae91fbbe6c42bc2cb54873c720d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

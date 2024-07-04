@@ -3,11 +3,21 @@ guid: 72491df14bebab64b8dbc63daa7f8f7d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_brick_01_Inst
+    second: {fileID: 2100000, guid: 5ea55483f6cb913408e4ef126861a9db, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_concrete_03_Inst
+    second: {fileID: 2100000, guid: 1bd2fb4acd877c644ba7b289a905d30a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

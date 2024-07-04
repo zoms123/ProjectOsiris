@@ -3,11 +3,16 @@ guid: 2c474c4e70456e14593b5249f942a0ab
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wooden_fence_01_Inst
+    second: {fileID: 2100000, guid: 43af303bdf60d42408d056d23c3046c1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

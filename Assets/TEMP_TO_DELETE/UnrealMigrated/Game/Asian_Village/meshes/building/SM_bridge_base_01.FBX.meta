@@ -3,7 +3,22 @@ guid: 686155bf687769440bc079b82af70dc5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_bark_05_Inst
+    second: {fileID: 2100000, guid: 0ec405f18d46cb3429266d0562e32835, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_wood_03_Inst
+    second: {fileID: 2100000, guid: 3f910a10647286d41881bfb003ba2070, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_rope_01_Inst
+    second: {fileID: 2100000, guid: 69e7cc6f22ce443489d11c7db6d985d1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

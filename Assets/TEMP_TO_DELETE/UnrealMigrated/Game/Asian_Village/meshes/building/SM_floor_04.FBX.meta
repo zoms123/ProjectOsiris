@@ -3,11 +3,16 @@ guid: eb2beb25e0b462a42859e223328560ce
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_stone_tiles_01_Inst
+    second: {fileID: 2100000, guid: 6201d576968470443a568423f580e438, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4

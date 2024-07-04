@@ -3,11 +3,31 @@ guid: 5d80c2208e2233d4498e9961e4bad636
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_building_wood_01_Inst
+    second: {fileID: 2100000, guid: d1b563afa8ed77048a6bc5fc1aa80cdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_concrete_02_Inst
+    second: {fileID: 2100000, guid: 0c9fdd254ac70904198ab8cc1e850cc5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_concrete_03_Inst
+    second: {fileID: 2100000, guid: 1bd2fb4acd877c644ba7b289a905d30a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_wallpaper_01_Inst
+    second: {fileID: 2100000, guid: 5c55960ac8f6a1243ba35dfc9769041b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
