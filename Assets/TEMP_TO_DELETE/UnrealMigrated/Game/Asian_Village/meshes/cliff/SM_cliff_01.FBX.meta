@@ -3,11 +3,16 @@ guid: 60f09bb570037784a9d09dc2ae27fed1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_cliff_01_Inst
+    second: {fileID: 2100000, guid: 0077b8be4ef3874459805ce6b05b9e65, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
