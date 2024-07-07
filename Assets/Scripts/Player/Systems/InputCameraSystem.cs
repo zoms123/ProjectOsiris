@@ -15,9 +15,9 @@ public class InputCameraSystem : PlayerSystem
     [SerializeField] private float defaultCameraSensitivity = 1.0f;
     [SerializeField] private float transitionSpeedFOV = 10f;
     [Tooltip("How far in degrees you can move the camera up")]
-    [SerializeField] private float cameraTopClamp = 70.0f;
+    [SerializeField] private float defaultCameraTopClamp = 70.0f;
     [Tooltip("How far in degrees you can move the camera down")]
-    [SerializeField] private float cameraBottomClamp = -30.0f;
+    [SerializeField] private float defaultCameraBottomClamp = -70.0f;
 
     private Vector2 lookInput;
 
@@ -26,6 +26,8 @@ public class InputCameraSystem : PlayerSystem
     private float cameraSensitivity;
     private float cinemachineTargetYaw;
     private float cinemachineTargetPitch;
+    private float cameraTopClamp;
+    private float cameraBottomClamp;
 
     private int invertY = 1;
 
@@ -35,6 +37,8 @@ public class InputCameraSystem : PlayerSystem
 
         defaultFOV = playerCamera.m_Lens.FieldOfView;
         currentCameraFOV = defaultFOV;
+
+        ResetCameraRange();
 
         cameraSensitivity = defaultCameraSensitivity;
 
@@ -48,6 +52,8 @@ public class InputCameraSystem : PlayerSystem
         inputManager.OnLook += HandleLook;
 
         player.ID.playerEvents.OnUpdateCameraSettings += UpdateSettingsAfectedByAim;
+        player.ID.playerEvents.OnChangeCameraRange += ChangeCameraRange;
+        player.ID.playerEvents.OnResetCameraRange += ResetCameraRange;
 
         gameManager.OnUpdateControllerSensitivity += UpdateControllerSensitivity;
         gameManager.OnUpdateInvertY += UpdateInvertY;
@@ -72,6 +78,18 @@ public class InputCameraSystem : PlayerSystem
         }
     }
 
+    private void ChangeCameraRange(float newCameraTopClamp, float newCameraBottomClamp)
+    {
+        cameraTopClamp = newCameraTopClamp;
+        cameraBottomClamp = newCameraBottomClamp;
+    }
+
+    private void ResetCameraRange()
+    {
+        cameraTopClamp = defaultCameraTopClamp;
+        cameraBottomClamp = defaultCameraBottomClamp;
+    }
+
     private void UpdateControllerSensitivity()
     {
         if (PlayerPrefs.HasKey("masterSensitivity"))
@@ -90,6 +108,10 @@ public class InputCameraSystem : PlayerSystem
     private void OnDisable()
     {
         inputManager.OnLook -= HandleLook;
+
+        player.ID.playerEvents.OnUpdateCameraSettings -= UpdateSettingsAfectedByAim;
+        player.ID.playerEvents.OnChangeCameraRange -= ChangeCameraRange;
+        player.ID.playerEvents.OnResetCameraRange -= ResetCameraRange;
 
         gameManager.OnUpdateControllerSensitivity -= UpdateControllerSensitivity;
         gameManager.OnUpdateInvertY -= UpdateInvertY;

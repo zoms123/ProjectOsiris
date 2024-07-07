@@ -4127,7 +4127,8 @@ MonoBehaviour:
   runningSpeed: 6
   rotationSpeed: 15
   jumpHeight: 3
-  jumpForwardSpeed: 8
+  jumpForwardSpeedWalking: 3
+  jumpForwardSpeedRunning: 6
   airMovementSpeed: 3
   freeFallSpeed: 3
   characterController: {fileID: 0}
@@ -4163,8 +4164,8 @@ MonoBehaviour:
   cameraFollowTransform: {fileID: 1327704750478782601}
   defaultCameraSensitivity: 1.5
   transitionSpeedFOV: 5
-  cameraTopClamp: 20
-  cameraBottomClamp: -70
+  defaultCameraTopClamp: 70
+  defaultCameraBottomClamp: -70
 --- !u!114 &7928412382261013486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4225,6 +4226,8 @@ MonoBehaviour:
   attachPointTransform: {fileID: 1053375799754395057}
   controlMovementSpeed: 10
   gravityCombatAbilityCooldown: 0
+  cameraTopClampUsingGravity: 20
+  cameraBottomClampUsingGravity: -70
 --- !u!114 &1852545833070531625
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ZeroGravityEffector : MonoBehaviour
+public class ZeroGravityEffector : MonoBehaviour, IZeroGravityEffector
 {
 
     [SerializeField] bool applyInitialForce;
