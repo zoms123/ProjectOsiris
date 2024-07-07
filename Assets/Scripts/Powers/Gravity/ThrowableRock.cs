@@ -5,13 +5,25 @@ using UnityEngine.VFX;
 
 public class ThrowableRock : DistanceAttack
 {
+    private TrailRenderer trailRenderer;
+
+    private void Awake()
+    {
+        trailRenderer = GetComponent<TrailRenderer>();
+    }
+    private void OnDisable()
+    {
+        trailRenderer.Clear();
+    }
+
     public override void Initialize(Vector3 direction, GameObject ownerObject)
     {
         base.Initialize(direction, ownerObject);
     }
     protected override void PerformAttack()
     {
-          transform.Translate(direction * speed * Time.deltaTime, Space.World);
+         transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        
     }
 
     protected void ReturnToPool()

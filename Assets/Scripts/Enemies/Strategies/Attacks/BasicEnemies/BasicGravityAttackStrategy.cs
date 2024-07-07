@@ -27,7 +27,9 @@ public class BasicGravityAttackStrategy<T> : IAttackStrategy where T : MonoBehav
             T attack = attackObject.GetComponent<T>();
             if (attack != null)
             {
-                (attack as IDistanceAttack).Initialize(attackPoint.forward, ownerTransform.gameObject);
+                Transform targetPoint = GameObject.FindGameObjectWithTag("PlayerTargetPoint").transform;
+                Vector3 direction = targetPoint.position - attackObject.transform.position;
+                (attack as IDistanceAttack).Initialize(direction.normalized, ownerTransform.gameObject);
             }
         }
     }

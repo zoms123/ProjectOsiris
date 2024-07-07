@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Interactable
   - ZeroGravityZone
+  - PlayerTargetPoint
   layers:
   - Default
   - TransparentFX

@@ -24,4 +24,10 @@ public class PlayerDetector : MonoBehaviour
     public bool CanDetectPlayer() => detectionStrategy.Execute(out player);
 
     public float PlayerDistance(Vector3 position) => Vector3.Distance(position, Player.position);
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, sphereRadius);
+    }
 }
