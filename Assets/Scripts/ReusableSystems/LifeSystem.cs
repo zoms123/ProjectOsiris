@@ -39,6 +39,8 @@ public class LifeSystem : MonoBehaviour
         {
             health = 0f;
             transform.GetComponent<Animator>().SetBool("Dead", true);
+            transform.GetComponent<Collider>().enabled = false;
+            Destroy(transform.GetComponent<Rigidbody>());
         }
         else if (CompareTag("Player") && health <= 20f)
         {

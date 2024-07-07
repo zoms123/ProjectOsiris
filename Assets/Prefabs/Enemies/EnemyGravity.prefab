@@ -4293,6 +4293,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  canFloat: 1
 --- !u!114 &1630243983206746905
 MonoBehaviour:
   m_ObjectHideFlags: 0
