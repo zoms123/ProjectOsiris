@@ -7,6 +7,7 @@ public abstract class DistanceAttack : MonoBehaviour, IDistanceAttack
     protected Vector3 direction;
     protected bool initialized;
     protected GameObject ownerObject;
+    protected float speedMultiplier = 1;
 
     public GameObject OwnerObject { get { return ownerObject; } }
 

@@ -7,7 +7,8 @@ public class BasicCombat : MonoBehaviour
     [SerializeField] private GameObject attackPrefab;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private float attackDamage;
+    [SerializeField] private float attackDamageMultiplier = 1;
+    [SerializeField] private float attackSpeedMultiplier = 1;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsDamageable;
     [SerializeField] private string myTag;
@@ -20,6 +21,9 @@ public class BasicCombat : MonoBehaviour
 
     public float TimeBetweenAttacks { get { return timeBetweenAttacks; } }
     public EAttackType AttackType { get { return attackType; } }
+
+    public float AttackDamageMultiplier { get { return attackDamageMultiplier; } }
+    public float AttackSpeedMultiplier { get { return attackSpeedMultiplier; } }
 
 
     private void Awake()

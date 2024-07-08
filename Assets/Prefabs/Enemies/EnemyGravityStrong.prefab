@@ -4327,7 +4327,8 @@ MonoBehaviour:
   attackPrefab: {fileID: 5169130777888166953, guid: 81bc72897074ff54498060cfe1f492df, type: 3}
   attackPoint: {fileID: 0}
   spawnPoint: {fileID: 3052344418670240837}
-  attackDamage: 20
+  attackDamageMultiplier: 2
+  attackSpeedMultiplier: 2
   radius: 1
   whatIsDamageable:
     serializedVersion: 2

@@ -19,10 +19,16 @@ public class ThrowableRock : DistanceAttack
     public override void Initialize(Vector3 direction, GameObject ownerObject)
     {
         base.Initialize(direction, ownerObject);
+        GetComponentInChildren<MeshRenderer>().material = ownerObject.GetComponentInChildren<SkinnedMeshRenderer>().material;
+        DamageDealer damageDealer = GetComponent<DamageDealer>();
+        BasicCombat basicCombat = ownerObject.GetComponent<BasicCombat>();
+        damageDealer.DamageMultiplier = basicCombat.AttackDamageMultiplier;
+        transform.localScale = ownerObject.transform.localScale;
+        speedMultiplier = basicCombat.AttackSpeedMultiplier;
     }
     protected override void PerformAttack()
     {
-         transform.Translate(direction * speed * Time.deltaTime, Space.World);
+         transform.Translate(direction * speed * speedMultiplier * Time.deltaTime, Space.World);
         
     }
 
