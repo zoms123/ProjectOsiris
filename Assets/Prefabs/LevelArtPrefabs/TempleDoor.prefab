@@ -93,6 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2393387140009000492}
+  - component: {fileID: 2014787907387062666}
+  - component: {fileID: 8800071562690856820}
   - component: {fileID: 7362485871980901936}
   m_Layer: 0
   m_Name: TempleDoor
@@ -119,6 +121,37 @@ Transform:
   - {fileID: 3858535043147022230}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &2014787907387062666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848059795960726219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09397aa6f730d0d41959054c04bce5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 8800071562690856820}
+  conditions:
+  - {fileID: 0}
+--- !u!114 &8800071562690856820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848059795960726219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c46ce096faa90459dc3043e9661a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 10
+  rotationAngle: 90
+  canInteract: 0
 --- !u!205 &7362485871980901936
 LODGroup:
   m_ObjectHideFlags: 0

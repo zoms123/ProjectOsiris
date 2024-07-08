@@ -9171,6 +9171,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (2)
@@ -9521,6 +9525,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (8)
@@ -9797,6 +9805,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (9)
@@ -9859,6 +9871,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (11)
@@ -9921,6 +9937,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (5)
@@ -9983,6 +10003,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (3)
@@ -10309,6 +10333,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (4)
@@ -10437,6 +10465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (10)
@@ -11079,6 +11111,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (1)
@@ -11915,6 +11951,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (6)
@@ -12055,6 +12095,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence
@@ -12117,6 +12161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3402422462267154101}
     m_Modifications:
+    - target: {fileID: 4396721397660932287, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8872945099358632217, guid: eb2c84670d6340349b14f2d2429edc21, type: 3}
       propertyPath: m_Name
       value: WoodFence (7)
