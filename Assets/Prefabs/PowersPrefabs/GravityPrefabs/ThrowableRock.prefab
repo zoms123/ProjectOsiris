@@ -227,7 +227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   lifetime: 5
-  attackPrefab: {fileID: 5169130777888166953}
 --- !u!1001 &819921895978980228
 PrefabInstance:
   m_ObjectHideFlags: 0

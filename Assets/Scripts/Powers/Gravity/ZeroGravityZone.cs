@@ -7,11 +7,11 @@ public class ZeroGravityZone : MonoBehaviour
 {
     [SerializeField] float activeTime;
 
-    private List<ZeroGravityEffector> zeroGravityEffectors;
+    private List<IZeroGravityEffector> zeroGravityEffectors;
 
     private void Awake()
     {
-        zeroGravityEffectors = new List<ZeroGravityEffector>();
+        zeroGravityEffectors = new List<IZeroGravityEffector>();
     }
 
     private void OnEnable()
@@ -23,7 +23,7 @@ public class ZeroGravityZone : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        foreach(ZeroGravityEffector effector in zeroGravityEffectors)
+        foreach(IZeroGravityEffector effector in zeroGravityEffectors)
         {
             effector.StopUsingZeroGravity();
         }
@@ -42,8 +42,8 @@ public class ZeroGravityZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ZeroGravityEffector effector = other.GetComponent<ZeroGravityEffector>();
-        if (effector)
+        IZeroGravityEffector effector = other.GetComponent<IZeroGravityEffector>();
+        if (effector != null)
         {
             zeroGravityEffectors.Add(effector);
             effector.UseZeroGravity();

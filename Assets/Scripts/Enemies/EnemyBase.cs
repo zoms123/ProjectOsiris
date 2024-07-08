@@ -20,6 +20,9 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private float groundCheckRadious;
     [SerializeField] private LayerMask groundLayerMask;
 
+    [Header("Floating System")]
+    [SerializeField] private bool canFloat = true;
+
     private StateMachine stateMachine;
     private NavMeshAgent agent;
     private ZeroGravityEffector zeroGravityEffector;
@@ -54,9 +57,9 @@ public class EnemyBase : MonoBehaviour
         At(patrolState, chaseState, new FuncPredicate(() => playerDetector.CanDetectPlayer()));
         At(chaseState, attackState, new FuncPredicate(() => CanAttack()));
         At(attackState, chaseState, new FuncPredicate(() => !CanAttack() || playerDetector.PlayerDistance(transform.position) > attackRange));
-        At(floatingState, chaseState, new FuncPredicate(() => !zeroGravityEffector.Activated && IsGrounded()));
+        if (canFloat) { At(floatingState, chaseState, new FuncPredicate(() => !zeroGravityEffector.Activated && IsGrounded())); }
 
-        Any(floatingState, new FuncPredicate(() => zeroGravityEffector.Activated));
+        if (canFloat) { Any(floatingState, new FuncPredicate(() => zeroGravityEffector.Activated)); }
         Any(patrolState, new FuncPredicate(() => !playerDetector.CanDetectPlayer()));
         stateMachine.SetState(patrolState);
     }
@@ -65,17 +68,18 @@ public class EnemyBase : MonoBehaviour
     {
         if(playerDetector.PlayerDistance(transform.position) <= attackRange)
         {
-            Vector3 directionToPlayer = (playerDetector.Player.position - obstaclesDetectorRayOrigin.position).normalized;
-            float distanceToPlayer = Vector3.Distance(obstaclesDetectorRayOrigin.position, playerDetector.Player.position);
+            Transform targetPoint = GameObject.FindGameObjectWithTag("PlayerTargetPoint").transform;
+            Vector3 directionToPlayer = (targetPoint.position - obstaclesDetectorRayOrigin.position).normalized;
+            float distanceToPlayer = Vector3.Distance(obstaclesDetectorRayOrigin.position, targetPoint.position);
             Debug.DrawRay(obstaclesDetectorRayOrigin.position, directionToPlayer);
             if (!Physics.Raycast(obstaclesDetectorRayOrigin.position, directionToPlayer, out RaycastHit hitInfo, distanceToPlayer, obstacleLayers, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log("Raycast No hit");
+                //Debug.Log("Raycast No hit");
                 return true;
             }
             else
             {
-                Debug.Log("Raycast false" + hitInfo.collider.gameObject);
+                //Debug.Log("Raycast false" + hitInfo.collider.gameObject);
                 return false;
             }
         }

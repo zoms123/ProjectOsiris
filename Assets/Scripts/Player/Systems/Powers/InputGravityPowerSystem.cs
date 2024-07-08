@@ -18,6 +18,8 @@ public class InputGravityPowerSystem : PlayerSystem
     [SerializeField, Required] Transform attachPointTransform;
     [SerializeField] private float controlMovementSpeed = 5f;
     [SerializeField] private float gravityCombatAbilityCooldown;
+    [SerializeField] private float cameraTopClampUsingGravity = 20.0f;
+    [SerializeField] private float cameraBottomClampUsingGravity = -70.0f;
 
     private GameObject zeroGravityZone;
 
@@ -128,6 +130,7 @@ public class InputGravityPowerSystem : PlayerSystem
                         else if (movable != null)
                         {
                             player.ID.playerEvents.OnLockRotation?.Invoke();
+                            player.ID.playerEvents.OnChangeCameraRange.Invoke(cameraTopClampUsingGravity, cameraBottomClampUsingGravity);
                             inputManager.PuzzleGravityAbilityEnabled();
                             inputManager.OnControlObjectXY += ControlObjectXY;
                             inputManager.OnControlObjectZ += ControlObjectZ;
@@ -158,6 +161,7 @@ public class InputGravityPowerSystem : PlayerSystem
         if (movable != null)
         {
             player.ID.playerEvents.OnUnlockRotation?.Invoke();
+            player.ID.playerEvents.OnResetCameraRange?.Invoke();
             inputManager.PuzzleGravityAbilityDisabled();
             inputManager.OnControlObjectXY -= ControlObjectXY;
             inputManager.OnControlObjectZ -= ControlObjectZ;

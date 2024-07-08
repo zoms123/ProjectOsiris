@@ -20,6 +20,8 @@ public struct PlayerEvents
     public Action OnGetAimPosition;
     public Action OnLockRotation;
     public Action OnUnlockRotation;
+    public Action<float, float> OnChangeCameraRange;
+    public Action OnResetCameraRange;
 
     // Animation Events
     public Action<string, bool, bool, bool, bool> OnChangeAnimation;
