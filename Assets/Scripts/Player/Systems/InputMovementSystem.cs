@@ -1,55 +1,59 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InputMovementSystem : PlayerSystem
 {
     [Header("References")]
 
-    [SerializeField, Required] 
+    [SerializeField, Required]
     private InputManagerSO inputManager;
 
     [Header("Ground Check & Falling")]
 
-    [SerializeField] 
+    [SerializeField]
     private LayerMask groundLayer;
 
-    [SerializeField] 
+    [SerializeField]
     private float groundCheckSphereRadius = 0.3f;
 
-    [SerializeField, Tooltip("The force at which the character is sticking to the ground whilst it is grounded")] 
+    [SerializeField, Tooltip("The force at which the character is sticking to the ground whilst it is grounded")]
     protected float groundedYVelocity = -20f;
 
-    [SerializeField, Tooltip("The force at which the character begins to fall when it become ungrounded (Rises as it falls longer)")] 
+    [SerializeField, Tooltip("The force at which the character begins to fall when it become ungrounded (Rises as it falls longer)")]
     protected float fallStartYVelocity = -5f;
 
-    [SerializeField] 
+    [SerializeField]
     protected float gravityFactor = -9.81f;
+
+    [SerializeField, Tooltip("Distance threshold to ground")]
+    private float groundCheckDistanceThreshold = 0.25f;
 
     [Header("Movement Settings")]
 
-    [SerializeField] 
+    [SerializeField]
     private float walkingSpeed = 2f;
 
-    [SerializeField] 
+    [SerializeField]
     private float runningSpeed = 5f;
 
-    [SerializeField] 
+    [SerializeField]
     private float rotationSpeed = 15f;
 
     [Header("Jump Settings")]
 
-    [SerializeField] 
+    [SerializeField]
     private float jumpHeight = 3f;
 
-    [SerializeField] 
+    [SerializeField]
     private float jumpForwardSpeedWalking = 3f;
 
-    [SerializeField] 
+    [SerializeField]
     private float jumpForwardSpeedRunning = 6f;
 
-    [SerializeField] 
+    [SerializeField]
     private float airMovementSpeed = 2f;
 
-    [SerializeField] 
+    [SerializeField]
     private float freeFallSpeed = 2f;
 
     private float jumpForwardSpeed;
@@ -79,7 +83,7 @@ public class InputMovementSystem : PlayerSystem
 
     private Transform mainCameraTransform;
 
-    [HideInInspector] 
+    [HideInInspector]
     public CharacterController characterController;
 
     protected override void Awake()
@@ -146,7 +150,7 @@ public class InputMovementSystem : PlayerSystem
 
     private void ActiveSprintMode(float newSpeed, float newJumpFactor)
     {
-        if (!isStrafing) 
+        if (!isStrafing)
         {
             currentSpeed = newSpeed;
             jumpFactor = newJumpFactor;
@@ -244,11 +248,31 @@ public class InputMovementSystem : PlayerSystem
 
     private void HandleGroundCheck()
     {
-        if (Physics.CheckSphere(transform.position, groundCheckSphereRadius, groundLayer) != isGrounded)
+        bool previousIsGrounded = isGrounded;
+
+        bool sphereCheck = Physics.CheckSphere(transform.position, groundCheckSphereRadius, groundLayer);
+
+        if (!sphereCheck)
         {
-            isGrounded = !isGrounded;
-            player.ID.playerEvents.OnAnimationGroundedUpdate?.Invoke(isGrounded);
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistanceThreshold, groundLayer))
+            {
+                isGrounded = true;
+                Debug.DrawRay(transform.position, Vector3.down * hit.distance, Color.green);
+            }
+            else
+            {
+                isGrounded = false;
+                Debug.DrawRay(transform.position, Vector3.down * groundCheckDistanceThreshold, Color.red);
+            }
         }
+        else
+        {
+            isGrounded = true;
+            Debug.DrawRay(transform.position, Vector3.down * groundCheckDistanceThreshold, Color.green);
+        }
+
+        if (previousIsGrounded != isGrounded)
+            player.ID.playerEvents.OnAnimationGroundedUpdate?.Invoke(isGrounded);
     }
 
     private void ManageVerticalSpeed()
@@ -300,7 +324,7 @@ public class InputMovementSystem : PlayerSystem
             {
                 currentSpeed = runningSpeed;
                 jumpFactor = JUMP_FACTOR_RUNNING;
-            }  
+            }
         }
 
         // If it is strafing, pass the horizontal movement as well (cannot run)

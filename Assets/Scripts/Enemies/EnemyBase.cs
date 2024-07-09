@@ -68,8 +68,9 @@ public class EnemyBase : MonoBehaviour
     {
         if(playerDetector.PlayerDistance(transform.position) <= attackRange)
         {
-            Vector3 directionToPlayer = (playerDetector.Player.position - obstaclesDetectorRayOrigin.position).normalized;
-            float distanceToPlayer = Vector3.Distance(obstaclesDetectorRayOrigin.position, playerDetector.Player.position);
+            Transform targetPoint = GameObject.FindGameObjectWithTag("PlayerTargetPoint").transform;
+            Vector3 directionToPlayer = (targetPoint.position - obstaclesDetectorRayOrigin.position).normalized;
+            float distanceToPlayer = Vector3.Distance(obstaclesDetectorRayOrigin.position, targetPoint.position);
             Debug.DrawRay(obstaclesDetectorRayOrigin.position, directionToPlayer);
             if (!Physics.Raycast(obstaclesDetectorRayOrigin.position, directionToPlayer, out RaycastHit hitInfo, distanceToPlayer, obstacleLayers, QueryTriggerInteraction.Ignore))
             {

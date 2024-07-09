@@ -390,7 +390,7 @@ Transform:
   m_GameObject: {fileID: 667507063918614825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.028, y: 0.706, z: 1.756}
+  m_LocalPosition: {x: 0.028, y: 1.42, z: 1.756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4327,7 +4327,8 @@ MonoBehaviour:
   attackPrefab: {fileID: 5169130777888166953, guid: 81bc72897074ff54498060cfe1f492df, type: 3}
   attackPoint: {fileID: 0}
   spawnPoint: {fileID: 3052344418670240837}
-  attackDamage: 20
+  attackDamageMultiplier: 2
+  attackSpeedMultiplier: 2
   radius: 1
   whatIsDamageable:
     serializedVersion: 2
