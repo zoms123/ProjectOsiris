@@ -32,7 +32,7 @@ public class InputTimePowerSystem : PlayerSystem
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
-        inputManager.OnCombatAbility += CombatAbility;
+        inputManager.OnCombatAbility += UseCombatAbility;
         inputManager.OnPuzzleAbility += PuzzleAbility;
     }
 
@@ -49,17 +49,17 @@ public class InputTimePowerSystem : PlayerSystem
         }
     }
 
-    private void CombatAbility()
+    private void UseCombatAbility()
     {
         if (timeIsActive && timeWaitTime <= 0)
         {
             timeWaitTime = timeCombatAbilityCooldown;
-            player.ID.playerEvents.OnGiveAimPosition += UseCombatAbility;
-            player.ID.playerEvents.OnGetAimPosition?.Invoke();
+            player.ID.playerEvents.OnUseCombatAbility.Invoke(); // play combat ability animation
+            player.ID.playerEvents.OnFirePower += FireTime;
         }
     }
 
-    private void UseCombatAbility(Vector3 aimPosition)
+    private void FireTime(Vector3 aimPosition)
     {
         if (timeIsActive)
         {
@@ -76,6 +76,7 @@ public class InputTimePowerSystem : PlayerSystem
                 UseTimeBomb(transform.position + forward * distance);
             }
         }
+        player.ID.playerEvents.OnFirePower -= FireTime;
     }
 
     private void PuzzleAbility()
@@ -92,7 +93,7 @@ public class InputTimePowerSystem : PlayerSystem
         }
 
         inputManager.OnPowerSelect -= OnPowerSelected;
-        inputManager.OnCombatAbility -= CombatAbility;
+        inputManager.OnCombatAbility -= UseCombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
     }
 

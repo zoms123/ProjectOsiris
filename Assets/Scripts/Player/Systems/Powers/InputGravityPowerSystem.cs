@@ -53,7 +53,7 @@ public class InputGravityPowerSystem : PlayerSystem
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
-        inputManager.OnCombatAbility += CombatAbility;
+        inputManager.OnCombatAbility += UseCombatAbility;
         inputManager.OnPuzzleAbility += PuzzleAbility;
     }
 
@@ -70,16 +70,16 @@ public class InputGravityPowerSystem : PlayerSystem
         }
     }
 
-    private void CombatAbility()
+    private void UseCombatAbility()
     {
         if (gravityIsActive && gravityWaitTime <= 0)
         {
             gravityWaitTime = gravityCombatAbilityCooldown;
-            player.ID.playerEvents.OnGiveAimPosition += UseCombatAbility;
-            player.ID.playerEvents.OnGetAimPosition?.Invoke();
+            player.ID.playerEvents.OnUseCombatAbility.Invoke(); // play combat ability animation
+            player.ID.playerEvents.OnFirePower += FireGravity;
         }
     }
-    private void UseCombatAbility(Vector3 aimPosition)
+    private void FireGravity(Vector3 aimPosition)
     {
         if (gravityIsActive)
         {
@@ -100,7 +100,7 @@ public class InputGravityPowerSystem : PlayerSystem
                 }
             }
         }
-        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
+        player.ID.playerEvents.OnFirePower -= FireGravity;
     }
 
 
@@ -198,7 +198,7 @@ public class InputGravityPowerSystem : PlayerSystem
         inputManager.PuzzleGravityAbilityDisabled();
 
         inputManager.OnPowerSelect -= OnPowerSelected;
-        inputManager.OnCombatAbility -= CombatAbility;
+        inputManager.OnCombatAbility -= UseCombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
     }
 
