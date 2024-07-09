@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class InputGravityPowerSystem : PlayerSystem
 {
@@ -12,6 +13,8 @@ public class InputGravityPowerSystem : PlayerSystem
     [SerializeField] private Vector3 offsetDirection = Vector3.up;
     [SerializeField] private float offsetValue = 1;
     [SerializeField] private float overlapSphereRadius;
+    [SerializeField] private float minDistance;
+    [SerializeField] private LayerMask interactableLayerMask;
 
     [Header("Gravity Power Settings")]
     [SerializeField, Required] GameObject zeroGravityZonePrefab;
@@ -108,15 +111,33 @@ public class InputGravityPowerSystem : PlayerSystem
     {
         if (gravityIsActive)
         {
+            if(interactable == null)
+            {
+                player.ID.playerEvents.OnGiveAimPosition += UsePuzzleAbility;
+                player.ID.playerEvents.OnGetAimPosition?.Invoke();
+            }
+            else
+            {
+                OnInteractableLost();
+            }
+        }
+    }
+
+    private void UsePuzzleAbility(Vector3 aimPosition)
+    {
+
+        if (gravityIsActive)
+        {
             if (interactable == null)
             {
-                Collider[] collidersTouched = Physics.OverlapCapsule(overlapSphereStartPointTransform.position, overlapSphereEndPoint, overlapSphereRadius);
-                foreach (Collider collider in collidersTouched)
+                Vector3 direction = (aimPosition - overlapSphereStartPointTransform.position).normalized;
+                
+                if(Physics.Raycast(overlapSphereStartPointTransform.position, direction, out RaycastHit hitInfo, minDistance, interactableLayerMask))
                 {
-                    interactable = collider.GetComponent<IInteractable>();
-                    attachable = collider.GetComponent<IAttachable>();
-                    movable = collider.GetComponent<IMovable>();
-                    losableObjet = collider.GetComponent<ILosableObject>();
+                    interactable = hitInfo.collider.GetComponent<IInteractable>();
+                    attachable = hitInfo.collider.GetComponent<IAttachable>();
+                    movable = hitInfo.collider.GetComponent<IMovable>();
+                    losableObjet = hitInfo.collider.GetComponent<ILosableObject>();
                     if (interactable != null && interactable.CanInteract(PowerType.Gravity))
                     {
                         ChangeAttachableParent(attachPointTransform);
@@ -137,14 +158,9 @@ public class InputGravityPowerSystem : PlayerSystem
                             targetRigidbody = movable.GetRigidbody();
                             liftingObjectWithGravity = true;
                         }
-
-                        break;
                     }
                 }
-            }
-            else
-            {
-                OnInteractableLost();
+                player.ID.playerEvents.OnGiveAimPosition -= UsePuzzleAbility;
             }
         }
     }
