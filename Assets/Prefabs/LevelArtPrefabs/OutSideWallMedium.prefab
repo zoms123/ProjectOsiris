@@ -320,6 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6174620632638860205}
+  - component: {fileID: 71882806439097613}
   m_Layer: 0
   m_Name: OutSideWallMedium
   m_TagString: Untagged
@@ -344,6 +345,27 @@ Transform:
   - {fileID: 8663102061168224786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &71882806439097613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922478442287202953}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.46719, y: 6.0491657, z: 1.6987308}
+  m_Center: {x: -3.983141, y: 2.9904041, z: -0.19963759}
 --- !u!1 &6261777564469234180
 GameObject:
   m_ObjectHideFlags: 0

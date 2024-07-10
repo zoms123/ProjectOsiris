@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3915183765786514930}
   - component: {fileID: 4834106199814854311}
+  - component: {fileID: 7387224233569133609}
   m_Layer: 0
   m_Name: OutSideWallMediumColumn
   m_TagString: Untagged
@@ -141,6 +142,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 5054944092454380969}
   m_Enabled: 1
+--- !u!65 &7387224233569133609
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2224062831415111298}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1684268, y: 5.2324696, z: 1.1684291}
+  m_Center: {x: 0.002716144, y: 2.6160874, z: 0.0027163625}
 --- !u!1 &6537699690246626935
 GameObject:
   m_ObjectHideFlags: 0

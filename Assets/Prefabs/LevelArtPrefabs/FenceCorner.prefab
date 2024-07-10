@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284298295575023760}
   - component: {fileID: 1378794788874644074}
+  - component: {fileID: 3723626759160119129}
   m_Layer: 0
   m_Name: FenceCorner
   m_TagString: Untagged
@@ -58,6 +59,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1796728464923456056}
   m_Enabled: 1
+--- !u!65 &3723626759160119129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335036208623419022}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.842329, y: 5.6484623, z: 1}
+  m_Center: {x: -2.4184074, y: 2.813941, z: 0}
 --- !u!1 &929647177743735183
 GameObject:
   m_ObjectHideFlags: 0

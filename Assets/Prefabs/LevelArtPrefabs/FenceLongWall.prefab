@@ -213,6 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1024848489890758514}
   - component: {fileID: 4966778214321579433}
+  - component: {fileID: 2652304727386312956}
   m_Layer: 0
   m_Name: FenceLongWall
   m_TagString: Untagged
@@ -261,6 +262,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8565498606654325435}
   m_Enabled: 1
+--- !u!65 &2652304727386312956
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6945985568101394765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.044942, y: 5.628063, z: 1.8141978}
+  m_Center: {x: -4.06241, y: 2.836832, z: -0.10713005}
 --- !u!1 &9175798404129973665
 GameObject:
   m_ObjectHideFlags: 0

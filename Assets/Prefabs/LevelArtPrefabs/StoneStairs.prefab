@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6880541781994133954}
   - component: {fileID: 1776881979132200710}
   - component: {fileID: 6805683629222119286}
+  - component: {fileID: 163789850468415862}
   m_Layer: 0
   m_Name: SM_stairs_01_LOD0
   m_TagString: Untagged
@@ -208,6 +209,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &163789850468415862
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4088467211517361675}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4096520211224020176, guid: 39c5dd8092bb1ba4789dd59bd41ccf08, type: 3}
 --- !u!1 &4290318938260007383
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +524,7 @@ GameObject:
   - component: {fileID: 8598170137856975755}
   - component: {fileID: 732133748986205093}
   - component: {fileID: 7343012164618003428}
+  - component: {fileID: 7471759120829162159}
   m_Layer: 0
   m_Name: SM_wall_stairs_03_LOD0
   m_TagString: Untagged
@@ -574,6 +598,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7471759120829162159
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5401573264663201723}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6684368346232323396, guid: 8a3bfe18e3a9bbe468d9e4688b9c5fb6, type: 3}
 --- !u!1 &5556315205279582590
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +631,7 @@ GameObject:
   - component: {fileID: 5861267419151598471}
   - component: {fileID: 5110156409596087540}
   - component: {fileID: 7973985873512069518}
+  - component: {fileID: 1781602349311928147}
   m_Layer: 0
   m_Name: SM_wall_stairs_03_LOD0
   m_TagString: Untagged
@@ -658,6 +705,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1781602349311928147
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5556315205279582590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6684368346232323396, guid: 8a3bfe18e3a9bbe468d9e4688b9c5fb6, type: 3}
 --- !u!1 &7051084944436086751
 GameObject:
   m_ObjectHideFlags: 0
