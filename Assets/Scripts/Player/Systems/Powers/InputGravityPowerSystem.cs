@@ -113,7 +113,7 @@ public class InputGravityPowerSystem : PlayerSystem
         {
             if(interactable == null)
             {
-                player.ID.playerEvents.OnGiveAimPosition += UsePuzzleAbility;
+                player.ID.playerEvents.OnAimPositionReceived += UsePuzzleAbility;
                 player.ID.playerEvents.OnGetAimPosition?.Invoke();
             }
             else
@@ -123,7 +123,7 @@ public class InputGravityPowerSystem : PlayerSystem
         }
     }
 
-    private void UsePuzzleAbility(Vector3 aimPosition)
+    private void UsePuzzleAbility(Vector3 aimPosition, bool isAiming)
     {
 
         if (gravityIsActive)
@@ -160,7 +160,7 @@ public class InputGravityPowerSystem : PlayerSystem
                         }
                     }
                 }
-                player.ID.playerEvents.OnGiveAimPosition -= UsePuzzleAbility;
+                player.ID.playerEvents.OnAimPositionReceived -= UsePuzzleAbility;
             }
         }
     }
