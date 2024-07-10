@@ -51,11 +51,13 @@ public class InputCrystalPowerSystem : PlayerSystem
         else
         {
             crystalIsActive = false;
+            player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
         }
     }
 
     private void UseCombatAbility()
     {
+        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
         if (crystalIsActive && crystalWaitTime <= 0)
         {
             crystalWaitTime = crystalCombatAbilityCooldown;
