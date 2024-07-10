@@ -181,6 +181,37 @@ Transform:
   - {fileID: 3091208996870163965}
   m_Father: {fileID: 3364787251868898256}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &499806301105608375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7998434434752431443}
+  m_Layer: 6
+  m_Name: TargetPoint
+  m_TagString: PlayerTargetPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7998434434752431443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499806301105608375}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.321, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 842339258647268263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &659365032587942676
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +636,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 69.99992
+  field of view: 69.99924
   orthographic: 0
   orthographic size: 10
   m_Depth: 1
@@ -1135,7 +1166,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1327704750478782601}
   m_Lens:
-    FieldOfView: 69.99992
+    FieldOfView: 69.99924
     OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -4046,6 +4077,7 @@ Transform:
   - {fileID: 3433456408496054569}
   - {fileID: 1917600495035936366}
   - {fileID: 35872110537216445}
+  - {fileID: 7998434434752431443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!143 &5243424742650938456
@@ -4118,11 +4150,12 @@ MonoBehaviour:
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 257
+    m_Bits: 8449
   groundCheckSphereRadius: 0.15
   groundedYVelocity: -20
   fallStartYVelocity: -5
   gravityFactor: -40
+  groundCheckDistanceThreshold: 0.25
   walkingSpeed: 1.5
   runningSpeed: 6
   rotationSpeed: 15
@@ -4202,7 +4235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 11400000, guid: c3507c126f16b034191bbc8a51b261ea, type: 2}
-  point: {fileID: 507323462852159407}
+  point: {fileID: 3433456408496054569}
   radius: 1.5
 --- !u!114 &4324232947318548481
 MonoBehaviour:
@@ -4222,6 +4255,10 @@ MonoBehaviour:
   offsetDirection: {x: 0, y: -1, z: 0}
   offsetValue: 1
   overlapSphereRadius: 0.2
+  minDistance: 5
+  interactableLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   zeroGravityZonePrefab: {fileID: 1226620444312156923, guid: 544bc0126152b2b41bc4ffba797caa2d, type: 3}
   attachPointTransform: {fileID: 1053375799754395057}
   controlMovementSpeed: 10
