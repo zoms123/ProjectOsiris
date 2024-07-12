@@ -15,6 +15,15 @@ public class PauseMenuManager : OptionsSettings
 
     private string MAIN_MENU_LVL = "MainMenu";
 
+    private void Awake()
+    {
+        inputManager.EnableGameplayInputs();
+        Time.timeScale = 1f;
+        pauseMenuInterface.SetActive(false);
+        gameInterface.SetActive(true);
+        UpdateInteractableSelected(null);
+    }
+
     #region Events
 
     private void OnEnable()
