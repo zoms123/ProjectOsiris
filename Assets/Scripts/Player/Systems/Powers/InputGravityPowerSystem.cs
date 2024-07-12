@@ -56,7 +56,7 @@ public class InputGravityPowerSystem : PlayerSystem
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
-        inputManager.OnCombatAbility += UseCombatAbility;
+        inputManager.OnCombatAbility += CombatAbility;
         inputManager.OnPuzzleAbility += PuzzleAbility;
     }
 
@@ -73,16 +73,16 @@ public class InputGravityPowerSystem : PlayerSystem
         }
     }
 
-    private void UseCombatAbility()
+    private void CombatAbility()
     {
         if (gravityIsActive && gravityWaitTime <= 0)
         {
             gravityWaitTime = gravityCombatAbilityCooldown;
-            player.ID.playerEvents.OnUseCombatAbility.Invoke(); // play combat ability animation
-            player.ID.playerEvents.OnFirePower += FireGravity;
+            player.ID.playerEvents.OnGiveAimPosition += UseCombatAbility;
+            player.ID.playerEvents.OnGetAimPosition?.Invoke();
         }
     }
-    private void FireGravity(Vector3 aimPosition)
+    private void UseCombatAbility(Vector3 aimPosition)
     {
         if (gravityIsActive)
         {
@@ -103,7 +103,7 @@ public class InputGravityPowerSystem : PlayerSystem
                 }
             }
         }
-        player.ID.playerEvents.OnFirePower -= FireGravity;
+        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
     }
 
 
@@ -113,7 +113,7 @@ public class InputGravityPowerSystem : PlayerSystem
         {
             if(interactable == null)
             {
-                player.ID.playerEvents.OnAimPositionReceived += UsePuzzleAbility;
+                player.ID.playerEvents.OnGiveAimPosition += UsePuzzleAbility;
                 player.ID.playerEvents.OnGetAimPosition?.Invoke();
             }
             else
@@ -123,7 +123,7 @@ public class InputGravityPowerSystem : PlayerSystem
         }
     }
 
-    private void UsePuzzleAbility(Vector3 aimPosition, bool isAiming)
+    private void UsePuzzleAbility(Vector3 aimPosition)
     {
 
         if (gravityIsActive)
@@ -160,7 +160,7 @@ public class InputGravityPowerSystem : PlayerSystem
                         }
                     }
                 }
-                player.ID.playerEvents.OnAimPositionReceived -= UsePuzzleAbility;
+                player.ID.playerEvents.OnGiveAimPosition -= UsePuzzleAbility;
             }
         }
     }
@@ -214,7 +214,7 @@ public class InputGravityPowerSystem : PlayerSystem
         inputManager.PuzzleGravityAbilityDisabled();
 
         inputManager.OnPowerSelect -= OnPowerSelected;
-        inputManager.OnCombatAbility -= UseCombatAbility;
+        inputManager.OnCombatAbility -= CombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
     }
 

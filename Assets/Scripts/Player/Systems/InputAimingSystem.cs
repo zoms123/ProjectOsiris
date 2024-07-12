@@ -33,6 +33,8 @@ public class InputAimingSystem : PlayerSystem
     {
         inputManager.OnAim += HandleAim;
 
+        player.ID.playerEvents.OnGetAimPosition += GiveAimPosition;
+
         gameManager.OnUpdateAimSensitivity += UpdateAimSensitivity;
     }
 
@@ -44,6 +46,14 @@ public class InputAimingSystem : PlayerSystem
 
         player.ID.playerEvents.OnUpdateCameraSettings?.Invoke(isAiming, aimCameraSensitivity, aimFOV);
         player.ID.playerEvents.OnPlayerAim?.Invoke(isAiming);
+    }
+
+    private void GiveAimPosition()
+    {
+        if (isAiming)
+        {
+            player.ID.playerEvents.OnGiveAimPosition?.Invoke(GetAimPosition());
+        }
     }
 
     private void UpdateAimSensitivity()
@@ -58,6 +68,8 @@ public class InputAimingSystem : PlayerSystem
     private void OnDisable()
     {
         inputManager.OnAim -= HandleAim;
+
+        player.ID.playerEvents.OnGetAimPosition -= GiveAimPosition;
 
         gameManager.OnUpdateAimSensitivity -= UpdateAimSensitivity;
     }
@@ -92,8 +104,6 @@ public class InputAimingSystem : PlayerSystem
         {
             aimLookAtTransform.position = Vector3.Lerp(aimLookAtTransform.position, targetPosition, Time.deltaTime * aimTargetSmoothSpeed);
         }
-
-        player.ID.playerEvents.OnAimPositionReceived.Invoke(targetPosition, isAiming);
     }
 
     public Vector3 GetAimPosition()

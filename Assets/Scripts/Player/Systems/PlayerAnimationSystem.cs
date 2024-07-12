@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -17,18 +16,15 @@ public class PlayerAnimationSystem : PlayerSystem
     private int horizontal;
     private int vertical;
     private int grounded;
-    private int combatAbility;
-
-    public bool isUsingCombatAbility = false;
-    private Vector3 aimPosition;
-    private bool isAiming;
 
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
 
-        AssignAnimationIDs();
+        horizontal = Animator.StringToHash("Horizontal");
+        vertical = Animator.StringToHash("Vertical");
+        grounded = Animator.StringToHash("IsGrounded");
 
         bodyRig.weight = 0f;
     }
@@ -41,8 +37,6 @@ public class PlayerAnimationSystem : PlayerSystem
         player.ID.playerEvents.OnUpdateAnimationMovementParameters += UpdateAnimatorMovementParameters;
         player.ID.playerEvents.OnAnimationGroundedUpdate += UpdateGrounded;
         player.ID.playerEvents.OnUpdateAimParameters += UpdateAimParameters;
-        player.ID.playerEvents.OnAimPositionReceived += GetAimPosition;
-        player.ID.playerEvents.OnUseCombatAbility += TriggerCombatAbilityAnimation;
     }
 
     private void PlayTargetActionAnimation(
@@ -83,47 +77,12 @@ public class PlayerAnimationSystem : PlayerSystem
         animator.SetLayerWeight(layerIndex, layerWeight);
     }
 
-    private void GetAimPosition(Vector3 aimPosition, bool isAiming)
-    {
-        this.aimPosition = aimPosition;
-        this.isAiming = isAiming;
-    }
-
-    private void TriggerCombatAbilityAnimation()
-    {
-        if (aimPosition != null)
-        {
-            if (!isUsingCombatAbility && isAiming)
-            {
-                isUsingCombatAbility = true;
-                animator.SetTrigger(combatAbility);
-            }
-        }
-        else Debug.Log($"Aim position is invalid, Combat Ability animation not triggered");
-    }
-
-    // Combat Ability animation event handler
-    private void OnCombatAbilityAnimationEvent() => player.ID.playerEvents.OnFirePower.Invoke(aimPosition);
-
-    // Combat Ability animation event handler
-    private void ResetCombatAbility() => isUsingCombatAbility = false;
-
-    private void AssignAnimationIDs()
-    {
-        horizontal = Animator.StringToHash("Horizontal");
-        vertical = Animator.StringToHash("Vertical");
-        grounded = Animator.StringToHash("IsGrounded");
-        combatAbility = Animator.StringToHash("CombatAbility");
-    }
-
     private void OnDisable()
     {
         player.ID.playerEvents.OnChangeAnimation -= PlayTargetActionAnimation;
         player.ID.playerEvents.OnUpdateAnimationMovementParameters -= UpdateAnimatorMovementParameters;
         player.ID.playerEvents.OnAnimationGroundedUpdate -= UpdateGrounded;
         player.ID.playerEvents.OnUpdateAimParameters -= UpdateAimParameters;
-        player.ID.playerEvents.OnUseCombatAbility -= TriggerCombatAbilityAnimation;
-        player.ID.playerEvents.OnAimPositionReceived -= GetAimPosition;
     }
 
     #endregion
