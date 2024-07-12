@@ -17,14 +17,12 @@ public abstract class DistanceAttack : MonoBehaviour, IDistanceAttack
         initialized = true;
         this.direction = direction;
         this.ownerObject = ownerObject;
+        ObjectPooler.Instance.Despawn(gameObject, lifetime);
     }
 
     protected void Update()
     {
-        if (initialized)
-        {
-            PerformAttack();
-        }
+        if (initialized) PerformAttack();
     }
 
     protected abstract void PerformAttack();

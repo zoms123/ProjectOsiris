@@ -37,7 +37,7 @@ public class InputCrystalPowerSystem : PlayerSystem
     private void OnEnable()
     {
         inputManager.OnPowerSelect += OnPowerSelected;
-        inputManager.OnCombatAbility += CombatAbility;
+        inputManager.OnCombatAbility += UseCombatAbility;
         inputManager.OnPuzzleAbility += PuzzleAbility;
     }
 
@@ -51,22 +51,20 @@ public class InputCrystalPowerSystem : PlayerSystem
         else
         {
             crystalIsActive = false;
-            player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
         }
     }
 
-    private void CombatAbility()
+    private void UseCombatAbility()
     {
-        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
         if (crystalIsActive && crystalWaitTime <= 0)
         {
             crystalWaitTime = crystalCombatAbilityCooldown;
-            player.ID.playerEvents.OnGiveAimPosition += UseCombatAbility;
-            player.ID.playerEvents.OnGetAimPosition?.Invoke();
+            player.ID.playerEvents.OnUseCombatAbility.Invoke(); // play combat ability animation
+            player.ID.playerEvents.OnFirePower += FireCrystal;
         }
     }
 
-    private void UseCombatAbility(Vector3 aimPosition)
+    private void FireCrystal(Vector3 aimPosition)
     {
         if (crystalIsActive)
         {
@@ -93,7 +91,7 @@ public class InputCrystalPowerSystem : PlayerSystem
                 Debug.LogError("Failed to spawn or get ThrowableCrystal component.");
             }
         }
-        player.ID.playerEvents.OnGiveAimPosition -= UseCombatAbility;
+        player.ID.playerEvents.OnFirePower -= FireCrystal;
     }
 
     private void PuzzleAbility()
@@ -124,7 +122,7 @@ public class InputCrystalPowerSystem : PlayerSystem
         }
 
         inputManager.OnPowerSelect -= OnPowerSelected;
-        inputManager.OnCombatAbility -= CombatAbility;
+        inputManager.OnCombatAbility -= UseCombatAbility;
         inputManager.OnPuzzleAbility -= PuzzleAbility;
     }
 

@@ -13,7 +13,7 @@ public struct PlayerEvents
 
     // Aiming Events
     public Action<bool> OnPlayerAim;
-    public Action<Vector3> OnGiveAimPosition;
+    public Action<Vector3, bool> OnAimPositionReceived;
     public Action<bool, float, float> OnUpdateCameraSettings;
 
     // Powers Events
@@ -22,6 +22,8 @@ public struct PlayerEvents
     public Action OnUnlockRotation;
     public Action<float, float> OnChangeCameraRange;
     public Action OnResetCameraRange;
+    public Action OnUseCombatAbility;
+    public Action<Vector3> OnFirePower;
 
     // Animation Events
     public Action<string, bool, bool, bool, bool> OnChangeAnimation;

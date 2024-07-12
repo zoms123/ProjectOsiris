@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 99342070}
   - component: {fileID: 99342069}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: StepCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,12 +327,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99342068}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.125, z: 2.5}
-  m_LocalScale: {x: 1.5, y: 0.25, z: 1.5}
+  m_LocalScale: {x: 10, y: 0.25, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 973269230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &329906086
 GameObject:
@@ -1305,6 +1305,7 @@ Transform:
   - {fileID: 1186868115}
   - {fileID: 2063099592}
   - {fileID: 1062450252}
+  - {fileID: 99342072}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062450251
@@ -2269,6 +2270,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507323462852159407, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 842339258647268263, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2308,6 +2313,31 @@ PrefabInstance:
     - target: {fileID: 842339258647268263, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917600495035936366, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1917600495035936366, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588405704745712293, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588405704745712293, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568530709042929193, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:Head'\n\tTransform
+        'mixamorig:Hips'\n\tTransform 'mixamorig:Neck'\n\tTransform 'mixamorig:Spine'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:Hips'\n\tTransform
+        'mixamorig:Neck'\n\tTransform 'mixamorig:Spine'\n\tand more ..."
       objectReference: {fileID: 0}
     - target: {fileID: 8633226566174168779, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
       propertyPath: m_Name
@@ -3293,4 +3323,3 @@ SceneRoots:
   - {fileID: 534319745}
   - {fileID: 1514494051}
   - {fileID: 573727463}
-  - {fileID: 99342072}
