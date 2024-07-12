@@ -173,7 +173,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.70860016, g: 0.8301887, b: 0.48088288, a: 1}
+      key0: {r: 0.5226415, g: 1, b: 0.96146107, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
