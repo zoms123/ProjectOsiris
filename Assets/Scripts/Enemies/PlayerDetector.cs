@@ -28,6 +28,6 @@ public class PlayerDetector : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, sphereRadius);
+        Gizmos.DrawWireSphere(transform.position, sphereRadius);
     }
 }

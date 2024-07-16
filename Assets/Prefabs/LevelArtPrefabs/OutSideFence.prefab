@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5758924162505774012}
   - component: {fileID: 5732400562566406092}
+  - component: {fileID: 211914323496780686}
   m_Layer: 0
   m_Name: OutSideFence
   m_TagString: Untagged
@@ -340,3 +341,24 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1881360558345859092}
   m_Enabled: 1
+--- !u!65 &211914323496780686
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801398783394762933}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.2917101, y: 1.6048927, z: 0.62443703}
+  m_Center: {x: -0.0337081, y: 0.69106436, z: -0.023984551}
