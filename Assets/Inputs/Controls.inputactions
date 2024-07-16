@@ -645,7 +645,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "IK",
+                    "name": "QZ",
                     "id": "8cbba0de-c63e-4a2a-9e4a-2e6767608071",
                     "path": "2DVector",
                     "interactions": "",
@@ -658,7 +658,7 @@
                 {
                     "name": "up",
                     "id": "63ea4b64-7514-4890-8ea8-49d3bbc10ff6",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -669,7 +669,7 @@
                 {
                     "name": "down",
                     "id": "64d99925-d03c-459d-ae9b-348b97ba4d4e",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -703,72 +703,6 @@
                     "name": "down",
                     "id": "ce201c66-7b75-4406-af90-6fd7abf01cd6",
                     "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "353714cc-3e93-4f90-83bf-4e1e4f93285a",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "b41c7fc6-3fbe-4c08-b5d7-2662469d9025",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "up",
-                    "id": "b5320d58-f7cc-46ee-9cc9-b952b96950de",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "c85bad2e-62d1-4d94-9530-28e7dbdaa2b5",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "eab2888c-3572-4fd6-85a8-1cbf3bdfebf4",
-                    "path": "<Keyboard>/j",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ControlObjectXY",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "d9c1ccd1-93a0-421d-bcba-dfe449feb4c1",
-                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
