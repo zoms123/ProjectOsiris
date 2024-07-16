@@ -115,7 +115,7 @@ public class EnemyBase : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(groundCheck.transform.position, groundCheckRadious);
+        Gizmos.DrawWireSphere(groundCheck.transform.position, groundCheckRadious);
     }
     #endregion
 }

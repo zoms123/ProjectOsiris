@@ -4287,7 +4287,7 @@ MonoBehaviour:
   - {fileID: 7411736353375566203}
   - {fileID: 6150919398262642731}
   waitTimeOnPoint: 2
-  patrolSpeed: 5
+  patrolSpeed: 4
   groundCheck: {fileID: 9022370276997076742}
   groundCheckRadious: 0.5
   groundLayerMask:
@@ -4327,7 +4327,8 @@ MonoBehaviour:
   attackPrefab: {fileID: 5169130777888166953, guid: 81bc72897074ff54498060cfe1f492df, type: 3}
   attackPoint: {fileID: 0}
   spawnPoint: {fileID: 3052344418670240837}
-  attackDamage: 20
+  attackDamageMultiplier: 1
+  attackSpeedMultiplier: 1
   radius: 1
   whatIsDamageable:
     serializedVersion: 2
@@ -4446,8 +4447,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 7903736210837791101}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
+  m_Radius: 1.16
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -4455,8 +4456,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
+  m_Height: 1.92
+  m_BaseOffset: -0.11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!205 &1561584253156899846

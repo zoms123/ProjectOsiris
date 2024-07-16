@@ -23895,6 +23895,10 @@ PrefabInstance:
       value: Wall (15)
       objectReference: {fileID: 0}
     - target: {fileID: 4768413808331448610, guid: d6495428bfc22b54ea2949b86bc2a676, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768413808331448610, guid: d6495428bfc22b54ea2949b86bc2a676, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.2951913
       objectReference: {fileID: 0}
@@ -23904,7 +23908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4768413808331448610, guid: d6495428bfc22b54ea2949b86bc2a676, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 20.053905
       objectReference: {fileID: 0}
     - target: {fileID: 4768413808331448610, guid: d6495428bfc22b54ea2949b86bc2a676, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24485,6 +24489,10 @@ PrefabInstance:
       value: CornerWall (4)
       objectReference: {fileID: 0}
     - target: {fileID: 6453547137138582131, guid: 308325337d008bd4b8d1ea1b42026e95, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0124
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453547137138582131, guid: 308325337d008bd4b8d1ea1b42026e95, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.000074
       objectReference: {fileID: 0}
@@ -24494,7 +24502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6453547137138582131, guid: 308325337d008bd4b8d1ea1b42026e95, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.000149
+      value: 13.997385
       objectReference: {fileID: 0}
     - target: {fileID: 6453547137138582131, guid: 308325337d008bd4b8d1ea1b42026e95, type: 3}
       propertyPath: m_LocalRotation.w
