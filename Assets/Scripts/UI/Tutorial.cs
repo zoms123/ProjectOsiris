@@ -11,7 +11,8 @@ public class Tutorial : MonoBehaviour
 
     [Header("Tutorial Settings")]
     [SerializeField] private string message;
-    [SerializeField] private Texture icon;
+    [SerializeField] private Texture iconPC;
+    [SerializeField] private Texture iconPS5;
 
     #region Collisions And Triggers
 
@@ -19,7 +20,7 @@ public class Tutorial : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gameManager.PlayerEnterTutorialZone(message, icon);
+            gameManager.PlayerEnterTutorialZone(message, iconPC, iconPS5);
         }
     }
 

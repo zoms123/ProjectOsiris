@@ -16,7 +16,7 @@ public class GameManagerSO : ScriptableObject
     public event Action OnPlayerCloseNote;
 
     // UI Tutorial
-    public event Action<string, Texture> OnPlayerEnterTutorialZone;
+    public event Action<string, Texture, Texture> OnPlayerEnterTutorialZone;
     public event Action OnPlayerExitTutorialZone;
 
     // UI PauseMenu
@@ -52,9 +52,9 @@ public class GameManagerSO : ScriptableObject
         OnPlayerCloseNote?.Invoke();
     }
 
-    public void PlayerEnterTutorialZone(string message, Texture icon)
+    public void PlayerEnterTutorialZone(string message, Texture iconPC, Texture iconPS5)
     {
-        OnPlayerEnterTutorialZone?.Invoke(message, icon);
+        OnPlayerEnterTutorialZone?.Invoke(message, iconPC, iconPS5);
     }
 
     public void PlayerExitTutorialZone()

@@ -8,8 +8,7 @@ public struct PlayerEvents
     public Action<Vector3, Quaternion> OnUpdateMovementByAnimator;
 
     // Sprint Events
-    public Action<float, float> OnPlayerActiveSprint;
-    public Action OnPlayerDesactiveSprint;
+    public Action<bool, float, float> OnPlayerSprint;
 
     // Aiming Events
     public Action<bool> OnPlayerAim;

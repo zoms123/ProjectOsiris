@@ -105,8 +105,7 @@ public class InputMovementSystem : PlayerSystem
         player.ID.playerEvents.OnAnimationChanged += UpdateVariablesAffectedByAnimation;
         player.ID.playerEvents.OnUpdateMovementByAnimator += UpdateMovementByAnimator;
 
-        player.ID.playerEvents.OnPlayerActiveSprint += ActiveSprintMode;
-        player.ID.playerEvents.OnPlayerDesactiveSprint += DesactiveSprintMode;
+        player.ID.playerEvents.OnPlayerSprint += ActiveOrDesactiveSprintMode;
 
         player.ID.playerEvents.OnPlayerAim += ActiveOrDesactiveAim;
 
@@ -148,19 +147,19 @@ public class InputMovementSystem : PlayerSystem
         }
     }
 
-    private void ActiveSprintMode(float newSpeed, float newJumpFactor)
+    private void ActiveOrDesactiveSprintMode(bool isSprintPressed, float newSpeed, float newJumpFactor)
     {
-        if (!isStrafing)
+        Debug.Log(isSprintPressed + "/" + isStrafing);
+        if (isSprintPressed && !isStrafing)
         {
             currentSpeed = newSpeed;
             jumpFactor = newJumpFactor;
             isSprintInputPressed = true;
         }
-    }
-
-    private void DesactiveSprintMode()
-    {
-        isSprintInputPressed = false;
+        else
+        {
+            isSprintInputPressed = false;
+        }
     }
 
     private void ActiveOrDesactiveAim(bool isAiming)
@@ -188,8 +187,7 @@ public class InputMovementSystem : PlayerSystem
         player.ID.playerEvents.OnAnimationChanged -= UpdateVariablesAffectedByAnimation;
         player.ID.playerEvents.OnUpdateMovementByAnimator -= UpdateMovementByAnimator;
 
-        player.ID.playerEvents.OnPlayerActiveSprint -= ActiveSprintMode;
-        player.ID.playerEvents.OnPlayerDesactiveSprint -= DesactiveSprintMode;
+        player.ID.playerEvents.OnPlayerSprint -= ActiveOrDesactiveSprintMode;
 
         player.ID.playerEvents.OnPlayerAim -= ActiveOrDesactiveAim;
 
@@ -306,12 +304,10 @@ public class InputMovementSystem : PlayerSystem
     {
         moveAmount = Mathf.Clamp01(Mathf.Abs(inputDirection.y) + Mathf.Abs(inputDirection.x));
 
-        bool isSprinting = isSprintInputPressed && moveAmount >= 0.5f;
-
         if (moveAmount <= 0.5f && moveAmount > 0)
         {
             moveAmount = 0.5f;
-            if (!isSprinting)
+            if (!isSprintInputPressed)
             {
                 currentSpeed = walkingSpeed;
                 jumpFactor = JUMP_FACTOR_WALKING;
@@ -320,7 +316,7 @@ public class InputMovementSystem : PlayerSystem
         else if (moveAmount > 0.5f && moveAmount <= 1)
         {
             moveAmount = 1;
-            if (!isSprinting)
+            if (!isSprintInputPressed)
             {
                 currentSpeed = runningSpeed;
                 jumpFactor = JUMP_FACTOR_RUNNING;
@@ -337,6 +333,7 @@ public class InputMovementSystem : PlayerSystem
         // If it is not strafing, only use the move amount (can run)
         else
         {
+            bool isSprinting = isSprintInputPressed && moveAmount >= 0.5f;
             player.ID.playerEvents.OnUpdateAnimationMovementParameters?.Invoke(0, moveAmount, isSprinting);
         }
     }

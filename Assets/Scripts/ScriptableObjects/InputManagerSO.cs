@@ -10,8 +10,7 @@ public class InputManagerSO : ScriptableObject
     public event Action<bool> OnJump;
     public event Action<Vector2> OnMove;
     public event Action<Vector2> OnLook;
-    public event Action OnSprintPressed;
-    public event Action OnSprintReleased;
+    public event Action OnSprintPressed, OnSprintReleased;
     public event Action OnInteract;
     public event Action<bool> OnAim;
     public event Action OnOptions;
@@ -45,9 +44,9 @@ public class InputManagerSO : ScriptableObject
         OnMove?.Invoke(context.ReadValue<Vector2>());
     }
 
-    private void Look(Vector2 newLookDirection)
+    private void Look(InputAction.CallbackContext context)
     {
-        OnLook?.Invoke(newLookDirection);
+        OnLook?.Invoke(context.ReadValue<Vector2>());
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -55,12 +54,12 @@ public class InputManagerSO : ScriptableObject
         OnJump?.Invoke(context.ReadValueAsButton());
     }
 
-    private void Sprint()
+    private void SprintPressed(InputAction.CallbackContext context)
     {
         OnSprintPressed?.Invoke();
     }
 
-    private void SprintCancel()
+    private void SprintReleased(InputAction.CallbackContext context)
     {
         OnSprintReleased?.Invoke();
     }
@@ -70,9 +69,9 @@ public class InputManagerSO : ScriptableObject
         OnInteract?.Invoke();
     }
 
-    private void Aim(bool newAimState)
+    private void Aim(InputAction.CallbackContext context)
     {
-        OnAim?.Invoke(newAimState);
+        OnAim?.Invoke(context.ReadValueAsButton());
     }
 
     private void Options(InputAction.CallbackContext context)
@@ -130,10 +129,10 @@ public class InputManagerSO : ScriptableObject
         controls.PlayerMovement.Move.performed += Move;
         controls.PlayerMovement.Move.canceled += Move;
 
-        controls.PlayerMovement.Jump.performed += Jump;
+        controls.PlayerMovement.Jump.started += Jump;
 
-        controls.PlayerMovement.Sprint.performed += x => Sprint();
-        controls.PlayerMovement.SprintFinish.performed += x => SprintCancel();
+        controls.PlayerMovement.Sprint.started += SprintPressed;
+        controls.PlayerMovement.Sprint.canceled += SprintReleased;
 
         controls.PlayerMovement.Enable();
     }
@@ -143,10 +142,10 @@ public class InputManagerSO : ScriptableObject
         controls.PlayerMovement.Move.performed -= Move;
         controls.PlayerMovement.Move.canceled -= Move;
 
-        controls.PlayerMovement.Jump.performed -= Jump;
+        controls.PlayerMovement.Jump.started -= Jump;
 
-        controls.PlayerMovement.Sprint.performed -= x => Sprint();
-        controls.PlayerMovement.SprintFinish.performed -= x => SprintCancel();
+        controls.PlayerMovement.Sprint.started -= SprintPressed;
+        controls.PlayerMovement.Sprint.canceled -= SprintReleased;
 
         controls.PlayerMovement.Disable();
     }
@@ -157,16 +156,16 @@ public class InputManagerSO : ScriptableObject
 
     private void EnablePlayerCamera()
     {
-        controls.PlayerCamera.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
-        controls.PlayerCamera.Look.canceled += ctx => Look(Vector2.zero);
+        controls.PlayerCamera.Look.performed += Look;
+        controls.PlayerCamera.Look.canceled += Look;
 
         controls.PlayerCamera.Enable();
     }
 
     private void DisablePlayerCamera()
     {
-        controls.PlayerCamera.Look.performed -= ctx => Look(ctx.ReadValue<Vector2>());
-        controls.PlayerCamera.Look.canceled -= ctx => Look(Vector2.zero);
+        controls.PlayerCamera.Look.performed -= Look;
+        controls.PlayerCamera.Look.canceled -= Look;
 
         controls.PlayerCamera.Disable();
     }
@@ -179,8 +178,8 @@ public class InputManagerSO : ScriptableObject
     {
         controls.PlayerActions.Interact.started += Interact;
 
-        controls.PlayerActions.Aim.performed += ctx => Aim(ctx.ReadValueAsButton());
-        controls.PlayerActions.Aim.canceled += ctx => Aim(ctx.ReadValueAsButton());
+        controls.PlayerActions.Aim.performed += Aim;
+        controls.PlayerActions.Aim.canceled += Aim;
 
         controls.PlayerActions.Enable();
     }
@@ -189,8 +188,8 @@ public class InputManagerSO : ScriptableObject
     {
         controls.PlayerActions.Interact.started -= Interact;
 
-        controls.PlayerActions.Aim.performed -= ctx => Aim(ctx.ReadValueAsButton());
-        controls.PlayerActions.Aim.canceled -= ctx => Aim(ctx.ReadValueAsButton());
+        controls.PlayerActions.Aim.performed -= Aim;
+        controls.PlayerActions.Aim.canceled -= Aim;
 
         controls.PlayerActions.Disable();
     }

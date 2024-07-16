@@ -20,12 +20,12 @@ public class InputSprintSystem : PlayerSystem
 
     private void Sprint()
     {
-        player.ID.playerEvents.OnPlayerActiveSprint?.Invoke(sprintingSpeed,JUMP_FACTOR_SPRINTING);
+        player.ID.playerEvents.OnPlayerSprint?.Invoke(true, sprintingSpeed,JUMP_FACTOR_SPRINTING);
     }
 
     private void StopSprint()
     {
-        player.ID.playerEvents.OnPlayerDesactiveSprint?.Invoke();
+        player.ID.playerEvents.OnPlayerSprint?.Invoke(false, 0, 0);
     }
 
     private void OnDisable()
