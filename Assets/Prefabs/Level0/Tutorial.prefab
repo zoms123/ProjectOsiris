@@ -1,0 +1,1187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &683181849267251266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120214606904623138}
+  m_Layer: 2
+  m_Name: Zone03_Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120214606904623138
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683181849267251266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5370510653540477854}
+  - {fileID: 3335709041588608084}
+  - {fileID: 8033420478280486525}
+  - {fileID: 1113447158680004512}
+  m_Father: {fileID: 1339018022725847039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1476743089255470559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8309001019535050613}
+  m_Layer: 2
+  m_Name: Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8309001019535050613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476743089255470559}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.03926998, z: -0, w: 0.99922866}
+  m_LocalPosition: {x: -4.71, y: 0, z: 4.5199966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4763300338773411378}
+  - {fileID: 2954266014678311845}
+  m_Father: {fileID: 8184664380505984773}
+  m_LocalEulerAnglesHint: {x: 0, y: 4.501, z: 0}
+--- !u!1 &1744947954128083231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4763300338773411378}
+  - component: {fileID: 7630254111114536493}
+  - component: {fileID: 8745144281896976555}
+  m_Layer: 2
+  m_Name: TutorialAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4763300338773411378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744947954128083231}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.904986, z: -0, w: 0.42544135}
+  m_LocalPosition: {x: 60.459995, y: 55.2, z: 78.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8309001019535050613}
+  m_LocalEulerAnglesHint: {x: 0, y: 129.643, z: 0}
+--- !u!65 &7630254111114536493
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744947954128083231}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 14.80073}
+  m_Center: {x: -0.00005795528, y: 0, z: 12.218275}
+--- !u!114 &8745144281896976555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744947954128083231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Throw crystal
+  iconPC: {fileID: 2800000, guid: 67f1e916b0af81e498506dbe91ea713e, type: 3}
+  iconPS5: {fileID: 2800000, guid: 9bc88852db6861b4f8a78fe0c40d1293, type: 3}
+--- !u!1 &2654970874560784016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5370510653540477854}
+  - component: {fileID: 5821724306328012614}
+  - component: {fileID: 2275963670949132113}
+  m_Layer: 2
+  m_Name: TutorialTowerInteract
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5370510653540477854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654970874560784016}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: -9.37, y: 67.2, z: 85.29}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120214606904623138}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &5821724306328012614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654970874560784016}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 4.4, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2275963670949132113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654970874560784016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Interact, a cube is needed
+  iconPC: {fileID: 2800000, guid: 0214ad632663ed541a6ddcfefc4e92c5, type: 3}
+  iconPS5: {fileID: 2800000, guid: c25a30de34ef91a48aeae1658c88c314, type: 3}
+--- !u!1 &3540300926166312378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3341316205951061275}
+  - component: {fileID: 6738092163996410336}
+  - component: {fileID: 5888289887115159436}
+  m_Layer: 2
+  m_Name: TutorialSelectGravity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3341316205951061275
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540300926166312378}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: 57.23, y: 59, z: 112.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3236852833349971054}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &6738092163996410336
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540300926166312378}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 6.42}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5888289887115159436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540300926166312378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Select Gravity Power
+  iconPC: {fileID: 2800000, guid: 10620a9dbe8c0414780e19887647b9b5, type: 3}
+  iconPS5: {fileID: 2800000, guid: a49915319a4169b4393ec8483b3935b8, type: 3}
+--- !u!1 &3569818897316277049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6972909446452920472}
+  m_Layer: 2
+  m_Name: Aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6972909446452920472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569818897316277049}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2425767908433778082}
+  - {fileID: 2896468131414558895}
+  m_Father: {fileID: 8184664380505984773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3958187708665362334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5967291761020642791}
+  - component: {fileID: 5917477257783143404}
+  - component: {fileID: 7979940652647882387}
+  m_Layer: 2
+  m_Name: TutorialJump
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5967291761020642791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958187708665362334}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.2806485, z: -0, w: 0.9598107}
+  m_LocalPosition: {x: 44.75, y: 51.42, z: 19.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1339018022725847039}
+  m_LocalEulerAnglesHint: {x: 0, y: 32.598, z: 0}
+--- !u!65 &5917477257783143404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958187708665362334}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7979940652647882387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958187708665362334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Jump
+  iconPC: {fileID: 2800000, guid: 0926007d3ba19b6458ed933632634268, type: 3}
+  iconPS5: {fileID: 2800000, guid: d630cf5227ae3b34ea6e83c2a1a718e8, type: 3}
+--- !u!1 &4131429136113756227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1359044644472042615}
+  - component: {fileID: 4945696088864152772}
+  - component: {fileID: 6898029915675048613}
+  m_Layer: 2
+  m_Name: TutorialAim2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1359044644472042615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131429136113756227}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: 57.35, y: 59, z: 116.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3236852833349971054}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &4945696088864152772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131429136113756227}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.083505, y: 5, z: 6.42}
+  m_Center: {x: -1.0417521, y: 0, z: -3.983066e-10}
+--- !u!114 &6898029915675048613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4131429136113756227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Aim
+  iconPC: {fileID: 2800000, guid: 129ec7ff87cc0194c821df885594c641, type: 3}
+  iconPS5: {fileID: 2800000, guid: c7cebfb630c63654faf64ecacde0c6d0, type: 3}
+--- !u!1 &4513171066563120674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1339018022725847039}
+  m_Layer: 2
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1339018022725847039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513171066563120674}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.942527, y: -44.345875, z: -88.05015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5967291761020642791}
+  - {fileID: 2133866322401047355}
+  - {fileID: 8184664380505984773}
+  - {fileID: 3236852833349971054}
+  - {fileID: 1120214606904623138}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4941604904973336486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2896468131414558895}
+  - component: {fileID: 4080199243448394082}
+  - component: {fileID: 3176314076260977871}
+  m_Layer: 2
+  m_Name: TutorialAim (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2896468131414558895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941604904973336486}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.8834412, z: -0, w: 0.46854213}
+  m_LocalPosition: {x: 65.08, y: 55.22, z: 65.43356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6972909446452920472}
+  m_LocalEulerAnglesHint: {x: 0, y: 124.121, z: 0}
+--- !u!65 &4080199243448394082
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941604904973336486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 3.6853962, z: 19.885239}
+  m_Center: {x: -0.000000004540203, y: -0.6573019, z: 1.445776}
+--- !u!114 &3176314076260977871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4941604904973336486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Aim
+  iconPC: {fileID: 2800000, guid: 129ec7ff87cc0194c821df885594c641, type: 3}
+  iconPS5: {fileID: 2800000, guid: c7cebfb630c63654faf64ecacde0c6d0, type: 3}
+--- !u!1 &5074696413683596686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8184664380505984773}
+  m_Layer: 2
+  m_Name: Zone01_Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8184664380505984773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074696413683596686}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1347775974133716079}
+  - {fileID: 6972909446452920472}
+  - {fileID: 8309001019535050613}
+  m_Father: {fileID: 1339018022725847039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5292391911461412394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2954266014678311845}
+  - component: {fileID: 7174858441845738091}
+  - component: {fileID: 8506695783050373649}
+  m_Layer: 2
+  m_Name: TutorialAttack (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2954266014678311845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292391911461412394}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9680085, z: -0, w: 0.25091735}
+  m_LocalPosition: {x: 54.889996, y: 55.2, z: 92.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8309001019535050613}
+  m_LocalEulerAnglesHint: {x: 0, y: 150.936, z: 0}
+--- !u!65 &7174858441845738091
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292391911461412394}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 14.80073}
+  m_Center: {x: -0.00005795528, y: 0, z: 12.218275}
+--- !u!114 &8506695783050373649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292391911461412394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Throw crystal
+  iconPC: {fileID: 2800000, guid: 67f1e916b0af81e498506dbe91ea713e, type: 3}
+  iconPS5: {fileID: 2800000, guid: 9bc88852db6861b4f8a78fe0c40d1293, type: 3}
+--- !u!1 &5769623015735685285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113447158680004512}
+  - component: {fileID: 9190157199932943044}
+  - component: {fileID: 3886779772926679973}
+  m_Layer: 2
+  m_Name: TutorialAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1113447158680004512
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769623015735685285}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.99160624, z: -0, w: 0.12929511}
+  m_LocalPosition: {x: -15.04, y: 68.85, z: 132.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120214606904623138}
+  m_LocalEulerAnglesHint: {x: 0, y: 165.142, z: 0}
+--- !u!65 &9190157199932943044
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769623015735685285}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: -0.000000004540203, y: -0.6573019, z: 1.445776}
+--- !u!114 &3886779772926679973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769623015735685285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Aim
+  iconPC: {fileID: 2800000, guid: 129ec7ff87cc0194c821df885594c641, type: 3}
+  iconPS5: {fileID: 2800000, guid: c7cebfb630c63654faf64ecacde0c6d0, type: 3}
+--- !u!1 &5990620070939964980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2133866322401047355}
+  - component: {fileID: 1454099031917783546}
+  - component: {fileID: 9005696485374834290}
+  m_Layer: 2
+  m_Name: TutorialRun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2133866322401047355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5990620070939964980}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.281595, z: -0, w: 0.95953333}
+  m_LocalPosition: {x: 53.2, y: 51.42, z: 35.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1339018022725847039}
+  m_LocalEulerAnglesHint: {x: 0, y: 32.711, z: 0}
+--- !u!65 &1454099031917783546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5990620070939964980}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 9.909864}
+  m_Center: {x: -0.00000034789585, y: 0, z: 1.7449365}
+--- !u!114 &9005696485374834290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5990620070939964980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Run
+  iconPC: {fileID: 2800000, guid: 3ce7366c028a70547a5ad129d5d80b66, type: 3}
+  iconPS5: {fileID: 2800000, guid: ba6f6a7fe14249c4db73403f6c315b8a, type: 3}
+--- !u!1 &7206887230022770424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807209320363514440}
+  - component: {fileID: 6622757094848364134}
+  - component: {fileID: 4449570704355882385}
+  m_Layer: 2
+  m_Name: TutorialAttack2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &807209320363514440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206887230022770424}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: 56.96, y: 59, z: 124.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3236852833349971054}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &6622757094848364134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206887230022770424}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 6.42}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4449570704355882385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206887230022770424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Attack
+  iconPC: {fileID: 2800000, guid: 67f1e916b0af81e498506dbe91ea713e, type: 3}
+  iconPS5: {fileID: 2800000, guid: 9bc88852db6861b4f8a78fe0c40d1293, type: 3}
+--- !u!1 &7746035698316711576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2425767908433778082}
+  - component: {fileID: 7584111122781202948}
+  - component: {fileID: 3699081687269573951}
+  m_Layer: 2
+  m_Name: TutorialAim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2425767908433778082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746035698316711576}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.99160624, z: -0, w: 0.12929511}
+  m_LocalPosition: {x: 56.64802, y: 55.22, z: 80.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6972909446452920472}
+  m_LocalEulerAnglesHint: {x: 0, y: 165.142, z: 0}
+--- !u!65 &7584111122781202948
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746035698316711576}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 3.6853962, z: 19.885239}
+  m_Center: {x: -0.000000004540203, y: -0.6573019, z: 1.445776}
+--- !u!114 &3699081687269573951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7746035698316711576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Aim
+  iconPC: {fileID: 2800000, guid: 129ec7ff87cc0194c821df885594c641, type: 3}
+  iconPS5: {fileID: 2800000, guid: c7cebfb630c63654faf64ecacde0c6d0, type: 3}
+--- !u!1 &7781103386210845820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8033420478280486525}
+  - component: {fileID: 4103912000071514494}
+  - component: {fileID: 8449827694111935351}
+  m_Layer: 2
+  m_Name: TutorialSelectGravity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8033420478280486525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781103386210845820}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: -14.98, y: 67.2, z: 132.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120214606904623138}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &4103912000071514494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781103386210845820}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 15, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8449827694111935351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781103386210845820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Select Gravity Power
+  iconPC: {fileID: 2800000, guid: 10620a9dbe8c0414780e19887647b9b5, type: 3}
+  iconPS5: {fileID: 2800000, guid: a49915319a4169b4393ec8483b3935b8, type: 3}
+--- !u!1 &7789828569552204943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347775974133716079}
+  - component: {fileID: 4258891489488353694}
+  - component: {fileID: 1116639692641930446}
+  m_Layer: 2
+  m_Name: TutorialSelectCrystal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1347775974133716079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789828569552204943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.8292309, z: -0, w: 0.5589062}
+  m_LocalPosition: {x: 47.22, y: 55.32, z: 60.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8184664380505984773}
+  m_LocalEulerAnglesHint: {x: 0, y: 112.04, z: 0}
+--- !u!65 &4258891489488353694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789828569552204943}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 5, z: 20.828445}
+  m_Center: {x: 0.0000088985535, y: 0, z: 2.0936403}
+--- !u!114 &1116639692641930446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789828569552204943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Select Crystal Power
+  iconPC: {fileID: 2800000, guid: d5d362158c4a5d446a57161bc47cca0e, type: 3}
+  iconPS5: {fileID: 2800000, guid: 366a3fc9834ebd9418a66e3ba28bf119, type: 3}
+--- !u!1 &8578173702903527512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3335709041588608084}
+  - component: {fileID: 1768866173869561496}
+  - component: {fileID: 3786544274120223501}
+  m_Layer: 2
+  m_Name: TutorialGravityCube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3335709041588608084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578173702903527512}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7044861, z: -0, w: 0.70971787}
+  m_LocalPosition: {x: -15.05, y: 67.2, z: 133.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1120214606904623138}
+  m_LocalEulerAnglesHint: {x: 0, y: 89.576, z: 0}
+--- !u!65 &1768866173869561496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578173702903527512}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: 0.89985603, y: 0, z: -5.1389087e-11}
+--- !u!114 &3786544274120223501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578173702903527512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48edce0ba6df144ba645829477c40b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 11400000, guid: f09e2690900fcf6459d541a8ffd5bddf, type: 2}
+  message: Use gravity power
+  iconPC: {fileID: 2800000, guid: f689bb50c34a9ea46a114e7cffbfbf2c, type: 3}
+  iconPS5: {fileID: 2800000, guid: 6cd7b619e05f2004b9bc3d5e048793f0, type: 3}
+--- !u!1 &8924458063573510289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3236852833349971054}
+  m_Layer: 2
+  m_Name: Zone02_Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3236852833349971054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924458063573510289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3341316205951061275}
+  - {fileID: 1359044644472042615}
+  - {fileID: 807209320363514440}
+  m_Father: {fileID: 1339018022725847039}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
