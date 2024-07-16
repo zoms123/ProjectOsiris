@@ -13,7 +13,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField, Required] private GameObject noteUI;
     [SerializeField, Required] private TMP_Text noteTextUi;
     [SerializeField, Required] private TextMeshProUGUI tutorialText;
-    [SerializeField, Required] private RawImage tutorialIcon;
+    [SerializeField, Required] private RawImage tutorialIconPC;
+    [SerializeField, Required] private RawImage tutorialIconPS5;
     [SerializeField, Required] private GameObject tutorial;
     [SerializeField, Required] private Image brightnessPanel;
 
@@ -91,10 +92,11 @@ public class CanvasManager : MonoBehaviour
         noteUI.SetActive(false);
     }
 
-    private void ShowTutorialUI(string message, Texture icon)
+    private void ShowTutorialUI(string message, Texture iconPC, Texture iconPS5)
     {
         tutorialText.text = message;
-        tutorialIcon.texture = icon;
+        tutorialIconPC.texture = iconPC;
+        tutorialIconPS5.texture = iconPS5;
         tutorial.gameObject.SetActive(true);
     }
 
