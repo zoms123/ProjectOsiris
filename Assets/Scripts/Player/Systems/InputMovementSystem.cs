@@ -149,7 +149,6 @@ public class InputMovementSystem : PlayerSystem
 
     private void ActiveOrDesactiveSprintMode(bool isSprintPressed, float newSpeed, float newJumpFactor)
     {
-        Debug.Log(isSprintPressed + "/" + isStrafing);
         if (isSprintPressed && !isStrafing)
         {
             currentSpeed = newSpeed;
