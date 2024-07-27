@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 30b0b757d9200b4489e24899b9e37f64
   - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 5bae962256a0c9b42afd19cc3178524c
+  - enabled: 1
     path: Assets/Scenes/Level0Puerto.unity
     guid: f393a0b35c6544e43a4e718343bf0da4
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 402127f97e3bf9944990b9955f38561d
   - enabled: 0
     path: Assets/Scenes/Blockout/Level0Gravity.unity
     guid: 34370d87afa59ad4c86cc82fb943bb17
