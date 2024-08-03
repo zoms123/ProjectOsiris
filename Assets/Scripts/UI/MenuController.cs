@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class MenuController : OptionsSettings
 {
@@ -16,7 +17,13 @@ public class MenuController : OptionsSettings
     #region New_Game And Load_Game
 
     public void NewGameDialogYes()
+    {        
+        StartCoroutine(nameof(StartGame));
+    }
+
+    private IEnumerator StartGame()
     {
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(_newGameLevel);
     }
 
