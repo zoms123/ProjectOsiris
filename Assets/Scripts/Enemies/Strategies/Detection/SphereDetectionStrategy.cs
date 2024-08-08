@@ -31,10 +31,13 @@ public class SphereDetectionStrategy : IDetectionStrategy
         } 
         else
         {
-            foundTarget = target;
-            return Vector3.Distance(owner.position, target.position) <= sphereRadius;
+            if(Vector3.Distance(owner.position, target.position) <= sphereRadius)
+            {
+                foundTarget = target;
+                return true;
+            }
         }
-        foundTarget = target;
+        foundTarget = null;
         return false;
     }
 }

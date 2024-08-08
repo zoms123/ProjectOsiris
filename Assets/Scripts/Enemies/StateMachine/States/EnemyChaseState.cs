@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,7 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void OnEnter()
     {
+        agent.isStopped = false;
         animator.SetBool("Idle", false);
         animator.SetBool("BasicAttack", false);
         animator.SetBool("StrongAttack", false);
@@ -24,10 +26,21 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void OnExit()
     {
+        
+        agent.ResetPath();
+        agent.isStopped = true;
         animator.SetBool("Walk", false);
     }
     public override void Update()
     {
-        agent.SetDestination(target.position);
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(target.position, path);
+        if (path.status == NavMeshPathStatus.PathComplete)
+        {
+            agent.SetDestination(target.position);
+        } else
+        {
+            agent.ResetPath();
+        }
     }
 }

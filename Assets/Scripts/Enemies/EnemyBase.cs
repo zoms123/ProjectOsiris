@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -57,9 +58,10 @@ public class EnemyBase : MonoBehaviour
         At(patrolState, chaseState, new FuncPredicate(() => playerDetector.CanDetectPlayer()));
         At(chaseState, attackState, new FuncPredicate(() => CanAttack()));
         At(attackState, chaseState, new FuncPredicate(() => !CanAttack() || playerDetector.PlayerDistance(transform.position) > attackRange));
-        if (canFloat) { At(floatingState, chaseState, new FuncPredicate(() => !zeroGravityEffector.Activated && IsGrounded())); }
-
-        if (canFloat) { Any(floatingState, new FuncPredicate(() => zeroGravityEffector.Activated)); }
+        if (canFloat) { 
+            At(floatingState, chaseState, new FuncPredicate(() => !zeroGravityEffector.Activated && IsGrounded()));
+            Any(floatingState, new FuncPredicate(() => zeroGravityEffector.Activated));
+        }
         Any(patrolState, new FuncPredicate(() => !playerDetector.CanDetectPlayer()));
         stateMachine.SetState(patrolState);
     }
@@ -74,12 +76,10 @@ public class EnemyBase : MonoBehaviour
             Debug.DrawRay(obstaclesDetectorRayOrigin.position, directionToPlayer);
             if (!Physics.Raycast(obstaclesDetectorRayOrigin.position, directionToPlayer, out RaycastHit hitInfo, distanceToPlayer, obstacleLayers, QueryTriggerInteraction.Ignore))
             {
-                //Debug.Log("Raycast No hit");
                 return true;
             }
             else
             {
-                //Debug.Log("Raycast false" + hitInfo.collider.gameObject);
                 return false;
             }
         }
@@ -99,6 +99,12 @@ public class EnemyBase : MonoBehaviour
     {
         if(lifeSystem.Health > 0)
             stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        if (lifeSystem.Health > 0)
+            stateMachine.FixedUpdate();
     }
 
     private bool IsGrounded()

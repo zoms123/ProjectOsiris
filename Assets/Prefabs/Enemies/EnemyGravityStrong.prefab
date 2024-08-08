@@ -4306,7 +4306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd67665359904c34196162cd82c1aa61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereRadius: 12
+  sphereRadius: 20
   layer:
     serializedVersion: 2
     m_Bits: 64
