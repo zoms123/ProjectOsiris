@@ -16,8 +16,8 @@ public class BasicCombat : MonoBehaviour
 
     private IAttackStrategy attackStrategy;
     private PlayerDetector playerDetector; 
-    private float currentTime;
     private Animator animator;
+    private LifeSystem lifesystem;
 
     public float TimeBetweenAttacks { get { return timeBetweenAttacks; } }
     public EAttackType AttackType { get { return attackType; } }
@@ -30,6 +30,7 @@ public class BasicCombat : MonoBehaviour
     {
         playerDetector = GetComponent<PlayerDetector>();
         animator = GetComponent<Animator>();
+        lifesystem = GetComponent<LifeSystem>();
         if (playerDetector)
         {
             switch (attackType)
@@ -43,7 +44,7 @@ public class BasicCombat : MonoBehaviour
                     break;
 
                 case EAttackType.TIME_BASIC:
-                    attackStrategy = new BasicTimeAttackStrategy<ThrowableRock>();
+                    attackStrategy = new BasicTimeAttackStrategy<TimeExplosion>(transform, attackPrefab, lifesystem);
                     break;
 
                 case EAttackType.SHADOW_BASIC:
