@@ -38,7 +38,9 @@ public class TimeExplosion : MeleeAttack
 
     private void Explode()
     {
-        Collider[] collidersTouched = Physics.OverlapSphere(transform.position, maxScale/2, whatIsDamageable);
+        Vector3 center = transform.position;
+        center.y += maxScale;
+        Collider[] collidersTouched = Physics.OverlapSphere(center, maxScale * 1.4f, whatIsDamageable);
         foreach (Collider collider in collidersTouched)
         {
             if (!collider.CompareTag("Enemy"))
