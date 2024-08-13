@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyPatrolState : EnemyBaseState {
@@ -30,6 +31,7 @@ public class EnemyPatrolState : EnemyBaseState {
 
     public override void OnEnter()
     {
+        agent.isStopped = false;
         waiting = false;
         animator.SetBool("Walk", true);
         animator.SetBool("Idle", false);
@@ -38,6 +40,7 @@ public class EnemyPatrolState : EnemyBaseState {
 
     public override void OnExit()
     {
+        agent.isStopped = true;
         animator.SetBool("Walk", false);
         animator.SetBool("Idle", false);
     }

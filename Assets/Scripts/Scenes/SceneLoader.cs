@@ -6,21 +6,21 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     private static bool gameStarted;
+    private AsyncOperation asyncOperation;
 
     private void Awake()
     {
         gameStarted = false;
     }
 
-    private IEnumerator StartGame(AsyncOperation asyncOperation)
+    private IEnumerator StartGame()
     {
         Debug.Log("StartGame");
-        while (!asyncOperation.isDone)
+        while (asyncOperation != null && !asyncOperation.isDone)
         {
             Debug.Log("Waiting"); 
             yield return new WaitForSeconds(0.1f);
         }
-
 
         yield return new WaitForSeconds(1.15f);
         FindFirstObjectByType<FadeInAndOutEffector>().FadeOut();
@@ -31,15 +31,15 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
-            AsyncOperation asyncOperation =  SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
-            
-            Debug.Log("Current Time " + Time.timeScale);
+           AsyncOperation asyncOperation = SceneManager.GetSceneByName(gameObject.name).isLoaded ? null : SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
+
             if(!gameStarted)
             {
                 FindFirstObjectByType<InputMovementSystem>().enabled = false;
-                StartCoroutine(nameof(StartGame), asyncOperation);
+                StartCoroutine(nameof(StartGame));
             }
             
         }
