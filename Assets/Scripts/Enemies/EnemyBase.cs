@@ -40,7 +40,8 @@ public class EnemyBase : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         basicCombat = GetComponent<BasicCombat>();
         lifeSystem = GetComponent<LifeSystem>();
-        //declare states
+
+        // Declare states
         var attackState = new EnemyAttackState(this, animator, agent, playerDetector, basicCombat.AttackType);
         var patrolState = new EnemyPatrolState(
             this,
@@ -54,7 +55,7 @@ public class EnemyBase : MonoBehaviour
 
         var floatingState = new EnemyFloatingState(this, animator, agent);
 
-        // declare transitions
+        // Declare transitions
         At(patrolState, chaseState, new FuncPredicate(() => playerDetector.CanDetectPlayer()));
         At(chaseState, attackState, new FuncPredicate(() => CanAttack()));
         At(attackState, chaseState, new FuncPredicate(() => !CanAttack() || playerDetector.PlayerDistance(transform.position) > attackRange));
@@ -66,9 +67,25 @@ public class EnemyBase : MonoBehaviour
         stateMachine.SetState(patrolState);
     }
 
+    void Start()
+    {
+        waypoints[0].parent.SetParent(null);
+    }
+
+    void Update()
+    {
+        if(lifeSystem.Health > 0)
+            stateMachine.Update();
+    }
+
+    #region Methods
+
+    private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
+    private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
+
     private bool CanAttack()
     {
-        if(playerDetector.PlayerDistance(transform.position) <= attackRange)
+        if (playerDetector.PlayerDistance(transform.position) <= attackRange)
         {
             Transform targetPoint = GameObject.FindGameObjectWithTag("PlayerTargetPoint").transform;
             Vector3 directionToPlayer = (targetPoint.position - obstaclesDetectorRayOrigin.position).normalized;
@@ -86,21 +103,6 @@ public class EnemyBase : MonoBehaviour
         return false;
     }
 
-    private void At(IState from, IState to, IPredicate condition) => stateMachine.AddTransition(from, to, condition);
-    private void Any(IState to, IPredicate condition) => stateMachine.AddAnyTransition(to, condition);
-
-    void Start()
-    {
-        waypoints[0].parent.SetParent(null);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(lifeSystem.Health > 0)
-            stateMachine.Update();
-    }
-
     private void FixedUpdate()
     {
         if (lifeSystem.Health > 0)
@@ -113,15 +115,15 @@ public class EnemyBase : MonoBehaviour
         return colliders.Length > 0;
     }
 
-    #region Collisions and Triggers
-
     #endregion
 
     #region Debug
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.transform.position, groundCheckRadious);
     }
+
     #endregion
 }

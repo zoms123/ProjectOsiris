@@ -26,6 +26,7 @@ public class ThrowableRock : DistanceAttack
         transform.localScale = ownerObject.transform.localScale;
         speedMultiplier = basicCombat.AttackSpeedMultiplier;
     }
+
     protected override void PerformAttack()
     {
          transform.Translate(direction * speed * speedMultiplier * Time.deltaTime, Space.World);
