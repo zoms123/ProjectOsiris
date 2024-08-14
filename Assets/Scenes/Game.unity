@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1485676432693447226, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
+      propertyPath: verticalTerrainSlidingBackwardsSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1917600495035936366, guid: 9a001e440013f2c4e8819fe32d3adb61, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class InputMovementSystem : PlayerSystem
 {
@@ -27,6 +29,15 @@ public class InputMovementSystem : PlayerSystem
 
     [SerializeField, Tooltip("Distance threshold to ground")]
     private float groundCheckDistanceThreshold = 0.25f;
+
+    [SerializeField, Tooltip("Transform to check if ground is being hit in front or in the back, based on player movement")]
+    private Transform groundInfrontOrBackChecker;
+
+    [SerializeField, Tooltip("Distance to check if ground is being hit in front or in the back, based on groundInfrontOrBackChecker")]
+    private float groundInfrontOrBackCheckerDistanceThreshold = 2f;
+
+    [SerializeField, Tooltip("Speed used when colliding with vertical terrain, allowing the player to be moved in the opposite direction of the wall")]
+    private float verticalTerrainSlidingBackwardsSpeed = 3f;
 
     [Header("Movement Settings")]
 
@@ -86,6 +97,8 @@ public class InputMovementSystem : PlayerSystem
     [HideInInspector]
     public CharacterController characterController;
 
+    private Vector3 groundContactPointOnAir;
+
     protected override void Awake()
     {
         base.Awake();
@@ -93,6 +106,7 @@ public class InputMovementSystem : PlayerSystem
         characterController = GetComponent<CharacterController>();
         mainCameraTransform = Camera.main.transform;
         jumpFactor = JUMP_FACTOR_WALKING;
+        characterController.slopeLimit = 45f;
     }
 
     #region Events
@@ -280,6 +294,7 @@ public class InputMovementSystem : PlayerSystem
             if (verticalVelocity.y < 0)
             {
                 fallingVelocityHasBeenSet = false;
+                verticalVelocity = Vector3.zero;
                 verticalVelocity.y = groundedYVelocity;
             }
         }
@@ -293,10 +308,28 @@ public class InputMovementSystem : PlayerSystem
             }
 
             verticalVelocity.y += gravityFactor * Time.deltaTime;
+            verticalVelocity += GetSlidingVelocity();
+
         }
 
         // There should always be some force applied to the Y velocity
         characterController.Move(verticalVelocity * Time.deltaTime);
+    }
+
+    private Vector3 GetSlidingVelocity()
+    {
+        if (groundContactPointOnAir != Vector3.zero)
+        {
+            var moveDirection = groundContactPointOnAir - groundInfrontOrBackChecker.position;
+
+            if (Physics.Raycast(groundInfrontOrBackChecker.position, moveDirection, out RaycastHit hit, groundInfrontOrBackCheckerDistanceThreshold, groundLayer))
+            {
+                Debug.DrawRay(groundInfrontOrBackChecker.position, moveDirection * hit.distance, Color.green);
+                return moveDirection * -1 * verticalTerrainSlidingBackwardsSpeed;
+            }
+        }       
+
+        return Vector3.zero;
     }
 
     private void HandleMovementInput()
@@ -426,6 +459,21 @@ public class InputMovementSystem : PlayerSystem
     public void ResetJump()
     {
         isJumping = false;
+    }
+
+    #endregion
+
+    #region Collisions
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if((groundLayer.value & (1 << hit.gameObject.layer)) != 0)
+        {
+            if (isGrounded)
+                groundContactPointOnAir = Vector3.zero;
+            else
+                groundContactPointOnAir = hit.point;
+        }
     }
 
     #endregion
