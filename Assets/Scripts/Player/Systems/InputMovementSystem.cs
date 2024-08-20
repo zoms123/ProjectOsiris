@@ -9,6 +9,7 @@ public class InputMovementSystem : PlayerSystem
 
     [SerializeField, Required]
     private InputManagerSO inputManager;
+    private GameManagerSO gameManager;
 
     [Header("Ground Check & Falling")]
 
@@ -115,6 +116,7 @@ public class InputMovementSystem : PlayerSystem
     {
         inputManager.OnMove += Move;
         inputManager.OnJump += Jump;
+        inputManager.OnOptions += ResetMovement;
 
         player.ID.playerEvents.OnAnimationChanged += UpdateVariablesAffectedByAnimation;
         player.ID.playerEvents.OnUpdateMovementByAnimator += UpdateMovementByAnimator;
@@ -137,6 +139,16 @@ public class InputMovementSystem : PlayerSystem
         if (isJumpPressed)
         {
             AttemptToPerformJump();
+        }
+    }
+
+    private void ResetMovement()
+    {
+        if(Time.timeScale == 0)
+        {
+            ActiveOrDesactiveSprintMode(false, 0, 0);
+            ActiveOrDesactiveAim(false);
+            Move(Vector2.zero);
         }
     }
 
@@ -196,6 +208,7 @@ public class InputMovementSystem : PlayerSystem
     {
         inputManager.OnMove -= Move;
         inputManager.OnJump -= Jump;
+        inputManager.OnOptions -= ResetMovement;
 
         player.ID.playerEvents.OnAnimationChanged -= UpdateVariablesAffectedByAnimation;
         player.ID.playerEvents.OnUpdateMovementByAnimator -= UpdateMovementByAnimator;
