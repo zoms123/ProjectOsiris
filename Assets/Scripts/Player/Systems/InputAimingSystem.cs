@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -32,6 +33,7 @@ public class InputAimingSystem : PlayerSystem
     private void OnEnable()
     {
         inputManager.OnAim += HandleAim;
+        inputManager.OnOptions += ResetAiming;
 
         player.ID.playerEvents.OnGetAimPosition += GiveAimPosition;
 
@@ -47,6 +49,18 @@ public class InputAimingSystem : PlayerSystem
         player.ID.playerEvents.OnUpdateCameraSettings?.Invoke(isAiming, aimCameraSensitivity, aimFOV);
         player.ID.playerEvents.OnPlayerAim?.Invoke(isAiming);
     }
+
+    private void ResetAiming()
+    {
+        StartCoroutine(nameof(StopAiming));
+    }
+
+    private IEnumerator StopAiming()
+    {
+        yield return new WaitForSeconds(0.2f);
+        HandleAim(false);
+    }
+
 
     private void GiveAimPosition()
     {
@@ -68,6 +82,7 @@ public class InputAimingSystem : PlayerSystem
     private void OnDisable()
     {
         inputManager.OnAim -= HandleAim;
+        inputManager.OnOptions -= ResetAiming;
 
         player.ID.playerEvents.OnGetAimPosition -= GiveAimPosition;
 

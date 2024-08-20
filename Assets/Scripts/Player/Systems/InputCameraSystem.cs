@@ -127,19 +127,22 @@ public class InputCameraSystem : PlayerSystem
 
     private void LateUpdate()
     {
-        // if look input is moving
-        if (lookInput.sqrMagnitude >= 0.01f)
+        if (Time.timeScale != 0) 
         {
-            cinemachineTargetYaw += lookInput.x * cameraSensitivity;
-            cinemachineTargetPitch -= lookInput.y * cameraSensitivity * invertY;
+            // if look input is moving
+            if (lookInput.sqrMagnitude >= 0.01f)
+            {
+                cinemachineTargetYaw += lookInput.x * cameraSensitivity;
+                cinemachineTargetPitch -= lookInput.y * cameraSensitivity * invertY;
+            }
+
+            // clamp rotations so values are limited 360 degrees
+            cinemachineTargetYaw = ClampAngle(cinemachineTargetYaw, float.MinValue, float.MaxValue);
+            cinemachineTargetPitch = ClampAngle(cinemachineTargetPitch, cameraBottomClamp, cameraTopClamp);
+
+            // camera will follow this target
+            cameraFollowTransform.rotation = Quaternion.Euler(cinemachineTargetPitch, cinemachineTargetYaw, 0.0f);
         }
-
-        // clamp rotations so values are limited 360 degrees
-        cinemachineTargetYaw = ClampAngle(cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        cinemachineTargetPitch = ClampAngle(cinemachineTargetPitch, cameraBottomClamp, cameraTopClamp);
-
-        // camera will follow this target
-        cameraFollowTransform.rotation = Quaternion.Euler(cinemachineTargetPitch, cinemachineTargetYaw, 0.0f);
     }
 
     #region Methods
