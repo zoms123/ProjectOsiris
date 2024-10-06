@@ -51,6 +51,10 @@ public class BasicCombat : MonoBehaviour
                     attackStrategy = new BasicShadowAttackStrategy<ThrowableRock>();
                     break;
 
+                case EAttackType.CRYSTAL_STRONG:
+                    attackStrategy = new StrongCrystalAttackStrategy<ThrowableCrystal>(transform, animator, attackPrefab, playerDetector, attackPoint);
+                    break;
+
                 default:
                     break;
             }
