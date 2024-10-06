@@ -11467,6 +11467,7 @@ MonoBehaviour:
   defaultBrightness: 1
   qualityDropdown: {fileID: 5207972039864821682}
   defaultQuality: 2
+  audioMixer: {fileID: 24100000, guid: 1b2214a30ff79d14bb34b5054e78519a, type: 2}
   volumeSlider: {fileID: 7503853544909830371}
   volumeTextValue: {fileID: 7558989725354604801}
   defaultVolume: 1

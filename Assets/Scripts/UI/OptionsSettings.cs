@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class OptionsSettings : MonoBehaviour
@@ -22,6 +23,7 @@ public class OptionsSettings : MonoBehaviour
     protected int _qualityLevel;
 
     [Header("Volume Settings")]
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField, Required] protected Slider volumeSlider = null;
     [SerializeField, Required] protected TMP_Text volumeTextValue = null;
     [SerializeField] protected float defaultVolume = 1.0f;
@@ -141,6 +143,7 @@ public class OptionsSettings : MonoBehaviour
     public void SetVolume(float volume)
     {
         AudioListener.volume = volume;
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
         volumeTextValue.text = volume.ToString("0.0");
     }
 
